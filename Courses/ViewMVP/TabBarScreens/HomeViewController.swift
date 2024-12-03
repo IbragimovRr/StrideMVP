@@ -8,18 +8,7 @@
 import UIKit
 import Lottie
 
-protocol HomeViewProtocol: AnyObject {
-    func showError(error: String)
-    func showBanners(banners: [String])
-    func showCoachs(coachs: [UserModel])
-    func showUser(user: UserModel)
-    func showCelebrity(celebrity: [UserModel])
-    func showRecomendedCourses(courses: [Course])
-    func navigateToLoading()
-    func disableLoading()
-}
-
-class HomeViewController: UIViewController, HomeViewProtocol {
+class HomeViewController: UIViewController {
     
     @IBOutlet weak var coachCollectionView: UICollectionView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -31,15 +20,19 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     @IBOutlet weak var recomendCollectionView: UICollectionView!
     
     var refreshControl = RefreshControll()
-    
-    private var presenter = HomePresenter()
+
     private var banners = [String]()
-    private var coachs = [UserModel]()
-    private var selectCoachs = UserModel()
+    private var coachs = [UserStruct]()
+    private var selectCoachs = UserStruct()
     private var recomendCourses = [Course]()
-    private var celebrities = [UserModel]()
+    private var celebrities = [UserStruct]()
     private let layout = PageLayout()
     private var selectCourses = Course()
+    private var user: UserStruct = User.info {
+        didSet {
+            addProfile()
+        }
+    }
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
     private let animationView = LottieAnimationView()
@@ -48,20 +41,20 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingStart()
+        addRefreshControll()
         collectionViewSettings()
-        presenter.view = self
-        presenter.viewDidLoad()
-//        loadingStart()
-//        addRefreshControll()
         tabbar()
         startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
+        design()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.viewWillAppear()
+        getUser()
+        getCoachs()
     }
     
     override func viewDidLayoutSubviews() {
@@ -70,52 +63,51 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         bannersCollectionView.setContentOffset(CGPoint(x: x, y: 0), animated: false)
     }
     
-//    private func addRefreshControll() {
-//        refreshControl.refreshSettings(scrollView: scrollView)
-//        refreshControl.refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-//    }
-    
-    
-    func navigateToLoading() {
-        performSegue(withIdentifier: "loading", sender: self)
+    private func addRefreshControll() {
+        refreshControl.refreshSettings(scrollView: scrollView)
+        refreshControl.refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
     }
     
-    func disableLoading() {
-        navigationController?.popViewController(animated: false)
+    private func loadingStart() {
+        if DeepLinksManager.isLink == false {
+            performSegue(withIdentifier: "loading", sender: self)
+        }else {
+            getCelebrity()
+            getRecomendCourses()
+        }
     }
     
-    func showError(error: String) {
-        print(error)
+    
+    private func getCoachs() {
+        Task {
+            coachs = try await User().getAllCoachs()
+            coachCollectionView.reloadData()
+        }
     }
     
-    func showBanners(banners: [String]) {
-        self.banners = banners
-        bannersCollectionView.reloadData()
+    private func getUser() {
+        Task {
+            user = try await User().getMyInfo()
+        }
     }
     
-    func showCoachs(coachs: [UserModel]) {
-        self.coachs = coachs
-        coachCollectionView.reloadData()
+    private func getCelebrity() {
+        Task {
+            celebrities = try await User().getCelebreties()
+            celebrityCollectionView.reloadData()
+        }
     }
     
-    func showUser(user: UserModel) {
-        nameLbl.text = "\(presenter.userModel.name) \(presenter.userModel.surname)"
-        avatar.sd_setImage(with: presenter.userModel.avatarURL!)
-    }
-    
-    func showCelebrity(celebrity: [UserModel]) {
-        self.celebrities = celebrity
-        celebrityCollectionView.reloadData()
-    }
-    
-    func showRecomendedCourses(courses: [Course]) {
-        recomendCourses = courses
-        recomendCollectionView.reloadData()
+    private func getRecomendCourses() {
+        Task {
+            recomendCourses = try await Course().getRecomendedCourses()
+            recomendCollectionView.reloadData()
+        }
     }
     
     private func tabbar() {
         var deleteUser = 3
-        if presenter.userModel.role == .coach {
+        if user.role == .coach {
             deleteUser = 4
         }
         self.tabBarController?.viewControllers?.remove(at: deleteUser) // 3 - USER | 4 - COACH
@@ -154,6 +146,24 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         coachCollectionView.dataSource = self
     }
     
+    private func design() {
+        getBanners()
+    }
+    
+    private func addProfile() {
+        nameLbl.text = "\(user.name) \(user.surname)"
+        avatar.sd_setImage(with: user.avatarURL!)
+    }
+    
+    
+    private func getBanners() {
+        banners.append("first")
+        banners.append("second")
+        banners.append("third")
+        banners.append("fourth")
+        bannersCollectionView.reloadData()
+    }
+    
     
     @IBAction func popular(_ sender: UIButton) {
         performSegue(withIdentifier: "popular", sender: self)
@@ -176,18 +186,18 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         errorView.swipe(sender: sender, startPosition: startPosition)
     }
     
-//    
-//    @objc func handleRefresh(sender: UIRefreshControl) {
-//        Task {
-//            celebrities = try await User().getCelebreties()
-//            recomendCourses = try await Course().getRecomendedCourses()
-//            coachs = try await User().getAllCoachs()
-//            recomendCollectionView.reloadData()
-//            celebrityCollectionView.reloadData()
-//            coachCollectionView.reloadData()
-//            refreshControl.refreshControl.endRefreshing()
-//        }
-//    }
+    
+    @objc func handleRefresh(sender: UIRefreshControl) {
+        Task {
+            celebrities = try await User().getCelebreties()
+            recomendCourses = try await Course().getRecomendedCourses()
+            coachs = try await User().getAllCoachs()
+            recomendCollectionView.reloadData()
+            celebrityCollectionView.reloadData()
+            coachCollectionView.reloadData()
+            refreshControl.refreshControl.endRefreshing()
+        }
+    }
     
     
 }
@@ -284,13 +294,24 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             vc.typeCourse = .popular
         }else if segue.identifier == "loading" {
             let vc = segue.destination as! LoadingStartViewController
-            vc.homePresenter = presenter
+            vc.delegate = self
         }else if segue.identifier == "coach" {
             let vc = segue.destination as! CoachViewController
             vc.idCoach = selectCoachs.id
         }
         
         
+    }
+    
+}
+extension HomeViewController: LoadingData {
+    
+    func getData(user: UserStruct, celebrity: [UserStruct], recomended: [Course]) {
+        self.user = user
+        self.celebrities = celebrity
+        self.celebrityCollectionView.reloadData()
+        self.recomendCourses = recomended
+        self.recomendCollectionView.reloadData()
     }
     
 }

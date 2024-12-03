@@ -18,34 +18,17 @@ class LoadingStartViewController: UIViewController {
     private var titles = [String]()
     private var images = [String]()
     
-    var delegate: LoadingData!
+    var homePresenter = HomePresenter()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkError()
+        homePresenter.getData()
         allTitle()
         allImages()
         randomImageAndTitle()
         loadingSettings()
     }
-    
-    private func checkError() {
-        Task {
-            getData()
-        }
-    }
-    
-    private func getData() {
-        Task{
-            let user = try await User().getMyInfo()
-            let celebrities = try await User().getCelebreties()
-            let recomendCourses = try await Course().getRecomendedCourses()
-            delegate.getData(user: user, celebrity: celebrities, recomended: recomendCourses)
-            navigationController?.popViewController(animated: false)
-        }
-    }
-    
     
 
     private func loadingSettings() {

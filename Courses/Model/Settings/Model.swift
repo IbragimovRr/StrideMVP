@@ -334,7 +334,3 @@ protocol AddPromoDelegate: AnyObject {
 protocol AddCategoryDelegate: AnyObject {
     func category(category: Category)
 }
-
-protocol LoadingData {
-    func getData(user: UserStruct, celebrity: [UserStruct], recomended: [Course])
-}
