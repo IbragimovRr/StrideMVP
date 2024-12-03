@@ -310,6 +310,9 @@
 		440DAB322C1748D400C576FB /* Courses */ = {
 			isa = PBXGroup;
 			children = (
+				448E73EC2CFF05E000C3000D /* ModelMVP */,
+				448E73ED2CFF05E900C3000D /* ViewMVP */,
+				448E73EE2CFF060600C3000D /* Presenter */,
 				448765092CE01C2E008A1E44 /* Courses.entitlements */,
 				440DAB472C17491600C576FB /* Model */,
 				440DAB482C17491D00C576FB /* Views */,
@@ -408,6 +411,27 @@
 				440E1F752CA16C86002C6FC8 /* CourseJSON.swift */,
 			);
 			path = Course;
+			sourceTree = "<group>";
+		};
+		448E73EC2CFF05E000C3000D /* ModelMVP */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModelMVP;
+			sourceTree = "<group>";
+		};
+		448E73ED2CFF05E900C3000D /* ViewMVP */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewMVP;
+			sourceTree = "<group>";
+		};
+		448E73EE2CFF060600C3000D /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		44BC59032CCFF33200AD7FFA /* AdminPanelScreens */ = {
