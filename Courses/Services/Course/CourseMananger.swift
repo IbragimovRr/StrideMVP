@@ -88,7 +88,7 @@ class CourseMananger {
         return value
     }
     
-    func searchCourses(text: String, category: Category?) async throws -> Data {
+    func searchCourses(text: String, category: CategoryModel?) async throws -> Data {
         let url = Constants.url + "api/v1/autocomplete/courses/"
         var parameters: Parameters = [
             "title": text

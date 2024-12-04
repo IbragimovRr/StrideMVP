@@ -299,7 +299,7 @@ class CourseServices {
     }
     
     // MARK: - Поиск
-    func searchCourses(text: String, category: Category?) async throws -> [Course] {
+    func searchCourses(text: String, category: CategoryModel?) async throws -> [Course] {
         let value = try await mananger.searchCourses(text: text, category: category)
         let courses = json.allCourses(value: value)
         return courses

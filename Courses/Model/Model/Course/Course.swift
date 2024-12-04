@@ -43,7 +43,7 @@ class Course {
     var nameCourse: String
     var author: UserStruct = UserStruct()
     var price: Int
-    var category: Category = Category()
+    var category: CategoryModel = CategoryModel()
     var imageURL: URL?
     var rating: Float
     var myRating: Int
@@ -58,7 +58,7 @@ class Course {
     var next: String = ""
     var verification: Verification = .proccess
     
-    init(daysCount: Int = 0, nameCourse: String = "", price: Int = 0, category: Category = Category(), imageURL: URL? = nil, rating: Float = 0.0, myRating:Int = 0, id: Int = 0, description: String = "", dataCreated: String = "", progressInDays: Int = 0, countBuyer: Int = 0, isBought: Bool = false, isDraft: Bool = true, next: String = "", verification: Verification = .proccess, author: UserStruct = UserStruct()) {
+    init(daysCount: Int = 0, nameCourse: String = "", price: Int = 0, category: CategoryModel = CategoryModel(), imageURL: URL? = nil, rating: Float = 0.0, myRating:Int = 0, id: Int = 0, description: String = "", dataCreated: String = "", progressInDays: Int = 0, countBuyer: Int = 0, isBought: Bool = false, isDraft: Bool = true, next: String = "", verification: Verification = .proccess, author: UserStruct = UserStruct()) {
         self.daysCount = daysCount
         self.nameCourse = nameCourse
         self.price = price
@@ -366,7 +366,7 @@ class Course {
     }
     
     // MARK: - Поиск
-    func searchCourses(text: String, category: Category?) async throws -> [Course] {
+    func searchCourses(text: String, category: CategoryModel?) async throws -> [Course] {
         let value = try await mananger.searchCourses(text: text, category: category)
         let courses = json.allCourses(value: value)
         return courses

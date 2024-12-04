@@ -129,7 +129,7 @@ class CourseJSON {
         let categoryID = json["category"]["id"].intValue
         let categoryTitle = json["category"]["title"].stringValue
         let categoryImage = json["category"]["image"].stringValue
-        let category = Category(nameCategory: categoryTitle, imageURL: URL(string: categoryImage), id: categoryID)
+        let category = CategoryModel(nameCategory: categoryTitle, imageURL: URL(string: categoryImage), id: categoryID)
         let boughtCount = json["bought_count"].intValue
         let isBought = json["bought"].boolValue
         let isDraft = json["is_draft"].boolValue

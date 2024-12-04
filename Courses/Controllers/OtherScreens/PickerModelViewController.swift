@@ -12,8 +12,8 @@ class PickerModelViewController: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     
     var delegate: AddCategoryDelegate?
-    var category = [Category]()
-    var selectCategory: Category?
+    var category = [CategoryModel]()
+    var selectCategory: CategoryModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class PickerModelViewController: UIViewController {
 
     private func getCategories() {
         Task {
-            category = try await Category.getCategories()
+            category = try await CategoryServices.getCategories()
             guard category.isEmpty == false else { return }
             selectCategory = category[0]
             pickerView.reloadAllComponents()

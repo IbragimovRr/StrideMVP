@@ -51,7 +51,6 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         collectionViewSettings()
         presenter.view = self
         presenter.viewDidLoad()
-//        loadingStart()
 //        addRefreshControll()
         tabbar()
         startPosition = errorView.center

@@ -332,5 +332,5 @@ protocol AddPromoDelegate: AnyObject {
 }
 
 protocol AddCategoryDelegate: AnyObject {
-    func category(category: Category)
+    func category(category: CategoryModel)
 }

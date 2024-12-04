@@ -35,7 +35,7 @@ class AddInfoAboutCourseVC: UIViewController {
     private var startPosition = CGPoint()
     private var infoCourses = Course()
     private var imageURL: URL?
-    private var selectCategory: Category?
+    private var selectCategory: CategoryModel?
     private var promocodes = [Promocodes]()
     var idCourse = 0
     var create = true
@@ -335,7 +335,7 @@ extension AddInfoAboutCourseVC: UITextFieldDelegate {
 }
 extension AddInfoAboutCourseVC: AddCategoryDelegate {
 
-    func category(category: Category) {
+    func category(category: CategoryModel) {
         categoriesLbl.text = category.nameCategory
         selectCategory = category
     }

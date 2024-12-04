@@ -9,7 +9,18 @@ import UIKit
 import SDWebImage
 import Lottie
 
-class CatalogViewController: UIViewController {
+protocol CatalogViewDelegate {
+    func showCourses()
+    func showCategories()
+    func showLoadingMain(bool: Bool)
+    func showLoadingPage(bool: Bool)
+    func showNextPage()
+    func showEmptyView(bool: Bool)
+    func searchCourses()
+    func updateCollection()
+}
+
+class CatalogViewController: UIViewController, CatalogViewDelegate {
 
     @IBOutlet weak var instagrampostFilterSegment: UIButton!
     @IBOutlet weak var groupPostFilterSegment: UIButton!
@@ -23,16 +34,13 @@ class CatalogViewController: UIViewController {
     @IBOutlet weak var catalogCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     
-    var categories = [Category]()
-    var courses = [Course]()
-    private var selectCourse = Course()
-    private var selectCategory: Category?
-    private var loadingMoreData = false
+    var presenter = CatalogPresenter()
     private var postFilterSegment: PostSegmented!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
+        presenter.view = self
         categoryCollectionView.dataSource = self
         categoryCollectionView.delegate = self
         catalogCollectionView.dataSource = self
@@ -40,6 +48,7 @@ class CatalogViewController: UIViewController {
         search.delegate = self
         postFilterSegment = PostSegmented(firstBtn: groupPostFilterSegment, secondBtn: instagrampostFilterSegment)
         design()
+        presenter.viewDidLoad()
     }
     
     
@@ -48,8 +57,6 @@ class CatalogViewController: UIViewController {
     }
     
     private func design() {
-        getCourses()
-        getCategories()
         emptySettings()
         loadingPage.play()
         loadingPage.loopMode = .loop
@@ -57,72 +64,65 @@ class CatalogViewController: UIViewController {
         loadingMain.loopMode = .loop
     }
     
-
-    private func getCourses(page: String? = nil) {
-        Task {
-            if page == nil {
-                loadingMain.isHidden = false
-            }
-            do {
-                let results = try await Course().getAllCourses(page: page)
-                courses += results
-                emptyCheck()
-                catalogCollectionView.reloadData()
-                loadingMoreData = false
-                catalogCollectionView.layoutIfNeeded()
-                changeHeightCollection()
-                loadingMain.isHidden = true
-            }catch {
-                loadingMoreData = false
-                loadingMain.isHidden = true
-            }
-        }
+    func showCourses() {
+        emptyCheck()
+        catalogCollectionView.reloadData()
+        catalogCollectionView.layoutIfNeeded()
+        changeHeightCollection()
     }
-
     
+    func showCategories() {
+        categoryCollectionView.reloadData()
+    }
     
-    private func getCoursesByCategory(id: Int) {
-        Task {
-            courses.removeAll()
-            catalogCollectionView.reloadData()
+    func showLoadingMain(bool: Bool) {
+        if bool {
             loadingMain.isHidden = false
-            do {
-                let results = try await Course().getAllCourses(categoryID: id)
-                courses = results
-                emptyCheck()
-                catalogCollectionView.reloadData()
-                loadingMoreData = false
-                catalogCollectionView.layoutIfNeeded()
-                changeHeightCollection()
-                loadingMain.isHidden = true
-            }catch {
-                loadingMoreData = false
-                loadingMain.isHidden = true
-            }
+            loadingMain.play()
+        }else {
+            loadingMain.isHidden = true
+            loadingMain.stop()
         }
     }
-
-    private func getCategories() {
-        Task {
-            categories = try await Category.getCategories()
-            categoryCollectionView.reloadData()
-        }
-    }
-
-    private func searchCourse(text: String) {
-        Task {
-            courses = try await Course().searchCourses(text: text, category: selectCategory)
-            emptyCheck()
-            catalogCollectionView.reloadData()
+    
+    func showLoadingPage(bool: Bool) {
+        if bool {
+            loadingPage.isHidden = false
+            loadingPage.play()
+        }else {
             loadingPage.isHidden = true
             loadingPage.stop()
-            catalogCollectionView.layoutIfNeeded()
-            changeHeightCollection()
         }
     }
     
+    func showNextPage() {
+        catalogCollectionView.reloadData()
+        catalogCollectionView.layoutIfNeeded()
+        changeHeightCollection()
+    }
+    
+    func showEmptyView(bool: Bool) {
+        if presenter.courses.isEmpty == false {
+            emptyView.isHidden = true
+        }else {
+            emptyView.isHidden = false
+        }
+    }
+    
+    func searchCourses() {
+        catalogCollectionView.reloadData()
+        catalogCollectionView.layoutIfNeeded()
+        changeHeightCollection()
+    }
+    
+    func updateCollection() {
+        catalogCollectionView.reloadData()
+        categoryCollectionView.reloadData()
+    }
+
+    
     private func emptyCheck() {
-        if courses.isEmpty == false {
+        if presenter.courses.isEmpty == false {
             emptyView.isHidden = true
         }else {
             emptyView.isHidden = false
@@ -156,64 +156,38 @@ class CatalogViewController: UIViewController {
 extension CatalogViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == categoryCollectionView {
-            return categories.count
+            return presenter.categories.count
         }else {
-            return courses.count
+            return presenter.courses.count
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == categoryCollectionView {
             let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "category", for: indexPath) as! CategoriesCollectionViewCell
-            cell.image.sd_setImage(with: categories[indexPath.row].imageURL)
-            cell.nameCategory.text = categories[indexPath.row].nameCategory
-            cell.selectCategory(selectCategoryID: selectCategory?.id, categoryID: categories[indexPath.row].id)
+            cell.image.sd_setImage(with: presenter.categories[indexPath.row].imageURL)
+            cell.nameCategory.text = presenter.categories[indexPath.row].nameCategory
+            cell.selectCategory(selectCategoryID: presenter.selectCategory?.id, categoryID: presenter.categories[indexPath.row].id)
             return cell
         }else {
             let cell = catalogCollectionView.dequeueReusableCell(withReuseIdentifier: postFilterSegment.collectionIdentifier, for: indexPath) as! CoursesCollectionViewCell
-            cell.image.sd_setImage(with: courses[indexPath.row].imageURL)
-            cell.nameAuthor.text = courses[indexPath.row].author.userName
-            cell.nameCourse.text = courses[indexPath.row].nameCourse
-            cell.price.text = "\(courses[indexPath.row].price)₽"
-            cell.rating.text = "\(courses[indexPath.row].rating)"
-            cell.daysCount.text = "\(courses[indexPath.row].daysCount) этапов"
+            cell.image.sd_setImage(with: presenter.courses[indexPath.row].imageURL)
+            cell.nameAuthor.text = presenter.courses[indexPath.row].author.userName
+            cell.nameCourse.text = presenter.courses[indexPath.row].nameCourse
+            cell.price.text = "\(presenter.courses[indexPath.row].price)₽"
+            cell.rating.text = "\(presenter.courses[indexPath.row].rating)"
+            cell.daysCount.text = "\(presenter.courses[indexPath.row].daysCount) этапов"
             return cell
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == catalogCollectionView {
-            selectCourse = courses[indexPath.row]
+            presenter.selectCourse = presenter.courses[indexPath.row]
             performSegue(withIdentifier: "info", sender: self)
         }else if collectionView == categoryCollectionView {
-            if selectCategory?.id == categories[indexPath.row].id {
-                loadCourses()
-            }else {
-                loadCategory(indexPath: indexPath)
-            }
+            presenter.showSelectCategory(indexPath: indexPath, search: search.text!)
         }
-    }
-    
-    private func loadCourses() {
-        selectCategory = nil
-        courses.removeAll()
-        catalogCollectionView.reloadData()
-        categoryCollectionView.reloadData()
-        if search.text == "" {
-            getCourses()
-        }else {
-            searchCourse(text: search.text!)
-        }
-    }
-    
-    private func loadCategory(indexPath: IndexPath) {
-        selectCategory = categories[indexPath.row]
-        if search.text == "" {
-            getCoursesByCategory(id: categories[indexPath.row].id)
-        }else {
-            searchCourse(text: search.text!)
-        }
-        categoryCollectionView.reloadData()
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -236,14 +210,14 @@ extension CatalogViewController: UICollectionViewDelegate, UICollectionViewDataS
             let scrollViewHeight = scrollView.frame.size.height
             let scrollOffset = scrollView.contentOffset.y
             
-            guard courses.isEmpty == false else { return }
-            let nextURL = courses[courses.count - 1].next
+            guard presenter.courses.isEmpty == false else { return }
+            let nextURL = presenter.courses[presenter.courses.count - 1].next
             
-            if scrollOffset >= contentHeight - scrollViewHeight && loadingMoreData == false && nextURL != "" {
+            if scrollOffset >= contentHeight - scrollViewHeight && presenter.loadingMoreData == false && nextURL != "" {
                 loadingPage.isHidden = false
                 loadingPage.play()
-                loadingMoreData = true
-                getCourses(page: nextURL)
+                presenter.loadingMoreData = true
+                presenter.getNextPage(page: nextURL)
             }
             
             checkLastPage(nextURL: nextURL)
@@ -262,7 +236,7 @@ extension CatalogViewController: UICollectionViewDelegate, UICollectionViewDataS
 
         if segue.identifier == "info" {
             let vc = segue.destination as! InfoCoursesViewController
-            vc.course = selectCourse
+            vc.course = presenter.selectCourse
         }
 
     }
@@ -272,14 +246,8 @@ extension CatalogViewController: UICollectionViewDelegate, UICollectionViewDataS
 extension CatalogViewController: UITextFieldDelegate {
 
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        searchCourse(text: textField.text!)
+        presenter.searchCourse(text: textField.text!)
     }
 
-    private func disableSelectCategory() {
-        if selectCategory != nil {
-            selectCategory = nil
-            categoryCollectionView.reloadData()
-        }
-    }
     
 }
