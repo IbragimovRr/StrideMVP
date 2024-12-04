@@ -11,9 +11,9 @@ import SwiftyJSON
 class CourseJSON {
     
     // MARK: - Days JSON
-    func daysInCourse(value: Data) async throws -> Course {
+    func daysInCourse(value: Data) async throws -> CourseModel {
         let json = JSON(value)
-        let course = Course()
+        let course = CourseModel()
         var modules = [Modules]()
         course.nameCourse = json["title"].stringValue
         course.id = json["id"].intValue
@@ -47,9 +47,9 @@ class CourseJSON {
     
     
     // MARK: - All Courses JSON
-    func allCourses(value: Data) -> [Course] {
+    func allCourses(value: Data) -> [CourseModel] {
         let json = JSON(value)
-        var courses = [Course]()
+        var courses = [CourseModel]()
 
         let results = json["results"].arrayValue
         guard results.isEmpty == false else {return []}
@@ -72,15 +72,15 @@ class CourseJSON {
             let isBought = json["results"][x]["bought"].boolValue
             let next = json["next"].stringValue
             let progressInDays = json["results"][x]["completed_days_count"].intValue
-            courses.append(Course(daysCount: daysCount, nameCourse: title, price: price, imageURL: URL(string: image), rating: rating, id: id, description: description, dataCreated: dataCreated, progressInDays: progressInDays, countBuyer: countBuyer, isBought: isBought, next: next, author: UserModel(name:authorName, surname: authorSurname, id: authorID)))
+            courses.append(CourseModel(daysCount: daysCount, nameCourse: title, price: price, imageURL: URL(string: image), rating: rating, id: id, description: description, dataCreated: dataCreated, progressInDays: progressInDays, countBuyer: countBuyer, isBought: isBought, next: next, author: UserModel(name:authorName, surname: authorSurname, id: authorID)))
         }
         return courses
     }
     
     // MARK: - All Courses By another user
-    func allCoursesByUser(value: Data) -> [Course] {
+    func allCoursesByUser(value: Data) -> [CourseModel] {
         let json = JSON(value)
-        var courses = [Course]()
+        var courses = [CourseModel]()
 
         let results = json.arrayValue
         guard results.isEmpty == false else {return []}
@@ -104,13 +104,13 @@ class CourseJSON {
             let isDraft = json[x]["is_draft"].boolValue
             let verification = Verification(rawValue: json[x]["verification"].stringValue) ?? .proccess
             let progressInDays = json[x]["completed_days_count"].intValue
-            courses.append(Course(daysCount: daysCount, nameCourse: title, price: price, imageURL: URL(string: image), rating: rating, id: id, description: description, dataCreated: dataCreated, progressInDays: progressInDays, countBuyer: countBuyer, isBought: isBought, isDraft: isDraft, verification: verification, author: author))
+            courses.append(CourseModel(daysCount: daysCount, nameCourse: title, price: price, imageURL: URL(string: image), rating: rating, id: id, description: description, dataCreated: dataCreated, progressInDays: progressInDays, countBuyer: countBuyer, isBought: isBought, isDraft: isDraft, verification: verification, author: author))
         }
         return courses
     }
     
     // MARK: - One Course
-    func course(value: Data) -> Course {
+    func course(value: Data) -> CourseModel {
         let json = JSON(value)
         let daysCount = json["count_days"].intValue
         let title = json["title"].stringValue
@@ -134,7 +134,7 @@ class CourseJSON {
         let isBought = json["bought"].boolValue
         let isDraft = json["is_draft"].boolValue
         let verification = Verification(rawValue: json["verification"].stringValue) ?? .proccess
-        let course = Course(daysCount: daysCount, nameCourse: title, price: price, category: category, imageURL: URL(string: image),rating: rating, myRating: myRating, id: id, description: description, dataCreated: dataCreated, countBuyer: boughtCount, isBought: isBought, isDraft: isDraft, verification: verification, author: author)
+        let course = CourseModel(daysCount: daysCount, nameCourse: title, price: price, category: category, imageURL: URL(string: image),rating: rating, myRating: myRating, id: id, description: description, dataCreated: dataCreated, countBuyer: boughtCount, isBought: isBought, isDraft: isDraft, verification: verification, author: author)
         return course
     }
 }

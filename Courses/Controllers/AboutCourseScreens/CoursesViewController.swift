@@ -18,9 +18,9 @@ class CoursesViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
 
     private var selectIDCourse = 0
-    private var selectCourse = Course()
-    var course = [Course]()
-    var filteredCourse = [Course]()
+    private var selectCourse = CourseModel()
+    var course = [CourseModel]()
+    var filteredCourse = [CourseModel]()
     var typeCourse = CourseCatalog.recomend
 
     override func viewDidLoad() {
@@ -57,7 +57,7 @@ class CoursesViewController: UIViewController {
 
     private func getMyCreateCourses() {
         Task {
-            course = try await Course().getMyCreateCourses()
+            course = try await CourseServices().getMyCreateCourses()
             filteredCourse = course
             emptyCheck()
             catalogCollectionView.reloadData()
@@ -66,7 +66,7 @@ class CoursesViewController: UIViewController {
     
     private func getPopularCourses() {
         Task {
-            course = try await Course().getPopularCourses()
+            course = try await CourseServices().getPopularCourses()
             filteredCourse = course
             emptyCheck()
             catalogCollectionView.reloadData()
@@ -75,7 +75,7 @@ class CoursesViewController: UIViewController {
 
     private func getRecomendCourses() {
         Task {
-            course = try await Course().getRecomendedCourses()
+            course = try await CourseServices().getRecomendedCourses()
             filteredCourse = course
             emptyCheck()
             catalogCollectionView.reloadData()
@@ -84,7 +84,7 @@ class CoursesViewController: UIViewController {
 
     private func getCelebrityCourses() {
         Task {
-            course = try await Course().getCoursesByCelebrity()
+            course = try await CourseServices().getCoursesByCelebrity()
             filteredCourse = course
             emptyCheck()
             catalogCollectionView.reloadData()

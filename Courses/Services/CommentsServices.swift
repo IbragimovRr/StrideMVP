@@ -13,7 +13,7 @@ class CommentsServices {
 
     func getComments(courseID: Int) async throws -> [Reviews] {
         let url = Constants.url + "api/v1/comments/\(courseID)/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let value = try await AF.request(url, headers: headers).serializingData().value
         let json = JSON(value)
         var comments = [Reviews]()
@@ -29,7 +29,7 @@ class CommentsServices {
             let date = json[x]["created_at"].stringValue
             let datePart = date.replacingOccurrences(of: "T.*", with: "", options: .regularExpression)
             let courseID = json[x]["course"].intValue
-            let avatarAuthor = try await User().getUserByID(id: authorID).avatarURL
+            let avatarAuthor = try await UserServices().getUserByID(id: authorID).avatarURL
             comments.append(Reviews(id: id, author: author, authorAvatar: avatarAuthor, text: text, date: datePart, courseID: courseID))
         }
         return comments
@@ -38,7 +38,7 @@ class CommentsServices {
     func addComment(idCourse: Int, rating: Int, text: String) async throws {
         try await addRating(rating: rating, idCourse: idCourse)
         let url = Constants.url + "api/v1/comments/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let parameters: Parameters = [
             "course": idCourse,
             "text": text
@@ -49,7 +49,7 @@ class CommentsServices {
 
     private func addRating(rating: Int, idCourse: Int) async throws {
         let url = Constants.url + "api/v1/rating/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let parameters: Parameters = [
             "course": idCourse,
             "rating": rating

@@ -27,8 +27,6 @@ struct Objects {
     let imageForBtn: String
 }
 
-
-
 // MARK: - Comments
 
 struct Reviews {

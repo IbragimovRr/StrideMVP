@@ -14,9 +14,9 @@ class Admin {
     
     private var json = CourseJSON()
     
-    func getNonVerificationCourses() async throws -> [Course] {
+    func getNonVerificationCourses() async throws -> [CourseModel] {
         let url = Constants.url + "api/v1/courses/non_verification_courses/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         let value = try await AF.request(url, headers: headers).serializingData().value
         let courses = json.allCourses(value: value)
@@ -26,7 +26,7 @@ class Admin {
     
     func cancelCourses(idCourses: Int) async throws {
         let url = Constants.url + "api/v1/courses/\(idCourses)/reject_course/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = AF.request(url, method: .post, headers: headers).serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode
@@ -44,7 +44,7 @@ class Admin {
     
     func successCourses(idCourses: Int) async throws {
         let url = Constants.url + "api/v1/courses/\(idCourses)/verificate_course/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = AF.request(url, method: .post, headers: headers).serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode
@@ -66,7 +66,7 @@ class Admin {
     
     func requestPayments() async throws -> [Payments] {
         let url = Constants.url + "api/v1/payments/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let value = try await AF.request(url, method: .get, headers: headers).serializingData().value
         
         let json = JSON(value)
@@ -102,7 +102,7 @@ class Admin {
     
     func completedPayments(id: Int) async throws {
         let url = Constants.url + "api/v1/payments/\(id)/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         let parameters = [
             "status": "Completed"

@@ -14,7 +14,7 @@ protocol HomeViewProtocol: AnyObject {
     func showCoachs(coachs: [UserModel])
     func showUser(user: UserModel)
     func showCelebrity(celebrity: [UserModel])
-    func showRecomendedCourses(courses: [Course])
+    func showRecomendedCourses(courses: [CourseModel])
     func navigateToLoading()
     func disableLoading()
 }
@@ -36,10 +36,10 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     private var banners = [String]()
     private var coachs = [UserModel]()
     private var selectCoachs = UserModel()
-    private var recomendCourses = [Course]()
+    private var recomendCourses = [CourseModel]()
     private var celebrities = [UserModel]()
     private let layout = PageLayout()
-    private var selectCourses = Course()
+    private var selectCourses = CourseModel()
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
     private let animationView = LottieAnimationView()
@@ -107,7 +107,7 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         celebrityCollectionView.reloadData()
     }
     
-    func showRecomendedCourses(courses: [Course]) {
+    func showRecomendedCourses(courses: [CourseModel]) {
         recomendCourses = courses
         recomendCollectionView.reloadData()
     }

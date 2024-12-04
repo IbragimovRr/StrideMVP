@@ -11,7 +11,7 @@ import SwiftyJSON
 import GoogleSignIn
 
 
-class Sign {
+class SignServices {
 
     // MARK: - Google
 
@@ -65,7 +65,7 @@ class Sign {
 
         if code == 200 {
             UD().saveToken(tokenAccess)
-            let _ = try await User().getMyInfo()
+            let _ = try await UserServices().getMyInfo()
             UD().saveCurrent(true)
         }else {
             throw ErrorNetwork.runtimeError("Неправильный номер или пароль")
@@ -98,7 +98,7 @@ class Sign {
 
         if code == 201 {
             UD().saveToken(tokenAccess)
-            let _ = try await User().getMyInfo()
+            let _ = try await UserServices().getMyInfo()
             UD().saveCurrent(true)
         }else {
             let error = json.dictionary!.first!.value[0].stringValue

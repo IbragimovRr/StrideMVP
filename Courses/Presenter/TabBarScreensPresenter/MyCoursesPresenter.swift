@@ -15,14 +15,14 @@ protocol MyCoursesPresenterDelegate {
 class MyCoursesPresenter: MyCoursesPresenterDelegate {
     
     var view: MyCoursesViewDelegate?
-    var course = [Course]()
-    var filteredCourse = [Course]()
+    var course = [CourseModel]()
+    var filteredCourse = [CourseModel]()
     var selectIDCourse = 0
     
     func getMyBoughtCourses() {
         view?.showLoading(bool: true)
         Task {
-            course = try await Course().getBoughtCourses()
+            course = try await CourseServices().getBoughtCourses()
             filteredCourse = course
             DispatchQueue.main.async {
                 self.view?.showLoading(bool: false)

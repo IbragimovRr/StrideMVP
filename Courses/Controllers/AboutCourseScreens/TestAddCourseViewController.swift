@@ -200,7 +200,7 @@ class TestAddCourseViewController: UIViewController {
     private func addCourse(text: NSAttributedString) async throws {
         do {
             loadingSettings()
-            try await Course().addModulesData(text: text, moduleID: module.id)
+            try await CourseServices().addModulesData(text: text, moduleID: module.id)
             loadingStop()
             isSave = true
         }catch ErrorNetwork.runtimeError(let error) {

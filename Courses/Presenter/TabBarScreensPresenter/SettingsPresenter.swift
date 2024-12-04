@@ -16,7 +16,7 @@ protocol SettingsPresenterDelegate {
 class SettingsPresenter: SettingsPresenterDelegate {
     
     var view: SettingsViewDelegate?
-    var user: UserModel = User.info
+    var user: UserModel = UserServices.info
     var arrayObjects = [Objects]()
     var arrayObjects2 = [Objects]()
     
@@ -27,7 +27,7 @@ class SettingsPresenter: SettingsPresenterDelegate {
     
     func getMyInfo() {
         Task {
-            user = try await User().getMyInfo()
+            user = try await UserServices().getMyInfo()
             DispatchQueue.main.async {
                 self.view?.showProfile()
             }

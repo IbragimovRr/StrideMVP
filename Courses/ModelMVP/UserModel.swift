@@ -21,7 +21,7 @@ struct UserModel {
     var level: Level?
     var goal: Goal?
     var coach = CoachModel()
-    var myCourses = [Course]()
+    var myCourses = [CourseModel]()
     var id = 0
     var token = ""
     
@@ -36,7 +36,7 @@ struct UserModel {
         self.avatarURL = avatarURL
     }
     
-    init(role: Role, name: String, surname: String, email: String, phone: String, height: Double? = nil, weight: Double? = nil, birthday: String? = nil, description: String? = nil, avatarURL: URL? = nil, level: Level? = nil, goal: Goal? = nil, myCourses: [Course] = [Course](), id: Int = 0) {
+    init(role: Role, name: String, surname: String, email: String, phone: String, height: Double? = nil, weight: Double? = nil, birthday: String? = nil, description: String? = nil, avatarURL: URL? = nil, level: Level? = nil, goal: Goal? = nil, myCourses: [CourseModel] = [CourseModel](), id: Int = 0) {
         self.role = role
         self.name = name
         self.surname = surname
@@ -57,7 +57,7 @@ struct CoachModel {
     var description: String?
     var countCourses: Int = 0
     var rating: Float = 0.0
-    var myCourses = [Course]()
+    var myCourses = [CourseModel]()
     var money: Int = 0
 }
 

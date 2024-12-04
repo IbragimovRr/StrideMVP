@@ -41,7 +41,7 @@ class Promocodes {
     
     func deletePromocode(_ promocode: Promocodes) async throws {
         let url = Constants.url + "api/v1/courses/\(promocode.id)/delete-promo/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         let response = AF.request(url, method: .delete, headers: headers).serializingData()
         
@@ -57,7 +57,7 @@ class Promocodes {
     
     func usedPromocode(_ promocodeName: String, courseID: Int) async throws -> Promocodes {
         let url = Constants.url + "api/v1/courses/use-promo/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         var parameters = [
             "course_id": courseID,
@@ -84,7 +84,7 @@ class Promocodes {
     
     func createPromocode(_ promocode: Promocodes) async throws -> Promocodes {
         let url = Constants.url + "api/v1/courses/promo-create/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         var parameters = [
             "name": promocode.name,
@@ -117,7 +117,7 @@ class Promocodes {
     func changePromocode(_ promocode: Promocodes) async throws -> Promocodes {
         print(promocode.id)
         let url = Constants.url + "api/v1/courses/\(promocode.id)/update-promo/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         var parameters = [
             "percent": promocode.procent
@@ -148,7 +148,7 @@ class Promocodes {
     
     func getMyPromocodes() async throws -> [Promocodes] {
         let url = Constants.url + "api/v1/courses/get-my-promo/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let value = try await AF.request(url, headers: headers).serializingData().value
         
         let json = JSON(value)
@@ -172,7 +172,7 @@ class Promocodes {
     
     func addPromocodesToCourses(courseID: Int, promocode: [Promocodes]) async throws {
         let url = Constants.url + "api/v1/courses/\(courseID)/assign-promo/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         let parameters = [
             "promo_code_name": promocodesInString(promocode)
@@ -198,7 +198,7 @@ class Promocodes {
     
     func deletePromocodesToCourses(courseID: Int, promocode: Promocodes) async throws {
         let url = Constants.url + "api/v1/courses/\(courseID)/remove-promo-from-course/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         let parameters = [
             "promo_code_name": promocode.name
@@ -215,7 +215,7 @@ class Promocodes {
     
     func getPromoToCourses(courseID: Int) async throws -> [Promocodes] {
         let url = Constants.url + "api/v1/courses/\(courseID)/get-course-promo/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         let value = try await AF.request(url, headers: headers).serializingData().value
         

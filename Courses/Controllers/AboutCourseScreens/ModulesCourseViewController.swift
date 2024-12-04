@@ -22,7 +22,7 @@ class ModulesCourseViewController: UIViewController {
 
     private let layout = PageModuleLayout()
     private var scaleView = false
-    private var course = Course()
+    private var course = CourseModel()
     private var selectDay: Int = 0
     private var selectModule = Modules(name: "", minutes: 0, id: 0)
     var idCourse = 0
@@ -67,7 +67,7 @@ class ModulesCourseViewController: UIViewController {
     
     private func completedModule(_ module: Modules) {
         Task {
-            try await Course().completedModule(id: module.id)
+            try await CourseServices().completedModule(id: module.id)
         }
     }
 
@@ -75,7 +75,7 @@ class ModulesCourseViewController: UIViewController {
         Task {
             loading.play()
             do {
-                course = try await Course().getDaysInCourse(id: idCourse)
+                course = try await CourseServices().getDaysInCourse(id: idCourse)
                 if course.courseDays.isEmpty == false {
                     course.courseDays[0].type = .current
                 }

@@ -11,8 +11,8 @@ class AdminCoursesViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var courses = [Course]()
-    private var selectCourse = Course()
+    private var courses = [CourseModel]()
+    private var selectCourse = CourseModel()
     var isVerificationCourses = true
     
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class AdminCoursesViewController: UIViewController {
     
     func getAllCourses() {
         Task {
-            let result = try await Course().getAllCourses()
+            let result = try await CourseServices().getAllCourses()
             courses = result
             collectionView.reloadData()
         }

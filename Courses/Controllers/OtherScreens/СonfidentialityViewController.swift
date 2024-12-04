@@ -44,7 +44,7 @@ class ConfidentialityViewController: UIViewController {
     private func deleteAccount() {
         Task {
             do {
-                try await User().deleteAccount()
+                try await UserServices().deleteAccount()
                 UD().clearUD()
                 self.navigationController?.popToRootViewController(animated: true)
             }catch {

@@ -33,7 +33,7 @@ class AddInfoAboutCourseVC: UIViewController {
 
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
-    private var infoCourses = Course()
+    private var infoCourses = CourseModel()
     private var imageURL: URL?
     private var selectCategory: CategoryModel?
     private var promocodes = [Promocodes]()
@@ -96,7 +96,7 @@ class AddInfoAboutCourseVC: UIViewController {
             return
         }
         Task {
-            infoCourses = try await Course().getCoursesByID(id: idCourse)
+            infoCourses = try await CourseServices().getCoursesByID(id: idCourse)
             getPromocodesByCourse()
             loadingStop()
             design()
@@ -174,7 +174,7 @@ class AddInfoAboutCourseVC: UIViewController {
     }
 
     func addCoach() {
-        let coach = User.info
+        let coach = UserServices.info
         coachPred.text = "\(coach.name) \(coach.surname)"
     }
     
@@ -222,11 +222,11 @@ class AddInfoAboutCourseVC: UIViewController {
             do {
                 addInfoInVar()
                 if create {
-                    idCourse = try await Course().saveInfoCourse(info: infoCourses, method: .post)
+                    idCourse = try await CourseServices().saveInfoCourse(info: infoCourses, method: .post)
                     create = false
                     shareBtn.isHidden = false
                 }else {
-                    idCourse = try await Course().saveInfoCourse(info: infoCourses, method: .patch)
+                    idCourse = try await CourseServices().saveInfoCourse(info: infoCourses, method: .patch)
                 }
                 try await Promocodes().addPromocodesToCourses(courseID: idCourse, promocode: promocodes)
                 saveBtn.isEnabled = true

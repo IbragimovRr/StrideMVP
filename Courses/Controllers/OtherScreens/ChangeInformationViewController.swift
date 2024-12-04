@@ -28,7 +28,7 @@ class ChangeInformationViewController: UIViewController {
 
     private var avatarURL: URL?
     private var activateTF: UITextField?
-    private var user: UserModel = User.info
+    private var user: UserModel = UserServices.info
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,7 @@ class ChangeInformationViewController: UIViewController {
             surname.autocapitalizationType = .words
             descriptionTF.textContainer.maximumNumberOfLines = 4
             descriptionTF.textContainer.lineBreakMode = .byTruncatingTail
-            user = try await User().getMyInfo()
+            user = try await UserServices().getMyInfo()
             if user.role == .user {
                 descriptionView.isHidden = true
                 heightScroll.constant = 530
@@ -123,7 +123,7 @@ class ChangeInformationViewController: UIViewController {
             do {
                 loadingSettings()
                 changeUserInfo()
-                try await User().changeInfoUser(id:user.id ,user: user)
+                try await UserServices().changeInfoUser(id:user.id ,user: user)
                 loading.stop()
                 loading.isHidden = true
                 saveBtn.isEnabled = true

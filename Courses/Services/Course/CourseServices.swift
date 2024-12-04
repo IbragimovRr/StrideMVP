@@ -16,7 +16,7 @@ class CourseServices {
     
     // MARK: - Получить дни и модули
     
-    func getDaysInCourse(id: Int) async throws -> Course {
+    func getDaysInCourse(id: Int) async throws -> CourseModel {
         let value = try await mananger.getDaysValue(id: id)
         let course = try await json.daysInCourse(value: value)
         return course
@@ -26,43 +26,43 @@ class CourseServices {
     
     // MARK: - Получить курсы
     
-    func getAllCourses(page: String? = nil) async throws -> [Course] {
+    func getAllCourses(page: String? = nil) async throws -> [CourseModel] {
         let value = try await mananger.getAllCourses(page: page)
         let courses = json.allCourses(value: value)
         return courses
     }
     
-    func getAllCourses(categoryID: Int) async throws -> [Course] {
+    func getAllCourses(categoryID: Int) async throws -> [CourseModel] {
         let value = try await mananger.getCoursesByCategory(id: categoryID)
         let courses = json.allCourses(value: value)
         return courses
     }
     
-    func getCoursesByID(id: Int) async throws -> Course {
+    func getCoursesByID(id: Int) async throws -> CourseModel {
         let value = try await mananger.getCoursesByID(id: id)
         let course = json.course(value: value)
         return course
     }
     
-    func getCoursesByUserID(id: Int) async throws -> [Course] {
+    func getCoursesByUserID(id: Int) async throws -> [CourseModel] {
         let value = try await mananger.getCoursesByUserID(id: id)
         let courses = json.allCoursesByUser(value: value)
         return courses
     }
     
-    func getCoursesByCelebrity() async throws -> [Course] {
+    func getCoursesByCelebrity() async throws -> [CourseModel] {
         let value = try await mananger.getCoursesByCelebrity()
         let courses = json.allCoursesByUser(value: value)
         return courses
     }
     
-    func getPopularCourses() async throws -> [Course] {
+    func getPopularCourses() async throws -> [CourseModel] {
         let value = try await mananger.getPopularCourses()
         let courses = json.allCourses(value: value)
         return courses
     }
     
-    func getRecomendedCourses() async throws -> [Course] {
+    func getRecomendedCourses() async throws -> [CourseModel] {
         let value = try await mananger.getRecomendedCourses()
         let courses = json.allCoursesByUser(value: value)
         return courses
@@ -71,13 +71,13 @@ class CourseServices {
     
     // MARK: - Получить мои курсы
     
-    func getBoughtCourses() async throws -> [Course] {
+    func getBoughtCourses() async throws -> [CourseModel] {
         let value = try await mananger.getBoughtCourses()
         let courses = json.allCoursesByUser(value: value)
         return courses
     }
     
-    func getMyCreateCourses() async throws -> [Course] {
+    func getMyCreateCourses() async throws -> [CourseModel] {
         let value = try await mananger.getMyCreateCourses()
         let courses = json.allCoursesByUser(value: value)
         return courses
@@ -87,7 +87,7 @@ class CourseServices {
     
     func changeModuleInfo(info: Modules) async throws {
         let url = Constants.url + "api/v1/module/update/\(info.id)/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response =  AF.upload(multipartFormData: { multipartFormData in
             if let imageURL = info.imageURL, "\(imageURL)".starts(with: "file") {
                 ImageResize.compressImageFromFileURL(fileURL: imageURL, maxSizeInMB: 0.1) { imageURL in
@@ -115,7 +115,7 @@ class CourseServices {
     
     func changePositionModule(info: Modules) async throws {
         let url = Constants.url + "api/v1/module/update/\(info.id)/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let parameters = [
             "order": info.position
         ]
@@ -135,18 +135,18 @@ class CourseServices {
     
     func completedModule(id: Int) async throws {
         let url = Constants.url + "api/v1/courses/\(id)/complete-module/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = try await AF.request(url, method: .post, headers: headers).serializingData().value
     }
     
     // MARK: - Добавить
     
-    func saveInfoCourse(info: Course, method: HTTPMethod = .post) async throws -> Int {
+    func saveInfoCourse(info: CourseModel, method: HTTPMethod = .post) async throws -> Int {
         var url = Constants.url + "api/v1/courses/"
         if method == .patch {
             url += "\(info.id)/"
         }
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = AF.upload(multipartFormData: { multipartFormData in
             // Image
             if "\(info.imageURL!)".starts(with: "file") {
@@ -196,7 +196,7 @@ class CourseServices {
     
     func addDaysInCourse(courseID: Int) async throws -> Int {
         let url = Constants.url + "api/v1/day/create/\(courseID)/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = AF.request(url, method: .post, headers: headers).serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode
@@ -215,7 +215,7 @@ class CourseServices {
     
     func addModulesInCourse(dayID: Int, position: Int) async throws -> Int {
         let url = Constants.url + "api/v1/module/create/\(dayID)/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = AF.request(url, method: .post, headers: headers).serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode
@@ -234,7 +234,7 @@ class CourseServices {
     
     func addModulesData(text: NSAttributedString, moduleID: Int) async throws {
         let url = Constants.url + "api/v1/module/update/\(moduleID)/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let file = FilePath().serializeAttributedStringToFile(text)!
         let tempFileURL = file.deletingPathExtension().appendingPathExtension("data")
         let response = AF.upload(multipartFormData: { multipartFormData in
@@ -257,7 +257,7 @@ class CourseServices {
     
     func deleteModule(moduleID: Int) async throws {
         let url = Constants.url + "api/v1/module/delete/\(moduleID)/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response =  AF.request(url, method: .delete, headers: headers).serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode
@@ -274,7 +274,7 @@ class CourseServices {
     
     func deleteDay(dayID: Int) async throws {
         let url = Constants.url + "api/v1/day/delete/\(dayID)/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response =  AF.request(url, method: .delete, headers: headers).serializingData()
         let value = try await response.value
     }
@@ -283,7 +283,7 @@ class CourseServices {
     
     func buyCourse(id: Int) async throws  {
         let url = Constants.url + "api/v1/courses/\(id)/buy_course/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = AF.request(url, method: .post, headers: headers).serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode
@@ -299,7 +299,7 @@ class CourseServices {
     }
     
     // MARK: - Поиск
-    func searchCourses(text: String, category: CategoryModel?) async throws -> [Course] {
+    func searchCourses(text: String, category: CategoryModel?) async throws -> [CourseModel] {
         let value = try await mananger.searchCourses(text: text, category: category)
         let courses = json.allCourses(value: value)
         return courses
@@ -308,7 +308,7 @@ class CourseServices {
     // MARK: - Отправить курс на проверку
     func sendCoursesVerification(idCourse: Int) async throws {
         let url = Constants.url + "api/v1/courses/\(idCourse)/send_to_verificate/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         let response = AF.request(url, method: .post, headers: headers).serializingData()
         

@@ -8,7 +8,14 @@
 import UIKit
 import Lottie
 
-class VhodViewController: UIViewController {
+protocol VhodViewDelegate {
+    func showLoading(bool: Bool)
+    func showError(error: String?)
+    func clearError()
+    func successVhod()
+}
+
+class VhodViewController: UIViewController, VhodViewDelegate {
 
     @IBOutlet weak var loading: LottieAnimationView!
     @IBOutlet weak var nextBtn: UIButton!
@@ -17,16 +24,41 @@ class VhodViewController: UIViewController {
     @IBOutlet weak var phone: UITextField!
     @IBOutlet weak var password: UITextField!
 
+    
+    var presenter = VhodPresenter()
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     var startPosition = CGPoint()
-
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         phone.delegate = self
+        presenter.view = self
         startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
+    }
+    
+    func showLoading(bool: Bool) {
+        if bool {
+            loadingStart()
+        }else {
+            loadingStop()
+        }
+    }
+    
+    func showError(error: String?) {
+        if let error = error {
+            errorView.isHidden = false
+            errorView.configure(title: "Ошибка", description: error)
+        }else {
+            errorView.isHidden = false
+            errorView.configure(title: "Ошибка", description: "Попробуйте позже")
+        }
+    }
+    
+    func successVhod() {
+        performSegue(withIdentifier: "success", sender: self)
     }
 
     func clearError() {
@@ -35,11 +67,6 @@ class VhodViewController: UIViewController {
         errorView.isHidden = true
     }
 
-
-    func addError(error: String) {
-        errorView.isHidden = false
-        errorView.configure(title: "Ошибка", description: error)
-    }
     
     private func loadingStart() {
         loading.play()
@@ -55,35 +82,23 @@ class VhodViewController: UIViewController {
         nextBtn.isHidden = false
     }
 
-    func checkInfo() throws {
+    func checkInfo() -> Bool {
+        var result = true
         guard phone.text!.count > 2 else {
             phoneBorder.color = .errorRed
-            throw ErrorNetwork.notFound }
+            result = false
+            return result }
         guard password.text!.isEmpty == false else {
             passwordBorder.color = .errorRed
-            throw ErrorNetwork.notFound }
+            result = false
+            return result }
+        return result
     }
 
     @IBAction func vhod(_ sender: UIButton) {
-        loadingStart()
-        nextBtn.isEnabled = false
-        Task {
-            do {
-                clearError()
-                try checkInfo()
-                let phoneNumberFormat = phone.text!.format(with: "+XXXXXXXXXXX")
-                try await Sign().vhod(phoneNumber: phoneNumberFormat, password: password.text!)
-                nextBtn.isEnabled = true
-                loadingStop()
-                performSegue(withIdentifier: "success", sender: self)
-            }catch ErrorNetwork.runtimeError(let error) {
-                addError(error: error)
-                nextBtn.isEnabled = true
-                loadingStop()
-            }catch {
-                loadingStop()
-                nextBtn.isEnabled = true
-            }
+        clearError()
+        if checkInfo() {
+            presenter.vhod(phoneNumber: phone.text!, password: password.text!)
         }
     }
 
@@ -93,7 +108,7 @@ class VhodViewController: UIViewController {
     }
 
     @IBAction func google(_ sender: UIButton) {
-        Sign().signGoogle(self)
+        presenter.googleSign(self)
     }
 
     @IBAction func passwordHidden(_ sender: UIButton) {

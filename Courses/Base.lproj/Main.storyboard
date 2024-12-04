@@ -5546,7 +5546,7 @@
                         <action selector="swipe:" destination="bWz-El-6Ec" id="ag4-NC-WoR"/>
                     </connections>
                 </panGestureRecognizer>
-                <tapGestureRecognizer id="ygQ-o9-rAk">
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="ygQ-o9-rAk">
                     <connections>
                         <action selector="tap:" destination="bWz-El-6Ec" id="Bt2-vd-bwm"/>
                     </connections>
@@ -10348,10 +10348,10 @@
     <inferredMetricsTieBreakers>
         <segue reference="kFQ-re-axD"/>
         <segue reference="vKu-9D-Hl7"/>
-        <segue reference="2uE-MH-jsq"/>
+        <segue reference="35z-4l-np9"/>
         <segue reference="nzc-9n-Ktz"/>
         <segue reference="jEY-vC-3ne"/>
-        <segue reference="afS-Cq-cau"/>
+        <segue reference="M8w-WU-QND"/>
         <segue reference="F7H-ew-eXR"/>
         <segue reference="HHf-kQ-icL"/>
         <segue reference="hAk-ad-GZt"/>

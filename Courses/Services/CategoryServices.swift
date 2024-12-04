@@ -13,7 +13,7 @@ class CategoryServices {
     
     static func getCategories() async throws -> [CategoryModel] {
         let url = Constants.url + "api/v1/categories/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let value = try await AF.request(url, headers: headers).serializingData().value
         let json = JSON(value)
         var categories = [CategoryModel]()

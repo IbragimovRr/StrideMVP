@@ -47,8 +47,8 @@ class InfoCoursesViewController: UIViewController {
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
 
-    var course = Course()
-    var similarCourse = [Course]()
+    var course = CourseModel()
+    var similarCourse = [CourseModel]()
     var reviews = [Reviews]()
     var interface: InfoCourses = .nothing
     var price: Int = 0 {
@@ -91,14 +91,14 @@ class InfoCoursesViewController: UIViewController {
     private func getCourse() {
         sceletonAnimatedStart()
         Task {
-            course = try await Course().getCoursesByID(id: course.id)
+            course = try await CourseServices().getCoursesByID(id: course.id)
             design()
         }
     }
     
     private func getSimilarCourses() {
         Task {
-            similarCourse = try await Course().getAllCourses(categoryID: course.category.id)
+            similarCourse = try await CourseServices().getAllCourses(categoryID: course.category.id)
             deleteSelectCoursesInSimilar()
             designSimilarCourse()
             similarCoursesCollectionView.reloadData()
@@ -257,7 +257,7 @@ class InfoCoursesViewController: UIViewController {
     }
     
     private func myCourse() -> Bool {
-        if User.info.id == course.author.id {
+        if UserServices.info.id == course.author.id {
             btnView.isHidden = true
             return true
         }else {
@@ -276,7 +276,7 @@ class InfoCoursesViewController: UIViewController {
     private func buyCourseSuccesed() {
         Task {
             do {
-                try await Course().buyCourse(id: course.id)
+                try await CourseServices().buyCourse(id: course.id)
                 performSegue(withIdentifier: "goCourse", sender: self)
             }catch ErrorNetwork.runtimeError(let error) {
                 errorView.isHidden = false
@@ -303,14 +303,14 @@ class InfoCoursesViewController: UIViewController {
     }
     
     private func getEmail() async throws -> String {
-        let email = try await User().getMyInfo().email
+        let email = try await UserServices().getMyInfo().email
         return email
     }
     
     private func sendCoursesVerification() {
         Task {
             do {
-                try await Course().sendCoursesVerification(idCourse: course.id)
+                try await CourseServices().sendCoursesVerification(idCourse: course.id)
                 errorView.configureSuccess(title: "Успешно", description: "Проверим в течение 48 часов")
                 errorView.isHidden = false
                 interfaceCheck()

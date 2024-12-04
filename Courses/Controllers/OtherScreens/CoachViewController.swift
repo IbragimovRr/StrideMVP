@@ -19,16 +19,16 @@ class CoachViewController: UIViewController {
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var coursesCollectionView: UICollectionView!
 
-    private var user: UserModel = User.info {
+    private var user: UserModel = UserServices.info {
         didSet {
             sceletonAnimatedStop()
             addProfile()
         }
     }
 
-    var courses = [Course]()
+    var courses = [CourseModel]()
     var idCoach = 0
-    var selectCourse = Course()
+    var selectCourse = CourseModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,11 +52,11 @@ class CoachViewController: UIViewController {
     }
 
     private func getCoachInfo() async throws {
-        user = try await User().getUserByID(id: idCoach)
+        user = try await UserServices().getUserByID(id: idCoach)
     }
 
     private func getCoachCourses() async throws {
-        courses = try await Course().getCoursesByUserID(id: idCoach)
+        courses = try await CourseServices().getCoursesByUserID(id: idCoach)
         coursesCount.text = "\(courses.count)"
         rating.text = "\(averageRating())"
         coursesCollectionView.reloadData()

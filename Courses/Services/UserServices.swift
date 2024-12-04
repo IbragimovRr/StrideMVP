@@ -2,22 +2,23 @@
 //  UserServices.swift
 //  Courses
 //
-//  Created by Руслан on 03.12.2024.
+//  Created by Руслан on 19.07.2024.
 //
 
 import Foundation
 import Alamofire
 import SwiftyJSON
 
+
 class UserServices {
-    
-//    static var info: UserModel {
-//        return UD().getMyInfo()
-//    }
+
+    static var info: UserModel {
+        return UD().getMyInfo()
+    }
 
     func getAllCoachs() async throws -> [UserModel] {
         let url = Constants.url + "api/v1/users/get_coaches/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let value = try await AF.request(
             url,method: .get,
             headers: headers
@@ -40,7 +41,7 @@ class UserServices {
 
     func changeInfoUser(id: Int, user: UserModel) async throws {
         let url = Constants.url + "api/v1/users/\(id)/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = AF.upload(multipartFormData: { multipartFormData in
             if let avatarURL = user.avatarURL {
                 ImageResize.compressImageFromFileURL(fileURL: avatarURL, maxSizeInMB: 0.1) { compressedURL in
@@ -66,14 +67,14 @@ class UserServices {
                 throw ErrorNetwork.runtimeError("Неизвестная ошибка")
             }
         }
-//        UD().saveMyInfo(user)
+        UD().saveMyInfo(user)
     }
 
     func changeInfoAboutMe(id: Int, user: UserModel) async throws {
         let url = Constants.url + "api/v1/users/\(id)/"
         try await doubleRequest(url: url, user: user)
         try await stringRequest(url: url, user: user)
-//        UD().saveInfoAboutMe(user)
+        UD().saveInfoAboutMe(user)
     }
 
     private func doubleRequest(url:String, user: UserModel) async throws {
@@ -81,7 +82,7 @@ class UserServices {
             "height": user.height,
             "weight": user.weight,
         ]
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let _ = try await AF.request(url, method: .patch, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).serializingData().value
     }
 
@@ -91,14 +92,14 @@ class UserServices {
             "target": user.goal?.rawValue,
             "level": user.level?.rawValue
         ]
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let _ = try await AF.request(url, method: .patch, parameters: parameters, encoder: JSONParameterEncoder.default,headers: headers).serializingData().value
     }
 
 
     func getMyInfo() async throws -> UserModel  {
         let url = Constants.url + "api/v1/users/me/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let value = try await AF.request(
             url,method: .get,
             headers: headers
@@ -127,14 +128,14 @@ class UserServices {
         }else if isCoach == false {
             user.role = .user
         }
-//        UD().saveMyInfo(user)
-//        UD().saveInfoAboutMe(user)
+        UD().saveMyInfo(user)
+        UD().saveInfoAboutMe(user)
         return user
     }
 
     func getUserByID(id: Int) async throws -> UserModel {
         let url = Constants.url + "api/v1/users/\(id)/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let value = try await AF.request(url, headers: headers).serializingData().value
         let json = JSON(value)
         var user = UserModel()
@@ -150,7 +151,7 @@ class UserServices {
 
     func getCelebreties() async throws -> [UserModel] {
         let url = Constants.url + "api/v1/users/get_all_celebrity/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let value = try await AF.request(url, headers: headers).serializingData().value
         let json = JSON(value)
         var celebrities = [UserModel]()
@@ -179,7 +180,7 @@ class UserServices {
     
     func deleteAccount() async throws {
         let url = Constants.url + "api/v1/users/delete-profile/"
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(User.info.token)"]
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         let response = AF.request(url, method: .delete, headers: headers).serializingData()
         let code = await response.response.response?.statusCode
@@ -188,5 +189,5 @@ class UserServices {
             throw ErrorNetwork.runtimeError("Ошибка")
         }
     }
-
+    
 }

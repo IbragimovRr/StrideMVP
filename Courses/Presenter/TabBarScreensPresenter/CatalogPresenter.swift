@@ -23,15 +23,15 @@ class CatalogPresenter: CatalogPresenterProtocol {
     weak var view: CatalogViewDelegate?
     
     var categories = [CategoryModel]()
-    var courses = [Course]()
-    var selectCourse = Course()
+    var courses = [CourseModel]()
+    var selectCourse = CourseModel()
     var selectCategory: CategoryModel?
     var loadingMoreData = false
     
     func getCourses() {
         view?.showLoadingMain(bool: true)
         Task {
-            courses = try await Course().getAllCourses()
+            courses = try await CourseServices().getAllCourses()
             loadingMoreData = false
             DispatchQueue.main.async {
                 self.view?.showCourses()
@@ -43,7 +43,7 @@ class CatalogPresenter: CatalogPresenterProtocol {
     func getNextPage(page: String) {
         view?.showLoadingPage(bool: true)
         Task {
-            let result = try await Course().getAllCourses(page: page)
+            let result = try await CourseServices().getAllCourses(page: page)
             courses += result
             loadingMoreData = false
             DispatchQueue.main.async {
@@ -66,7 +66,7 @@ class CatalogPresenter: CatalogPresenterProtocol {
         courses.removeAll()
         view?.showLoadingMain(bool: true)
         Task {
-            let results = try await Course().getAllCourses(categoryID: id)
+            let results = try await CourseServices().getAllCourses(categoryID: id)
             courses = results
             loadingMoreData = false
             DispatchQueue.main.async {
@@ -78,7 +78,7 @@ class CatalogPresenter: CatalogPresenterProtocol {
     
     func searchCourse(text: String) {
         Task {
-            courses = try await Course().searchCourses(text: text, category: selectCategory)
+            courses = try await CourseServices().searchCourses(text: text, category: selectCategory)
             DispatchQueue.main.async {
                 self.view?.searchCourses()
             }

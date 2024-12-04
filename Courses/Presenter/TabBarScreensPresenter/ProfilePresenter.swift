@@ -15,10 +15,10 @@ protocol ProfilePresenterDelegate {
 class ProfilePresenter: ProfilePresenterDelegate {
     
     weak var view: ProfileViewDelegate?
-    var courses = [Course]()
+    var courses = [CourseModel]()
     var selectCourseID = 0
     
-    var user: UserModel = User.info
+    var user: UserModel = UserServices.info
     
     func viewWillApear() {
         getMyData()
@@ -27,8 +27,8 @@ class ProfilePresenter: ProfilePresenterDelegate {
     func getMyData() {
         view?.showSceletonAnimated(bool: true)
         Task {
-            user = try await User().getMyInfo()
-            courses = try await Course().getMyCreateCourses()
+            user = try await UserServices().getMyInfo()
+            courses = try await CourseServices().getMyCreateCourses()
             DispatchQueue.main.async {
                 self.view?.showSceletonAnimated(bool: false)
                 self.view?.showUser()

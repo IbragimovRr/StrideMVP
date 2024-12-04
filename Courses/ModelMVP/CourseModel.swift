@@ -48,3 +48,29 @@ class CourseModel {
     }
     
 }
+
+struct Modules {
+    var text: URL?
+    var name: String
+    var minutes: Int
+    var imageURL: URL?
+    var description: String?
+    var id: Int
+    var isCompleted: Bool = false
+    var position: Int = 0
+}
+
+
+struct CourseDays {
+    var dayID: Int
+    var type: TypeDays = .noneSee
+    var modules = [Modules]()
+    var completed: Bool = false
+    
+    init(dayID: Int, type: TypeDays, modules: [Modules] = [Modules](), completed: Bool = false) {
+        self.dayID = dayID
+        self.type = type
+        self.modules = modules.sorted(by: { $0.position < $1.position })
+        self.completed = completed
+    }
+}

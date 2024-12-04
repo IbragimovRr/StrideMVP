@@ -54,7 +54,7 @@ class InfoAboutMeViewController: UIViewController {
     var picker: Picker?
     var intentionArray = [String]()
     var levelPreparationArray = [String]()
-    private var meInfo = User.info
+    private var meInfo = UserServices.info
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -245,7 +245,7 @@ class InfoAboutMeViewController: UIViewController {
     @IBAction func save(_ sender: UIButton) {
         Task {
             changeUser()
-            try await User().changeInfoAboutMe(id: meInfo.id,user: meInfo)
+            try await UserServices().changeInfoAboutMe(id: meInfo.id,user: meInfo)
             dismiss(animated: false)
         }
     }

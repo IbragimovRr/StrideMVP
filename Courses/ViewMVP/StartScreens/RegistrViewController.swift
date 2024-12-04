@@ -98,7 +98,7 @@ class RegistrViewController: UIViewController {
                 clearError()
                 try checkInfo()
                 let phoneNumberFormat = phoneNumber.text!.format(with: "+XXXXXXXXXXX")
-                try await Sign().registr(phoneNumber: phoneNumberFormat, password: password.text!, name: name.text!, lastName: lastName.text!, mail: mail.text!)
+                try await SignServices().registr(phoneNumber: phoneNumberFormat, password: password.text!, name: name.text!, lastName: lastName.text!, mail: mail.text!)
                 registerBtn.isEnabled = true
                 loadingStop()
                 performSegue(withIdentifier: "success", sender: self)

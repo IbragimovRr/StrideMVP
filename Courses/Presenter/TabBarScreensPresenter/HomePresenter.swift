@@ -29,7 +29,7 @@ class HomePresenter: HomePresenterProtocol {
     weak var view: HomeViewProtocol?
     var userService = UserServices()
     var courseServices = CourseServices()
-    var userModel: UserModel = User.info {
+    var userModel: UserModel = UserServices.info {
         didSet {
             self.view?.showUser(user: userModel)
         }
@@ -51,7 +51,7 @@ class HomePresenter: HomePresenterProtocol {
         Task {
             let user = try await userService.getMyInfo()
             let coachs = try await self.userService.getAllCoachs()
-            let recomendCourses = try await Course().getRecomendedCourses()
+            let recomendCourses = try await CourseServices().getRecomendedCourses()
             let celebrity = try await self.userService.getCelebreties()
             
             DispatchQueue.main.async {
@@ -93,7 +93,7 @@ class HomePresenter: HomePresenterProtocol {
     
     func getRecomendCourses() {
         Task {
-            let recomendCourses = try await Course().getRecomendedCourses()
+            let recomendCourses = try await CourseServices().getRecomendedCourses()
             DispatchQueue.main.async {
                 self.view?.showRecomendedCourses(courses: recomendCourses)
             }
