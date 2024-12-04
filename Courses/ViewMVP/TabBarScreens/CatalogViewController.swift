@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 import Lottie
 
-protocol CatalogViewDelegate {
+protocol CatalogViewDelegate: AnyObject {
     func showCourses()
     func showCategories()
     func showLoadingMain(bool: Bool)

@@ -19,7 +19,7 @@ class CoachViewController: UIViewController {
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var coursesCollectionView: UICollectionView!
 
-    private var user: UserStruct = User.info {
+    private var user: UserModel = User.info {
         didSet {
             sceletonAnimatedStop()
             addProfile()

@@ -20,7 +20,7 @@ class SettingsViewController: UIViewController {
 
     var arrayObjects = [Objects]()
     var arrayObjects2 = [Objects]()
-    var user: UserStruct = User.info {
+    var user: UserModel = User.info {
         didSet {
             addProfile()
         }

@@ -126,7 +126,7 @@ class InfoCoursesViewController: UIViewController {
 
     private func getComments() {
         Task {
-            reviews = try await Comments().getComments(courseID: course.id)
+            reviews = try await CommentsServices().getComments(courseID: course.id)
             reviewsCollectionView.reloadData()
             changeCollectionViewHeight()
             checkReviewsCount()

@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class Comments {
+class CommentsServices {
 
     func getComments(courseID: Int) async throws -> [Reviews] {
         let url = Constants.url + "api/v1/comments/\(courseID)/"

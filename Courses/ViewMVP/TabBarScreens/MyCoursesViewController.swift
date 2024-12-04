@@ -60,12 +60,6 @@ class MyCoursesViewController: UIViewController, MyCoursesViewDelegate {
         presenter.getMyBoughtCourses()
     }
 
-    func procent(completed:Int, countAll: Int) -> Double {
-        guard countAll > 0 else { return 100.0 }
-        let progress = Double(completed) / Double(countAll)
-        return progress * 100
-
-    }
 
     private func loadingSettings() {
         loading.loopMode = .loop
@@ -138,7 +132,7 @@ extension MyCoursesViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.nameCourse.text = presenter.filteredCourse[indexPath.row].nameCourse
         cell.rating.text = "\(presenter.filteredCourse[indexPath.row].rating)"
         cell.progressInDays.text = "\(presenter.filteredCourse[indexPath.row].progressInDays)/\(presenter.filteredCourse[indexPath.row].daysCount)"
-        let procent = procent(completed: presenter.filteredCourse[indexPath.row].progressInDays, countAll: presenter.filteredCourse[indexPath.row].daysCount)
+        let procent = presenter.procent(indexPath: indexPath)
         cell.progressInPercents.text = "\(Int(procent))%"
         cell.progressVIew.setProgress(Float(procent / 100), animated: false)
         return cell

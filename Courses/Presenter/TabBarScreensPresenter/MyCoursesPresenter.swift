@@ -5,8 +5,7 @@
 //  Created by Руслан on 04.12.2024.
 //
 
-import Alamofire
-import SwiftyJSON
+import Foundation
 
 protocol MyCoursesPresenterDelegate {
     func getMyBoughtCourses()
@@ -36,4 +35,11 @@ class MyCoursesPresenter: MyCoursesPresenterDelegate {
         getMyBoughtCourses()
     }
     
+    func procent(indexPath: IndexPath) -> Double {
+        var completed = filteredCourse[indexPath.row].progressInDays
+        var countAll = filteredCourse[indexPath.row].daysCount
+        guard countAll > 0 else { return 100.0 }
+        let progress = Double(completed) / Double(countAll)
+        return progress * 100
+    }
 }

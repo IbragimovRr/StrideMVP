@@ -110,7 +110,7 @@ class AddReviewViewController: UIViewController {
         if check() == true {
             Task {
                 do {
-                    try await Comments().addComment(idCourse: idCourse, rating: rating, text: textView.text)
+                    try await CommentsServices().addComment(idCourse: idCourse, rating: rating, text: textView.text)
                     sendReviewBtn.isEnabled = true
                     dismiss(animated: true)
                 }catch ErrorNetwork.runtimeError(let error) {

@@ -13,7 +13,7 @@ class UD {
         UserDefaults.standard.set(token, forKey: "token")
     }
 
-    func saveMyInfo(_ user: UserStruct) {
+    func saveMyInfo(_ user: UserModel) {
         UserDefaults.standard.set(user.name, forKey: "myName")
         UserDefaults.standard.set(user.surname, forKey: "mySurname")
         UserDefaults.standard.set(user.role.rawValue, forKey: "myRole")
@@ -23,8 +23,8 @@ class UD {
         UserDefaults.standard.set(user.coach.description, forKey: "coachDescription")
     }
 
-    func getMyInfo() -> UserStruct {
-        var user = UserStruct()
+    func getMyInfo() -> UserModel {
+        var user = UserModel()
         user.name = UserDefaults.standard.string(forKey: "myName") ?? ""
         user.surname = UserDefaults.standard.string(forKey: "mySurname") ?? ""
         user.role = Role(rawValue: UserDefaults.standard.string(forKey: "myRole") ?? "user") ?? .user
@@ -62,7 +62,7 @@ class UD {
     
 
 
-    func saveInfoAboutMe(_ user: UserStruct) {
+    func saveInfoAboutMe(_ user: UserModel) {
         UserDefaults.standard.set(user.birthday, forKey: "birthday")
         UserDefaults.standard.set(user.height, forKey: "height")
         UserDefaults.standard.set(user.weight, forKey: "weight")

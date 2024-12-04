@@ -20,7 +20,7 @@ protocol CatalogPresenterProtocol {
 
 class CatalogPresenter: CatalogPresenterProtocol {
     
-    var view: CatalogViewDelegate?
+    weak var view: CatalogViewDelegate?
     
     var categories = [CategoryModel]()
     var courses = [Course]()

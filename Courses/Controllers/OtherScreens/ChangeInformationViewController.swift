@@ -28,7 +28,7 @@ class ChangeInformationViewController: UIViewController {
 
     private var avatarURL: URL?
     private var activateTF: UITextField?
-    private var user: UserStruct = User.info
+    private var user: UserModel = User.info
 
     override func viewDidLoad() {
         super.viewDidLoad()

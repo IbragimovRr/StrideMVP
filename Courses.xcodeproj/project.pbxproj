@@ -46,7 +46,7 @@
 		4450B3C92CB6066900F1F54B /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450B3C82CB6066900F1F54B /* UpdateViewController.swift */; };
 		44547E572CF4BE380051C782 /* Promocodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44547E562CF4BE380051C782 /* Promocodes.swift */; };
 		44547E592CF4C1B50051C782 /* CreatePromoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44547E582CF4C1B50051C782 /* CreatePromoViewController.swift */; };
-		446475752C72088300ACD3D7 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446475742C72088300ACD3D7 /* Comments.swift */; };
+		446475752C72088300ACD3D7 /* CommentsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446475742C72088300ACD3D7 /* CommentsServices.swift */; };
 		4464757B2C7496F100ACD3D7 /* FilePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464757A2C7496F100ACD3D7 /* FilePath.swift */; };
 		4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */; };
 		447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */; };
@@ -69,6 +69,7 @@
 		44962E962C821B3600CB6A1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44962E942C821B3600CB6A1C /* Main.storyboard */; };
 		449880CA2CB621280052C3C3 /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449880C92CB621280052C3C3 /* NavigationControllerDelegate.swift */; };
 		449C124E2D00DDA30091F0F5 /* MyCoursesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449C124D2D00DDA30091F0F5 /* MyCoursesPresenter.swift */; };
+		449C12502D00E0AF0091F0F5 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449C124F2D00E0AF0091F0F5 /* ProfilePresenter.swift */; };
 		449CF0D92C337099000D4528 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CF0D82C337099000D4528 /* CatalogViewController.swift */; };
 		449CF0DB2C3370CA000D4528 /* CoursesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CF0DA2C3370CA000D4528 /* CoursesCollectionViewCell.swift */; };
 		449CF0DD2C3370E0000D4528 /* CategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CF0DC2C3370E0000D4528 /* CategoriesCollectionViewCell.swift */; };
@@ -179,7 +180,7 @@
 		4450B3C82CB6066900F1F54B /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
 		44547E562CF4BE380051C782 /* Promocodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promocodes.swift; sourceTree = "<group>"; };
 		44547E582CF4C1B50051C782 /* CreatePromoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePromoViewController.swift; sourceTree = "<group>"; };
-		446475742C72088300ACD3D7 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
+		446475742C72088300ACD3D7 /* CommentsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsServices.swift; sourceTree = "<group>"; };
 		4464757A2C7496F100ACD3D7 /* FilePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePath.swift; sourceTree = "<group>"; };
 		4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMoneyInfoViewController.swift; sourceTree = "<group>"; };
 		447D8C802C85DEEB00EF2217 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
@@ -201,6 +202,7 @@
 		44962E952C821B3600CB6A1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		449880C92CB621280052C3C3 /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
 		449C124D2D00DDA30091F0F5 /* MyCoursesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoursesPresenter.swift; sourceTree = "<group>"; };
+		449C124F2D00E0AF0091F0F5 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		449CF0D82C337099000D4528 /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		449CF0DA2C3370CA000D4528 /* CoursesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCollectionViewCell.swift; sourceTree = "<group>"; };
 		449CF0DC2C3370E0000D4528 /* CategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -411,7 +413,6 @@
 				440E1F702CA169D3002C6FC8 /* Course */,
 				44064C9D2C28628000AB5227 /* Sign.swift */,
 				44D68AF22C4ACC0C00F8F476 /* User.swift */,
-				446475742C72088300ACD3D7 /* Comments.swift */,
 				447D8C802C85DEEB00EF2217 /* Payment.swift */,
 				44547E562CF4BE380051C782 /* Promocodes.swift */,
 			);
@@ -455,6 +456,7 @@
 		448E73EF2CFF063E00C3000D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				446475742C72088300ACD3D7 /* CommentsServices.swift */,
 				448E73FF2CFF09FF00C3000D /* UserServices.swift */,
 				44E4061A2CFF75D2004F633E /* Course */,
 				44E406212CFF7BFA004F633E /* CategoryServices.swift */,
@@ -468,6 +470,7 @@
 				753A4F7B2C340DB7007A8194 /* MyCoursesViewController.swift */,
 				449CF0D82C337099000D4528 /* CatalogViewController.swift */,
 				44E906332C29A59B00FFA6DD /* HomeViewController.swift */,
+				7515103B2C343146009978E6 /* ProfileViewController.swift */,
 			);
 			path = TabBarScreens;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				448E73F32CFF071F00C3000D /* HomePresenter.swift */,
 				44E4061D2CFF79F7004F633E /* CatalogPresenter.swift */,
 				449C124D2D00DDA30091F0F5 /* MyCoursesPresenter.swift */,
+				449C124F2D00E0AF0091F0F5 /* ProfilePresenter.swift */,
 			);
 			path = TabBarScreensPresenter;
 			sourceTree = "<group>";
@@ -561,7 +565,6 @@
 		753A4F792C340A90007A8194 /* TabBarScreens */ = {
 			isa = PBXGroup;
 			children = (
-				7515103B2C343146009978E6 /* ProfileViewController.swift */,
 				751510402C34586D009978E6 /* SettingsViewController.swift */,
 			);
 			path = TabBarScreens;
@@ -735,11 +738,12 @@
 				44DFB1162C3B199A005C8F44 /* RecomendationCollectionViewCell.swift in Sources */,
 				449CF0DB2C3370CA000D4528 /* CoursesCollectionViewCell.swift in Sources */,
 				44064C892C27042100AB5227 /* StartViewController.swift in Sources */,
+				449C12502D00E0AF0091F0F5 /* ProfilePresenter.swift in Sources */,
 				44BC59092CCFF37500AD7FFA /* AdminOtherViewController.swift in Sources */,
 				447FE4932CDD2300007C5B31 /* MainTabBarController.swift in Sources */,
 				44907E482C91F4D6002D4617 /* ImageResize.swift in Sources */,
 				4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */,
-				446475752C72088300ACD3D7 /* Comments.swift in Sources */,
+				446475752C72088300ACD3D7 /* CommentsServices.swift in Sources */,
 				44BD6CE02C432C82001645A0 /* ModuleCourseCollectionViewCell.swift in Sources */,
 				448301842C987A0700E40DBA /* DeepLinksManager.swift in Sources */,
 				44547E572CF4BE380051C782 /* Promocodes.swift in Sources */,

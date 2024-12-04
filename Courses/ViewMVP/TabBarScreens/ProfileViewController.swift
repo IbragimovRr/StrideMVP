@@ -9,7 +9,13 @@ import UIKit
 import SDWebImage
 import SkeletonView
 
-class ProfileViewController: UIViewController {
+protocol ProfileViewDelegate: AnyObject {
+    func showUser()
+    func showMyCourses()
+    func showSceletonAnimated(bool: Bool)
+}
+
+class ProfileViewController: UIViewController, ProfileViewDelegate {
 
     @IBOutlet weak var characteristic: UILabel!
     @IBOutlet weak var name: UILabel!
@@ -20,56 +26,22 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var coursesCollectionView: UICollectionView!
 
-    var user: UserStruct = User.info {
-        didSet {
-            sceletonAnimatedStop()
-            addProfile()
-        }
-    }
-
-    var courses = [Course]()
-    var selectCourseID = 0
-
+    var presenter = ProfilePresenter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.view = self
         coursesCollectionView.delegate = self
         coursesCollectionView.dataSource = self
-        sceletonAnimatedStart()
-        design()
+//        presenter.viewWillApear()
     }
 
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        design()
+        presenter.viewWillApear()
     }
 
-    func design() {
-        Task {
-            user = try await User().getMyInfo()
-            courses = try await Course().getMyCreateCourses()
-            coursesCount.text = "\(courses.count)"
-            rating.text = "\(averageRating())"
-            coursesCollectionView.reloadData()
-        }
-    }
-
-    private func averageRating() -> Float {
-        var ratingSumm: Float = 0.0
-        var count = 0
-        for course in courses {
-            if course.rating != 0.0 {
-                ratingSumm += course.rating
-                count += 1
-            }
-        }
-        let average = Float(ratingSumm) / Float(count)
-        if average.isNaN {
-            return 0.0
-        }else {
-            return Comments().roundRating(rating: average)
-        }
-    }
 
     private func sceletonAnimatedStart() {
         coursesCollectionView.isSkeletonable = true
@@ -107,12 +79,26 @@ class ProfileViewController: UIViewController {
         ratingBottom.isHidden = false
         coursesCountBottom.isHidden = false
     }
-
-    private func addProfile() {
-        characteristic.text = user.coach.description
-        name.text = "\(user.surname) \(user.name)"
+    
+    func showUser() {
+        coursesCount.text = "\(presenter.courses.count)"
+        rating.text = "\(presenter.averageRating())"
+        characteristic.text = presenter.user.coach.description
+        name.text = "\(presenter.user.surname) \(presenter.user.name)"
         rating.text = "\(0.0)"
-        avatar.sd_setImage(with: user.avatarURL)
+        avatar.sd_setImage(with: presenter.user.avatarURL)
+    }
+    
+    func showMyCourses() {
+        coursesCollectionView.reloadData()
+    }
+    
+    func showSceletonAnimated(bool: Bool) {
+        if bool {
+            sceletonAnimatedStart()
+        }else {
+            sceletonAnimatedStop()
+        }
     }
 
 
@@ -126,20 +112,20 @@ extension ProfileViewController: SkeletonCollectionViewDelegate, SkeletonCollect
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return courses.count
+        return presenter.courses.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "course", for: indexPath) as! CoursesCollectionViewCell
         descriptionCell(cell: cell, indexPath: indexPath)
-        cell.image.sd_setImage(with: courses[indexPath.row].imageURL)
+        cell.image.sd_setImage(with: presenter.courses[indexPath.row].imageURL)
         return cell
     }
     
     private func descriptionCell(cell: CoursesCollectionViewCell, indexPath: IndexPath) {
-        if courses[indexPath.row].isDraft {
+        if presenter.courses[indexPath.row].isDraft {
             cell.isDraftView.isHidden = false
-            switch courses[indexPath.row].verification {
+            switch presenter.courses[indexPath.row].verification {
             case .proccess:
                 cell.descriptionDraft.text = "Черновик"
             case .noneVerificate:
@@ -155,7 +141,7 @@ extension ProfileViewController: SkeletonCollectionViewDelegate, SkeletonCollect
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectCourseID = courses[indexPath.row].id
+        presenter.selectCourseID = presenter.courses[indexPath.row].id
         performSegue(withIdentifier: "changeCourse", sender: self)
     }
 
@@ -164,7 +150,7 @@ extension ProfileViewController: SkeletonCollectionViewDelegate, SkeletonCollect
         if segue.identifier == "changeCourse" {
             let vc = segue.destination as! AddInfoAboutCourseVC
             vc.create = false
-            vc.idCourse = selectCourseID
+            vc.idCourse = presenter.selectCourseID
         }
     }
 

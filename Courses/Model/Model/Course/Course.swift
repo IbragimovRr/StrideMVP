@@ -41,7 +41,7 @@ struct CourseDays {
 class Course {
     var daysCount: Int
     var nameCourse: String
-    var author: UserStruct = UserStruct()
+    var author: UserModel = UserModel()
     var price: Int
     var category: CategoryModel = CategoryModel()
     var imageURL: URL?
@@ -58,14 +58,14 @@ class Course {
     var next: String = ""
     var verification: Verification = .proccess
     
-    init(daysCount: Int = 0, nameCourse: String = "", price: Int = 0, category: CategoryModel = CategoryModel(), imageURL: URL? = nil, rating: Float = 0.0, myRating:Int = 0, id: Int = 0, description: String = "", dataCreated: String = "", progressInDays: Int = 0, countBuyer: Int = 0, isBought: Bool = false, isDraft: Bool = true, next: String = "", verification: Verification = .proccess, author: UserStruct = UserStruct()) {
+    init(daysCount: Int = 0, nameCourse: String = "", price: Int = 0, category: CategoryModel = CategoryModel(), imageURL: URL? = nil, rating: Float = 0.0, myRating:Int = 0, id: Int = 0, description: String = "", dataCreated: String = "", progressInDays: Int = 0, countBuyer: Int = 0, isBought: Bool = false, isDraft: Bool = true, next: String = "", verification: Verification = .proccess, author: UserModel = UserModel()) {
         self.daysCount = daysCount
         self.nameCourse = nameCourse
         self.price = price
         self.author = author
         self.category = category
         self.imageURL = imageURL
-        self.rating = Comments().roundRating(rating: rating)
+        self.rating = CommentsServices().roundRating(rating: rating)
         self.myRating = myRating
         self.id = id
         self.description = description

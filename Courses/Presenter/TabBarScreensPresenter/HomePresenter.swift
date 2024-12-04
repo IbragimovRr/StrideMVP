@@ -9,6 +9,7 @@ import UIKit
 
 protocol HomePresenterProtocol {
     var deepLink: Bool { get }
+    var userModel: UserModel { get set }
     func viewDidLoad()
     func viewWillAppear()
     func getUser()
@@ -28,7 +29,15 @@ class HomePresenter: HomePresenterProtocol {
     weak var view: HomeViewProtocol?
     var userService = UserServices()
     var courseServices = CourseServices()
-    var userModel = UserModel()
+    var userModel: UserModel = User.info {
+        didSet {
+            Task {
+                await MainActor.run { [weak self] in
+                    self?.view?.showUser(user: userModel)
+                }
+            }
+        }
+    }
     
     
     func viewDidLoad() {
