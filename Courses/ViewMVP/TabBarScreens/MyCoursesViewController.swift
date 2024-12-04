@@ -9,7 +9,13 @@ import UIKit
 import SDWebImage
 import Lottie
 
-class MyCoursesViewController: UIViewController {
+
+protocol MyCoursesViewDelegate {
+    func showLoading(bool: Bool)
+    func showMyBoughtCourses()
+}
+
+class MyCoursesViewController: UIViewController, MyCoursesViewDelegate {
 
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var emptyBox: LottieAnimationView!
@@ -21,21 +27,21 @@ class MyCoursesViewController: UIViewController {
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var search: UITextField!
 
+    var presenter = MyCoursesPresenter()
     var refreshControl = RefreshControll()
-    var course = [Course]()
-    var filteredCourse = [Course]()
-    private var selectIDCourse = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         myCoursesCollectionView.delegate = self
         myCoursesCollectionView.dataSource = self
+        presenter.view = self
         search.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         design()
+        presenter.viewWillApear()
     }
 
     func design() {
@@ -43,7 +49,6 @@ class MyCoursesViewController: UIViewController {
         addRefreshControll()
         let font = UIFont(name: "Commissioner-SemiBold", size: 12)
         search.attributedPlaceholder = NSAttributedString(string: "Поиск...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.grayMain, NSAttributedString.Key.font: font!])
-        getMyBoughtCourses()
     }
     
     private func addRefreshControll() {
@@ -52,7 +57,7 @@ class MyCoursesViewController: UIViewController {
     }
     
     @objc func handleRefresh(sender: UIRefreshControl ) {
-        getMyBoughtCourses()
+        presenter.getMyBoughtCourses()
     }
 
     func procent(completed:Int, countAll: Int) -> Double {
@@ -72,23 +77,26 @@ class MyCoursesViewController: UIViewController {
     }
 
     private func emptyCheck() {
-        if filteredCourse.isEmpty == false {
+        if presenter.filteredCourse.isEmpty == false {
             emptyView.isHidden = true
         }else {
             emptyView.isHidden = false
         }
     }
-
-    private func getMyBoughtCourses() {
-        Task {
-            course = try await Course().getBoughtCourses()
-            filteredCourse = course
+    
+    func showLoading(bool: Bool) {
+        if bool {
+            loading.play()
+            loading.isHidden = false
+        }else {
             loading.stop()
             loading.isHidden = true
-            emptyCheck()
-            myCoursesCollectionView.reloadData()
-            refreshControl.refreshControl.endRefreshing()
         }
+    }
+    
+    func showMyBoughtCourses() {
+        myCoursesCollectionView.reloadData()
+        refreshControl.refreshControl.endRefreshing()
     }
 
     @IBAction func search(_ sender: UIButton) {
@@ -101,7 +109,7 @@ class MyCoursesViewController: UIViewController {
 
     @IBAction func cancel(_ sender: UIButton) {
         search.text = ""
-        filteredCourse = course
+        presenter.filteredCourse = presenter.course
         myCoursesCollectionView.reloadData()
         topConstraint.constant = 30
         viewForSearch.isHidden = true
@@ -120,24 +128,24 @@ class MyCoursesViewController: UIViewController {
 extension MyCoursesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredCourse.count
+        return presenter.filteredCourse.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = myCoursesCollectionView.dequeueReusableCell(withReuseIdentifier: "course", for: indexPath) as! CoursesCollectionViewCell
-        cell.image.sd_setImage(with: filteredCourse[indexPath.row].imageURL)
-        cell.nameAuthor.text = "Тренер: \(filteredCourse[indexPath.row].author.userName)"
-        cell.nameCourse.text = filteredCourse[indexPath.row].nameCourse
-        cell.rating.text = "\(filteredCourse[indexPath.row].rating)"
-        cell.progressInDays.text = "\(filteredCourse[indexPath.row].progressInDays)/\(filteredCourse[indexPath.row].daysCount)"
-        let procent = procent(completed: course[indexPath.row].progressInDays, countAll: filteredCourse[indexPath.row].daysCount)
+        cell.image.sd_setImage(with: presenter.filteredCourse[indexPath.row].imageURL)
+        cell.nameAuthor.text = "Тренер: \(presenter.filteredCourse[indexPath.row].author.userName)"
+        cell.nameCourse.text = presenter.filteredCourse[indexPath.row].nameCourse
+        cell.rating.text = "\(presenter.filteredCourse[indexPath.row].rating)"
+        cell.progressInDays.text = "\(presenter.filteredCourse[indexPath.row].progressInDays)/\(presenter.filteredCourse[indexPath.row].daysCount)"
+        let procent = procent(completed: presenter.filteredCourse[indexPath.row].progressInDays, countAll: presenter.filteredCourse[indexPath.row].daysCount)
         cell.progressInPercents.text = "\(Int(procent))%"
         cell.progressVIew.setProgress(Float(procent / 100), animated: false)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectIDCourse = filteredCourse[indexPath.row].id
+        presenter.selectIDCourse = presenter.filteredCourse[indexPath.row].id
         performSegue(withIdentifier: "course", sender: self)
     }
     
@@ -150,7 +158,7 @@ extension MyCoursesViewController: UICollectionViewDelegate, UICollectionViewDat
 
         if segue.identifier == "course" {
             let vc = segue.destination as! ModulesCourseViewController
-            vc.idCourse = selectIDCourse
+            vc.idCourse = presenter.selectIDCourse
         }
 
     }
@@ -163,7 +171,7 @@ extension MyCoursesViewController: UITextFieldDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
 
-        filteredCourse = updatedText.isEmpty ? course : course.filter { courseItem in
+        presenter.filteredCourse = updatedText.isEmpty ? presenter.course : presenter.course.filter { courseItem in
             return courseItem.nameCourse.lowercased().contains(updatedText.lowercased())
         }
         emptyCheck()

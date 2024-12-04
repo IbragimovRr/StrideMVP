@@ -68,6 +68,7 @@
 		44932A9B2C81F87B00E0F86F /* LoadingStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44932A9A2C81F87B00E0F86F /* LoadingStartViewController.swift */; };
 		44962E962C821B3600CB6A1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44962E942C821B3600CB6A1C /* Main.storyboard */; };
 		449880CA2CB621280052C3C3 /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449880C92CB621280052C3C3 /* NavigationControllerDelegate.swift */; };
+		449C124E2D00DDA30091F0F5 /* MyCoursesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449C124D2D00DDA30091F0F5 /* MyCoursesPresenter.swift */; };
 		449CF0D92C337099000D4528 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CF0D82C337099000D4528 /* CatalogViewController.swift */; };
 		449CF0DB2C3370CA000D4528 /* CoursesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CF0DA2C3370CA000D4528 /* CoursesCollectionViewCell.swift */; };
 		449CF0DD2C3370E0000D4528 /* CategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CF0DC2C3370E0000D4528 /* CategoriesCollectionViewCell.swift */; };
@@ -199,6 +200,7 @@
 		44932A9A2C81F87B00E0F86F /* LoadingStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStartViewController.swift; sourceTree = "<group>"; };
 		44962E952C821B3600CB6A1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		449880C92CB621280052C3C3 /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
+		449C124D2D00DDA30091F0F5 /* MyCoursesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoursesPresenter.swift; sourceTree = "<group>"; };
 		449CF0D82C337099000D4528 /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		449CF0DA2C3370CA000D4528 /* CoursesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCollectionViewCell.swift; sourceTree = "<group>"; };
 		449CF0DC2C3370E0000D4528 /* CategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -445,8 +447,7 @@
 		448E73EE2CFF060600C3000D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				448E73F32CFF071F00C3000D /* HomePresenter.swift */,
-				44E4061D2CFF79F7004F633E /* CatalogPresenter.swift */,
+				449C124C2D00DD7E0091F0F5 /* TabBarScreensPresenter */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -464,10 +465,21 @@
 		448E73F02CFF065900C3000D /* TabBarScreens */ = {
 			isa = PBXGroup;
 			children = (
+				753A4F7B2C340DB7007A8194 /* MyCoursesViewController.swift */,
 				449CF0D82C337099000D4528 /* CatalogViewController.swift */,
 				44E906332C29A59B00FFA6DD /* HomeViewController.swift */,
 			);
 			path = TabBarScreens;
+			sourceTree = "<group>";
+		};
+		449C124C2D00DD7E0091F0F5 /* TabBarScreensPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				448E73F32CFF071F00C3000D /* HomePresenter.swift */,
+				44E4061D2CFF79F7004F633E /* CatalogPresenter.swift */,
+				449C124D2D00DDA30091F0F5 /* MyCoursesPresenter.swift */,
+			);
+			path = TabBarScreensPresenter;
 			sourceTree = "<group>";
 		};
 		44BC59032CCFF33200AD7FFA /* AdminPanelScreens */ = {
@@ -549,7 +561,6 @@
 		753A4F792C340A90007A8194 /* TabBarScreens */ = {
 			isa = PBXGroup;
 			children = (
-				753A4F7B2C340DB7007A8194 /* MyCoursesViewController.swift */,
 				7515103B2C343146009978E6 /* ProfileViewController.swift */,
 				751510402C34586D009978E6 /* SettingsViewController.swift */,
 			);
@@ -689,6 +700,7 @@
 				75F6FDB42C9323B500A57EA9 /* WithdrawViewController.swift in Sources */,
 				44D68B042C51B3EF00F8F476 /* CourseTextViewController.swift in Sources */,
 				447D8C812C85DEEB00EF2217 /* Payment.swift in Sources */,
+				449C124E2D00DDA30091F0F5 /* MyCoursesPresenter.swift in Sources */,
 				448E73EA2CFCD0DB00C3000D /* PromoTableViewCell.swift in Sources */,
 				44BC590B2CD0FB7E00AD7FFA /* Admin.swift in Sources */,
 				444A07012C2B9D6C008F4E68 /* Extension.swift in Sources */,
