@@ -8,9 +8,7 @@
 import Foundation
 
 protocol ProfilePresenterDelegate {
-    var user: UserModel { get set }
-    func getMyInfo()
-    func getMyCourses()
+    func getMyData()
     func viewWillApear()
 }
 
@@ -20,34 +18,21 @@ class ProfilePresenter: ProfilePresenterDelegate {
     var courses = [Course]()
     var selectCourseID = 0
     
-    var user: UserModel = User.info {
-        didSet {
-            view?.showSceletonAnimated(bool: false)
-            view?.showUser()
-        }
-    }
+    var user: UserModel = User.info
     
     func viewWillApear() {
+        getMyData()
+    }
+    
+    func getMyData() {
         view?.showSceletonAnimated(bool: true)
-        getMyInfo()
-        getMyCourses()
-    }
-    
-    func getMyInfo() {
         Task {
-            let result = try await User().getMyInfo()
-            await MainActor.run { [weak self] in
-                self?.user = result
-                self?.view?.showUser()
-            }
-        }
-    }
-    
-    func getMyCourses() {
-        Task {
+            user = try await User().getMyInfo()
             courses = try await Course().getMyCreateCourses()
-            await MainActor.run { [weak self] in
-                self?.view?.showMyCourses()
+            DispatchQueue.main.async {
+                self.view?.showSceletonAnimated(bool: false)
+                self.view?.showUser()
+                self.view?.showMyCourses()
             }
         }
     }
@@ -61,6 +46,7 @@ class ProfilePresenter: ProfilePresenterDelegate {
                 count += 1
             }
         }
+    
         let average = Float(ratingSumm) / Float(count)
         if average.isNaN {
             return 0.0

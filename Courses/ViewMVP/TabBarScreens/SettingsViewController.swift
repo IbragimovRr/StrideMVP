@@ -7,8 +7,12 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+protocol SettingsViewDelegate {
+    func showProfile()
+    func showObjects()
+}
 
+class SettingsViewController: UIViewController, SettingsViewDelegate {
 
     @IBOutlet weak var tbvConstant: NSLayoutConstraint!
     @IBOutlet weak var mail: UILabel!
@@ -18,39 +22,43 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var settingsCollectionView: UICollectionView!
     @IBOutlet weak var settingsTableView2: UITableView!
 
-    var arrayObjects = [Objects]()
-    var arrayObjects2 = [Objects]()
-    var user: UserModel = User.info {
-        didSet {
-            addProfile()
-        }
-    }
+    var presenter = SettingsPresenter()
+    var arrayObjects: [Objects] { return presenter.arrayObjects }
+    var arrayObjects2: [Objects] { return presenter.arrayObjects2 }
+    var user: UserModel { return presenter.user }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.view = self
         settingsCollectionView.delegate = self
         settingsCollectionView.dataSource = self
         settingsTableView2.dataSource = self
         settingsTableView2.delegate = self
-        addObjects()
         hiddenBtn()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        design()
+        presenter.viewWillApear()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         changeHeightTable()
     }
-
-    private func design() {
-        Task {
-            user = try await User().getMyInfo()
-            self.view.layoutSubviews()
+    
+    func showProfile() {
+        name.text = "\(user.name) \(user.surname)"
+        mail.text = user.email
+        if let ava = user.avatarURL {
+            avatar.sd_setImage(with: ava)
         }
+        self.view.layoutSubviews()
+    }
+    
+    func showObjects() {
+        settingsCollectionView.reloadData()
+        settingsTableView2.reloadData()
     }
 
     private func hiddenBtn() {
@@ -64,27 +72,7 @@ class SettingsViewController: UIViewController {
     private func changeHeightTable() {
         tbvConstant.constant = settingsCollectionView.contentSize.height
     }
-
-    private func addProfile() {
-        name.text = "\(user.name) \(user.surname)"
-        mail.text = user.email
-        if let ava = user.avatarURL {
-            avatar.sd_setImage(with: ava)
-        }
-    }
-
-    private func addObjects() {
-        if user.role == .coach {
-            arrayObjects = [Objects(name: "Информация о себе", image: "information", imageForBtn: "next2"), Objects(name: "Мои курсы", image: "coursesHistory", imageForBtn: "next2"), Objects(name: "Конфиденциальность", image: "confidentiality", imageForBtn: "next2"), Objects(name: "Добавить курс", image: "confirmAccount", imageForBtn: "next2"), Objects(name: "Кошелёк", image: "wallet", imageForBtn: "next2"), Objects(name: "Промокоды", image: "promoSettings", imageForBtn: "next2")]
-            arrayObjects2 = [Objects(name: "Нужна помощь? Напиши нам", image: "helper", imageForBtn: "next2"), Objects(name: "Политика конфиденциальности", image: "political", imageForBtn: "next2")]
-        }else if user.role == .user {
-            arrayObjects = [Objects(name: "Информация о себе", image: "information", imageForBtn: "next2"), Objects(name: "Мои курсы", image: "coursesHistory", imageForBtn: "next2"), Objects(name: "Конфиденциальность", image: "confidentiality", imageForBtn: "next2"), /*Objects(name: "Подтвердить аккаунт", image: "confirmAccount", imageForBtn: "next2"),*/ Objects(name: "Стать тренером", image: "becomeCoach", imageForBtn: "next2")]
-            arrayObjects2 = [Objects(name: "Нужна помощь? Напиши нам", image: "helper", imageForBtn: "next2"), Objects(name: "Политика конфиденциальности", image: "political", imageForBtn: "next2")]
-        }else if user.role == .admin {
-            arrayObjects = [Objects(name: "Информация о себе", image: "information", imageForBtn: "next2"), Objects(name: "Мои курсы", image: "coursesHistory", imageForBtn: "next2"), Objects(name: "Конфиденциальность", image: "confidentiality", imageForBtn: "next2"), Objects(name: "Админ панель", image: "adminPanel", imageForBtn: "next2")]
-            arrayObjects2 = [Objects(name: "Нужна помощь? Напиши нам", image: "helper", imageForBtn: "next2"), Objects(name: "Политика конфиденциальности", image: "political", imageForBtn: "next2")]
-        }
-    }
+    
 
 
     @IBAction func logOut(_ sender: UIButton) {

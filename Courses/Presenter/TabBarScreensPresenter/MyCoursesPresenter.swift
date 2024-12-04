@@ -24,9 +24,9 @@ class MyCoursesPresenter: MyCoursesPresenterDelegate {
         Task {
             course = try await Course().getBoughtCourses()
             filteredCourse = course
-            await MainActor.run { [weak self] in
-                self?.view?.showLoading(bool: false)
-                self?.view?.showMyBoughtCourses()
+            DispatchQueue.main.async {
+                self.view?.showLoading(bool: false)
+                self.view?.showMyBoughtCourses()
             }
         }
     }
@@ -36,8 +36,8 @@ class MyCoursesPresenter: MyCoursesPresenterDelegate {
     }
     
     func procent(indexPath: IndexPath) -> Double {
-        var completed = filteredCourse[indexPath.row].progressInDays
-        var countAll = filteredCourse[indexPath.row].daysCount
+        let completed = filteredCourse[indexPath.row].progressInDays
+        let countAll = filteredCourse[indexPath.row].daysCount
         guard countAll > 0 else { return 100.0 }
         let progress = Double(completed) / Double(countAll)
         return progress * 100

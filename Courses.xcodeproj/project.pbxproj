@@ -70,6 +70,7 @@
 		449880CA2CB621280052C3C3 /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449880C92CB621280052C3C3 /* NavigationControllerDelegate.swift */; };
 		449C124E2D00DDA30091F0F5 /* MyCoursesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449C124D2D00DDA30091F0F5 /* MyCoursesPresenter.swift */; };
 		449C12502D00E0AF0091F0F5 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449C124F2D00E0AF0091F0F5 /* ProfilePresenter.swift */; };
+		449C12522D010DEC0091F0F5 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449C12512D010DEC0091F0F5 /* SettingsPresenter.swift */; };
 		449CF0D92C337099000D4528 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CF0D82C337099000D4528 /* CatalogViewController.swift */; };
 		449CF0DB2C3370CA000D4528 /* CoursesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CF0DA2C3370CA000D4528 /* CoursesCollectionViewCell.swift */; };
 		449CF0DD2C3370E0000D4528 /* CategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CF0DC2C3370E0000D4528 /* CategoriesCollectionViewCell.swift */; };
@@ -203,6 +204,7 @@
 		449880C92CB621280052C3C3 /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
 		449C124D2D00DDA30091F0F5 /* MyCoursesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoursesPresenter.swift; sourceTree = "<group>"; };
 		449C124F2D00E0AF0091F0F5 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		449C12512D010DEC0091F0F5 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		449CF0D82C337099000D4528 /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		449CF0DA2C3370CA000D4528 /* CoursesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCollectionViewCell.swift; sourceTree = "<group>"; };
 		449CF0DC2C3370E0000D4528 /* CategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -383,7 +385,6 @@
 				44BC59032CCFF33200AD7FFA /* AdminPanelScreens */,
 				44D68B002C51B3EF00F8F476 /* AboutCourseScreens */,
 				753A4F7A2C340C73007A8194 /* OtherScreens */,
-				753A4F792C340A90007A8194 /* TabBarScreens */,
 				44064C872C27040B00AB5227 /* StartScreens */,
 			);
 			path = Controllers;
@@ -471,6 +472,7 @@
 				449CF0D82C337099000D4528 /* CatalogViewController.swift */,
 				44E906332C29A59B00FFA6DD /* HomeViewController.swift */,
 				7515103B2C343146009978E6 /* ProfileViewController.swift */,
+				751510402C34586D009978E6 /* SettingsViewController.swift */,
 			);
 			path = TabBarScreens;
 			sourceTree = "<group>";
@@ -482,6 +484,7 @@
 				44E4061D2CFF79F7004F633E /* CatalogPresenter.swift */,
 				449C124D2D00DDA30091F0F5 /* MyCoursesPresenter.swift */,
 				449C124F2D00E0AF0091F0F5 /* ProfilePresenter.swift */,
+				449C12512D010DEC0091F0F5 /* SettingsPresenter.swift */,
 			);
 			path = TabBarScreensPresenter;
 			sourceTree = "<group>";
@@ -560,14 +563,6 @@
 				448E73E92CFCD0DB00C3000D /* PromoTableViewCell.swift */,
 			);
 			path = TableViewCells;
-			sourceTree = "<group>";
-		};
-		753A4F792C340A90007A8194 /* TabBarScreens */ = {
-			isa = PBXGroup;
-			children = (
-				751510402C34586D009978E6 /* SettingsViewController.swift */,
-			);
-			path = TabBarScreens;
 			sourceTree = "<group>";
 		};
 		753A4F7A2C340C73007A8194 /* OtherScreens */ = {
@@ -719,6 +714,7 @@
 				44064C8D2C285DA600AB5227 /* RegistrViewController.swift in Sources */,
 				44932A9B2C81F87B00E0F86F /* LoadingStartViewController.swift in Sources */,
 				448765082CE00D15008A1E44 /* SettingsCollectionViewCell.swift in Sources */,
+				449C12522D010DEC0091F0F5 /* SettingsPresenter.swift in Sources */,
 				44D68B022C51B3EF00F8F476 /* AddInfoAboutCourseVC.swift in Sources */,
 				44BD149E2C80A141006D0722 /* CelebrityCollectionViewCell.swift in Sources */,
 				44064CA02C28634C00AB5227 /* Model.swift in Sources */,

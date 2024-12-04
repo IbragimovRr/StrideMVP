@@ -33,7 +33,6 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         presenter.view = self
         coursesCollectionView.delegate = self
         coursesCollectionView.dataSource = self
-//        presenter.viewWillApear()
     }
 
 
@@ -81,15 +80,15 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
     }
     
     func showUser() {
-        coursesCount.text = "\(presenter.courses.count)"
-        rating.text = "\(presenter.averageRating())"
         characteristic.text = presenter.user.coach.description
         name.text = "\(presenter.user.surname) \(presenter.user.name)"
-        rating.text = "\(0.0)"
         avatar.sd_setImage(with: presenter.user.avatarURL)
     }
     
     func showMyCourses() {
+        coursesCount.text = "\(presenter.courses.count)"
+        rating.text = "\(presenter.averageRating())"
+        print(rating.text,coursesCount.text)
         coursesCollectionView.reloadData()
     }
     

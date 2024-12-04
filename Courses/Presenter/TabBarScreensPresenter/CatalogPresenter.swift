@@ -33,9 +33,9 @@ class CatalogPresenter: CatalogPresenterProtocol {
         Task {
             courses = try await Course().getAllCourses()
             loadingMoreData = false
-            await MainActor.run { [weak self] in
-                self?.view?.showCourses()
-                self?.view?.showLoadingMain(bool: false)
+            DispatchQueue.main.async {
+                self.view?.showCourses()
+                self.view?.showLoadingMain(bool: false)
             }
         }
     }
@@ -46,9 +46,9 @@ class CatalogPresenter: CatalogPresenterProtocol {
             let result = try await Course().getAllCourses(page: page)
             courses += result
             loadingMoreData = false
-            await MainActor.run { [weak self] in
-                self?.view?.showNextPage()
-                self?.view?.showLoadingPage(bool: false)
+            DispatchQueue.main.async {
+                self.view?.showNextPage()
+                self.view?.showLoadingPage(bool: false)
             }
         }
     }
@@ -56,8 +56,8 @@ class CatalogPresenter: CatalogPresenterProtocol {
     func getCategories() {
         Task {
             categories = try await CategoryServices.getCategories()
-            await MainActor.run { [weak self] in
-                self?.view?.showCategories()
+            DispatchQueue.main.async {
+                self.view?.showCategories()
             }
         }
     }
@@ -69,9 +69,9 @@ class CatalogPresenter: CatalogPresenterProtocol {
             let results = try await Course().getAllCourses(categoryID: id)
             courses = results
             loadingMoreData = false
-            await MainActor.run { [weak self] in
-                self?.view?.showLoadingMain(bool: false)
-                self?.view?.showCourses()
+            DispatchQueue.main.async {
+                self.view?.showLoadingMain(bool: false)
+                self.view?.showCourses()
             }
         }
     }
@@ -79,8 +79,8 @@ class CatalogPresenter: CatalogPresenterProtocol {
     func searchCourse(text: String) {
         Task {
             courses = try await Course().searchCourses(text: text, category: selectCategory)
-            await MainActor.run { [weak self] in
-                self?.view?.searchCourses()
+            DispatchQueue.main.async {
+                self.view?.searchCourses()
             }
         }
     }

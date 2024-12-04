@@ -31,11 +31,7 @@ class HomePresenter: HomePresenterProtocol {
     var courseServices = CourseServices()
     var userModel: UserModel = User.info {
         didSet {
-            Task {
-                await MainActor.run { [weak self] in
-                    self?.view?.showUser(user: userModel)
-                }
-            }
+            self.view?.showUser(user: userModel)
         }
     }
     
@@ -53,25 +49,17 @@ class HomePresenter: HomePresenterProtocol {
     func getData() {
         getBanners()
         Task {
-            userModel = try await userService.getMyInfo()
+            let user = try await userService.getMyInfo()
             let coachs = try await self.userService.getAllCoachs()
             let recomendCourses = try await Course().getRecomendedCourses()
             let celebrity = try await self.userService.getCelebreties()
             
-            await MainActor.run { [weak self] in
-                self?.view?.showCelebrity(celebrity: celebrity)
-            }
-            await MainActor.run { [weak self] in
-                self?.view?.showUser(user: userModel)
-            }
-            await MainActor.run { [weak self] in
-                self?.view?.showRecomendedCourses(courses: recomendCourses)
-            }
-            await MainActor.run { [weak self] in
-                self?.view?.showCoachs(coachs: coachs)
-            }
-            await MainActor.run { [weak self] in
-                self?.view?.disableLoading()
+            DispatchQueue.main.async {
+                self.userModel = user
+                self.view?.showCelebrity(celebrity: celebrity)
+                self.view?.showRecomendedCourses(courses: recomendCourses)
+                self.view?.showCoachs(coachs: coachs)
+                self.view?.disableLoading()
             }
         }
     }
@@ -87,9 +75,9 @@ class HomePresenter: HomePresenterProtocol {
     
     func getUser() {
         Task {
-            userModel = try await userService.getMyInfo()
-            await MainActor.run { [weak self] in
-                self?.view?.showUser(user: userModel)
+            let user = try await userService.getMyInfo()
+            DispatchQueue.main.async {
+                self.userModel = user
             }
         }
     }
@@ -97,8 +85,8 @@ class HomePresenter: HomePresenterProtocol {
     func getCelebrity() {
         Task {
             let celebrity = try await self.userService.getCelebreties()
-            await MainActor.run { [weak self] in
-                self?.view?.showCelebrity(celebrity: celebrity)
+            DispatchQueue.main.async {
+                self.view?.showCelebrity(celebrity: celebrity)
             }
         }
     }
@@ -106,8 +94,8 @@ class HomePresenter: HomePresenterProtocol {
     func getRecomendCourses() {
         Task {
             let recomendCourses = try await Course().getRecomendedCourses()
-            await MainActor.run { [weak self] in
-                self?.view?.showRecomendedCourses(courses: recomendCourses)
+            DispatchQueue.main.async {
+                self.view?.showRecomendedCourses(courses: recomendCourses)
             }
         }
     }
@@ -124,8 +112,8 @@ class HomePresenter: HomePresenterProtocol {
     func getAllCoachs() {
         Task {
             let coachs = try await self.userService.getAllCoachs()
-            await MainActor.run { [weak self] in
-                self?.view?.showCoachs(coachs: coachs)
+            DispatchQueue.main.async {
+                self.view?.showCoachs(coachs: coachs)
             }
         }
     }
