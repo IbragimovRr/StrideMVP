@@ -289,7 +289,7 @@ class InfoCoursesViewController: UIViewController {
     private func openTinkoffKassa() {
         Task {
             let email = try await getEmail()
-            Payment().configure(self, email: email, price: price) { result in
+            PaymentServices().configure(self, email: email, price: price) { result in
                 switch result {
                 case .succeeded(_):
                     self.buyCourseSuccesed()

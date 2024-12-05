@@ -8,7 +8,13 @@
 import UIKit
 import Lottie
 
-class RegistrViewController: UIViewController {
+protocol RegistrViewDelegate: AnyObject {
+    func showError(error: String)
+    func showLoading(bool: Bool)
+    func successRegistr()
+}
+
+class RegistrViewController: UIViewController, RegistrViewDelegate {
 
     @IBOutlet weak var loading: LottieAnimationView!
     @IBOutlet weak var registerBtn: UIButton!
@@ -27,12 +33,14 @@ class RegistrViewController: UIViewController {
 
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     var startPosition = CGPoint()
+    var presenter = RegistrPresenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         phoneNumber.delegate = self
         name.delegate = self
         lastName.delegate = self
+        presenter.view = self
         name.autocapitalizationType = .words
         lastName.autocapitalizationType = .words
         startPosition = errorView.center
@@ -49,11 +57,6 @@ class RegistrViewController: UIViewController {
         phoneBorder.color = UIColor.lightBlackMain
         errorView.isHidden = true
     }
-
-    func addError(error: String) {
-        errorView.isHidden = false
-        errorView.configure(title: "Ошибка", description: error)
-    }
     
     private func loadingStart() {
         loading.play()
@@ -69,47 +72,55 @@ class RegistrViewController: UIViewController {
         registerBtn.isHidden = false
     }
 
-    func checkInfo() throws {
+    func checkInfo() -> Bool {
+        var results = true
         guard password.text == passwordAgo.text else {
             passwordBorder.color = .errorRed
             passwordAgoBorder.color = .errorRed
             errorView.configure(title: "Неверный пароль", description: "Пароли не совпадают")
             errorView.isHidden = false
-            throw ErrorNetwork.notFound }
+            results = false
+            return results }
         guard name.text!.isEmpty == false else {
             nameBorder.color = .errorRed
-            throw ErrorNetwork.notFound }
+            results = false
+            return results }
         guard lastName.text!.isEmpty == false else {
             surnameBorder.color = .errorRed
-            throw ErrorNetwork.notFound }
+            results = false
+            return results }
         guard mail.text!.isEmpty == false else {
             mailBorder.color = .errorRed
-            throw ErrorNetwork.notFound }
+            results = false
+            return results }
         guard password.text!.isEmpty == false else {
             passwordBorder.color = .errorRed
-            throw ErrorNetwork.notFound }
+            results = false
+            return results }
+        return results
+    }
+    
+    func showError(error: String) {
+        errorView.isHidden = false
+        errorView.configure(title: "Ошибка", description: error)
+    }
+    
+    func showLoading(bool: Bool) {
+        if bool {
+            loadingStart()
+        }else {
+            loadingStop()
+        }
+    }
+    
+    func successRegistr() {
+        performSegue(withIdentifier: "success", sender: self)
     }
 
     @IBAction func registr(_ sender: UIButton) {
-        loadingStop()
-        registerBtn.isEnabled = false
-        Task {
-            do {
-                clearError()
-                try checkInfo()
-                let phoneNumberFormat = phoneNumber.text!.format(with: "+XXXXXXXXXXX")
-                try await SignServices().registr(phoneNumber: phoneNumberFormat, password: password.text!, name: name.text!, lastName: lastName.text!, mail: mail.text!)
-                registerBtn.isEnabled = true
-                loadingStop()
-                performSegue(withIdentifier: "success", sender: self)
-            }catch ErrorNetwork.runtimeError(let error) {
-                addError(error: error)
-                registerBtn.isEnabled = true
-                loadingStop()
-            } catch {
-                loadingStop()
-                registerBtn.isEnabled = true
-            }
+        clearError()
+        if checkInfo() {
+            presenter.signUp(phoneNumber: phoneNumber.text!, password: password.text!, name: name.text!, lastName: lastName.text!, mail: mail.text!)
         }
     }
 

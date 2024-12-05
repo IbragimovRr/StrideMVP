@@ -84,7 +84,7 @@ class WithdrawViewController: UIViewController {
                 guard let moneyFluent = Int(withdrawTextField.text ?? "0") else { return }
                 let cardFormat = cardTextField.text!.format(with: "XXXX XXXX XXXX XXXX")
                 let card: PaymentMethod = .card(cardNumber: cardFormat, amount: moneyFluent)
-                try await Payment().fetchFunds(payment: card)
+                try await PaymentServices().fetchFunds(payment: card)
                 finishBtn.isEnabled = true
                 let result = Int(moneyCount.text!)! - moneyFluent
                 money = result

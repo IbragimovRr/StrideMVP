@@ -13,7 +13,7 @@ import UIKit
 import Alamofire
 
 
-class Payment {
+class PaymentServices {
 
     var email = ""
     let credential = AcquiringSdkCredential(

@@ -111,7 +111,7 @@ class WithdrawSBPViewController: UIViewController {
                 try checkInfo()
                 guard let money = Int(withdrawTextField.text ?? "0") else { return }
                 let sbp: PaymentMethod = .sbp(phoneNumber: numberTextField.text!, amount: money, bank: bankLabel.text!)
-                try await Payment().fetchFunds(payment: sbp)
+                try await PaymentServices().fetchFunds(payment: sbp)
                 finishBtn.isEnabled = true
                 let result = Int(moneyCount.text!)! - money
                 moneyCount.text = "\(result)"

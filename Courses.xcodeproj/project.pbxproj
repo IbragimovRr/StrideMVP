@@ -49,10 +49,11 @@
 		446475752C72088300ACD3D7 /* CommentsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446475742C72088300ACD3D7 /* CommentsServices.swift */; };
 		4464757B2C7496F100ACD3D7 /* FilePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464757A2C7496F100ACD3D7 /* FilePath.swift */; };
 		44682C9B2D01189B00087C62 /* VhodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682C9A2D01189B00087C62 /* VhodPresenter.swift */; };
+		44682C9D2D01F2A100087C62 /* RegistrPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682C9C2D01F2A100087C62 /* RegistrPresenter.swift */; };
 		4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */; };
 		447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */; };
 		447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */; };
-		447D8C812C85DEEB00EF2217 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D8C802C85DEEB00EF2217 /* Payment.swift */; };
+		447D8C812C85DEEB00EF2217 /* PaymentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D8C802C85DEEB00EF2217 /* PaymentServices.swift */; };
 		447D8C8E2C89D09600EF2217 /* emptyBox.json in Resources */ = {isa = PBXBuildFile; fileRef = 447D8C8D2C89D09600EF2217 /* emptyBox.json */; };
 		447FE4932CDD2300007C5B31 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447FE4922CDD2300007C5B31 /* MainTabBarController.swift */; };
 		448301822C9504B600E40DBA /* ValidateTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448301812C9504B600E40DBA /* ValidateTF.swift */; };
@@ -183,8 +184,9 @@
 		446475742C72088300ACD3D7 /* CommentsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsServices.swift; sourceTree = "<group>"; };
 		4464757A2C7496F100ACD3D7 /* FilePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePath.swift; sourceTree = "<group>"; };
 		44682C9A2D01189B00087C62 /* VhodPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VhodPresenter.swift; sourceTree = "<group>"; };
+		44682C9C2D01F2A100087C62 /* RegistrPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrPresenter.swift; sourceTree = "<group>"; };
 		4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMoneyInfoViewController.swift; sourceTree = "<group>"; };
-		447D8C802C85DEEB00EF2217 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		447D8C802C85DEEB00EF2217 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		447D8C8D2C89D09600EF2217 /* emptyBox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyBox.json; sourceTree = "<group>"; };
 		447FE4922CDD2300007C5B31 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		448301812C9504B600E40DBA /* ValidateTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateTF.swift; sourceTree = "<group>"; };
@@ -329,12 +331,10 @@
 			isa = PBXGroup;
 			children = (
 				448765092CE01C2E008A1E44 /* Courses.entitlements */,
-				440E1F6C2CA1671F002C6FC8 /* Settings */,
 				448E73EF2CFF063E00C3000D /* Services */,
 				448E73EC2CFF05E000C3000D /* ModelMVP */,
 				448E73ED2CFF05E900C3000D /* ViewMVP */,
 				448E73EE2CFF060600C3000D /* Presenter */,
-				440DAB472C17491600C576FB /* Model */,
 				440DAB482C17491D00C576FB /* Views */,
 				440DAB492C17492900C576FB /* Controllers */,
 				440DAB3C2C1748D600C576FB /* Assets.xcassets */,
@@ -350,14 +350,6 @@
 				44DFB1172C3B1FC1005C8F44 /* Animation */,
 			);
 			path = Courses;
-			sourceTree = "<group>";
-		};
-		440DAB472C17491600C576FB /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				440E1F6D2CA1674C002C6FC8 /* Model */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		440DAB482C17491D00C576FB /* Views */ = {
@@ -404,27 +396,11 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		440E1F6D2CA1674C002C6FC8 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				440E1F702CA169D3002C6FC8 /* Course */,
-				447D8C802C85DEEB00EF2217 /* Payment.swift */,
-				44547E562CF4BE380051C782 /* Promocodes.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		440E1F702CA169D3002C6FC8 /* Course */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Course;
-			sourceTree = "<group>";
-		};
 		44682C992D01187F00087C62 /* StartScreensPresenter */ = {
 			isa = PBXGroup;
 			children = (
 				44682C9A2D01189B00087C62 /* VhodPresenter.swift */,
+				44682C9C2D01F2A100087C62 /* RegistrPresenter.swift */,
 			);
 			path = StartScreensPresenter;
 			sourceTree = "<group>";
@@ -432,6 +408,7 @@
 		448E73EC2CFF05E000C3000D /* ModelMVP */ = {
 			isa = PBXGroup;
 			children = (
+				440E1F6C2CA1671F002C6FC8 /* Settings */,
 				448E73F92CFF087A00C3000D /* UserModel.swift */,
 				44E4061B2CFF78F4004F633E /* CourseModel.swift */,
 				44E4061F2CFF7B9C004F633E /* CategoryModel.swift */,
@@ -442,8 +419,8 @@
 		448E73ED2CFF05E900C3000D /* ViewMVP */ = {
 			isa = PBXGroup;
 			children = (
-				44064C872C27040B00AB5227 /* StartScreens */,
 				448E73F02CFF065900C3000D /* TabBarScreens */,
+				44064C872C27040B00AB5227 /* StartScreens */,
 			);
 			path = ViewMVP;
 			sourceTree = "<group>";
@@ -460,6 +437,8 @@
 		448E73EF2CFF063E00C3000D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				447D8C802C85DEEB00EF2217 /* PaymentServices.swift */,
+				44547E562CF4BE380051C782 /* Promocodes.swift */,
 				44BC590A2CD0FB7E00AD7FFA /* Admin.swift */,
 				44064C9D2C28628000AB5227 /* SignServices.swift */,
 				44D68AF22C4ACC0C00F8F476 /* UserServices.swift */,
@@ -702,7 +681,7 @@
 			files = (
 				75F6FDB42C9323B500A57EA9 /* WithdrawViewController.swift in Sources */,
 				44D68B042C51B3EF00F8F476 /* CourseTextViewController.swift in Sources */,
-				447D8C812C85DEEB00EF2217 /* Payment.swift in Sources */,
+				447D8C812C85DEEB00EF2217 /* PaymentServices.swift in Sources */,
 				449C124E2D00DDA30091F0F5 /* MyCoursesPresenter.swift in Sources */,
 				448E73EA2CFCD0DB00C3000D /* PromoTableViewCell.swift in Sources */,
 				44BC590B2CD0FB7E00AD7FFA /* Admin.swift in Sources */,
@@ -779,6 +758,7 @@
 				44064C9E2C28628000AB5227 /* SignServices.swift in Sources */,
 				440CB67D2C5FA86F003FCAF0 /* CoachViewController.swift in Sources */,
 				44BC59052CCFF34A00AD7FFA /* AdminMainViewController.swift in Sources */,
+				44682C9D2D01F2A100087C62 /* RegistrPresenter.swift in Sources */,
 				44064C8B2C28516C00AB5227 /* VhodViewController.swift in Sources */,
 				75D68C612C80A361001407F0 /* AddReviewViewController.swift in Sources */,
 				44BD6CDC2C428A2C001645A0 /* ModulesCourseViewController.swift in Sources */,
