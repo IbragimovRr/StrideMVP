@@ -8,8 +8,8 @@ import UIKit
 import SDWebImage
 import SkeletonView
 
-class CoachViewController: UIViewController {
-
+class CoachViewController: UIViewController, ProfileViewDelegate {
+    
     @IBOutlet weak var characteristic: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var rating: UILabel!
@@ -19,19 +19,12 @@ class CoachViewController: UIViewController {
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var coursesCollectionView: UICollectionView!
 
-    private var user: UserModel = UserServices.info {
-        didSet {
-            sceletonAnimatedStop()
-            addProfile()
-        }
-    }
-
-    var courses = [CourseModel]()
-    var idCoach = 0
-    var selectCourse = CourseModel()
-
+    var presenter = ProfilePresenter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.view = self
+        presenter.isMyProfile = false
         coursesCollectionView.delegate = self
         coursesCollectionView.dataSource = self
     }
@@ -39,45 +32,9 @@ class CoachViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        design()
+        presenter.viewWillApear()
     }
 
-    func design() {
-        Task {
-            sceletonAnimatedStart()
-            try await getCoachInfo()
-            try await getCoachCourses()
-            coursesCollectionView.reloadData()
-        }
-    }
-
-    private func getCoachInfo() async throws {
-        user = try await UserServices().getUserByID(id: idCoach)
-    }
-
-    private func getCoachCourses() async throws {
-        courses = try await CourseServices().getCoursesByUserID(id: idCoach)
-        coursesCount.text = "\(courses.count)"
-        rating.text = "\(averageRating())"
-        coursesCollectionView.reloadData()
-    }
-
-    private func averageRating() -> Float {
-        var ratingSumm: Float = 0.0
-        var count = 0
-        for course in courses {
-            if course.rating != 0.0 {
-                ratingSumm += course.rating
-                count += 1
-            }
-        }
-        let average = Float(ratingSumm) / Float(count)
-        if average.isNaN {
-            return 0.0
-        }else {
-            return average
-        }
-    }
 
     private func sceletonAnimatedStart() {
         coursesCollectionView.isSkeletonable = true
@@ -86,7 +43,7 @@ class CoachViewController: UIViewController {
         avatar.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
         characteristic.isSkeletonable = true
         characteristic.linesCornerRadius = 5
-        characteristic.skeletonTextNumberOfLines = 3
+        characteristic.skeletonTextNumberOfLines = 0
         characteristic.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
         rating.isSkeletonable = true
         rating.linesCornerRadius = 5
@@ -98,7 +55,7 @@ class CoachViewController: UIViewController {
         coursesCount.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
         name.isSkeletonable = true
         name.linesCornerRadius = 5
-        name.skeletonTextNumberOfLines = 1
+        name.skeletonTextNumberOfLines = 3
         name.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
 
         ratingBottom.isHidden = true
@@ -115,21 +72,32 @@ class CoachViewController: UIViewController {
         ratingBottom.isHidden = false
         coursesCountBottom.isHidden = false
     }
-
-    private func addProfile() {
-        name.text = "\(user.name) \(user.surname)"
-        characteristic.text = user.coach.description
-        if let avatar = user.avatarURL {
-            self.avatar.sd_setImage(with: avatar)
+    
+    func showUser() {
+        characteristic.text = presenter.user.coach.description
+        name.text = "\(presenter.user.surname) \(presenter.user.name)"
+        avatar.sd_setImage(with: presenter.user.avatarURL)
+    }
+    
+    func showMyCourses() {
+        coursesCount.text = "\(presenter.courses.count)"
+        rating.text = "\(presenter.averageRating())"
+        coursesCollectionView.reloadData()
+    }
+    
+    func showSceletonAnimated(bool: Bool) {
+        if bool {
+            sceletonAnimatedStart()
+        }else {
+            sceletonAnimatedStop()
         }
     }
 
     @IBAction func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-
+    
 }
-
 extension CoachViewController: SkeletonCollectionViewDelegate, SkeletonCollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> SkeletonView.ReusableCellIdentifier {
@@ -138,17 +106,17 @@ extension CoachViewController: SkeletonCollectionViewDelegate, SkeletonCollectio
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return courses.count
+        return presenter.courses.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "course", for: indexPath) as! CoursesCollectionViewCell
-        cell.image.sd_setImage(with: courses[indexPath.row].imageURL)
+        cell.image.sd_setImage(with: presenter.courses[indexPath.row].imageURL)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectCourse = courses[indexPath.row]
+        presenter.selectCourse = presenter.courses[indexPath.row]
         performSegue(withIdentifier: "info", sender: self)
     }
     
@@ -156,7 +124,7 @@ extension CoachViewController: SkeletonCollectionViewDelegate, SkeletonCollectio
         
         if segue.identifier == "info" {
             let vc = segue.destination as! InfoCoursesViewController
-            vc.course = selectCourse
+            vc.course = presenter.selectCourse
         }
         
     }

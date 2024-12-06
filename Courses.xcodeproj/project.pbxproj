@@ -50,6 +50,8 @@
 		4464757B2C7496F100ACD3D7 /* FilePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464757A2C7496F100ACD3D7 /* FilePath.swift */; };
 		44682C9B2D01189B00087C62 /* VhodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682C9A2D01189B00087C62 /* VhodPresenter.swift */; };
 		44682C9D2D01F2A100087C62 /* RegistrPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682C9C2D01F2A100087C62 /* RegistrPresenter.swift */; };
+		44682CA02D02874A00087C62 /* PromocodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682C9F2D02874A00087C62 /* PromocodeModel.swift */; };
+		44682CA32D034CDD00087C62 /* CreatePromoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA22D034CDD00087C62 /* CreatePromoPresenter.swift */; };
 		4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */; };
 		447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */; };
 		447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */; };
@@ -101,7 +103,6 @@
 		44DFB11B2C3B2637005C8F44 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 44DFB11A2C3B2637005C8F44 /* loading.json */; };
 		44DFB11E2C3BE46B005C8F44 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 44DFB11D2C3BE46B005C8F44 /* Lottie */; };
 		44E00B922CE39F2400E62089 /* CoachCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00B912CE39F2400E62089 /* CoachCollectionViewCell.swift */; };
-		44E00B942CE6941400E62089 /* TestAddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00B932CE6941400E62089 /* TestAddCourseViewController.swift */; };
 		44E406192CFF7572004F633E /* CourseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E406182CFF7572004F633E /* CourseServices.swift */; };
 		44E4061C2CFF78F4004F633E /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E4061B2CFF78F4004F633E /* CourseModel.swift */; };
 		44E4061E2CFF79F7004F633E /* CatalogPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E4061D2CFF79F7004F633E /* CatalogPresenter.swift */; };
@@ -185,6 +186,8 @@
 		4464757A2C7496F100ACD3D7 /* FilePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePath.swift; sourceTree = "<group>"; };
 		44682C9A2D01189B00087C62 /* VhodPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VhodPresenter.swift; sourceTree = "<group>"; };
 		44682C9C2D01F2A100087C62 /* RegistrPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrPresenter.swift; sourceTree = "<group>"; };
+		44682C9F2D02874A00087C62 /* PromocodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromocodeModel.swift; sourceTree = "<group>"; };
+		44682CA22D034CDD00087C62 /* CreatePromoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePromoPresenter.swift; sourceTree = "<group>"; };
 		4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMoneyInfoViewController.swift; sourceTree = "<group>"; };
 		447D8C802C85DEEB00EF2217 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		447D8C8D2C89D09600EF2217 /* emptyBox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyBox.json; sourceTree = "<group>"; };
@@ -231,7 +234,6 @@
 		44DFB1152C3B199A005C8F44 /* RecomendationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationCollectionViewCell.swift; sourceTree = "<group>"; };
 		44DFB11A2C3B2637005C8F44 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		44E00B912CE39F2400E62089 /* CoachCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachCollectionViewCell.swift; sourceTree = "<group>"; };
-		44E00B932CE6941400E62089 /* TestAddCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAddCourseViewController.swift; sourceTree = "<group>"; };
 		44E406182CFF7572004F633E /* CourseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseServices.swift; sourceTree = "<group>"; };
 		44E4061B2CFF78F4004F633E /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		44E4061D2CFF79F7004F633E /* CatalogPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogPresenter.swift; sourceTree = "<group>"; };
@@ -332,10 +334,9 @@
 			children = (
 				448765092CE01C2E008A1E44 /* Courses.entitlements */,
 				448E73EF2CFF063E00C3000D /* Services */,
-				448E73EC2CFF05E000C3000D /* ModelMVP */,
-				448E73ED2CFF05E900C3000D /* ViewMVP */,
+				448E73EC2CFF05E000C3000D /* Model */,
+				448E73ED2CFF05E900C3000D /* View */,
 				448E73EE2CFF060600C3000D /* Presenter */,
-				440DAB482C17491D00C576FB /* Views */,
 				440DAB492C17492900C576FB /* Controllers */,
 				440DAB3C2C1748D600C576FB /* Assets.xcassets */,
 				44962E942C821B3600CB6A1C /* Main.storyboard */,
@@ -372,7 +373,6 @@
 		440DAB492C17492900C576FB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				44BC59032CCFF33200AD7FFA /* AdminPanelScreens */,
 				44D68B002C51B3EF00F8F476 /* AboutCourseScreens */,
 				753A4F7A2C340C73007A8194 /* OtherScreens */,
 			);
@@ -405,29 +405,53 @@
 			path = StartScreensPresenter;
 			sourceTree = "<group>";
 		};
-		448E73EC2CFF05E000C3000D /* ModelMVP */ = {
+		44682C9E2D02193300087C62 /* OtherScreens */ = {
+			isa = PBXGroup;
+			children = (
+				44547E582CF4C1B50051C782 /* CreatePromoViewController.swift */,
+				44BD149B2C808106006D0722 /* PickerModelViewController.swift */,
+				44932A982C81303A00E0F86F /* PrivacyViewController.swift */,
+				440CB67C2C5FA86F003FCAF0 /* CoachViewController.swift */,
+			);
+			path = OtherScreens;
+			sourceTree = "<group>";
+		};
+		44682CA12D034CC500087C62 /* OtherScreens */ = {
+			isa = PBXGroup;
+			children = (
+				44682CA22D034CDD00087C62 /* CreatePromoPresenter.swift */,
+			);
+			path = OtherScreens;
+			sourceTree = "<group>";
+		};
+		448E73EC2CFF05E000C3000D /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				440E1F6C2CA1671F002C6FC8 /* Settings */,
 				448E73F92CFF087A00C3000D /* UserModel.swift */,
+				44682C9F2D02874A00087C62 /* PromocodeModel.swift */,
 				44E4061B2CFF78F4004F633E /* CourseModel.swift */,
 				44E4061F2CFF7B9C004F633E /* CategoryModel.swift */,
 			);
-			path = ModelMVP;
+			path = Model;
 			sourceTree = "<group>";
 		};
-		448E73ED2CFF05E900C3000D /* ViewMVP */ = {
+		448E73ED2CFF05E900C3000D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				440DAB482C17491D00C576FB /* Views */,
+				44BC59032CCFF33200AD7FFA /* AdminPanelScreens */,
+				44682C9E2D02193300087C62 /* OtherScreens */,
 				448E73F02CFF065900C3000D /* TabBarScreens */,
 				44064C872C27040B00AB5227 /* StartScreens */,
 			);
-			path = ViewMVP;
+			path = View;
 			sourceTree = "<group>";
 		};
 		448E73EE2CFF060600C3000D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				44682CA12D034CC500087C62 /* OtherScreens */,
 				44682C992D01187F00087C62 /* StartScreensPresenter */,
 				449C124C2D00DD7E0091F0F5 /* TabBarScreensPresenter */,
 			);
@@ -495,7 +519,6 @@
 				44D68AFD2C51B3EF00F8F476 /* CoursesViewController.swift */,
 				44D68AFE2C51B3EF00F8F476 /* CourseTextViewController.swift */,
 				44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */,
-				44E00B932CE6941400E62089 /* TestAddCourseViewController.swift */,
 			);
 			path = AboutCourseScreens;
 			sourceTree = "<group>";
@@ -554,15 +577,11 @@
 			children = (
 				7508513A2C38763A00F5C0DC /* ChangeInformationViewController.swift */,
 				75106D782C38AFDB0036042B /* InfoAboutMeViewController.swift */,
-				440CB67C2C5FA86F003FCAF0 /* CoachViewController.swift */,
 				75D68C602C80A361001407F0 /* AddReviewViewController.swift */,
-				44BD149B2C808106006D0722 /* PickerModelViewController.swift */,
-				44932A982C81303A00E0F86F /* PrivacyViewController.swift */,
 				75F6FDB32C9323B500A57EA9 /* WithdrawViewController.swift */,
 				7555DEB42C986FC100B80A13 /* WithdradSBPViewController.swift */,
 				441E4AEE2CD2AD6100800EE4 /* СonfidentialityViewController.swift */,
 				440C9C402CF49D72007D0735 /* PromoViewController.swift */,
-				44547E582CF4C1B50051C782 /* CreatePromoViewController.swift */,
 			);
 			path = OtherScreens;
 			sourceTree = "<group>";
@@ -688,6 +707,7 @@
 				444A07012C2B9D6C008F4E68 /* Extension.swift in Sources */,
 				7595784B2C5B9A7E00A9F811 /* AddInfoAboutModuleViewController.swift in Sources */,
 				44F741542CA1D0720041F8FA /* Privacy.swift in Sources */,
+				44682CA32D034CDD00087C62 /* CreatePromoPresenter.swift in Sources */,
 				448E73FA2CFF087A00C3000D /* UserModel.swift in Sources */,
 				7555DEB52C986FC100B80A13 /* WithdradSBPViewController.swift in Sources */,
 				7555DEB72C98822000B80A13 /* BanksTableViewCell.swift in Sources */,
@@ -711,6 +731,7 @@
 				449880CA2CB621280052C3C3 /* NavigationControllerDelegate.swift in Sources */,
 				44BD149C2C808106006D0722 /* PickerModelViewController.swift in Sources */,
 				44E406192CFF7572004F633E /* CourseServices.swift in Sources */,
+				44682CA02D02874A00087C62 /* PromocodeModel.swift in Sources */,
 				449CF0D92C337099000D4528 /* CatalogViewController.swift in Sources */,
 				44BD6CDE2C432C45001645A0 /* DaysCourseCollectionViewCell.swift in Sources */,
 				4450B3C92CB6066900F1F54B /* UpdateViewController.swift in Sources */,
@@ -769,7 +790,6 @@
 				440E1F722CA169E9002C6FC8 /* CourseMananger.swift in Sources */,
 				751510412C34586D009978E6 /* SettingsViewController.swift in Sources */,
 				44D68B052C51B3EF00F8F476 /* InfoCoursesViewController.swift in Sources */,
-				44E00B942CE6941400E62089 /* TestAddCourseViewController.swift in Sources */,
 				440C9C432CF49DD0007D0735 /* PromoCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

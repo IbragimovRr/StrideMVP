@@ -7,7 +7,16 @@
 
 import UIKit
 
-class CreatePromoViewController: UIViewController {
+protocol CreatePromoViewDelegate {
+    var dateStart: String? { get set }
+    var dateEnd: String? { get set }
+    func showErrors(error: String)
+    func create(promoCode: PromocodeModel)
+    func change(promoCode: PromocodeModel)
+    func delete(promoCode: PromocodeModel)
+}
+
+class CreatePromoViewController: UIViewController, CreatePromoViewDelegate {
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var promoNameView: UIView!
@@ -24,10 +33,12 @@ class CreatePromoViewController: UIViewController {
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
-    private var procents = [Int]()
-    private var selectProcent: Int? = nil
     private var currentLbl: UILabel? = nil
-    private var dateStart: String? = nil {
+    
+    var presenter = CreatePromoPresenter()
+    weak var delegate: PromoCodeDelegate?
+    
+    var dateStart: String? = nil {
         didSet {
             if dateStart == nil {
                 dateStartLbl.text = "Начало"
@@ -37,7 +48,7 @@ class CreatePromoViewController: UIViewController {
             }
         }
     }
-    private var dateEnd: String? = nil {
+    var dateEnd: String? = nil {
         didSet {
             if dateEnd == nil {
                 dateEndLbl.text = "Конец"
@@ -48,8 +59,6 @@ class CreatePromoViewController: UIViewController {
         }
     }
     
-    var promoCode: Promocodes? = nil
-    weak var delegate: PromoCodeDelegate?
     
     private var formatter: DateFormatter {
         let formatter = DateFormatter()
@@ -59,6 +68,7 @@ class CreatePromoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.view = self
         namePromo.delegate = self
         procentCollectionView.delegate = self
         procentCollectionView.dataSource = self
@@ -94,8 +104,8 @@ class CreatePromoViewController: UIViewController {
         view.addSubview(errorView)
         errorView.isHidden = true
         settingsDatePicker()
-        getProcents()
-        if promoCode == nil {
+        presenter.getProcents()
+        if presenter.promoCode == nil {
             titleMain.text = "Создать промокод"
             deleteBtn.isHidden = true
             promoNameView.isHidden = false
@@ -105,20 +115,29 @@ class CreatePromoViewController: UIViewController {
             createBtn.setTitle("Изменить", for: .normal)
             deleteBtn.isHidden = false
             promoNameView.isHidden = true
-            namePromo.text = promoCode!.name
-            selectProcent = getProcentByArray(procent: promoCode!.procent)
-            dateStart = promoCode!.dateStart
-            dateEnd = promoCode!.dateEnd
+            namePromo.text = presenter.promoCode!.name
+            presenter.changePromocode()
         }
     }
     
-    private func getProcentByArray(procent: Int) -> Int? {
-        for x in 0...procents.count - 1 {
-            if procents[x] == procent {
-                return x
-            }
-        }
-        return nil
+    func showErrors(error: String) {
+        errorView.isHidden = false
+        errorView.configure(title: "Ошибка", description: error)
+    }
+    
+    func create(promoCode: PromocodeModel) {
+        delegate?.create(promoCode: promoCode)
+        dismiss(animated: true)
+    }
+    
+    func change(promoCode: PromocodeModel) {
+        delegate?.change(promoCode: promoCode)
+        dismiss(animated: true)
+    }
+    
+    func delete(promoCode: PromocodeModel) {
+        delegate?.delete(promoCode: promoCode)
+        dismiss(animated: false)
     }
     
     @objc func datePickerValueChanged (sender: UIDatePicker) {
@@ -144,9 +163,7 @@ class CreatePromoViewController: UIViewController {
         datePicker.minimumDate = Date()
     }
     
-    private func getProcents() {
-        procents += [5,10,15,20,25,30]
-    }
+   
     
     private func checkError() -> Bool {
         var results = true
@@ -155,7 +172,7 @@ class CreatePromoViewController: UIViewController {
             errorView.configure(title: "Ошибка", description: "Впишите название промокода")
             errorView.isHidden = false
         }
-        if selectProcent == nil {
+        if presenter.selectProcent == nil {
             results = false
             errorView.configure(title: "Ошибка", description: "Выберите процент")
             errorView.isHidden = false
@@ -170,17 +187,16 @@ class CreatePromoViewController: UIViewController {
             errorView.configure(title: "Ошибка", description: "Выберете конец промокода")
             errorView.isHidden = false
         }
-        print(dateEnd, dateStart)
         return results
     }
     
-    private func createPromocode() -> Promocodes {
-        let promocodes = Promocodes()
-        if let promoCode = promoCode {
+    private func createPromocode() -> PromocodeModel {
+        let promocodes = PromocodeModel()
+        if let promoCode = presenter.promoCode {
             promocodes.id = promoCode.id
         }
         promocodes.name = namePromo.text!
-        promocodes.procent = procents[selectProcent!]
+        promocodes.procent = presenter.procents[presenter.selectProcent!]
         promocodes.dateStart = dateStart
         promocodes.dateEnd = dateEnd
         return promocodes
@@ -204,41 +220,11 @@ class CreatePromoViewController: UIViewController {
     @IBAction func create(_ sender: UIButton) {
         guard checkError() else { return }
         let promocode = createPromocode()
-        Task {
-            do {
-                if promoCode == nil {
-                    let promocode = try await Promocodes().createPromocode(promocode)
-                    delegate?.create(promoCode: promocode)
-                }else {
-                    let promocode = try await Promocodes().changePromocode(promocode)
-                    delegate?.change(promoCode: promocode)
-                }
-                dismiss(animated: false)
-            }catch ErrorNetwork.runtimeError(var error) {
-                errorView.configure(title: "Ошибка", description: error)
-                errorView.isHidden = false
-            }catch {
-                errorView.configure(title: "Неизвестная ошибка", description: "Попробуйте позже")
-                errorView.isHidden = false
-            }
-        }
+        presenter.createPromocode(promocode: promocode)
     }
     
     @IBAction func deletePromo(_ sender: UIButton) {
-        Task {
-            do {
-                guard let promoCode = promoCode else { return }
-                try await Promocodes().deletePromocode(promoCode)
-                delegate?.delete(promoCode: promoCode)
-                dismiss(animated: false)
-            }catch ErrorNetwork.runtimeError(var error) {
-                errorView.configure(title: "Ошибка", description: error)
-                errorView.isHidden = false
-            }catch {
-                errorView.configure(title: "Неизвестная ошибка", description: "Попробуйте позже")
-                errorView.isHidden = false
-            }
-        }
+        presenter.deletePromocode()
     }
     
     @IBAction func swipe(_ sender: UIPanGestureRecognizer) {
@@ -271,22 +257,22 @@ class CreatePromoViewController: UIViewController {
 extension CreatePromoViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        procents.count
+        presenter.procents.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "procents", for: indexPath) as! PromoCollectionViewCell
-        if selectProcent == indexPath.row {
+        if presenter.selectProcent == indexPath.row {
             cell.backgroundColor = UIColor.blackMain
         }else {
             cell.backgroundColor = .clear
         }
-        cell.procent.text = "\(procents[indexPath.row])%"
+        cell.procent.text = "\(presenter.procents[indexPath.row])%"
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectProcent = indexPath.row
+        presenter.selectProcent = indexPath.row
         procentCollectionView.reloadData()
     }
     

@@ -29,7 +29,7 @@
       "scale" : "2x"
     },
     {
-      "filename" : "fonLight1.jpg",
+      "filename" : "errorLight.svg",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -40,7 +40,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "startFon6.jpg",
+      "filename" : "error.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

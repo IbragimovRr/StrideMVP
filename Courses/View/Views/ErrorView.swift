@@ -96,9 +96,11 @@ class ErrorView: UIView {
         self.backgroundColor = UIColor.success
     }
     
-    func configureUnavailable(image: UIImage = UIImage.error, title: String, description: String) {
+    func configureUnavailable(image: UIImage = UIImage.errorLight, title: String, description: String) {
         imageView.image = image
         titleLabel.text = title
+        titleLabel.textColor = .label
+        descriptionLabel.textColor = .label
         descriptionLabel.text = description
         self.backgroundColor = UIColor.lightBlackMain
     }

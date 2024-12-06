@@ -281,10 +281,17 @@ class CourseServices {
     
     // MARK: - Купить курс
     
-    func buyCourse(id: Int) async throws  {
+    func buyCourse(id: Int, promocode: PromocodeModel?) async throws  {
         let url = Constants.url + "api/v1/courses/\(id)/buy_course/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
-        let response = AF.request(url, method: .post, headers: headers).serializingData()
+        
+        var parameters = [String: String]()
+        
+        if let promocode = promocode {
+            parameters["promo_name"] = promocode.name
+        }
+        
+        let response = AF.request(url, method: .post, parameters: parameters, headers: headers).serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode
         let json = JSON(value)

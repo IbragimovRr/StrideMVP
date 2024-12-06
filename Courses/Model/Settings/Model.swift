@@ -257,13 +257,13 @@ protocol ChangeInfoModule: AnyObject {
 }
 
 protocol PromoCodeDelegate: AnyObject {
-    func delete(promoCode: Promocodes)
-    func create(promoCode: Promocodes)
-    func change(promoCode: Promocodes)
+    func delete(promoCode: PromocodeModel)
+    func create(promoCode: PromocodeModel)
+    func change(promoCode: PromocodeModel)
 }
 
 protocol AddPromoDelegate: AnyObject {
-    func promocodes(promocodes: [Promocodes])
+    func promocodes(promocodes: [PromocodeModel])
 }
 
 protocol AddCategoryDelegate: AnyObject {

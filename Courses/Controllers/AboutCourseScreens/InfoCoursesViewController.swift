@@ -51,6 +51,13 @@ class InfoCoursesViewController: UIViewController {
     var similarCourse = [CourseModel]()
     var reviews = [Reviews]()
     var interface: InfoCourses = .nothing
+    var promocode: PromocodeModel? = nil {
+        didSet {
+            if let promocode = promocode {
+                promoSuccessDesign(promo: promocode)
+            }
+        }
+    }
     var price: Int = 0 {
         didSet {
             priceLbl.text = "₽\(price)"
@@ -276,7 +283,7 @@ class InfoCoursesViewController: UIViewController {
     private func buyCourseSuccesed() {
         Task {
             do {
-                try await CourseServices().buyCourse(id: course.id)
+                try await CourseServices().buyCourse(id: course.id, promocode: promocode)
                 performSegue(withIdentifier: "goCourse", sender: self)
             }catch ErrorNetwork.runtimeError(let error) {
                 errorView.isHidden = false
@@ -350,8 +357,8 @@ class InfoCoursesViewController: UIViewController {
     private func usedPromocodes() {
         Task {
             do {
-                let promo = try await Promocodes().usedPromocode(promoTextField.text!, courseID: course.id)
-                promoSuccessDesign(promo: promo)
+                let promo = try await PromocodesServices().usedPromocode(promoTextField.text!, courseID: course.id)
+                promocode = promo
                 promoMainBtn.tag = 1
             }catch ErrorNetwork.runtimeError(let error) {
                 promoMainBtn.tag = 0
@@ -366,7 +373,7 @@ class InfoCoursesViewController: UIViewController {
         }
     }
     
-    private func promoSuccessDesign(promo: Promocodes) {
+    private func promoSuccessDesign(promo: PromocodeModel) {
         promoSucces.isHidden = false
         promoSuccessInfo.isHidden = false
         promoMainText.isHidden = false
@@ -386,6 +393,7 @@ class InfoCoursesViewController: UIViewController {
         promoMainText.isHidden = true
         promoTextField.isHidden = false
         sale = nil
+        promocode = nil
         promoMainBtn.setTitle("Подтвердить", for: .normal)
         promoMainBtn.setImage(nil, for: .normal)
     }
@@ -445,7 +453,7 @@ class InfoCoursesViewController: UIViewController {
 
         if segue.identifier == "coach" {
             let vc = segue.destination as! CoachViewController
-            vc.idCoach = course.author.id
+            vc.presenter.user = course.author
         }else if segue.identifier == "goCourse" {
             let vc = segue.destination as! ModulesCourseViewController
             vc.idCourse = course.id

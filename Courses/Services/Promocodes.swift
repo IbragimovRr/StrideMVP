@@ -9,37 +9,9 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class Promocodes {
+class PromocodesServices {
     
-    var name: String
-    var procent: Int
-    var dateStart: String?
-    var dateEnd: String?
-    var buyers: Int
-    var countCourses: Int
-    var id: Int
-    
-    init(name: String, procent: Int, dateStart: String?, dateEnd: String?, buyers: Int, countCourses: Int, id: Int) {
-        self.name = name
-        self.procent = procent
-        self.dateStart = dateStart
-        self.dateEnd = dateEnd
-        self.buyers = buyers
-        self.countCourses = countCourses
-        self.id = id
-    }
-    
-    init() {
-        self.name = ""
-        self.procent = 0
-        self.dateStart = nil
-        self.dateEnd = nil
-        self.buyers = 0
-        self.countCourses = 0
-        self.id = 0
-    }
-    
-    func deletePromocode(_ promocode: Promocodes) async throws {
+    func deletePromocode(_ promocode: PromocodeModel) async throws {
         let url = Constants.url + "api/v1/courses/\(promocode.id)/delete-promo/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
@@ -55,7 +27,7 @@ class Promocodes {
         }
     }
     
-    func usedPromocode(_ promocodeName: String, courseID: Int) async throws -> Promocodes {
+    func usedPromocode(_ promocodeName: String, courseID: Int) async throws -> PromocodeModel {
         let url = Constants.url + "api/v1/courses/use-promo/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
@@ -69,7 +41,7 @@ class Promocodes {
         let code = await response.response.response?.statusCode
         let json = JSON(value)
         
-        let promo = Promocodes()
+        let promo = PromocodeModel()
         
         promo.id = json["id"].intValue
         promo.name = json["name"].stringValue
@@ -82,7 +54,7 @@ class Promocodes {
         return promo
     }
     
-    func createPromocode(_ promocode: Promocodes) async throws -> Promocodes {
+    func createPromocode(_ promocode: PromocodeModel) async throws -> PromocodeModel {
         let url = Constants.url + "api/v1/courses/promo-create/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
@@ -101,7 +73,6 @@ class Promocodes {
         let value = try await response.value
         let code = await response.response.response?.statusCode
         let json = JSON(value)
-        print(json)
         if code != 201 {
             if let dictionary = json.dictionary {
                 let error = dictionary.first!.value[0].stringValue
@@ -114,8 +85,7 @@ class Promocodes {
         return promocode
     }
     
-    func changePromocode(_ promocode: Promocodes) async throws -> Promocodes {
-        print(promocode.id)
+    func changePromocode(_ promocode: PromocodeModel) async throws -> PromocodeModel {
         let url = Constants.url + "api/v1/courses/\(promocode.id)/update-promo/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
@@ -133,7 +103,6 @@ class Promocodes {
         let value = try await response.value
         let code = await response.response.response?.statusCode
         let json = JSON(value)
-        print(json, code)
         if code != 200 {
             if let dictionary = json.dictionary {
                 let error = dictionary.first!.value[0].stringValue
@@ -146,19 +115,19 @@ class Promocodes {
         return promocode
     }
     
-    func getMyPromocodes() async throws -> [Promocodes] {
+    func getMyPromocodes() async throws -> [PromocodeModel] {
         let url = Constants.url + "api/v1/courses/get-my-promo/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let value = try await AF.request(url, headers: headers).serializingData().value
         
         let json = JSON(value)
-        var promocodes = [Promocodes]()
+        var promocodes = [PromocodeModel]()
         
         let results = json.arrayValue
         guard results.isEmpty == false else {return []}
         
         for x in 0...results.count - 1 {
-            let promocode = Promocodes()
+            let promocode = PromocodeModel()
             promocode.id = json[x]["id"].intValue
             promocode.name = json[x]["name"].stringValue
             promocode.procent = json[x]["percent"].intValue
@@ -170,25 +139,24 @@ class Promocodes {
         return promocodes
     }
     
-    func addPromocodesToCourses(courseID: Int, promocode: [Promocodes]) async throws {
+    func addPromocodesToCourses(courseID: Int, promocode: [PromocodeModel]) async throws {
         let url = Constants.url + "api/v1/courses/\(courseID)/assign-promo/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         let parameters = [
-            "promo_code_name": promocodesInString(promocode)
+            "promo_code_names": promocodesInString(promocode)
         ]
-        print(parameters)
         
-        let response = AF.request(url, method: .patch, parameters: parameters, headers: headers).serializingData()
+        let response = AF.request(url, method: .patch, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).serializingData()
         
         let value = try await response.value
         let code = await response.response.response?.statusCode
         let json = JSON(value)
         
-        print(json, code)
+        print(code)
     }
     
-    private func promocodesInString(_ promocodes: [Promocodes] ) -> [String] {
+    private func promocodesInString(_ promocodes: [PromocodeModel] ) -> [String] {
         var result = [String]()
         for x in promocodes {
             result.append(x.name)
@@ -196,7 +164,7 @@ class Promocodes {
         return result
     }
     
-    func deletePromocodesToCourses(courseID: Int, promocode: Promocodes) async throws {
+    func deletePromocodesToCourses(courseID: Int, promocode: PromocodeModel) async throws {
         let url = Constants.url + "api/v1/courses/\(courseID)/remove-promo-from-course/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
@@ -213,20 +181,20 @@ class Promocodes {
         print(json, code)
     }
     
-    func getPromoToCourses(courseID: Int) async throws -> [Promocodes] {
+    func getPromoToCourses(courseID: Int) async throws -> [PromocodeModel] {
         let url = Constants.url + "api/v1/courses/\(courseID)/get-course-promo/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
         let value = try await AF.request(url, headers: headers).serializingData().value
         
         let json = JSON(value)
-        var promocodes = [Promocodes]()
+        var promocodes = [PromocodeModel]()
         
         let results = json.arrayValue
         guard results.isEmpty == false else {return []}
         
         for x in 0...results.count - 1 {
-            let promocode = Promocodes()
+            let promocode = PromocodeModel()
             promocode.id = json[x]["id"].intValue
             promocode.name = json[x]["name"].stringValue
             promocode.procent = json[x]["percent"].intValue

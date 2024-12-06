@@ -9,6 +9,7 @@ import UIKit
 import Lottie
 import CropViewController
 
+
 class ChangeInformationViewController: UIViewController {
 
     @IBOutlet weak var heightScroll: NSLayoutConstraint!
@@ -123,7 +124,7 @@ class ChangeInformationViewController: UIViewController {
             do {
                 loadingSettings()
                 changeUserInfo()
-                try await UserServices().changeInfoUser(id:user.id ,user: user)
+                try await UserServices().changeInfoUser(user: user)
                 loading.stop()
                 loading.isHidden = true
                 saveBtn.isEnabled = true

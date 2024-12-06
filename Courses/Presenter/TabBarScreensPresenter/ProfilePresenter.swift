@@ -16,8 +16,8 @@ class ProfilePresenter: ProfilePresenterDelegate {
     
     weak var view: ProfileViewDelegate?
     var courses = [CourseModel]()
-    var selectCourseID = 0
-    
+    var selectCourse = CourseModel()
+    var isMyProfile = true
     var user: UserModel = UserServices.info
     
     func viewWillApear() {
@@ -27,8 +27,13 @@ class ProfilePresenter: ProfilePresenterDelegate {
     func getMyData() {
         view?.showSceletonAnimated(bool: true)
         Task {
-            user = try await UserServices().getMyInfo()
-            courses = try await CourseServices().getMyCreateCourses()
+            if isMyProfile {
+                user = try await UserServices().getMyInfo()
+                courses = try await CourseServices().getMyCreateCourses()
+            }else {
+                user = try await UserServices().getUserByID(id: user.id)
+                courses = try await CourseServices().getCoursesByUserID(id: user.id)
+            }
             DispatchQueue.main.async {
                 self.view?.showSceletonAnimated(bool: false)
                 self.view?.showUser()

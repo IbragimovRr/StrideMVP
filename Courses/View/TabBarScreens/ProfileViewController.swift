@@ -88,7 +88,6 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
     func showMyCourses() {
         coursesCount.text = "\(presenter.courses.count)"
         rating.text = "\(presenter.averageRating())"
-        print(rating.text,coursesCount.text)
         coursesCollectionView.reloadData()
     }
     
@@ -140,7 +139,7 @@ extension ProfileViewController: SkeletonCollectionViewDelegate, SkeletonCollect
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter.selectCourseID = presenter.courses[indexPath.row].id
+        presenter.selectCourse = presenter.courses[indexPath.row]
         performSegue(withIdentifier: "changeCourse", sender: self)
     }
 
@@ -149,7 +148,7 @@ extension ProfileViewController: SkeletonCollectionViewDelegate, SkeletonCollect
         if segue.identifier == "changeCourse" {
             let vc = segue.destination as! AddInfoAboutCourseVC
             vc.create = false
-            vc.idCourse = presenter.selectCourseID
+            vc.idCourse = presenter.selectCourse.id
         }
     }
 

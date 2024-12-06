@@ -39,8 +39,8 @@ class UserServices {
         return users
     }
 
-    func changeInfoUser(id: Int, user: UserModel) async throws {
-        let url = Constants.url + "api/v1/users/\(id)/"
+    func changeInfoUser(user: UserModel) async throws {
+        let url = Constants.url + "api/v1/users/\(user.id)/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = AF.upload(multipartFormData: { multipartFormData in
             if let avatarURL = user.avatarURL {

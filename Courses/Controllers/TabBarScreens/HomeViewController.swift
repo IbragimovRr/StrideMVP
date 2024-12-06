@@ -286,7 +286,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             vc.homePresenter = presenter
         }else if segue.identifier == "coach" {
             let vc = segue.destination as! CoachViewController
-            vc.idCoach = selectCoachs.id
+            vc.presenter.user.id = selectCoachs.id
         }
         
         

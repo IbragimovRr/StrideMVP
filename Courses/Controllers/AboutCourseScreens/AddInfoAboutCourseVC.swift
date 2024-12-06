@@ -36,7 +36,7 @@ class AddInfoAboutCourseVC: UIViewController {
     private var infoCourses = CourseModel()
     private var imageURL: URL?
     private var selectCategory: CategoryModel?
-    private var promocodes = [Promocodes]()
+    private var promocodes = [PromocodeModel]()
     var idCourse = 0
     var create = true
 
@@ -61,7 +61,7 @@ class AddInfoAboutCourseVC: UIViewController {
     
     private func getPromocodesByCourse() {
         Task {
-            let results = try await Promocodes().getPromoToCourses(courseID: idCourse)
+            let results = try await PromocodesServices().getPromoToCourses(courseID: idCourse)
             promocodes = results
             promoCollectionView.reloadData()
         }
@@ -71,7 +71,7 @@ class AddInfoAboutCourseVC: UIViewController {
         Task {
             sender.isEnabled = false
             do {
-                try await Promocodes().deletePromocodesToCourses(courseID: idCourse, promocode: promocodes[sender.tag])
+                try await PromocodesServices().deletePromocodesToCourses(courseID: idCourse, promocode: promocodes[sender.tag])
                 promocodes.remove(at: sender.tag)
                 promoCollectionView.reloadData()
                 sender.isEnabled = true
@@ -228,7 +228,7 @@ class AddInfoAboutCourseVC: UIViewController {
                 }else {
                     idCourse = try await CourseServices().saveInfoCourse(info: infoCourses, method: .patch)
                 }
-                try await Promocodes().addPromocodesToCourses(courseID: idCourse, promocode: promocodes)
+                try await PromocodesServices().addPromocodesToCourses(courseID: idCourse, promocode: promocodes)
                 saveBtn.isEnabled = true
                 loadingStop()
                 performSegue(withIdentifier: "goToAddModule", sender: self)
@@ -383,7 +383,7 @@ extension AddInfoAboutCourseVC: UICollectionViewDelegate, UICollectionViewDataSo
 }
 extension AddInfoAboutCourseVC: AddPromoDelegate {
     
-    func promocodes(promocodes: [Promocodes]) {
+    func promocodes(promocodes: [PromocodeModel]) {
         self.promocodes = promocodes
         promoCollectionView.reloadData()
     }

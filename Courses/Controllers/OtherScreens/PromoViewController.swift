@@ -13,10 +13,10 @@ class PromoViewController: UIViewController {
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var promoCollectionView: UICollectionView!
     
-    private var promocodes = [Promocodes]()
-    private var selectPromoCode: Promocodes? = nil
+    private var promocodes = [PromocodeModel]()
+    private var selectPromoCode: PromocodeModel? = nil
     var delegate: AddPromoDelegate?
-    var promocodesBySelect = [Promocodes]()
+    var promocodesBySelect = [PromocodeModel]()
     var isSelectPromo = false
     
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ class PromoViewController: UIViewController {
     
     private func getMyPromo() {
         Task {
-            promocodes = try await Promocodes().getMyPromocodes()
+            promocodes = try await PromocodesServices().getMyPromocodes()
             promoCollectionView.reloadData()
         }
     }
@@ -118,7 +118,7 @@ extension PromoViewController: UICollectionViewDelegate, UICollectionViewDataSou
         if segue.identifier == "createPromo" {
             let vc = segue.destination as! CreatePromoViewController
             vc.delegate = self
-            vc.promoCode = selectPromoCode
+            vc.presenter.promoCode = selectPromoCode
         }
         
     }
@@ -134,7 +134,7 @@ extension PromoViewController: UICollectionViewDelegate, UICollectionViewDataSou
 }
 extension PromoViewController: PromoCodeDelegate {
     
-    func delete(promoCode: Promocodes) {
+    func delete(promoCode: PromocodeModel) {
         for x in 0...promocodes.count - 1 {
             if promoCode.id == promocodes[x].id {
                 promocodes.remove(at: x)
@@ -144,12 +144,12 @@ extension PromoViewController: PromoCodeDelegate {
         }
     }
     
-    func create(promoCode: Promocodes) {
+    func create(promoCode: PromocodeModel) {
         promocodes.append(promoCode)
         promoCollectionView.reloadData()
     }
     
-    func change(promoCode: Promocodes) {
+    func change(promoCode: PromocodeModel) {
         for x in 0...promocodes.count - 1 {
             if promoCode.id == promocodes[x].id {
                 promocodes[x] = promoCode

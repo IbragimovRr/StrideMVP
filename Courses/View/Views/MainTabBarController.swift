@@ -28,7 +28,6 @@ class MainTabBarController: UITabBarController {
     private func setViewControllersInTaBar() {
         guard let vc = viewControllers else { return }
         let theme = traitCollection.userInterfaceStyle
-        print(vc.count)
         vc[0].tabBarItem = selectImageByTabBarItem(image: "home", theme: theme)
         vc[1].tabBarItem = selectImageByTabBarItem(image: "catalog", theme: theme)
         vc[2].tabBarItem = selectImageByTabBarItem(image: "courses", theme: theme)
