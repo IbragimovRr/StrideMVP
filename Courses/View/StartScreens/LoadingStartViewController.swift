@@ -23,7 +23,7 @@ class LoadingStartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        homePresenter.getData()
+        homePresenter.getData(isLoading: true)
         allTitle()
         allImages()
         randomImageAndTitle()

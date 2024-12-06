@@ -52,6 +52,8 @@
 		44682C9D2D01F2A100087C62 /* RegistrPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682C9C2D01F2A100087C62 /* RegistrPresenter.swift */; };
 		44682CA02D02874A00087C62 /* PromocodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682C9F2D02874A00087C62 /* PromocodeModel.swift */; };
 		44682CA32D034CDD00087C62 /* CreatePromoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA22D034CDD00087C62 /* CreatePromoPresenter.swift */; };
+		44682CA52D03577500087C62 /* WithdrawPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA42D03577500087C62 /* WithdrawPresenter.swift */; };
+		44682CA72D0362B800087C62 /* ChangeInformationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA62D0362B800087C62 /* ChangeInformationPresenter.swift */; };
 		4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */; };
 		447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */; };
 		447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */; };
@@ -188,6 +190,8 @@
 		44682C9C2D01F2A100087C62 /* RegistrPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrPresenter.swift; sourceTree = "<group>"; };
 		44682C9F2D02874A00087C62 /* PromocodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromocodeModel.swift; sourceTree = "<group>"; };
 		44682CA22D034CDD00087C62 /* CreatePromoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePromoPresenter.swift; sourceTree = "<group>"; };
+		44682CA42D03577500087C62 /* WithdrawPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawPresenter.swift; sourceTree = "<group>"; };
+		44682CA62D0362B800087C62 /* ChangeInformationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeInformationPresenter.swift; sourceTree = "<group>"; };
 		4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMoneyInfoViewController.swift; sourceTree = "<group>"; };
 		447D8C802C85DEEB00EF2217 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		447D8C8D2C89D09600EF2217 /* emptyBox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyBox.json; sourceTree = "<group>"; };
@@ -337,7 +341,6 @@
 				448E73EC2CFF05E000C3000D /* Model */,
 				448E73ED2CFF05E900C3000D /* View */,
 				448E73EE2CFF060600C3000D /* Presenter */,
-				440DAB492C17492900C576FB /* Controllers */,
 				440DAB3C2C1748D600C576FB /* Assets.xcassets */,
 				44962E942C821B3600CB6A1C /* Main.storyboard */,
 				440DAB332C1748D400C576FB /* AppDelegate.swift */,
@@ -368,15 +371,6 @@
 				440C9C3E2CED6C47007D0735 /* ProtectScreen.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		440DAB492C17492900C576FB /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				44D68B002C51B3EF00F8F476 /* AboutCourseScreens */,
-				753A4F7A2C340C73007A8194 /* OtherScreens */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		440E1F6C2CA1671F002C6FC8 /* Settings */ = {
@@ -412,6 +406,13 @@
 				44BD149B2C808106006D0722 /* PickerModelViewController.swift */,
 				44932A982C81303A00E0F86F /* PrivacyViewController.swift */,
 				440CB67C2C5FA86F003FCAF0 /* CoachViewController.swift */,
+				440C9C402CF49D72007D0735 /* PromoViewController.swift */,
+				441E4AEE2CD2AD6100800EE4 /* СonfidentialityViewController.swift */,
+				75F6FDB32C9323B500A57EA9 /* WithdrawViewController.swift */,
+				7555DEB42C986FC100B80A13 /* WithdradSBPViewController.swift */,
+				75D68C602C80A361001407F0 /* AddReviewViewController.swift */,
+				75106D782C38AFDB0036042B /* InfoAboutMeViewController.swift */,
+				7508513A2C38763A00F5C0DC /* ChangeInformationViewController.swift */,
 			);
 			path = OtherScreens;
 			sourceTree = "<group>";
@@ -420,6 +421,8 @@
 			isa = PBXGroup;
 			children = (
 				44682CA22D034CDD00087C62 /* CreatePromoPresenter.swift */,
+				44682CA42D03577500087C62 /* WithdrawPresenter.swift */,
+				44682CA62D0362B800087C62 /* ChangeInformationPresenter.swift */,
 			);
 			path = OtherScreens;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 			children = (
 				440DAB482C17491D00C576FB /* Views */,
 				44BC59032CCFF33200AD7FFA /* AdminPanelScreens */,
+				44D68B002C51B3EF00F8F476 /* AboutCourseScreens */,
 				44682C9E2D02193300087C62 /* OtherScreens */,
 				448E73F02CFF065900C3000D /* TabBarScreens */,
 				44064C872C27040B00AB5227 /* StartScreens */,
@@ -570,20 +574,6 @@
 				448E73E92CFCD0DB00C3000D /* PromoTableViewCell.swift */,
 			);
 			path = TableViewCells;
-			sourceTree = "<group>";
-		};
-		753A4F7A2C340C73007A8194 /* OtherScreens */ = {
-			isa = PBXGroup;
-			children = (
-				7508513A2C38763A00F5C0DC /* ChangeInformationViewController.swift */,
-				75106D782C38AFDB0036042B /* InfoAboutMeViewController.swift */,
-				75D68C602C80A361001407F0 /* AddReviewViewController.swift */,
-				75F6FDB32C9323B500A57EA9 /* WithdrawViewController.swift */,
-				7555DEB42C986FC100B80A13 /* WithdradSBPViewController.swift */,
-				441E4AEE2CD2AD6100800EE4 /* СonfidentialityViewController.swift */,
-				440C9C402CF49D72007D0735 /* PromoViewController.swift */,
-			);
-			path = OtherScreens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -736,6 +726,7 @@
 				44BD6CDE2C432C45001645A0 /* DaysCourseCollectionViewCell.swift in Sources */,
 				4450B3C92CB6066900F1F54B /* UpdateViewController.swift in Sources */,
 				448E73F42CFF071F00C3000D /* HomePresenter.swift in Sources */,
+				44682CA52D03577500087C62 /* WithdrawPresenter.swift in Sources */,
 				44DFB1162C3B199A005C8F44 /* RecomendationCollectionViewCell.swift in Sources */,
 				449CF0DB2C3370CA000D4528 /* CoursesCollectionViewCell.swift in Sources */,
 				44064C892C27042100AB5227 /* StartViewController.swift in Sources */,
@@ -752,6 +743,7 @@
 				4442F3D82C31BFDB00203A36 /* PageLayout.swift in Sources */,
 				44E906372C2ADE8700FFA6DD /* BannerCollectionViewCell.swift in Sources */,
 				44064C812C26F0E800AB5227 /* Border.swift in Sources */,
+				44682CA72D0362B800087C62 /* ChangeInformationPresenter.swift in Sources */,
 				44E406202CFF7B9C004F633E /* CategoryModel.swift in Sources */,
 				44064C8F2C285F7C00AB5227 /* TextFieldFormat.swift in Sources */,
 				440C9C3F2CED6C47007D0735 /* ProtectScreen.swift in Sources */,

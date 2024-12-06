@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WithdrawViewController: UIViewController {
+class WithdrawViewController: UIViewController, WithdrawViewDelegate {
 
     @IBOutlet weak var finishBtn: UIButton!
     @IBOutlet weak var withdrawBorder: Border!
@@ -16,26 +16,51 @@ class WithdrawViewController: UIViewController {
     @IBOutlet weak var withdrawTextField: UITextField!
     @IBOutlet weak var cardTextField: UITextField!
     
-    var money = 0
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 40, height: 70))
     var startPosition = CGPoint()
+    var presenter = WithdrawPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         clearError()
         textFieldDesign()
         cardTextField.delegate = self
-        moneyCount.text = "\(money)"
+        presenter.view = self
         startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        moneyCount.text = "\(presenter.money)"
+    }
+    
     private func textFieldDesign() {
         let font = UIFont(name: "Commissioner-SemiBold", size: 12)
         withdrawTextField.attributedPlaceholder = NSAttributedString(string: "от 100₽ до 50000₽", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray, NSAttributedString.Key.font: font!])
         cardTextField.attributedPlaceholder = NSAttributedString(string: "**** **** **** ****", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray, NSAttributedString.Key.font: font!])
     }
+    
+    func showError(error: String) {
+        errorView.isHidden = false
+        errorView.configure(title: "Ошибка", description: error)
+    }
+    
+    func showSuccess(money: Int) {
+        moneyCount.text = "\(money)"
+        errorView.isHidden = false
+        errorView.configureSuccess(title: "Успешно", description: "Средства будут выведены в течении 48 часов")
+    }
+    
+    func showBank() {
+        // Disabled
+    }
+    
+    func showEnableFinish(bool: Bool) {
+        finishBtn.isEnabled = bool
+    }
+    
     
     func clearError() {
         withdrawBorder.color = .lightBlackMain
@@ -43,32 +68,27 @@ class WithdrawViewController: UIViewController {
         errorView.isHidden = true
     }
     
-    func addSuccess() {
-        errorView.isHidden = false
-        errorView.configureSuccess(title: "Успешно", description: "Средства будут выведены в течении 48 часов")
-    }
-    
-    func addError(error: String) {
-        errorView.isHidden = false
-        errorView.configure(title: "Ошибка", description: error)
-    }
-    
-    private func checkInfo() throws {
+    private func checkInfo() -> Bool {
+        var result = true
         guard cardTextField.text!.isEmpty == false else {
             cardBorder.color = .errorRed
-            throw ErrorNetwork.notFound }
+            result = false
+            return result }
         guard cardTextField.text!.count == 19 else {
             cardBorder.color = .errorRed
-            addError(error: "Неправильный формат банковской карты")
-            throw ErrorNetwork.notFound }
+            showError(error: "Неправильный формат банковской карты")
+            result = false
+            return result }
         guard withdrawTextField.text!.isEmpty == false else {
             withdrawBorder.color = .errorRed
-            throw ErrorNetwork.notFound }
+            result = false
+            return result }
         guard Int(withdrawTextField.text!)! >= 100 && Int(withdrawTextField.text!)! <= 50000 else {
             withdrawBorder.color = .errorRed
-            addError(error: "Вывод средств от 100₽ до 50000₽")
-            throw ErrorNetwork.notFound }
-        
+            showError(error: "Вывод средств от 100₽ до 50000₽")
+            result = false
+            return result }
+        return result
     }
 
     @IBAction func sbp(_ sender: UIButton) {
@@ -76,26 +96,11 @@ class WithdrawViewController: UIViewController {
     }
     
     @IBAction func fluent(_ sender: UIButton) {
-        finishBtn.isEnabled = false
-        Task {
-            do {
-                clearError()
-                try checkInfo()
-                guard let moneyFluent = Int(withdrawTextField.text ?? "0") else { return }
-                let cardFormat = cardTextField.text!.format(with: "XXXX XXXX XXXX XXXX")
-                let card: PaymentMethod = .card(cardNumber: cardFormat, amount: moneyFluent)
-                try await PaymentServices().fetchFunds(payment: card)
-                finishBtn.isEnabled = true
-                let result = Int(moneyCount.text!)! - moneyFluent
-                money = result
-                moneyCount.text = "\(money)"
-                addSuccess()
-            }catch ErrorNetwork.runtimeError(let error) {
-                addError(error: error)
-                finishBtn.isEnabled = true
-            }catch {
-                finishBtn.isEnabled = true
-            }
+        clearError()
+        if checkInfo() {
+            let moneyCountRes = Int(moneyCount.text!)!
+            let selectMoney = Int(withdrawTextField.text!)!
+            presenter.fluent(money: moneyCountRes, selectMoney: selectMoney, cardFormat: cardTextField.text!)
         }
     }
     
@@ -116,7 +121,7 @@ class WithdrawViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToSBP" {
             let vc = segue.destination as! WithdrawSBPViewController
-            vc.money = money
+            vc.presenter = presenter
         }
         
     }

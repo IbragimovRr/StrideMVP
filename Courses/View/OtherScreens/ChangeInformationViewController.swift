@@ -9,8 +9,16 @@ import UIKit
 import Lottie
 import CropViewController
 
+protocol ChangeInformationViewDelegate {
+    func showError(error: String)
+    func showUser()
+    func showCoach()
+    func showEnabledSaveBtn(bool: Bool)
+    func showLoading(bool: Bool)
+    func create()
+}
 
-class ChangeInformationViewController: UIViewController {
+class ChangeInformationViewController: UIViewController, ChangeInformationViewDelegate {
 
     @IBOutlet weak var heightScroll: NSLayoutConstraint!
     @IBOutlet weak var saveBtn: UIButton!
@@ -24,22 +32,25 @@ class ChangeInformationViewController: UIViewController {
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var avatar: UIImageView!
 
+    var presenter = ChangeInformationPresenter()
+    
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
 
     private var avatarURL: URL?
     private var activateTF: UITextField?
-    private var user: UserModel = UserServices.info
 
     override func viewDidLoad() {
         super.viewDidLoad()
         phoneNumber.delegate = self
         descriptionTF.delegate = self
         name.delegate = self
+        presenter.view = self
         surname.delegate = self
         mail.delegate = self
         startPosition = errorView.center
         design()
+        presenter.getUser()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,71 +84,81 @@ class ChangeInformationViewController: UIViewController {
     }
 
     private func design() {
-        Task {
-            name.autocapitalizationType = .words
-            surname.autocapitalizationType = .words
-            descriptionTF.textContainer.maximumNumberOfLines = 4
-            descriptionTF.textContainer.lineBreakMode = .byTruncatingTail
-            user = try await UserServices().getMyInfo()
-            if user.role == .user {
-                descriptionView.isHidden = true
-                heightScroll.constant = 530
-            }else {
-                descriptionView.isHidden = false
-                heightScroll.constant = 650
-            }
-            addText()
+        view.addSubview(errorView)
+        errorView.isHidden = true
+        loadingSettings()
+        name.autocapitalizationType = .words
+        surname.autocapitalizationType = .words
+        descriptionTF.textContainer.maximumNumberOfLines = 4
+        descriptionTF.textContainer.lineBreakMode = .byTruncatingTail
+    }
+    
+    func create() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func showLoading(bool: Bool) {
+        if bool {
+            loading.play()
+            loading.isHidden = false
+        }else {
+            loading.stop()
+            loading.isHidden = true
         }
     }
+    
+    func showEnabledSaveBtn(bool: Bool) {
+        saveBtn.isEnabled = bool
+    }
+    
+    func showError(error: String) {
+        errorView.isHidden = false
+        errorView.configure(title: "Ошибка", description: error)
+    }
+    
+    func showUser() {
+        descriptionView.isHidden = true
+        heightScroll.constant = 530
+        addText()
+    }
+    
+    func showCoach() {
+        descriptionView.isHidden = false
+        heightScroll.constant = 650
+        addText()
+    }
+    
 
 
     private func addText() {
-        if let avatar = user.avatarURL {
+        if let avatar = presenter.user.avatarURL {
             self.avatar.sd_setImage(with: avatar)
         }
-        name.text = user.name
-        surname.text = user.surname
-        mail.text = user.email
-        phoneNumber.text = user.phone.format(with: "+X (XXX) XXX-XXXX")
-        descriptionTF.text = user.coach.description
+        name.text = presenter.user.name
+        surname.text = presenter.user.surname
+        mail.text = presenter.user.email
+        phoneNumber.text = presenter.user.phone.format(with: "+X (XXX) XXX-XXXX")
+        descriptionTF.text = presenter.user.coach.description
     }
 
     private func changeUserInfo() {
-        user.name = name.text ?? user.name
-        user.surname = surname.text ?? user.surname
-        user.phone = phoneNumber.text ?? user.phone
-        user.email = mail.text ?? user.email
-        user.coach.description = descriptionTF.text ?? user.coach.description
-        user.avatarURL = avatarURL
+        presenter.user.name = name.text ?? presenter.user.name
+        presenter.user.surname = surname.text ?? presenter.user.surname
+        presenter.user.phone = phoneNumber.text ?? presenter.user.phone
+        presenter.user.email = mail.text ?? presenter.user.email
+        presenter.user.coach.description = descriptionTF.text ?? presenter.user.coach.description
+        presenter.user.avatarURL = avatarURL
     }
 
     private func loadingSettings() {
         loading.loopMode = .loop
         loading.contentMode = .scaleToFill
-        loading.isHidden = false
-        loading.play()
+        loading.isHidden = true
     }
 
     @IBAction func save(_ sender: UIButton) {
-        saveBtn.isEnabled = false
-        Task{
-            do {
-                loadingSettings()
-                changeUserInfo()
-                try await UserServices().changeInfoUser(user: user)
-                loading.stop()
-                loading.isHidden = true
-                saveBtn.isEnabled = true
-                self.navigationController?.popViewController(animated: true)
-            }catch ErrorNetwork.runtimeError(let error) {
-                errorView.isHidden = false
-                errorView.configure(title: "Ошибка", description: error)
-                view.addSubview(errorView)
-                loading.stop()
-                loading.isHidden = true
-                saveBtn.isEnabled = true
-            }
-        }
+        changeUserInfo()
+        presenter.save()
     }
 
     @IBAction func addImage(_ sender: UIButton) {

@@ -7,7 +7,14 @@
 
 import UIKit
 
-class WithdrawSBPViewController: UIViewController {
+protocol WithdrawViewDelegate {
+    func showError(error: String)
+    func showSuccess(money: Int)
+    func showBank()
+    func showEnableFinish(bool: Bool)
+}
+
+class WithdrawSBPViewController: UIViewController, WithdrawViewDelegate {
     
     @IBOutlet weak var finishBtn: UIButton!
     @IBOutlet weak var withdrawTextField: UITextField!
@@ -21,16 +28,16 @@ class WithdrawSBPViewController: UIViewController {
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     var startPosition = CGPoint()
-    var money = 0
-    var arrayBanks = [Banks]()
+    var presenter = WithdrawPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         clearError()
-        addBank()
         design()
+        presenter.getBanks()
         textFieldDesign()
         numberTextField.delegate = self
+        presenter.view = self
         banksTableView.delegate = self
         banksTableView.dataSource = self
         startPosition = errorView.center
@@ -45,11 +52,26 @@ class WithdrawSBPViewController: UIViewController {
     
     private func design() {
         banksTableView.isHidden = true
-        moneyCount.text = "\(money)"
+        moneyCount.text = "\(presenter.money)"
     }
     
-    private func addBank() {
-        arrayBanks = [Banks(name: "Сбербанк", image: ""), Banks(name: "Т-Банк", image: ""), Banks(name: "АльфаБанк", image: ""), Banks(name: "ГазПромБанк", image: "")]
+    func showError(error: String) {
+        errorView.isHidden = false
+        errorView.configure(title: "Ошибка", description: error)
+    }
+    
+    func showSuccess(money: Int) {
+        moneyCount.text = "\(money)"
+        errorView.isHidden = false
+        errorView.configureSuccess(title: "Успешно", description: "Средства будут выведены в течении 48 часов")
+    }
+    
+    func showBank() {
+        banksTableView.reloadData()
+    }
+    
+    func showEnableFinish(bool: Bool) {
+        finishBtn.isEnabled = bool
     }
     
     
@@ -60,36 +82,33 @@ class WithdrawSBPViewController: UIViewController {
         errorView.isHidden = true
     }
     
-    func addSuccess() {
-        errorView.isHidden = false
-        errorView.configureSuccess(title: "Успешно", description: "Средства будут выведены в течении 48 часов")
-    }
     
-    func addError(error: String) {
-        errorView.isHidden = false
-        errorView.configure(title: "Ошибка", description: error)
-    }
-    
-    private func checkInfo() throws {
+    private func checkInfo() -> Bool {
+        var result = true
         guard numberTextField.text!.isEmpty == false else {
             numberBorder.color = .errorRed
-            throw ErrorNetwork.notFound }
+            result = false
+            return result }
         guard numberTextField.text!.count == 17 else {
             numberBorder.color = .errorRed
-            addError(error: "Неправильный номер")
-            throw ErrorNetwork.notFound }
+            showError(error: "Неправильный номер")
+            result = false
+            return result }
         if bankLabel.text == "Выберите ваш банк" {
             bankBorder.color = .errorRed
-            addError(error: "Выберите банк")
-            throw ErrorNetwork.notFound }
+            showError(error: "Выберите банк")
+            result = false
+            return result }
         guard withdrawTextField.text!.isEmpty == false else {
             withdrawBorder.color = .errorRed
-            throw ErrorNetwork.notFound }
+            result = false
+            return result }
         guard Int(withdrawTextField.text!)! >= 100 && Int(withdrawTextField.text!)! <= 50000 else {
             withdrawBorder.color = .errorRed
-            addError(error: "Вывод средств от 1₽ до 50000₽")
-            throw ErrorNetwork.notFound }
-        
+            showError(error: "Вывод средств от 100₽ до 50000₽")
+            result = false
+            return result }
+        return result
     }
 
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
@@ -103,25 +122,11 @@ class WithdrawSBPViewController: UIViewController {
     }
     
     @IBAction func fluent(_ sender: UIButton) {
-       
-        finishBtn.isEnabled = false
-        Task {
-            do {
-                clearError()
-                try checkInfo()
-                guard let money = Int(withdrawTextField.text ?? "0") else { return }
-                let sbp: PaymentMethod = .sbp(phoneNumber: numberTextField.text!, amount: money, bank: bankLabel.text!)
-                try await PaymentServices().fetchFunds(payment: sbp)
-                finishBtn.isEnabled = true
-                let result = Int(moneyCount.text!)! - money
-                moneyCount.text = "\(result)"
-                addSuccess()
-            }catch ErrorNetwork.runtimeError(let error) {
-                addError(error: error)
-                finishBtn.isEnabled = true
-            }catch {
-                finishBtn.isEnabled = true
-            }
+        clearError()
+        if checkInfo() {
+            let moneyCountRes = Int(moneyCount.text!)!
+            let selectMoney = Int(withdrawTextField.text!)!
+            presenter.fluentSBP(money: moneyCountRes, selectMoney: selectMoney, number: numberTextField.text!, bank: bankLabel.text!)
         }
     }
     
@@ -139,18 +144,18 @@ class WithdrawSBPViewController: UIViewController {
 
 extension WithdrawSBPViewController: UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        arrayBanks.count
+        presenter.arrayBanks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = banksTableView.dequeueReusableCell(withIdentifier: "bankTF", for: indexPath) as! BanksTableViewCell
-        cell.name.text = arrayBanks[indexPath.row].name
-        cell.im.image = UIImage(named: "\(arrayBanks[indexPath.row].image)")
+        cell.name.text = presenter.arrayBanks[indexPath.row].name
+        cell.im.image = UIImage(named: "\(presenter.arrayBanks[indexPath.row].image)")
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        bankLabel.text = arrayBanks[indexPath.row].name
+        bankLabel.text = presenter.arrayBanks[indexPath.row].name
         banksTableView.isHidden = true
     }
     

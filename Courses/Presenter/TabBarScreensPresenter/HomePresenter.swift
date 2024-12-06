@@ -18,7 +18,7 @@ protocol HomePresenterProtocol {
     func getBanners()
     func getAllCoachs()
     func navigateToLoading()
-    func getData()
+    func getData(isLoading: Bool)
 }
 
 class HomePresenter: HomePresenterProtocol {
@@ -46,7 +46,7 @@ class HomePresenter: HomePresenterProtocol {
         getAllCoachs()
     }
     
-    func getData() {
+    func getData(isLoading: Bool) {
         getBanners()
         Task {
             let user = try await userService.getMyInfo()
@@ -59,7 +59,11 @@ class HomePresenter: HomePresenterProtocol {
                 self.view?.showCelebrity(celebrity: celebrity)
                 self.view?.showRecomendedCourses(courses: recomendCourses)
                 self.view?.showCoachs(coachs: coachs)
-                self.view?.disableLoading()
+                if isLoading {
+                    self.view?.disableLoading()
+                }else {
+                    self.view?.update()
+                }
             }
         }
     }

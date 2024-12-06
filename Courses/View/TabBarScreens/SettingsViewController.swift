@@ -167,7 +167,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             vc.create = true
         }else if segue.identifier == "goToWithdraw" {
             let vc = segue.destination as! WithdrawViewController
-            vc.money = user.coach.money
+            vc.presenter.money = user.coach.money
         }
 
     }

@@ -17,6 +17,7 @@ protocol HomeViewProtocol: AnyObject {
     func showRecomendedCourses(courses: [CourseModel])
     func navigateToLoading()
     func disableLoading()
+    func update()
 }
 
 class HomeViewController: UIViewController, HomeViewProtocol {
@@ -51,7 +52,7 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         collectionViewSettings()
         presenter.view = self
         presenter.viewDidLoad()
-//        addRefreshControll()
+        addRefreshControll()
         tabbar()
         startPosition = errorView.center
         view.addSubview(errorView)
@@ -69,10 +70,10 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         bannersCollectionView.setContentOffset(CGPoint(x: x, y: 0), animated: false)
     }
     
-//    private func addRefreshControll() {
-//        refreshControl.refreshSettings(scrollView: scrollView)
-//        refreshControl.refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-//    }
+    private func addRefreshControll() {
+        refreshControl.refreshSettings(scrollView: scrollView)
+        refreshControl.refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+    }
     
     
     func navigateToLoading() {
@@ -81,10 +82,12 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     
     func disableLoading() {
         navigationController?.popViewController(animated: false)
+        refreshControl.refreshControl.endRefreshing()
     }
     
     func showError(error: String) {
-        print(error)
+        errorView.configure(title: "Ошибка", description: error)
+        errorView.isHidden = false
     }
     
     func showBanners(banners: [String]) {
@@ -110,6 +113,10 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     func showRecomendedCourses(courses: [CourseModel]) {
         recomendCourses = courses
         recomendCollectionView.reloadData()
+    }
+    
+    func update() {
+        refreshControl.refreshControl.endRefreshing()
     }
     
     private func tabbar() {
@@ -175,18 +182,10 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         errorView.swipe(sender: sender, startPosition: startPosition)
     }
     
-//    
-//    @objc func handleRefresh(sender: UIRefreshControl) {
-//        Task {
-//            celebrities = try await User().getCelebreties()
-//            recomendCourses = try await Course().getRecomendedCourses()
-//            coachs = try await User().getAllCoachs()
-//            recomendCollectionView.reloadData()
-//            celebrityCollectionView.reloadData()
-//            coachCollectionView.reloadData()
-//            refreshControl.refreshControl.endRefreshing()
-//        }
-//    }
+    
+    @objc func handleRefresh(sender: UIRefreshControl) {
+        presenter.getData(isLoading: false)
+    }
     
     
 }
