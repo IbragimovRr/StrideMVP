@@ -158,7 +158,7 @@ extension CoursesViewController: UICollectionViewDelegate, UICollectionViewDataS
             vc.idCourse = selectIDCourse
         }else if segue.identifier == "infoCourses" {
             let vc = segue.destination as! InfoCoursesViewController
-            vc.course = selectCourse
+            vc.presenter.course = selectCourse
         }
     }
 

@@ -45,7 +45,9 @@ class PaymentServices {
         do {
             let sdk = try AcquiringUISDK(coreSDKConfiguration: coreSDKConfiguration, uiSDKConfiguration: uiSDKConfiguration)
             let config = MainFormUIConfiguration(orderDescription: "Оплата курса")
-            sdk.presentMainForm(on: viewController, paymentFlow: paymentFlow(price: Int64(price)), configuration: config, completion: completion)
+            DispatchQueue.main.async {
+                sdk.presentMainForm(on: viewController, paymentFlow: self.paymentFlow(price: Int64(price)), configuration: config, completion: completion)
+            }
         } catch {
             assertionFailure("\(error)")
         }

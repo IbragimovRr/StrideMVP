@@ -269,7 +269,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         if segue.identifier == "infoCourses" {
             let vc = segue.destination as! InfoCoursesViewController
-            vc.course = selectCourses
+            vc.presenter.course = selectCourses
         }else if segue.identifier == "allRecomend" {
             let vc = segue.destination as! CoursesViewController
             vc.typeCourse = .recomend

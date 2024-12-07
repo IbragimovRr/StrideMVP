@@ -54,6 +54,7 @@
 		44682CA32D034CDD00087C62 /* CreatePromoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA22D034CDD00087C62 /* CreatePromoPresenter.swift */; };
 		44682CA52D03577500087C62 /* WithdrawPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA42D03577500087C62 /* WithdrawPresenter.swift */; };
 		44682CA72D0362B800087C62 /* ChangeInformationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA62D0362B800087C62 /* ChangeInformationPresenter.swift */; };
+		44682CAA2D03BF5700087C62 /* InfoCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */; };
 		4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */; };
 		447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */; };
 		447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */; };
@@ -192,6 +193,7 @@
 		44682CA22D034CDD00087C62 /* CreatePromoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePromoPresenter.swift; sourceTree = "<group>"; };
 		44682CA42D03577500087C62 /* WithdrawPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawPresenter.swift; sourceTree = "<group>"; };
 		44682CA62D0362B800087C62 /* ChangeInformationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeInformationPresenter.swift; sourceTree = "<group>"; };
+		44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoursePresenter.swift; sourceTree = "<group>"; };
 		4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMoneyInfoViewController.swift; sourceTree = "<group>"; };
 		447D8C802C85DEEB00EF2217 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		447D8C8D2C89D09600EF2217 /* emptyBox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyBox.json; sourceTree = "<group>"; };
@@ -427,6 +429,14 @@
 			path = OtherScreens;
 			sourceTree = "<group>";
 		};
+		44682CA82D03BF3800087C62 /* CourseScreens */ = {
+			isa = PBXGroup;
+			children = (
+				44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */,
+			);
+			path = CourseScreens;
+			sourceTree = "<group>";
+		};
 		448E73EC2CFF05E000C3000D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,6 +465,7 @@
 		448E73EE2CFF060600C3000D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				44682CA82D03BF3800087C62 /* CourseScreens */,
 				44682CA12D034CC500087C62 /* OtherScreens */,
 				44682C992D01187F00087C62 /* StartScreensPresenter */,
 				449C124C2D00DD7E0091F0F5 /* TabBarScreensPresenter */,
@@ -729,6 +740,7 @@
 				44682CA52D03577500087C62 /* WithdrawPresenter.swift in Sources */,
 				44DFB1162C3B199A005C8F44 /* RecomendationCollectionViewCell.swift in Sources */,
 				449CF0DB2C3370CA000D4528 /* CoursesCollectionViewCell.swift in Sources */,
+				44682CAA2D03BF5700087C62 /* InfoCoursePresenter.swift in Sources */,
 				44064C892C27042100AB5227 /* StartViewController.swift in Sources */,
 				449C12502D00E0AF0091F0F5 /* ProfilePresenter.swift in Sources */,
 				44BC59092CCFF37500AD7FFA /* AdminOtherViewController.swift in Sources */,
@@ -956,7 +968,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.9;
+				MARKETING_VERSION = 3.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -994,7 +1006,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.9;
+				MARKETING_VERSION = 3.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

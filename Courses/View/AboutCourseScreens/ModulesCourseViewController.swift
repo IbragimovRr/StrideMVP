@@ -232,7 +232,7 @@ extension ModulesCourseViewController: UICollectionViewDelegate, UICollectionVie
             vc.module = selectModule
         }else if segue.identifier == "goToInfo" {
             let vc = segue.destination as! InfoCoursesViewController
-            vc.course.id = idCourse
+            vc.presenter.course.id = idCourse
         }
     }
 

@@ -48,7 +48,7 @@ class DeepLinksManager {
         guard let vcHome = storyboard.instantiateViewController(identifier: "UITabBarController") as? UITabBarController else { return }
         
         
-        vc.course.id = DeepLinksManager.courseID!
+        vc.presenter.course.id = DeepLinksManager.courseID!
         
         guard let navigationController = window.rootViewController as? UINavigationController else { return }
         if isOpen == false {

@@ -124,7 +124,7 @@ extension CoachViewController: SkeletonCollectionViewDelegate, SkeletonCollectio
         
         if segue.identifier == "info" {
             let vc = segue.destination as! InfoCoursesViewController
-            vc.course = presenter.selectCourse
+            vc.presenter.course = presenter.selectCourse
         }
         
     }

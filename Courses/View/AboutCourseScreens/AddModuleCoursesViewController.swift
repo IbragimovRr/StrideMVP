@@ -337,7 +337,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
             vc.delegate = self
         }else if segue.identifier == "preview" {
             let vc = segue.destination as! InfoCoursesViewController
-            vc.course.id = course.id
+            vc.presenter.course.id = course.id
             vc.interface = role
         }
 
