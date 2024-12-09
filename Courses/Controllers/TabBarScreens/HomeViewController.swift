@@ -33,6 +33,7 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     
     var refreshControl = RefreshControll()
     
+    @IBOutlet weak var celebView: UIView!
     private var presenter = HomePresenter()
     private var banners = [String]()
     private var coachs = [UserModel]()
@@ -57,6 +58,7 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
+        celebView.layer.makeHiddenOnCapture()
     }
     
     override func viewWillAppear(_ animated: Bool) {

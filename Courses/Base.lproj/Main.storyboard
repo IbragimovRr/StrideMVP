@@ -1812,6 +1812,7 @@
                     <connections>
                         <outlet property="avatar" destination="dbw-PQ-MuY" id="Oz4-Sx-Kpw"/>
                         <outlet property="bannersCollectionView" destination="Z2L-Xb-7Q5" id="ywj-KA-KJq"/>
+                        <outlet property="celebView" destination="SmM-20-FQY" id="ddp-zt-I9R"/>
                         <outlet property="celebrityCollectionView" destination="2xv-Wu-71J" id="xVv-SC-AMQ"/>
                         <outlet property="coachCollectionView" destination="J1y-Pg-2b6" id="gXH-RW-ozm"/>
                         <outlet property="imProfile" destination="dbw-PQ-MuY" id="Sop-ZJ-Ewv"/>
@@ -8625,7 +8626,7 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                <color key="value" red="0.77254901960784317" green="0.77647058823529413" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" name="GrayMain"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -10342,14 +10343,14 @@
         <segue reference="vKu-9D-Hl7"/>
         <segue reference="2uE-MH-jsq"/>
         <segue reference="nsh-RS-Plh"/>
-        <segue reference="jEY-vC-3ne"/>
+        <segue reference="yNH-bw-Rcl"/>
         <segue reference="M8w-WU-QND"/>
-        <segue reference="RsJ-Z8-4Bo"/>
+        <segue reference="F7H-ew-eXR"/>
         <segue reference="HHf-kQ-icL"/>
-        <segue reference="hAk-ad-GZt"/>
+        <segue reference="HWx-1p-0TA"/>
         <segue reference="AOP-mt-L4O"/>
         <segue reference="Ect-gX-bg4"/>
-        <segue reference="iWm-3v-hYp"/>
+        <segue reference="7iD-6h-6hO"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="apple" width="15.333333015441895" height="18"/>

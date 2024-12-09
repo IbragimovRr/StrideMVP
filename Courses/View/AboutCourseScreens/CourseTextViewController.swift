@@ -20,6 +20,7 @@ class CourseTextViewController: UIViewController {
         super.viewDidLoad()
         getData()
         design()
+        textView.layer.makeHiddenOnCapture()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

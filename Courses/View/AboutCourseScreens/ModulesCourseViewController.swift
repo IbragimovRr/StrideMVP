@@ -33,8 +33,9 @@ class ModulesCourseViewController: UIViewController {
         loadingSettings()
         collectionSettings()
         getCourseInfo()
+        viewDays.layer.makeHiddenOnCapture()
+        modulesCollectionView.layer.makeHiddenOnCapture()
     }
-
 
     private func collectionSettings() {
         daysCollectionView.delegate = self
