@@ -61,6 +61,14 @@ class UD {
     }
     
 
+    func saveTheme(_ theme: String) {
+        UserDefaults.standard.set(theme, forKey: "theme")
+    }
+    
+    func getTheme() -> String {
+        let theme = UserDefaults.standard.string(forKey: "theme") ?? "default"
+        return theme
+    }
 
     func saveInfoAboutMe(_ user: UserModel) {
         UserDefaults.standard.set(user.birthday, forKey: "birthday")

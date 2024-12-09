@@ -7,7 +7,6 @@
 
 import UIKit
 import Lottie
-import ScreenShield
 
 class ModulesCourseViewController: UIViewController {
 

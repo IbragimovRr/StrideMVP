@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ScreenProtectorKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -14,9 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func scene(_ scene: UIScene,willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        let protect = ProtectScreen()
-//        ProtectScreen.window = window
-//        protect.protectOn()
+        ConfidetialityPresenter().getTheme()
         DeepLinksManager().fetchURL(connectionOptions: connectionOptions)
         if DeepLinksManager.isLink {
             DeepLinksManager().openCourses(with: window!)

@@ -58,7 +58,6 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
-        celebView.layer.makeHiddenOnCapture()
     }
     
     override func viewWillAppear(_ animated: Bool) {

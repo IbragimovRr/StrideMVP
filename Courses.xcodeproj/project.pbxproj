@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		440123C22CED5EDA00E78A29 /* ScreenShield in Frameworks */ = {isa = PBXBuildFile; productRef = 440123C12CED5EDA00E78A29 /* ScreenShield */; };
 		44049A2E2C6CE0C30014BD9C /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44049A2D2C6CE0C30014BD9C /* credentials.plist */; };
 		44064C752C26ED8E00AB5227 /* Commissioner-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44064C742C26ED8E00AB5227 /* Commissioner-Medium.ttf */; };
 		44064C772C26ED9500AB5227 /* Commissioner-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44064C762C26ED9500AB5227 /* Commissioner-SemiBold.ttf */; };
@@ -28,7 +27,6 @@
 		44064C9E2C28628000AB5227 /* SignServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44064C9D2C28628000AB5227 /* SignServices.swift */; };
 		44064CA02C28634C00AB5227 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44064C9F2C28634C00AB5227 /* Model.swift */; };
 		44064CA62C28773E00AB5227 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44064CA52C28773E00AB5227 /* Error.swift */; };
-		440C9C3D2CED6298007D0735 /* ScreenProtectorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 440C9C3C2CED6298007D0735 /* ScreenProtectorKit */; };
 		440C9C3F2CED6C47007D0735 /* ProtectScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C9C3E2CED6C47007D0735 /* ProtectScreen.swift */; };
 		440C9C412CF49D72007D0735 /* PromoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C9C402CF49D72007D0735 /* PromoViewController.swift */; };
 		440C9C432CF49DD0007D0735 /* PromoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C9C422CF49DD0007D0735 /* PromoCollectionViewCell.swift */; };
@@ -55,6 +53,8 @@
 		44682CA52D03577500087C62 /* WithdrawPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA42D03577500087C62 /* WithdrawPresenter.swift */; };
 		44682CA72D0362B800087C62 /* ChangeInformationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA62D0362B800087C62 /* ChangeInformationPresenter.swift */; };
 		44682CAA2D03BF5700087C62 /* InfoCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */; };
+		44682CAC2D076A8B00087C62 /* ConfidetialityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CAB2D076A8B00087C62 /* ConfidetialityPresenter.swift */; };
+		44682CAE2D076BC500087C62 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CAD2D076BC500087C62 /* ThemeModel.swift */; };
 		4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */; };
 		447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */; };
 		447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */; };
@@ -194,6 +194,8 @@
 		44682CA42D03577500087C62 /* WithdrawPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawPresenter.swift; sourceTree = "<group>"; };
 		44682CA62D0362B800087C62 /* ChangeInformationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeInformationPresenter.swift; sourceTree = "<group>"; };
 		44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoursePresenter.swift; sourceTree = "<group>"; };
+		44682CAB2D076A8B00087C62 /* ConfidetialityPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfidetialityPresenter.swift; sourceTree = "<group>"; };
+		44682CAD2D076BC500087C62 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
 		4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMoneyInfoViewController.swift; sourceTree = "<group>"; };
 		447D8C802C85DEEB00EF2217 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		447D8C8D2C89D09600EF2217 /* emptyBox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyBox.json; sourceTree = "<group>"; };
@@ -274,10 +276,8 @@
 				44DFB11E2C3BE46B005C8F44 /* Lottie in Frameworks */,
 				44064C972C2861CA00AB5227 /* SwiftyJSON in Frameworks */,
 				447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */,
-				440123C22CED5EDA00E78A29 /* ScreenShield in Frameworks */,
 				44D68AF82C5051E100F8F476 /* GoogleSignInSwift in Frameworks */,
 				44F395482C9B8BA200861759 /* CropViewController in Frameworks */,
-				440C9C3D2CED6298007D0735 /* ScreenProtectorKit in Frameworks */,
 				44064C9C2C2861D700AB5227 /* SDWebImageMapKit in Frameworks */,
 				44064C922C2861B900AB5227 /* Alamofire in Frameworks */,
 				44064C9A2C2861D700AB5227 /* SDWebImage in Frameworks */,
@@ -425,6 +425,7 @@
 				44682CA22D034CDD00087C62 /* CreatePromoPresenter.swift */,
 				44682CA42D03577500087C62 /* WithdrawPresenter.swift */,
 				44682CA62D0362B800087C62 /* ChangeInformationPresenter.swift */,
+				44682CAB2D076A8B00087C62 /* ConfidetialityPresenter.swift */,
 			);
 			path = OtherScreens;
 			sourceTree = "<group>";
@@ -445,6 +446,7 @@
 				44682C9F2D02874A00087C62 /* PromocodeModel.swift */,
 				44E4061B2CFF78F4004F633E /* CourseModel.swift */,
 				44E4061F2CFF7B9C004F633E /* CategoryModel.swift */,
+				44682CAD2D076BC500087C62 /* ThemeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -617,8 +619,6 @@
 				447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */,
 				44F395472C9B8BA200861759 /* CropViewController */,
 				44F395492C9B8BA200861759 /* TOCropViewController */,
-				440123C12CED5EDA00E78A29 /* ScreenShield */,
-				440C9C3C2CED6298007D0735 /* ScreenProtectorKit */,
 			);
 			productName = Courses;
 			productReference = 440DAB302C1748D400C576FB /* Courses.app */;
@@ -657,8 +657,6 @@
 				44A406812C762FE1005509D0 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */,
 				44F395462C9B8BA200861759 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
-				440123C02CED5EDA00E78A29 /* XCRemoteSwiftPackageReference "ScreenShield" */,
-				440C9C3B2CED6298007D0735 /* XCRemoteSwiftPackageReference "ScreenProtectorKit" */,
 			);
 			productRefGroup = 440DAB312C1748D400C576FB /* Products */;
 			projectDirPath = "";
@@ -790,8 +788,10 @@
 				441E4AEF2CD2AD6100800EE4 /* СonfidentialityViewController.swift in Sources */,
 				7515103F2C34583B009978E6 /* SettingsTableViewCell.swift in Sources */,
 				440E1F742CA16AD1002C6FC8 /* CourseErrors.swift in Sources */,
+				44682CAE2D076BC500087C62 /* ThemeModel.swift in Sources */,
 				44E906342C29A59B00FFA6DD /* HomeViewController.swift in Sources */,
 				440E1F722CA169E9002C6FC8 /* CourseMananger.swift in Sources */,
+				44682CAC2D076A8B00087C62 /* ConfidetialityPresenter.swift in Sources */,
 				751510412C34586D009978E6 /* SettingsViewController.swift in Sources */,
 				44D68B052C51B3EF00F8F476 /* InfoCoursesViewController.swift in Sources */,
 				440C9C432CF49DD0007D0735 /* PromoCollectionViewCell.swift in Sources */,
@@ -968,7 +968,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.2;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1006,7 +1006,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.2;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1043,14 +1043,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		440123C02CED5EDA00E78A29 /* XCRemoteSwiftPackageReference "ScreenShield" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/JayantBadlani/ScreenShield";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.2;
-			};
-		};
 		44064C902C2861B900AB5227 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1073,14 +1065,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.19.3;
-			};
-		};
-		440C9C3B2CED6298007D0735 /* XCRemoteSwiftPackageReference "ScreenProtectorKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/prongbang/ScreenProtectorKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.1;
 			};
 		};
 		447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */ = {
@@ -1126,11 +1110,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		440123C12CED5EDA00E78A29 /* ScreenShield */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 440123C02CED5EDA00E78A29 /* XCRemoteSwiftPackageReference "ScreenShield" */;
-			productName = ScreenShield;
-		};
 		44064C912C2861B900AB5227 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 44064C902C2861B900AB5227 /* XCRemoteSwiftPackageReference "Alamofire" */;
@@ -1150,11 +1129,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 44064C982C2861D700AB5227 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
-		};
-		440C9C3C2CED6298007D0735 /* ScreenProtectorKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 440C9C3B2CED6298007D0735 /* XCRemoteSwiftPackageReference "ScreenProtectorKit" */;
-			productName = ScreenProtectorKit;
 		};
 		447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */ = {
 			isa = XCSwiftPackageProductDependency;

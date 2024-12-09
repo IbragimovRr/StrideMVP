@@ -7,18 +7,32 @@
 
 import UIKit
 
-class ConfidentialityViewController: UIViewController {
+protocol ConfidetialityViewDelegate {
+    func showTheme()
+}
+
+class ConfidentialityViewController: UIViewController, ConfidetialityViewDelegate {
     
+    @IBOutlet weak var thirdView: UIView!
+    @IBOutlet weak var secondView: UIView!
+    @IBOutlet weak var firstView: UIView!
+    @IBOutlet weak var successThird: UIImageView!
+    @IBOutlet weak var successSecond: UIImageView!
+    @IBOutlet weak var successFirst: UIImageView!
     @IBOutlet weak var newPassword: UITextField!
     @IBOutlet weak var oldPassword: UITextField!
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
     
+    var presenter = ConfidetialityPresenter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startPosition = errorView.center
         errorView.isHidden = true
+        presenter.view = self
+        presenter.getTheme()
         view.addSubview(errorView)
     }
     
@@ -41,6 +55,30 @@ class ConfidentialityViewController: UIViewController {
         }
     }
     
+    func showTheme() {
+        clearSegmented()
+        switch presenter.theme {
+        case .unspecified:
+            thirdView.layer.borderColor = UIColor.blueMain.cgColor
+            thirdView.layer.borderWidth = 1
+            successThird.isHidden = false
+        case .light:
+            firstView.layer.borderColor = UIColor.blueMain.cgColor
+            firstView.layer.borderWidth = 1
+            successFirst.isHidden = false
+        case .dark:
+            secondView.layer.borderColor = UIColor.blueMain.cgColor
+            secondView.layer.borderWidth = 1
+            successSecond.isHidden = false
+        @unknown default:
+            thirdView.layer.borderColor = UIColor.blueMain.cgColor
+            thirdView.layer.borderWidth = 1
+            successThird.isHidden = false
+        }
+        
+    }
+    
+    
     private func deleteAccount() {
         Task {
             do {
@@ -53,6 +91,7 @@ class ConfidentialityViewController: UIViewController {
             }
         }
     }
+    
     
     private func showAccessDeniedAlert() {
         let alert = UIAlertController(title: "Внимание",
@@ -70,6 +109,18 @@ class ConfidentialityViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    private func clearSegmented() {
+        firstView.layer.borderColor = UIColor.clear.cgColor
+        firstView.layer.borderWidth = 0
+        secondView.layer.borderColor = UIColor.clear.cgColor
+        secondView.layer.borderWidth = 0
+        thirdView.layer.borderColor = UIColor.clear.cgColor
+        thirdView.layer.borderWidth = 0
+        successFirst.isHidden = true
+        successSecond.isHidden = true
+        successThird.isHidden = true
+    }
+    
     @IBAction func changePassword(_ sender: UIButton) {
         errorView.isHidden = false
         errorView.configureUnavailable(title: "Cкоро", description: "В данный момент недоступно")
@@ -77,19 +128,17 @@ class ConfidentialityViewController: UIViewController {
     
     
     @IBAction func theme(_ sender: UIButton) {
-        var theme: UIUserInterfaceStyle = .unspecified
+        clearSegmented()
+        
         switch sender.tag {
         case 0:
-            theme = .dark
+            presenter.theme = .light
         case 1:
-            theme = .light
+            presenter.theme = .dark
         case 2:
-            theme = .unspecified
+            presenter.theme = .unspecified
         default:
-            theme = .unspecified
-        }
-        UIApplication.shared.windows.forEach { window in
-            window.overrideUserInterfaceStyle = theme
+            presenter.theme = .unspecified
         }
     }
     

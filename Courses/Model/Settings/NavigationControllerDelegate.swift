@@ -10,7 +10,6 @@ import UIKit
 extension StartViewController: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-//        ProtectScreen.currentVc = viewController
         if viewController is UITabBarController || viewController is AddCourseViewController {
             navigationController.interactivePopGestureRecognizer?.isEnabled = false
         } else {
