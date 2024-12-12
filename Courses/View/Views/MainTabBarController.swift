@@ -14,20 +14,30 @@ class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ConfidetialityPresenter.isStart = true
         setTabBarApearence()
         setViewControllersInTaBar()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
-            setViewControllersInTaBar()
+        if ConfidetialityPresenter.isStart == false {
+            if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
+                setViewControllersInTaBar()
+            }
+        }else {
+            ConfidetialityPresenter.isStart = false
         }
     }
     
     private func setViewControllersInTaBar() {
         guard let vc = viewControllers else { return }
-        let theme = traitCollection.userInterfaceStyle
+        var theme = traitCollection.userInterfaceStyle
+        let themeUD = UD().getTheme()
+        let themeRes = theme.themeInsert(themeUD)
+        if themeRes != .unspecified {
+            theme = themeRes
+        }
         vc[0].tabBarItem = selectImageByTabBarItem(image: "home", theme: theme)
         vc[1].tabBarItem = selectImageByTabBarItem(image: "catalog", theme: theme)
         vc[2].tabBarItem = selectImageByTabBarItem(image: "courses", theme: theme)
@@ -37,7 +47,7 @@ class MainTabBarController: UITabBarController {
         }
     }
     
-    private func selectImageByTabBarItem(image: String, theme: UIUserInterfaceStyle ) -> UITabBarItem {
+    private func selectImageByTabBarItem(image: String, theme: UIUserInterfaceStyle) -> UITabBarItem {
         let item = UITabBarItem()
         
         if theme == .dark {
@@ -77,4 +87,5 @@ class MainTabBarController: UITabBarController {
         tabBar.layer.shadowColor = UIColor.black.cgColor
         tabBar.layer.masksToBounds = false
     }
+    
 }

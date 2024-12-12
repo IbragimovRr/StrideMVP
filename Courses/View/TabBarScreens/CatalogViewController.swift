@@ -110,6 +110,7 @@ class CatalogViewController: UIViewController, CatalogViewDelegate {
     }
     
     func searchCourses() {
+        emptyCheck()
         catalogCollectionView.reloadData()
         catalogCollectionView.layoutIfNeeded()
         changeHeightCollection()
@@ -186,7 +187,7 @@ extension CatalogViewController: UICollectionViewDelegate, UICollectionViewDataS
             presenter.selectCourse = presenter.courses[indexPath.row]
             performSegue(withIdentifier: "info", sender: self)
         }else if collectionView == categoryCollectionView {
-            presenter.showSelectCategory(indexPath: indexPath, search: search.text!)
+            presenter.getSelectCategory(indexPath: indexPath, search: search.text!)
         }
     }
 

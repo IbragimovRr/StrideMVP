@@ -89,6 +89,7 @@ class MyCoursesViewController: UIViewController, MyCoursesViewDelegate {
     }
     
     func showMyBoughtCourses() {
+        emptyCheck()
         myCoursesCollectionView.reloadData()
         refreshControl.refreshControl.endRefreshing()
     }

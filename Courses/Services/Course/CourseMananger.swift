@@ -31,7 +31,7 @@ class CourseMananger {
     }
     
     func getCoursesByCategory(id: Int) async throws -> Data {
-        var url = Constants.url + "api/v1/courses/?category=\(id)"
+        let url = Constants.url + "api/v1/courses/?category=\(id)"
         
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let value = try await AF.request(url, headers: headers).serializingData().value

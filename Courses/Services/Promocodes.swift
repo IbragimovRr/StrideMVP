@@ -103,6 +103,7 @@ class PromocodesServices {
         let value = try await response.value
         let code = await response.response.response?.statusCode
         let json = JSON(value)
+        
         if code != 200 {
             if let dictionary = json.dictionary {
                 let error = dictionary.first!.value[0].stringValue
@@ -132,7 +133,7 @@ class PromocodesServices {
             promocode.name = json[x]["name"].stringValue
             promocode.procent = json[x]["percent"].intValue
             promocode.dateStart = json[x]["start_date"].stringValue.isEmpty ? nil : json[x]["start_date"].stringValue
-            promocode.dateEnd = json[x]["end_date"].stringValue.isEmpty ? nil : json[x]["start_date"].stringValue
+            promocode.dateEnd = json[x]["end_date"].stringValue.isEmpty ? nil : json[x]["end_date"].stringValue
             promocode.countCourses = json[x]["courses"].arrayValue.count
             promocodes.append(promocode)
         }
@@ -153,7 +154,12 @@ class PromocodesServices {
         let code = await response.response.response?.statusCode
         let json = JSON(value)
         
-        print(code)
+        print(json)
+        
+        if code != 200 {
+            let error = json["detail"].stringValue
+            throw ErrorNetwork.runtimeError(error)
+        }
     }
     
     private func promocodesInString(_ promocodes: [PromocodeModel] ) -> [String] {
@@ -178,7 +184,6 @@ class PromocodesServices {
         let code = await response.response.response?.statusCode
         let json = JSON(value)
         
-        print(json, code)
     }
     
     func getPromoToCourses(courseID: Int) async throws -> [PromocodeModel] {

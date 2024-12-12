@@ -29,7 +29,6 @@ class InfoCoursePresenter: InfoCoursePresenterDelegate {
     func viewDidLoad() {
         getCourses()
         getComments()
-        getSimillarCourses()
     }
     
     func getCourses() {
@@ -40,6 +39,7 @@ class InfoCoursePresenter: InfoCoursePresenterDelegate {
                 self.view?.showSceletonLoading(bool: false)
                 self.view?.showCourses()
             }
+            getSimillarCourses()
         }
     }
     

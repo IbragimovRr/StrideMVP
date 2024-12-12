@@ -24,8 +24,8 @@ class Border: UIView {
     }
 
     func addViewBorder(view: UIView) {
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(named: "BorderColor")?.cgColor
+        view.layer.borderWidth = border
+        view.layer.borderColor = color.cgColor
     }
 
     override init(frame:CGRect) {
@@ -35,6 +35,10 @@ class Border: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        addViewBorder(view: self)
+    }
+    
+    override func layoutSubviews() {
         addViewBorder(view: self)
     }
 }

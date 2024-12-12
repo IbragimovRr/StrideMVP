@@ -84,7 +84,9 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
                 oldPrice.isHidden = false
             }else {
                 oldPrice.isHidden = true
-                price = price + oldValue!
+                if let oldValue = oldValue {
+                    price = price + oldValue
+                }
             }
         }
     }

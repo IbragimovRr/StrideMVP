@@ -19,18 +19,27 @@ class ProfilePresenter: ProfilePresenterDelegate {
     var selectCourse = CourseModel()
     var isMyProfile = true
     var user: UserModel = UserServices.info
+    var isLoadData = false
     
     func viewWillApear() {
         getMyData()
     }
     
     func getMyData() {
-        view?.showSceletonAnimated(bool: true)
         Task {
             if isMyProfile {
+                DispatchQueue.main.async {
+                    if self.isLoadData == false {
+                        self.view?.showSceletonAnimated(bool: true)
+                    }
+                }
                 user = try await UserServices().getMyInfo()
                 courses = try await CourseServices().getMyCreateCourses()
+                isLoadData = true
             }else {
+                DispatchQueue.main.async {
+                    self.view?.showSceletonAnimated(bool: true)
+                }
                 user = try await UserServices().getUserByID(id: user.id)
                 courses = try await CourseServices().getCoursesByUserID(id: user.id)
             }

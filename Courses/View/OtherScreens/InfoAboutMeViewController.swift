@@ -83,6 +83,7 @@ class InfoAboutMeViewController: UIViewController {
     }
 
     @objc func keyboardWillAppear(notification: Notification) {
+        viewPV.isHidden = true
         bottomConstraint.constant = 50
     }
 

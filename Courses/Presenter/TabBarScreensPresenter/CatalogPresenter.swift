@@ -14,7 +14,7 @@ protocol CatalogPresenterProtocol {
     func getCoursesByCategory(id: Int) 
     func searchCourse(text: String)
     func viewDidLoad()
-    func showSelectCategory(indexPath: IndexPath, search: String)
+    func getSelectCategory(indexPath: IndexPath, search: String)
 }
 
 
@@ -90,7 +90,7 @@ class CatalogPresenter: CatalogPresenterProtocol {
         getCategories()
     }
     
-    func showSelectCategory(indexPath: IndexPath, search: String) {
+    func getSelectCategory(indexPath: IndexPath, search: String) {
         if selectCategory?.id == categories[indexPath.row].id {
             loadCourses(text: search)
         }else {
@@ -100,6 +100,7 @@ class CatalogPresenter: CatalogPresenterProtocol {
     
     private func loadCategory(indexPath: IndexPath, search: String) {
         selectCategory = categories[indexPath.row]
+        
         if search == "" {
             getCoursesByCategory(id: categories[indexPath.row].id)
         }else {
@@ -114,7 +115,7 @@ class CatalogPresenter: CatalogPresenterProtocol {
         view?.updateCollection()
         if text == "" {
             getCourses()
-        }else {
+        } else {
             searchCourse(text: text)
         }
     }

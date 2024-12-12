@@ -1,5 +1,5 @@
 {
-  "originHash" : "2a2b02b488c6782d59aab0e45925cf74425a027cac2086f83ece834bf840a9f1",
+  "originHash" : "e4b38a0673a7bd4478f0ede747e0a675491980ee6f8e9eed654a3ef2a356b295",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -53,15 +53,6 @@
       "state" : {
         "revision" : "fe4c6fe3a0aa66cdeb51d549623c82ca9704b9a5",
         "version" : "4.5.0"
-      }
-    },
-    {
-      "identity" : "screenprotectorkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/prongbang/ScreenProtectorKit.git",
-      "state" : {
-        "revision" : "eed4217449b0312156c6483fccc0f2b54a45be90",
-        "version" : "1.3.1"
       }
     },
     {

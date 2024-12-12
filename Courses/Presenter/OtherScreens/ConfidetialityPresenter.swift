@@ -14,6 +14,7 @@ protocol ConfidetialityPresenterDelegate {
 
 class ConfidetialityPresenter: ConfidetialityPresenterDelegate {
     
+    static var isStart = false
     var view: ConfidetialityViewDelegate?
     var theme: UIUserInterfaceStyle = .unspecified {
         didSet {

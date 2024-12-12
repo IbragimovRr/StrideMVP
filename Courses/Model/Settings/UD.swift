@@ -90,7 +90,9 @@ class UD {
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in
-            defaults.removeObject(forKey: key)
+            if key != "theme" {
+                defaults.removeObject(forKey: key)
+            }
         }
     }
 
