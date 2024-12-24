@@ -40,6 +40,7 @@
 		440E1F762CA16C86002C6FC8 /* CourseJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440E1F752CA16C86002C6FC8 /* CourseJSON.swift */; };
 		441E4AEF2CD2AD6100800EE4 /* СonfidentialityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4AEE2CD2AD6100800EE4 /* СonfidentialityViewController.swift */; };
 		4442F3D82C31BFDB00203A36 /* PageLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442F3D72C31BFDB00203A36 /* PageLayout.swift */; };
+		44435CF42D184FFD00B879C3 /* VideoModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */; };
 		444A07012C2B9D6C008F4E68 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A07002C2B9D6C008F4E68 /* Extension.swift */; };
 		4450B3C92CB6066900F1F54B /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450B3C82CB6066900F1F54B /* UpdateViewController.swift */; };
 		44547E572CF4BE380051C782 /* Promocodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44547E562CF4BE380051C782 /* Promocodes.swift */; };
@@ -61,6 +62,7 @@
 		447D8C812C85DEEB00EF2217 /* PaymentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D8C802C85DEEB00EF2217 /* PaymentServices.swift */; };
 		447D8C8E2C89D09600EF2217 /* emptyBox.json in Resources */ = {isa = PBXBuildFile; fileRef = 447D8C8D2C89D09600EF2217 /* emptyBox.json */; };
 		447FE4932CDD2300007C5B31 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447FE4922CDD2300007C5B31 /* MainTabBarController.swift */; };
+		4481D4382D19C41A00DBE377 /* VideoModulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481D4372D19C41A00DBE377 /* VideoModulePresenter.swift */; };
 		448301822C9504B600E40DBA /* ValidateTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448301812C9504B600E40DBA /* ValidateTF.swift */; };
 		448301842C987A0700E40DBA /* DeepLinksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448301832C987A0700E40DBA /* DeepLinksManager.swift */; };
 		448765082CE00D15008A1E44 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */; };
@@ -113,6 +115,9 @@
 		44E406222CFF7BFA004F633E /* CategoryServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E406212CFF7BFA004F633E /* CategoryServices.swift */; };
 		44E906342C29A59B00FFA6DD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E906332C29A59B00FFA6DD /* HomeViewController.swift */; };
 		44E906372C2ADE8700FFA6DD /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E906362C2ADE8700FFA6DD /* BannerCollectionViewCell.swift */; };
+		44F118D22D109025000FCDC3 /* AppMetricaCore in Frameworks */ = {isa = PBXBuildFile; productRef = 44F118D12D109025000FCDC3 /* AppMetricaCore */; };
+		44F118D42D109025000FCDC3 /* AppMetricaCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 44F118D32D109025000FCDC3 /* AppMetricaCrashes */; };
+		44F118D62D109025000FCDC3 /* AppMetricaLibraryAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 44F118D52D109025000FCDC3 /* AppMetricaLibraryAdapter */; };
 		44F395482C9B8BA200861759 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 44F395472C9B8BA200861759 /* CropViewController */; };
 		44F3954A2C9B8BA200861759 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 44F395492C9B8BA200861759 /* TOCropViewController */; };
 		44F3954C2C9B8BB900861759 /* CropImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3954B2C9B8BB900861759 /* CropImage.swift */; };
@@ -181,6 +186,7 @@
 		441E4AF02CD2BD2E00800EE4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		441E4AF12CD2BD2E00800EE4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4442F3D72C31BFDB00203A36 /* PageLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLayout.swift; sourceTree = "<group>"; };
+		44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModuleViewController.swift; sourceTree = "<group>"; };
 		444A07002C2B9D6C008F4E68 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		4450B3C82CB6066900F1F54B /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
 		44547E562CF4BE380051C782 /* Promocodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promocodes.swift; sourceTree = "<group>"; };
@@ -200,6 +206,7 @@
 		447D8C802C85DEEB00EF2217 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		447D8C8D2C89D09600EF2217 /* emptyBox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyBox.json; sourceTree = "<group>"; };
 		447FE4922CDD2300007C5B31 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		4481D4372D19C41A00DBE377 /* VideoModulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModulePresenter.swift; sourceTree = "<group>"; };
 		448301812C9504B600E40DBA /* ValidateTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateTF.swift; sourceTree = "<group>"; };
 		448301832C987A0700E40DBA /* DeepLinksManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinksManager.swift; sourceTree = "<group>"; };
 		448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -274,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44DFB11E2C3BE46B005C8F44 /* Lottie in Frameworks */,
+				44F118D62D109025000FCDC3 /* AppMetricaLibraryAdapter in Frameworks */,
 				44064C972C2861CA00AB5227 /* SwiftyJSON in Frameworks */,
 				447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */,
 				44D68AF82C5051E100F8F476 /* GoogleSignInSwift in Frameworks */,
@@ -284,6 +292,8 @@
 				44F3954A2C9B8BA200861759 /* TOCropViewController in Frameworks */,
 				447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */,
 				44A406832C762FE1005509D0 /* SkeletonView in Frameworks */,
+				44F118D22D109025000FCDC3 /* AppMetricaCore in Frameworks */,
+				44F118D42D109025000FCDC3 /* AppMetricaCrashes in Frameworks */,
 				44D68AF62C5051E100F8F476 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */,
+				4481D4372D19C41A00DBE377 /* VideoModulePresenter.swift */,
 			);
 			path = CourseScreens;
 			sourceTree = "<group>";
@@ -536,6 +547,7 @@
 				44D68AFD2C51B3EF00F8F476 /* CoursesViewController.swift */,
 				44D68AFE2C51B3EF00F8F476 /* CourseTextViewController.swift */,
 				44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */,
+				44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */,
 			);
 			path = AboutCourseScreens;
 			sourceTree = "<group>";
@@ -619,6 +631,9 @@
 				447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */,
 				44F395472C9B8BA200861759 /* CropViewController */,
 				44F395492C9B8BA200861759 /* TOCropViewController */,
+				44F118D12D109025000FCDC3 /* AppMetricaCore */,
+				44F118D32D109025000FCDC3 /* AppMetricaCrashes */,
+				44F118D52D109025000FCDC3 /* AppMetricaLibraryAdapter */,
 			);
 			productName = Courses;
 			productReference = 440DAB302C1748D400C576FB /* Courses.app */;
@@ -657,6 +672,7 @@
 				44A406812C762FE1005509D0 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */,
 				44F395462C9B8BA200861759 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
+				44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */,
 			);
 			productRefGroup = 440DAB312C1748D400C576FB /* Products */;
 			projectDirPath = "";
@@ -699,6 +715,7 @@
 			files = (
 				75F6FDB42C9323B500A57EA9 /* WithdrawViewController.swift in Sources */,
 				44D68B042C51B3EF00F8F476 /* CourseTextViewController.swift in Sources */,
+				4481D4382D19C41A00DBE377 /* VideoModulePresenter.swift in Sources */,
 				447D8C812C85DEEB00EF2217 /* PaymentServices.swift in Sources */,
 				449C124E2D00DDA30091F0F5 /* MyCoursesPresenter.swift in Sources */,
 				448E73EA2CFCD0DB00C3000D /* PromoTableViewCell.swift in Sources */,
@@ -790,6 +807,7 @@
 				440E1F742CA16AD1002C6FC8 /* CourseErrors.swift in Sources */,
 				44682CAE2D076BC500087C62 /* ThemeModel.swift in Sources */,
 				44E906342C29A59B00FFA6DD /* HomeViewController.swift in Sources */,
+				44435CF42D184FFD00B879C3 /* VideoModuleViewController.swift in Sources */,
 				440E1F722CA169E9002C6FC8 /* CourseMananger.swift in Sources */,
 				44682CAC2D076A8B00087C62 /* ConfidetialityPresenter.swift in Sources */,
 				751510412C34586D009978E6 /* SettingsViewController.swift in Sources */,
@@ -968,7 +986,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.5;
+				MARKETING_VERSION = 3.4.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1006,7 +1024,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.5;
+				MARKETING_VERSION = 3.4.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1099,6 +1117,14 @@
 				minimumVersion = 4.4.3;
 			};
 		};
+		44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/appmetrica/appmetrica-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.0;
+			};
+		};
 		44F395462C9B8BA200861759 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
@@ -1159,6 +1185,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 44DFB11C2C3BE46A005C8F44 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		44F118D12D109025000FCDC3 /* AppMetricaCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */;
+			productName = AppMetricaCore;
+		};
+		44F118D32D109025000FCDC3 /* AppMetricaCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */;
+			productName = AppMetricaCrashes;
+		};
+		44F118D52D109025000FCDC3 /* AppMetricaLibraryAdapter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */;
+			productName = AppMetricaLibraryAdapter;
 		};
 		44F395472C9B8BA200861759 /* CropViewController */ = {
 			isa = XCSwiftPackageProductDependency;

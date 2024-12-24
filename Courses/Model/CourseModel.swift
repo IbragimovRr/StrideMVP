@@ -51,6 +51,7 @@ class CourseModel {
 
 struct Modules {
     var text: URL?
+    var videoURL: URL?
     var name: String
     var minutes: Int
     var imageURL: URL?
@@ -58,7 +59,18 @@ struct Modules {
     var id: Int
     var isCompleted: Bool = false
     var position: Int = 0
+    var views: Int = 0
+    var timeVideo: Int = 0
+    var author: String?
+    var videoDescription: String?
+    var type : ModuleType = .text
 }
+
+enum ModuleType {
+    case text
+    case video
+}
+
 
 
 struct CourseDays {

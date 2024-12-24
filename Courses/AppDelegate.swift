@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleSignIn
+import AppMetricaCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,7 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        
+        if let configuration = AppMetricaConfiguration(apiKey: "5965b15e-9bc0-4755-847c-92cb7e0433a6") {
+            AppMetrica.activate(with: configuration)
+        }
+        
         
         return true
     }

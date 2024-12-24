@@ -335,9 +335,9 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
         promoTextField.isHidden = true
         promoTextField.resignFirstResponder()
         promoMainText.text = promo.name
-        let saleAfterPromo = price / 100 * promo.procent
-        promoSuccessInfo.text = "\(promo.procent)% cкидка (-₽\(saleAfterPromo).00)"
-        sale = saleAfterPromo
+        let saleAfterPromo = Double(price) / 100.00 * Double(promo.procent)
+        promoSuccessInfo.text = "\(promo.procent)% cкидка (-₽\(Int(saleAfterPromo)).00)"
+        sale = Int(saleAfterPromo)
         promoMainBtn.setTitle("", for: .normal)
         promoMainBtn.setImage(UIImage.closeGray, for: .normal)
     }

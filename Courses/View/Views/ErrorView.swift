@@ -113,12 +113,21 @@ class ErrorView: UIView {
             self.center = CGPoint(x: self.center.x, y: self.center.y +  translation.y)
             sender.setTranslation(CGPoint.zero, in: self)
         case .ended:
-            if self.center.y <= 50 {
-                self.self.isHidden = true
-            }
-            UIView.animate(withDuration: 0.5) {
-                self.center = startPosition
-            }
+            UIView.animate(withDuration: 0.5, animations: {
+                if self.center.y < startPosition.y {
+                    self.alpha = 0.0
+                    self.center = CGPoint(x: self.center.x, y: self.center.y - 50)
+                } else {
+                    self.center = startPosition
+                }
+            }, completion: { _ in
+                if self.alpha == 0.0 {
+                    self.alpha = 1.0
+                    self.isHidden = true
+                    self.center = startPosition
+                }
+            })
+            
         default:
             break
         }
