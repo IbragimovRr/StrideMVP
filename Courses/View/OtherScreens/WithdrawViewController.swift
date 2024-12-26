@@ -90,7 +90,8 @@ class WithdrawViewController: UIViewController, WithdrawViewDelegate {
             return result }
         return result
     }
-
+    
+    
     @IBAction func sbp(_ sender: UIButton) {
         performSegue(withIdentifier: "goToSBP", sender: self)
     }

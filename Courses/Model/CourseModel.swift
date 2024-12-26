@@ -71,8 +71,6 @@ enum ModuleType {
     case video
 }
 
-
-
 struct CourseDays {
     var dayID: Int
     var type: TypeDays = .noneSee

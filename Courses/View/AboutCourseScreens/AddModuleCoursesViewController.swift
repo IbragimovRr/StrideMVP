@@ -8,7 +8,17 @@
 import UIKit
 import Lottie
 
-class AddModuleCoursesViewController: UIViewController {
+protocol AddModuleCoursesViewDelegate {
+    func loading(bool: Bool)
+    func showCourseInfo()
+    func showDay()
+    func showModule(position: Int)
+    func deleteDay(dayID: Int)
+    func showError(error: String)
+}
+
+class AddModuleCoursesViewController: UIViewController, AddModuleCoursesViewDelegate {
+    
 
     @IBOutlet weak var successBtn: UIButton!
     @IBOutlet weak var loading: LottieAnimationView!
@@ -23,29 +33,27 @@ class AddModuleCoursesViewController: UIViewController {
 
     private let layout = PageModuleLayout()
     private var scaleView = false
-    private var course = CourseModel()
-    private var selectDay: Int = 0
-    private var selectModule = Modules(name: "", minutes: 0, id: 0)
-    var idCourse = 0
+    var presenter = AddModuleCoursesPresenter()
     var role: InfoCourses = .send
 
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionSettings()
         startPosition = errorView.center
+        presenter.view = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadingSettings()
-        addCourseInfo()
+        presenter.addCourseInfo()
     }
 
     
     private func checkRole() {
         guard role != .adminVerification else { successBtn.isHidden = false; return }
         
-        switch course.verification {
+        switch presenter.course.verification {
         case .proccessVerificate:
             role = .send
             successBtn.isHidden = true
@@ -61,19 +69,6 @@ class AddModuleCoursesViewController: UIViewController {
         }
     }
 
-    private func addCourseInfo() {
-        Task {
-            do {
-                course = try await CourseServices().getDaysInCourse(id: idCourse)
-                nameCourses.text = course.nameCourse
-                loadingStop()
-                daysCollectionView.reloadData()
-                modulesCollectionView.reloadData()
-            }catch {
-                loadingStop()
-            }
-        }
-    }
 
     private func collectionSettings() {
         daysCollectionView.delegate = self
@@ -114,33 +109,6 @@ class AddModuleCoursesViewController: UIViewController {
         }
     }
     
-    private func addDay() {
-        Task {
-            do {
-                let id = try await CourseServices().addDaysInCourse(courseID: idCourse)
-                course.courseDays.append(CourseDays(dayID: id, type: .noneSee))
-                daysCollectionView.insertItems(at: [IndexPath(item: course.courseDays.count - 1, section: 0)])
-            }catch ErrorNetwork.runtimeError(let error) {
-                errorView.isHidden = false
-                errorView.configure(title: "Ошибка", description: error)
-                view.addSubview(errorView)
-            }
-        }
-    }
-
-    private func addModule(dayID: Int, position: Int) {
-        Task {
-            do {
-                let id = try await CourseServices().addModulesInCourse(dayID: dayID, position: position)
-                course.courseDays[selectDay].modules.append(Modules(name: "", minutes: 0, id: id, position: position))
-                modulesCollectionView.insertItems(at: [IndexPath(item: position, section: 0)])
-            }catch ErrorNetwork.runtimeError(let error) {
-                errorView.isHidden = false
-                errorView.configure(title: "Ошибка", description: error)
-                view.addSubview(errorView)
-            }
-        }
-    }
     
     private func loadingSettings() {
         loading.loopMode = .loop
@@ -156,38 +124,52 @@ class AddModuleCoursesViewController: UIViewController {
     }
     
     private func selectBack(deleteIndex: Int) {
-        if selectDay == course.courseDays.count - 1 {
-            selectDay -= 1
-        }
-    }
-    
-    private func changePositionModule(module: Modules) {
-        Task {
-            try await CourseServices().changePositionModule(info: module)
-        }
-    }
-    
-    private func deleteDay(dayID: Int) {
-        Task {
-            do {
-                try await CourseServices().deleteDay(dayID: dayID)
-                for x in 0...course.courseDays.count - 1 {
-                    if course.courseDays[x].dayID == dayID {
-                        selectBack(deleteIndex: x)
-                        course.courseDays.remove(at: x)
-                        daysCollectionView.reloadData()
-                        modulesCollectionView.reloadData()
-                        break
-                    }
-                }
-            }catch ErrorNetwork.runtimeError(let error) {
-                errorView.isHidden = false
-                errorView.configure(title: "Ошибка", description: error)
-                view.addSubview(errorView)
-            }
+        if presenter.selectDay == presenter.course.courseDays.count - 1 {
+            presenter.selectDay -= 1
         }
     }
 
+    
+    func loading(bool: Bool) {
+        if bool {
+            loading.play()
+        }else {
+            loadingStop()
+        }
+    }
+    
+    func showCourseInfo() {
+        nameCourses.text = presenter.course.nameCourse
+        daysCollectionView.reloadData()
+        modulesCollectionView.reloadData()
+    }
+    
+    func showDay() {
+        daysCollectionView.insertItems(at: [IndexPath(item: presenter.course.courseDays.count - 1, section: 0)])
+    }
+    
+    func showModule(position: Int) {
+        modulesCollectionView.insertItems(at: [IndexPath(item: position, section: 0)])
+    }
+    
+    func deleteDay(dayID: Int) {
+        for x in 0...presenter.course.courseDays.count - 1 {
+            if presenter.course.courseDays[x].dayID == dayID {
+                selectBack(deleteIndex: x)
+                presenter.course.courseDays.remove(at: x)
+                daysCollectionView.reloadData()
+                modulesCollectionView.reloadData()
+                break
+            }
+        }
+    }
+    
+    func showError(error: String) {
+        errorView.isHidden = false
+        errorView.configure(title: "Ошибка", description: error)
+        view.addSubview(errorView)
+    }
+    
 
     
     @IBAction func success(_ sender: UIButton) {
@@ -238,10 +220,10 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == daysCollectionView {
-            return course.courseDays.count + 1
+            return presenter.course.courseDays.count + 1
         }else {
-            if course.courseDays.isEmpty == false {
-                return course.courseDays[selectDay].modules.count + 1
+            if presenter.course.courseDays.isEmpty == false {
+                return presenter.course.courseDays[presenter.selectDay].modules.count + 1
             }else {
                 return 0
             }
@@ -253,15 +235,15 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
         if collectionView == daysCollectionView {
             var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "day", for: indexPath) as! DaysCourseCollectionViewCell
             // Add +
-            if indexPath.row == course.courseDays.count {
+            if indexPath.row == presenter.course.courseDays.count {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addDayCell", for: indexPath) as! DaysCourseCollectionViewCell
                 return cell
             }else {
                 cell.lbl.text = "\(indexPath.row + 1)"
                 cell.delete.isHidden = false
-                cell.delete.tag = course.courseDays[indexPath.row].dayID
+                cell.delete.tag = presenter.course.courseDays[indexPath.row].dayID
                 cell.delete.addTarget(self, action: #selector(deleteDayBtn), for: .touchUpInside)
-                if selectDay == indexPath.row {
+                if presenter.selectDay == indexPath.row {
                     cell.current()
                     cell.delete.isHidden = true
                 }else {
@@ -273,15 +255,15 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
             // Modules
             var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
 
-            guard course.courseDays.isEmpty == false else { return cell }
+            guard presenter.course.courseDays.isEmpty == false else { return cell }
 
             // Add +
-            if indexPath.row == course.courseDays[selectDay].modules.count {
+            if indexPath.row == presenter.course.courseDays[presenter.selectDay].modules.count {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moduleAdd", for: indexPath) as! ModuleCourseCollectionViewCell
                 return cell
             }
 
-            if let image = course.courseDays[selectDay].modules[indexPath.row].imageURL {
+            if let image = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].imageURL {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
                 cell.im.sd_setImage(with: image)
                 cell.settingsBtn.tag = indexPath.row
@@ -291,14 +273,14 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
                 cell.settingsBtn2.tag = indexPath.row
                 cell.settingsBtn2.addTarget(self, action: #selector(settings), for: .touchUpInside)
             }
-            cell.name.text = course.courseDays[selectDay].modules[indexPath.row].name
-            if course.courseDays[selectDay].modules[indexPath.row].minutes == 0 {
+            cell.name.text = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].name
+            if presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].minutes == 0 {
                 cell.time.isHidden = true
             }else {
                 cell.time.isHidden = false
-                cell.time.text = "\(course.courseDays[selectDay].modules[indexPath.row].minutes) минут(ы/а)"
+                cell.time.text = "\(presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].minutes) минут(ы/а)"
             }
-            cell.descrLbl.text = course.courseDays[selectDay].modules[indexPath.row].description
+            cell.descrLbl.text = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].description
             return cell
         }
     }
@@ -306,19 +288,20 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == daysCollectionView {
 
-            if indexPath.row == course.courseDays.count {
-                addDay()
+            if indexPath.row == presenter.course.courseDays.count {
+                presenter.addDay()
             }else{
-                selectDay = indexPath.row
+                presenter.selectDay = indexPath.row
             }
             modulesCollectionView.reloadData()
             daysCollectionView.reloadData()
         }else {
 
-            if indexPath.row == course.courseDays[selectDay].modules.count {
-                addModule(dayID: course.courseDays[selectDay].dayID, position: indexPath.row)
+            if indexPath.row == presenter.course.courseDays[presenter.selectDay].modules.count {
+                presenter.addModule(dayID: presenter.course.courseDays[presenter.selectDay].dayID, position: indexPath.row)
+                performSegue(withIdentifier: "addModule", sender: self)
             }else {
-                selectModule = course.courseDays[selectDay].modules[indexPath.row]
+                presenter.selectModule = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row]
                 performSegue(withIdentifier: "goToAddCourse2", sender: self)
             }
 
@@ -329,15 +312,15 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
 
         if segue.identifier == "goToAddCourse2" {
             let vc = segue.destination as! AddCourseViewController
-            vc.module = selectModule
-            vc.nameCourse = course.nameCourse
+            vc.module = presenter.selectModule
+            vc.nameCourse = presenter.course.nameCourse
         }else if segue.identifier == "goToModuleSettings" {
             let vc = segue.destination as! AddInfoAboutModuleViewController
-            vc.module = selectModule
+            vc.module = presenter.selectModule
             vc.delegate = self
         }else if segue.identifier == "preview" {
             let vc = segue.destination as! InfoCoursesViewController
-            vc.presenter.course.id = course.id
+            vc.presenter.course.id = presenter.course.id
             vc.interface = role
         }
 
@@ -354,7 +337,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == course.courseDays[selectDay].modules.count {
+        if indexPath.row == presenter.course.courseDays[presenter.selectDay].modules.count {
             return false
         }else {
             return true
@@ -362,18 +345,17 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard destinationIndexPath.row != course.courseDays[selectDay].modules.count else {
+        guard destinationIndexPath.row != presenter.course.courseDays[presenter.selectDay].modules.count else {
             collectionView.moveItem(at: destinationIndexPath, to: sourceIndexPath)
             return
         }
         
-        var module = course.courseDays[selectDay].modules[sourceIndexPath.row]
+        var module = presenter.course.courseDays[presenter.selectDay].modules[sourceIndexPath.row]
         module.position = destinationIndexPath.row + 1
-        changePositionModule(module: module)
-        
-        let movedModule = course.courseDays[selectDay].modules.remove(at: sourceIndexPath.row)
-        course.courseDays[selectDay].modules.insert(movedModule, at: destinationIndexPath.row)
-        
+        presenter.changePositionModule(module: module)
+        let movedModule = presenter.course.courseDays[presenter.selectDay].modules.remove(at: sourceIndexPath.row)
+        presenter.course.courseDays[presenter.selectDay].modules.insert(movedModule, at: destinationIndexPath.row)
+        modulesCollectionView.reloadData()
         
     }
 
@@ -381,7 +363,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
         let alert = UIAlertController(title: "Удалить данные?", message: "Вы уверены, что хотите удалить этот день? Это действие невозможно отменить.", preferredStyle: .alert)
 
         let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
-            self.deleteDay(dayID: sender.tag)
+            self.presenter.deleteDay(dayID: sender.tag)
         }
 
         let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _ in
@@ -396,7 +378,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
     }
 
     @objc func settings(sender: UIButton) {
-        selectModule = course.courseDays[selectDay].modules[sender.tag]
+        presenter.selectModule = presenter.course.courseDays[presenter.selectDay].modules[sender.tag]
         performSegue(withIdentifier: "goToModuleSettings", sender: self)
     }
 
@@ -404,18 +386,18 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
 extension AddModuleCoursesViewController: ChangeInfoModule {
 
     func changeInfoModuleDismiss(module: Modules, moduleID: Int) {
-        for x in 0...course.courseDays[selectDay].modules.count - 1 {
-            if course.courseDays[selectDay].modules[x].id == moduleID {
-                course.courseDays[selectDay].modules[x] = module
+        for x in 0...presenter.course.courseDays[presenter.selectDay].modules.count - 1 {
+            if presenter.course.courseDays[presenter.selectDay].modules[x].id == moduleID {
+                presenter.course.courseDays[presenter.selectDay].modules[x] = module
                 modulesCollectionView.reloadData()
             }
         }
     }
 
     func deleteModuleDismiss(moduleID: Int) {
-        for x in 0...course.courseDays[selectDay].modules.count - 1 {
-            if course.courseDays[selectDay].modules[x].id == moduleID {
-                course.courseDays[selectDay].modules.remove(at: x)
+        for x in 0...presenter.course.courseDays[presenter.selectDay].modules.count - 1 {
+            if presenter.course.courseDays[presenter.selectDay].modules[x].id == moduleID {
+                presenter.course.courseDays[presenter.selectDay].modules.remove(at: x)
                 modulesCollectionView.reloadData()
                 break
             }

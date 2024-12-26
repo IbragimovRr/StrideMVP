@@ -250,6 +250,8 @@ enum InfoCourses {
 }
 
 // MARK: - Protocol
+protocol TypeModuleDelegate: AnyObject {
+}
 
 protocol ChangeInfoModule: AnyObject {
     func changeInfoModuleDismiss(module: Modules, moduleID: Int)

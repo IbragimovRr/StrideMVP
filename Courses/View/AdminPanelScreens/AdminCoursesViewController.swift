@@ -76,7 +76,7 @@ extension AdminCoursesViewController: UICollectionViewDelegate, UICollectionView
         
         if segue.identifier == "admin" {
             let vc = segue.destination as! AddModuleCoursesViewController
-            vc.idCourse = selectCourse.id
+            vc.presenter.idCourse = selectCourse.id
             vc.role = .adminVerification
         }
         

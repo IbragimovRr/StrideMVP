@@ -275,7 +275,7 @@ class AddInfoAboutCourseVC: UIViewController {
 
         if segue.identifier == "goToAddModule" {
             let vc = segue.destination as! AddModuleCoursesViewController
-            vc.idCourse = idCourse
+            vc.presenter.idCourse = idCourse
         }else if segue.identifier == "category" {
             let vc = segue.destination as! PickerModelViewController
             vc.delegate = self
