@@ -30,7 +30,7 @@ class AddCourseViewController: UIViewController {
     private var isChangedText = false
     private var isSave = true
     
-    var module = Modules(name: "", minutes: 0, id: 0)
+    var module = CustomModule(module: Modules(name: "", minutes: 0, id: 0))
     var nameCourse = ""
     
     
@@ -137,7 +137,7 @@ class AddCourseViewController: UIViewController {
     
     
     private func design() {
-        nameCourseLBL.text = module.name
+        nameCourseLBL.text = module.module.name
     }
     
     
@@ -191,7 +191,7 @@ class AddCourseViewController: UIViewController {
     private func addCourse(text: NSAttributedString) async throws {
         do {
             loadingSettings()
-            try await CourseServices().addModulesData(text: text, moduleID: module.id)
+            try await CourseServices().addModulesData(text: text, moduleID: module.module.id)
             loadingStop()
             isSave = true
         }catch ErrorNetwork.runtimeError(let error) {

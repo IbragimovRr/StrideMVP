@@ -45,7 +45,7 @@ class VideoModuleViewController: UIViewController, VideoModuleViewDelegate {
         authorName.text = module.author
         views.text = "\(module.views) просмотров"
         time.text = "\(module.timeVideo) минут"
-        nameModule.text = module.name
+        nameModule.text = module.module.name
         descriptionVideo.text = module.videoDescription
         if let videoURL = module.videoURL {
             settingsPlayer(videoURL: videoURL)
@@ -55,7 +55,6 @@ class VideoModuleViewController: UIViewController, VideoModuleViewDelegate {
     func settingsPlayer(videoURL: URL) {
         Task {
             let asset = AVAsset(url: videoURL)
-
             let playerItem = AVPlayerItem(asset: asset)
             player = AVPlayer(playerItem: playerItem)
             playerViewController.player = player

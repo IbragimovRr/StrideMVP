@@ -263,7 +263,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
                 return cell
             }
 
-            if let image = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].imageURL {
+            if let image = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].module.imageURL {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
                 cell.im.sd_setImage(with: image)
                 cell.settingsBtn.tag = indexPath.row
@@ -273,14 +273,14 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
                 cell.settingsBtn2.tag = indexPath.row
                 cell.settingsBtn2.addTarget(self, action: #selector(settings), for: .touchUpInside)
             }
-            cell.name.text = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].name
-            if presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].minutes == 0 {
+            cell.name.text = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].module.name
+            if presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].module.minutes == 0 {
                 cell.time.isHidden = true
             }else {
                 cell.time.isHidden = false
-                cell.time.text = "\(presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].minutes) минут(ы/а)"
+                cell.time.text = "\(presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].module.minutes) минут(ы/а)"
             }
-            cell.descrLbl.text = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].description
+            cell.descrLbl.text = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].module.description
             return cell
         }
     }
@@ -298,11 +298,21 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
         }else {
 
             if indexPath.row == presenter.course.courseDays[presenter.selectDay].modules.count {
-                presenter.addModule(dayID: presenter.course.courseDays[presenter.selectDay].dayID, position: indexPath.row)
+                
+//                presenter.addModule(dayID: presenter.course.courseDays[presenter.selectDay].dayID, position: indexPath.row)
                 performSegue(withIdentifier: "addModule", sender: self)
             }else {
                 presenter.selectModule = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row]
-                performSegue(withIdentifier: "goToAddCourse2", sender: self)
+                switch presenter.selectModule?.type {
+                case .custom:
+                    performSegue(withIdentifier: "goToAddCourse2", sender: self)
+                case .video:
+                    performSegue(withIdentifier: "goToAddVideoModule", sender: self)
+                case .training:
+                    performSegue(withIdentifier: "goToAddTrainingModule", sender: self)
+                case .none:
+                    break
+                }
             }
 
         }
@@ -312,16 +322,22 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
 
         if segue.identifier == "goToAddCourse2" {
             let vc = segue.destination as! AddCourseViewController
-            vc.module = presenter.selectModule
+            vc.module = presenter.selectModule as! CustomModule
             vc.nameCourse = presenter.course.nameCourse
+        }else if segue.identifier == "goToAddVideoModule" {
+            let vc = segue.destination as! AddVideoModuleViewController
+            vc.presenter.module = presenter.selectModule as! VideoModule
         }else if segue.identifier == "goToModuleSettings" {
             let vc = segue.destination as! AddInfoAboutModuleViewController
-            vc.module = presenter.selectModule
+            vc.module = presenter.selectModule!.module
             vc.delegate = self
         }else if segue.identifier == "preview" {
             let vc = segue.destination as! InfoCoursesViewController
             vc.presenter.course.id = presenter.course.id
             vc.interface = role
+        }else if segue.identifier == "addModule" {
+            let vc = segue.destination as! TypeModuleViewController
+            vc.delegate = self
         }
 
     }
@@ -350,7 +366,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
             return
         }
         
-        var module = presenter.course.courseDays[presenter.selectDay].modules[sourceIndexPath.row]
+        var module = presenter.course.courseDays[presenter.selectDay].modules[sourceIndexPath.row].module
         module.position = destinationIndexPath.row + 1
         presenter.changePositionModule(module: module)
         let movedModule = presenter.course.courseDays[presenter.selectDay].modules.remove(at: sourceIndexPath.row)
@@ -383,12 +399,27 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
     }
 
 }
-extension AddModuleCoursesViewController: ChangeInfoModule {
+extension AddModuleCoursesViewController: ChangeInfoModule, TypeModuleDelegate {
+    
+    func addModule(type: ModuleType) {
+        var module: ModuleProtocol!
+        switch type {
+        case .custom:
+            module = CustomModule(module: Modules(name: "", minutes: 0, id: 0))
+        case .video:
+            module = VideoModule(module: Modules(name: "", minutes: 0, id: 0))
+        case .training:
+            module = TrainingModule(module: Modules(name: "", minutes: 0, id: 0))
+        }
+        presenter.course.courseDays[presenter.selectDay].modules.append(module)
+        modulesCollectionView.reloadData()
+    }
+    
 
     func changeInfoModuleDismiss(module: Modules, moduleID: Int) {
         for x in 0...presenter.course.courseDays[presenter.selectDay].modules.count - 1 {
-            if presenter.course.courseDays[presenter.selectDay].modules[x].id == moduleID {
-                presenter.course.courseDays[presenter.selectDay].modules[x] = module
+            if presenter.course.courseDays[presenter.selectDay].modules[x].module.id == moduleID {
+                presenter.course.courseDays[presenter.selectDay].modules[x].module = module
                 modulesCollectionView.reloadData()
             }
         }
@@ -396,7 +427,7 @@ extension AddModuleCoursesViewController: ChangeInfoModule {
 
     func deleteModuleDismiss(moduleID: Int) {
         for x in 0...presenter.course.courseDays[presenter.selectDay].modules.count - 1 {
-            if presenter.course.courseDays[presenter.selectDay].modules[x].id == moduleID {
+            if presenter.course.courseDays[presenter.selectDay].modules[x].module.id == moduleID {
                 presenter.course.courseDays[presenter.selectDay].modules.remove(at: x)
                 modulesCollectionView.reloadData()
                 break

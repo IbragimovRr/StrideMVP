@@ -103,7 +103,9 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     
     func showUser(user: UserModel) {
         nameLbl.text = "\(presenter.userModel.name) \(presenter.userModel.surname)"
-        avatar.sd_setImage(with: presenter.userModel.avatarURL!)
+        if let avatarURL = presenter.userModel.avatarURL {
+            avatar.sd_setImage(with: avatarURL)
+        }
     }
     
     func showCelebrity(celebrity: [UserModel]) {

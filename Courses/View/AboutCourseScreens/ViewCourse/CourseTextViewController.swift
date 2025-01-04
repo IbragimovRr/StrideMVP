@@ -14,7 +14,7 @@ class CourseTextViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var nameCourse: UILabel!
 
-    var module = Modules(name: "", minutes: 0, id: 0)
+    var module = CustomModule(module: Modules(name: "", minutes: 0, id: 0))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class CourseTextViewController: UIViewController {
         self.overrideUserInterfaceStyle = .dark
         textView.textColor = .white
         loadingSettings()
-        nameCourse.text = module.name
+        nameCourse.text = module.module.name
     }
 
     func getData() {

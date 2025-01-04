@@ -23,7 +23,7 @@ class ModulesCourseViewController: UIViewController {
     private var scaleView = false
     private var course = CourseModel()
     private var selectDay: Int = 0
-    private var selectModule = Modules(name: "", minutes: 0, id: 0)
+    private var selectModule: ModuleProtocol?
     var idCourse = 0
 
 
@@ -108,7 +108,7 @@ class ModulesCourseViewController: UIViewController {
     
     private func checkModulesCompleted(day: Int) -> Bool {
         for x in 0...course.courseDays[day].modules.count - 1 {
-            if course.courseDays[day].modules[x].isCompleted == false {
+            if course.courseDays[day].modules[x].module.isCompleted == false {
                 return false
             }
         }
@@ -194,18 +194,18 @@ extension ModulesCourseViewController: UICollectionViewDelegate, UICollectionVie
 
             guard course.courseDays.isEmpty == false else { return cell }
 
-            if let image = course.courseDays[selectDay].modules[indexPath.row].imageURL {
+            if let image = course.courseDays[selectDay].modules[indexPath.row].module.imageURL {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
                 cell.im.sd_setImage(with: image)
             }
-            cell.name.text = course.courseDays[selectDay].modules[indexPath.row].name
-            if course.courseDays[selectDay].modules[indexPath.row].minutes == 0 {
+            cell.name.text = course.courseDays[selectDay].modules[indexPath.row].module.name
+            if course.courseDays[selectDay].modules[indexPath.row].module.minutes == 0 {
                 cell.time.isHidden = true
             }else {
                 cell.time.isHidden = false
-                cell.time.text = "\(course.courseDays[selectDay].modules[indexPath.row].minutes) минут(ы/а)"
+                cell.time.text = "\(course.courseDays[selectDay].modules[indexPath.row].module.minutes) минут(ы/а)"
             }
-            cell.descrLbl.text = course.courseDays[selectDay].modules[indexPath.row].description
+            cell.descrLbl.text = course.courseDays[selectDay].modules[indexPath.row].module.description
 
             return cell
         }
@@ -218,8 +218,8 @@ extension ModulesCourseViewController: UICollectionViewDelegate, UICollectionVie
             daysCollectionView.reloadData()
         }else {
             let module = course.courseDays[selectDay].modules[indexPath.row]
-            completedModule(module)
-            course.courseDays[selectDay].modules[indexPath.row].isCompleted = true
+            completedModule(module.module)
+            course.courseDays[selectDay].modules[indexPath.row].module.isCompleted = true
             selectModule = module
             performSegue(withIdentifier: "goToText", sender: self)
         }
@@ -229,7 +229,7 @@ extension ModulesCourseViewController: UICollectionViewDelegate, UICollectionVie
 
         if segue.identifier == "goToText" {
             let vc = segue.destination as! CourseTextViewController
-            vc.module = selectModule
+            vc.module = selectModule as! CustomModule
         }else if segue.identifier == "goToInfo" {
             let vc = segue.destination as! InfoCoursesViewController
             vc.presenter.course.id = idCourse

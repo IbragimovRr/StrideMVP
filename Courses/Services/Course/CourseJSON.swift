@@ -14,7 +14,7 @@ class CourseJSON {
     func daysInCourse(value: Data) async throws -> CourseModel {
         let json = JSON(value)
         let course = CourseModel()
-        var modules = [Modules]()
+        var modules = [ModuleProtocol]()
         course.nameCourse = json["title"].stringValue
         course.id = json["id"].intValue
         course.isDraft = json["is_draft"].boolValue
@@ -36,7 +36,7 @@ class CourseJSON {
                     let desc = json["days"][x]["modules"][y]["desc"].stringValue
                     let index = json["days"][x]["modules"][y]["order"].intValue
                     let completed = json["days"][x]["modules"][y]["module_complete"].boolValue
-                    modules.append(Modules(text: URL(string: text), name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index))
+                    modules.append(CustomModule(module: Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index), text: URL(string: text)))
                 }
             }
             course.courseDays.append(CourseDays(dayID: idDay, type: .noneSee, modules: modules, completed: completed))

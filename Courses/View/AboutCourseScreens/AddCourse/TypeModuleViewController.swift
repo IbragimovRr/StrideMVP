@@ -19,6 +19,7 @@ class TypeModuleViewController: UIViewController {
     
     private var selectTag: Int? = nil
     private var startPosition = CGPoint()
+    var delegate: TypeModuleDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +83,21 @@ class TypeModuleViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: UIButton) {
-        
+        var type: ModuleType = .custom
+        switch selectTag {
+        case 0:
+            type = .custom
+        case 1:
+            type = .video
+        case 2:
+            type = .training
+        case .none:
+            break
+        case .some(_):
+            break
+        }
+        delegate.addModule(type: type)
+        dismiss(animated: false)
     }
     
     

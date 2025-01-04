@@ -49,9 +49,63 @@ class CourseModel {
     
 }
 
-struct Modules {
+protocol ModuleProtocol {
+    var module: Modules { get set }
+    var type: ModuleType { get set }
+    var position: Int { get }
+}
+
+struct CustomModule: ModuleProtocol {
+    var module: Modules
+    var type: ModuleType = .custom
     var text: URL?
+    
+    var position: Int {
+        module.position
+    }
+}
+
+struct VideoModule: ModuleProtocol {
+    var module: Modules
+    var type: ModuleType = .video
     var videoURL: URL?
+    var views: Int = 0
+    var timeVideo: Int = 0
+    var author: String?
+    var videoDescription: String?
+    
+    var position: Int {
+        module.position
+    }
+}
+
+struct TrainingModule: ModuleProtocol {
+    var module: Modules
+    var type: ModuleType = .training
+    var mediaURL: URL?
+    var description: String = ""
+    var trainingItems = [TrainingItem]()
+    
+    var position: Int {
+        module.position
+    }
+}
+
+enum FormatTraining: String {
+    case weight = "Вес"
+    case repeats = "Повторения"
+    case timer = "Таймер"
+    case distance = "Расстояние"
+}
+
+struct TrainingItem {
+    var firstItemType: FormatTraining?
+    var firstItemData: String?
+    var secondItemType: FormatTraining?
+    var secondItemData: String?
+}
+
+struct Modules {
     var name: String
     var minutes: Int
     var imageURL: URL?
@@ -59,25 +113,21 @@ struct Modules {
     var id: Int
     var isCompleted: Bool = false
     var position: Int = 0
-    var views: Int = 0
-    var timeVideo: Int = 0
-    var author: String?
-    var videoDescription: String?
-    var type : ModuleType = .text
 }
 
 enum ModuleType {
-    case text
+    case custom
     case video
+    case training
 }
 
 struct CourseDays {
     var dayID: Int
     var type: TypeDays = .noneSee
-    var modules = [Modules]()
+    var modules = [ModuleProtocol]()
     var completed: Bool = false
     
-    init(dayID: Int, type: TypeDays, modules: [Modules] = [Modules](), completed: Bool = false) {
+    init(dayID: Int, type: TypeDays, modules: [ModuleProtocol] = [ModuleProtocol](), completed: Bool = false) {
         self.dayID = dayID
         self.type = type
         self.modules = modules.sorted(by: { $0.position < $1.position })

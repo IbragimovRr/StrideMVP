@@ -20,7 +20,7 @@ class AddModuleCoursesPresenter: AddModuleCoursesPresenterDelegate {
     var view: AddModuleCoursesViewDelegate?
     var course = CourseModel()
     var selectDay: Int = 0
-    var selectModule = Modules(name: "", minutes: 0, id: 0)
+    var selectModule: ModuleProtocol?
     var idCourse = 0
     
     func addCourseInfo() {
@@ -59,7 +59,7 @@ class AddModuleCoursesPresenter: AddModuleCoursesPresenterDelegate {
         Task {
             do {
                 let id = try await CourseServices().addModulesInCourse(dayID: dayID, position: position)
-                course.courseDays[selectDay].modules.append(Modules(name: "", minutes: 0, id: id, position: position))
+                course.courseDays[selectDay].modules.append(selectModule!)
                 DispatchQueue.main.async {
                     self.view?.showModule(position: position)
                 }
