@@ -19,7 +19,7 @@ class AddVideoModulePresenter: AddVideoModuleDelegate {
     var module = VideoModule(module: Modules(name: "", minutes: 0, id: 0))
     
     func getModule() {
-        module = VideoModule(module: Modules(name: "Видео модуль", minutes: 55, id: 0, isCompleted: false, position: 0), videoURL: nil, views: 550, timeVideo: 50, author: "Руслан Ибрагимов", videoDescription: "Качественное видео снятое в Москве")
+//        module = VideoModule(module: Modules(name: "Видео модуль", minutes: 55, id: 0, isCompleted: false, position: 0), videoURL: nil, views: 550, timeVideo: 50, author: "Руслан Ибрагимов", videoDescription: "Качественное видео снятое в Москве")
         view?.showData()
         if module.videoURL != nil {
             view?.showVideo()

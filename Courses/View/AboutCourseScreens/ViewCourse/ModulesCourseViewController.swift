@@ -198,6 +198,9 @@ extension ModulesCourseViewController: UICollectionViewDelegate, UICollectionVie
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
                 cell.im.sd_setImage(with: image)
             }
+            
+            cell.typeModule(course.courseDays[selectDay].modules[indexPath.row].type)
+            
             cell.name.text = course.courseDays[selectDay].modules[indexPath.row].module.name
             if course.courseDays[selectDay].modules[indexPath.row].module.minutes == 0 {
                 cell.time.isHidden = true
