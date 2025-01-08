@@ -10,8 +10,11 @@ import SwiftyJSON
 import Alamofire
 import Lottie
 import WebKit
+import SwiftyMarkdown
+
 
 class AddCourseViewController: UIViewController {
+//    @IBOutlet weak var markdownTextView: UITextView!
     
     @IBOutlet weak var redo: UIButton!
     @IBOutlet weak var undo: UIButton!
@@ -23,7 +26,7 @@ class AddCourseViewController: UIViewController {
     @IBOutlet weak var fontView: UIView!
     @IBOutlet weak var bottomConsoleView: NSLayoutConstraint!
     @IBOutlet weak var alingment: UIButton!
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView: MarkdownTextView!
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
@@ -33,19 +36,16 @@ class AddCourseViewController: UIViewController {
     var module = CustomModule(module: Modules(name: "", minutes: 0, id: 0))
     var nameCourse = ""
     
-    
     private var colorSelect = UIColor.white {
         didSet {
             colorView.backgroundColor = colorSelect
             textView.typingAttributes[.foregroundColor] = colorSelect
-            selectText(attributes: [.font: fontSelect, .foregroundColor: colorSelect])
         }
     }
     private var fontSelect = UIFont.systemFont(ofSize: 16) {
         didSet {
             fontTitle.text = fontSelect.fontName
             textView.typingAttributes[.font] = fontSelect
-            selectText(attributes: [.font: fontSelect, .foregroundColor: colorSelect])
         }
     }
     private var alignment = NSMutableParagraphStyle().alignment {
@@ -54,7 +54,6 @@ class AddCourseViewController: UIViewController {
             paragraph.alignment = alignment
             textView.typingAttributes[.paragraphStyle] = paragraph
             changedAlignment(alignment)
-            selectText(attributes: [.paragraphStyle: paragraph])
         }
     }
     private var sizeFontSelect = 16.0 {
@@ -68,7 +67,8 @@ class AddCourseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.delegate = self
+//        textView.delegate = self
+//        markdownTextView.delegate = self
         self.overrideUserInterfaceStyle = .dark
         getData()
         design()
@@ -115,26 +115,18 @@ class AddCourseViewController: UIViewController {
     
     func getData() {
         Task {
-            loadingSettings()
-            guard let module = module.text else {
-                loadingStop()
-                return
-            }
-            let attributedString = try await FilePath().downloadFileWithURL(url: module)
-            textView.attributedText = attributedString
             
-            loadingStop()
+            
+            let markdownText = """
+        *italics* or _italics_
+        """
+            textView.setMarkdown(markdownText)
+            textView.onTextChange = { newMarkdownText in
+                print("New Markdown text:\n \(newMarkdownText)")
+            }
+            
         }
     }
-    
-    private func downloadImageByURL() {
-        let links = textView.getURLs()
-        
-        for link in links {
-            addImageInTextView(imageURL: link)
-        }
-    }
-    
     
     private func design() {
         nameCourseLBL.text = module.module.name
@@ -175,19 +167,6 @@ class AddCourseViewController: UIViewController {
     }
     
     
-    private func selectText(attributes: [NSAttributedString.Key: Any]) {
-        guard let selectedRange = textView.selectedTextRange else { return }
-        let selectedText = textView.text(in: selectedRange)
-        guard selectedText != "" else {return}
-        let nsRange = textView.convertUITextRangeToNSRange(range: selectedRange)
-        let previousAttributes = textView.attributedText.attributedSubstring(from: nsRange)
-        textView.replaceRange(nsRange, withAttributedText: previousAttributes)
-        textView.textStorage.addAttributes(attributes, range: nsRange)
-        textView.selectedTextRange = selectedRange
-        checkUndoRedo()
-    }
-    
-    
     private func addCourse(text: NSAttributedString) async throws {
         do {
             loadingSettings()
@@ -219,6 +198,31 @@ class AddCourseViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    func applyMarkdownFormatting(format: String){
+        
+        guard let selectedRange = textView.selectedTextRange else {
+            return
+        }
+        
+        guard let selectedText = textView.text(in: selectedRange) else {
+            return
+        }
+        
+        let markdownString = "\(format)\(selectedText)\(format)"
+        
+        textView.replace(selectedRange, withText: markdownString)
+        
+        if let cursorPosition = textView.position(from: selectedRange.end, offset: format.count) {
+            textView.selectedTextRange = textView.textRange(from: cursorPosition, to: cursorPosition)
+        }
+    }
+    
+//    func updateMarkdown() {
+//        let markdown = SwiftyMarkdown(string: markdownText)
+//        textView.attributedText = markdown.attributedString()
+//    }
+
+    
     // MARK: - UIButton
     
     @IBAction func okFont(_ sender: Any) {
@@ -233,9 +237,9 @@ class AddCourseViewController: UIViewController {
     
     @IBAction func save(_ sender: UIButton) {
         textView.resignFirstResponder()
-        Task {
-            try await addCourse(text: textView.attributedText)
-        }
+//        Task {
+//            try await addCourse(text: textView.attributedText)
+//        }
     }
     
     @IBAction func color(_ sender: UIButton) {
@@ -255,12 +259,13 @@ class AddCourseViewController: UIViewController {
     }
     
     @IBAction func changedText(_ sender: UIButton) {
-        textView.isSelectable = true
-        textView.isEditable = false
-        textView.becomeFirstResponder()
-        fontView.isHidden = false
-        isChangedText = true
-        textStyleBar()
+//        textView.isSelectable = true
+//        textView.isEditable = false
+//        textView.becomeFirstResponder()
+//        fontView.isHidden = false
+//        isChangedText = true
+//        applyMarkdownFormatting(format: "**")
+        textView.toggleBoldOnSelection()
     }
     
     @IBAction func fontBtn(_ sender: UIButton) {
@@ -325,55 +330,19 @@ class AddCourseViewController: UIViewController {
 // MARK: - TextView
 extension AddCourseViewController: UITextViewDelegate {
     
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        let selectedRange = textView.selectedRange
-        
-        if selectedRange.length > 0 && isChangedText {
-            let attributedText = textView.attributedText!
-            
-            let font = attributedText.attribute(.font, at: selectedRange.location, effectiveRange: nil) as? UIFont ?? textView.font
-            let color = attributedText.attribute(.foregroundColor, at: selectedRange.location, effectiveRange: nil) as? UIColor ?? textView.textColor
-            
-            
-            
-            if let font = font {
-                fontSelect = font
-                sizeFontSelect = font.pointSize
-            }
-            
-            if let color = color {
-                colorSelect = color
-            }
-            
-        }
-        
-    }
     
-    func textViewDidChange(_ textView: UITextView) {
-        checkUndoRedo()
-        isSave = false
-        textStyleBar()
-    }
+//    func textViewDidChange(_ textView: UITextView) {
+//        if let text = textView.text {
+//            self.markdownText = text
+//            updateMarkdown()
+//        }
+//    }
     
-    private func textStyleBar() {
-        if let font = textView.typingAttributes[.font] as? UIFont {
-            fontSelect = font
-            sizeFontSelect = font.pointSize
-        }else {
-            let font = fontSelect
-            fontSelect = font
-            let size = sizeFont
-            sizeFont = size
-        }
-        if let color = textView.typingAttributes[.foregroundColor] as? UIColor {
-            colorSelect = color
-        }else {
-            colorSelect = .white
-        }
-        if let align = textView.typingAttributes[.paragraphStyle] as? NSParagraphStyle {
-            alignment = align.alignment
-        }
-    }
+//    func textViewDidChange(_ textView: UITextView) {
+//        
+//        checkUndoRedo()
+//        isSave = false
+//    }
     
 }
 // MARK: - Image
@@ -381,68 +350,12 @@ extension AddCourseViewController: UIImagePickerControllerDelegate & UINavigatio
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage, let url = info[.imageURL] as? URL {
-            ImageResize().deleteTempImage(atURL: url)
-            let resizeImage = ImageResize.resizeAndCompressImage(image: image, maxSizeKB: 300 * 1024)
-            addImageInTextView(image: resizeImage)
             picker.dismiss(animated: true)
         }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
-    }
-    
-    
-    private func addImageInTextView(image: UIImage) {
-        let attachment = NSTextAttachment()
-        let cornerImage = image.withRoundedCorners(radius: 15)
-        attachment.image = cornerImage
-        let targetSize = resizeImageAboutTextView(image: image)
-        attachment.bounds = CGRect(origin: .zero, size: targetSize)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        let attributedString = NSMutableAttributedString(attachment: attachment)
-        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
-        let combinedString = NSMutableAttributedString(attributedString: self.textView.attributedText)
-        combinedString.insert(attributedString, at: textView.selectedRange.location)
-        self.textView.attributedText = combinedString
-    }
-    
-    private func addImageInTextView(imageURL: URL) {
-        let attachment = NSTextAttachment()
-        
-        if let imageData = try? Data(contentsOf: imageURL),
-           let image = UIImage(data: imageData) {
-            
-            let cornerImage = image.withRoundedCorners(radius: 15)
-            
-            attachment.image = cornerImage
-            
-            let targetSize = resizeImageAboutTextView(image: cornerImage)
-            attachment.bounds = CGRect(origin: .zero, size: targetSize)
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .center
-            
-            let attributedString = NSMutableAttributedString(attachment: attachment)
-            attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
-            
-            if let range = textView.attributedText.string.range(of: imageURL.absoluteString) {
-                
-                let combinedString = NSMutableAttributedString(attributedString: self.textView.attributedText)
-                combinedString.replaceCharacters(in: NSRange(range, in: combinedString.string), with: attributedString)
-                self.textView.attributedText = combinedString
-            }
-        }
-    }
-
-
-    
-    private func resizeImageAboutTextView(image: UIImage) -> CGSize {
-        let targetWidth = UIScreen.main.bounds.width - 30
-        let aspectRatio = image.size.height / image.size.width
-        let targetSize = CGSize(width: targetWidth, height: targetWidth * aspectRatio)
-        return targetSize
     }
     
     

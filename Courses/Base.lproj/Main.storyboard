@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NAm-LK-wo0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bKb-Fe-dxw">
     <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -321,7 +321,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvN-T3-fMd">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvN-T3-fMd" customClass="MarkdownTextView" customModule="Courses" customModuleProvider="target">
                                 <rect key="frame" x="10" y="128" width="373" height="640"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -676,12 +676,12 @@
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="top" secondItem="XmU-3q-Hr8" secondAttribute="top" id="2tt-Qg-RBW"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="jHI-pb-aUK" secondAttribute="trailing" id="3BT-8M-Lim"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="15" id="AWy-Bx-pCA"/>
+                            <constraint firstItem="mvN-T3-fMd" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="10" id="BcS-1q-ohi"/>
                             <constraint firstItem="1KA-rw-DuX" firstAttribute="bottom" secondItem="xnu-Sq-5BV" secondAttribute="bottom" id="L77-ad-Nnv"/>
                             <constraint firstItem="mvN-T3-fMd" firstAttribute="top" secondItem="jHI-pb-aUK" secondAttribute="bottom" constant="15" id="OmC-ep-4Mu"/>
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="leading" secondItem="xnu-Sq-5BV" secondAttribute="leading" id="PCp-UW-C6E"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="mvN-T3-fMd" secondAttribute="trailing" constant="10" id="W7o-h2-WG4"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="Tcz-ME-6lc" secondAttribute="trailing" constant="15" id="XSS-W7-GxF"/>
-                            <constraint firstItem="mvN-T3-fMd" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="10" id="Y4j-24-h0r"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="top" secondItem="mvN-T3-fMd" secondAttribute="bottom" id="bY6-Nw-Td3"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="bottom" secondItem="Tcz-ME-6lc" secondAttribute="bottom" id="e27-Hi-dfQ"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="1KA-rw-DuX" secondAttribute="trailing" id="gfz-nV-f19"/>
@@ -713,7 +713,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="5568.8372093023254" y="1095.7081545064379"/>
+            <point key="canvasLocation" x="5568.7022900763359" y="1095.0704225352113"/>
         </scene>
         <!--Registr View Controller-->
         <scene sceneID="GeJ-dB-txG">

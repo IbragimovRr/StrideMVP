@@ -61,6 +61,8 @@
 		44682CAA2D03BF5700087C62 /* InfoCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */; };
 		44682CAC2D076A8B00087C62 /* ConfidetialityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CAB2D076A8B00087C62 /* ConfidetialityPresenter.swift */; };
 		44682CAE2D076BC500087C62 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CAD2D076BC500087C62 /* ThemeModel.swift */; };
+		446BF19F2D2C723200D8E534 /* SwiftyMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = 446BF19E2D2C723200D8E534 /* SwiftyMarkdown */; };
+		446BF1A12D2C948000D8E534 /* MarkdownTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446BF1A02D2C948000D8E534 /* MarkdownTextView.swift */; };
 		4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */; };
 		447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */; };
 		447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */; };
@@ -215,6 +217,7 @@
 		44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoursePresenter.swift; sourceTree = "<group>"; };
 		44682CAB2D076A8B00087C62 /* ConfidetialityPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfidetialityPresenter.swift; sourceTree = "<group>"; };
 		44682CAD2D076BC500087C62 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
+		446BF1A02D2C948000D8E534 /* MarkdownTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownTextView.swift; sourceTree = "<group>"; };
 		4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMoneyInfoViewController.swift; sourceTree = "<group>"; };
 		447D8C802C85DEEB00EF2217 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		447D8C8D2C89D09600EF2217 /* emptyBox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyBox.json; sourceTree = "<group>"; };
@@ -304,6 +307,7 @@
 				44F395482C9B8BA200861759 /* CropViewController in Frameworks */,
 				44064C9C2C2861D700AB5227 /* SDWebImageMapKit in Frameworks */,
 				44064C922C2861B900AB5227 /* Alamofire in Frameworks */,
+				446BF19F2D2C723200D8E534 /* SwiftyMarkdown in Frameworks */,
 				44064C9A2C2861D700AB5227 /* SDWebImage in Frameworks */,
 				44F3954A2C9B8BA200861759 /* TOCropViewController in Frameworks */,
 				447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */,
@@ -397,6 +401,7 @@
 				447FE4922CDD2300007C5B31 /* MainTabBarController.swift */,
 				448E73FD2CFF09E200C3000D /* Segment.swift */,
 				440C9C3E2CED6C47007D0735 /* ProtectScreen.swift */,
+				446BF1A02D2C948000D8E534 /* MarkdownTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -674,6 +679,7 @@
 				44F118D12D109025000FCDC3 /* AppMetricaCore */,
 				44F118D32D109025000FCDC3 /* AppMetricaCrashes */,
 				44F118D52D109025000FCDC3 /* AppMetricaLibraryAdapter */,
+				446BF19E2D2C723200D8E534 /* SwiftyMarkdown */,
 			);
 			productName = Courses;
 			productReference = 440DAB302C1748D400C576FB /* Courses.app */;
@@ -713,6 +719,7 @@
 				447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */,
 				44F395462C9B8BA200861759 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */,
+				446BF19D2D2C723200D8E534 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
 			);
 			productRefGroup = 440DAB312C1748D400C576FB /* Products */;
 			projectDirPath = "";
@@ -813,6 +820,7 @@
 				44547E592CF4C1B50051C782 /* CreatePromoViewController.swift in Sources */,
 				44D84B282D1EF40C001A35CA /* AddVideoModuleViewController.swift in Sources */,
 				4442F3D82C31BFDB00203A36 /* PageLayout.swift in Sources */,
+				446BF1A12D2C948000D8E534 /* MarkdownTextView.swift in Sources */,
 				44E906372C2ADE8700FFA6DD /* BannerCollectionViewCell.swift in Sources */,
 				44064C812C26F0E800AB5227 /* Border.swift in Sources */,
 				44682CA72D0362B800087C62 /* ChangeInformationPresenter.swift in Sources */,
@@ -1133,6 +1141,14 @@
 				minimumVersion = 5.19.3;
 			};
 		};
+		446BF19D2D2C723200D8E534 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimonFairbairn/SwiftyMarkdown.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.4;
+			};
+		};
 		447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/tinkoff-mobile-tech/tinkoff-asdk-ios?tab=readme-ov-file#%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5";
@@ -1203,6 +1219,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 44064C982C2861D700AB5227 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
+		};
+		446BF19E2D2C723200D8E534 /* SwiftyMarkdown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 446BF19D2D2C723200D8E534 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */;
+			productName = SwiftyMarkdown;
 		};
 		447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */ = {
 			isa = XCSwiftPackageProductDependency;

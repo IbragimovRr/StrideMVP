@@ -1,5 +1,5 @@
 {
-  "originHash" : "d3a5a6715f38cbc2a99c146397ce7d4d0855f73a9f6f97471e2297c5aaf234b2",
+  "originHash" : "f0c13e652c1eed461f7fb60b82d885746e753acaad83cbbf1aa134171bee88ad",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -98,6 +98,15 @@
       "state" : {
         "revision" : "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
         "version" : "5.0.2"
+      }
+    },
+    {
+      "identity" : "swiftymarkdown",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SimonFairbairn/SwiftyMarkdown.git",
+      "state" : {
+        "revision" : "dde451ab4ed9b77b328e21baa471fdfa0cf61369",
+        "version" : "1.2.4"
       }
     },
     {
