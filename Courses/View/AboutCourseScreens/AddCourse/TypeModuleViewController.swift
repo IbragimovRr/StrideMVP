@@ -56,7 +56,7 @@ class TypeModuleViewController: UIViewController {
             videoImage.image = UIImage.videoModule2
         case 2:
             trainingView.color = UIColor.lightBlackMain
-            trainingImage.image = UIImage.trainingModule
+            trainingImage.image = UIImage.trainingModule2
         default:
             break
         }
@@ -68,7 +68,7 @@ class TypeModuleViewController: UIViewController {
         videoView.color = UIColor.lightBlackMain
         videoImage.image = UIImage.videoModule2
         trainingView.color = UIColor.lightBlackMain
-        trainingImage.image = UIImage.trainingModule
+        trainingImage.image = UIImage.trainingModule2
     }
     
     @IBAction func selectType(_ sender: UIButton) {

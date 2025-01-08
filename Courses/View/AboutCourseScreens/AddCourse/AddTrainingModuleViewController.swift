@@ -18,6 +18,7 @@ protocol AddTrainingModuleViewDelegate {
 
 class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDelegate {
 
+    @IBOutlet weak var heigthCollection: NSLayoutConstraint!
     @IBOutlet weak var distanceView: Border!
     @IBOutlet weak var timerView: Border!
     @IBOutlet weak var repeatsView: Border!
@@ -56,10 +57,11 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
     var presenter = AddTrainingModulePresenter()
-    var trainingItem = TrainingItem() {
-        didSet {
-            countTypeChange()
-            hiddenTrainingItems()
+    var trainingItem: TrainingItem {
+        get {
+            return presenter.trainingItem
+        }set {
+            presenter.trainingItem = newValue
         }
     }
     
@@ -77,11 +79,19 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         toggleControlVideo(isPlay: false)
     }
     
+    private func changeHeightCollection() {
+        heigthCollection.constant = trainingCollectionView.contentSize.height
+    }
+    
     func showData() {
         let module = presenter.module
         nameModule.text = module.module.name
         descriptionText.text = module.description
         updateCharCountLabel(count: descriptionText.text.count)
+        updateFormatUI()
+        trainingCollectionView.reloadData()
+        trainingCollectionView.layoutIfNeeded()
+        changeHeightCollection()
     }
     
     func showVideo() {
@@ -114,6 +124,7 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         if countType.text == "2/2" {
             trainingCollectionView.isHidden = false
             countType.isHidden = true
+            trainingCollectionView.reloadData()
             isNotEnabledType()
         }else {
             trainingCollectionView.isHidden = true
@@ -195,7 +206,6 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         }else if trainingItem.secondItemType == nil {
             trainingItem.secondItemType = type
         }
-        selectType(type: type)
     }
     
     private func formatDelete(type: FormatTraining) {
@@ -204,7 +214,6 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         }else if trainingItem.secondItemType == type {
             trainingItem.secondItemType = nil
         }
-        unselectType(type: type)
     }
     
     private func isEnabledType() {
@@ -245,6 +254,24 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         }
     }
     
+    private func updateFormatUI() {
+        unselectAllType()
+        countTypeChange()
+        hiddenTrainingItems()
+        if trainingItem.firstItemType == .weight || trainingItem.secondItemType == .weight {
+            selectType(type: .weight)
+        }
+        if trainingItem.firstItemType == .repeats || trainingItem.secondItemType == .repeats {
+            selectType(type: .repeats)
+        }
+        if trainingItem.firstItemType == .timer || trainingItem.secondItemType == .timer {
+            selectType(type: .timer)
+        }
+        if trainingItem.firstItemType == .distance || trainingItem.secondItemType == .distance {
+            selectType(type: .distance)
+        }
+    }
+    
     private func selectType(type: FormatTraining) {
         switch type {
         case .weight:
@@ -274,32 +301,34 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         }
     }
     
-    private func unselectType(type: FormatTraining) {
-        switch type {
-        case .weight:
-            weightBox.image = UIImage.box
-            weightLbl.textColor = UIColor.grayMain
-            weightImage.image = UIImage.weight
-            weightView.color = UIColor.extraLightBlackMain
-            weightView.backgroundColor = UIColor.clear
-        case .repeats:
-            repeatsBox.image = UIImage.box
-            repeatsLbl.textColor = UIColor.grayMain
-            repeatsImage.image = UIImage.repeats
-            repeatsView.color = UIColor.extraLightBlackMain
-            repeatsView.backgroundColor = UIColor.clear
-        case .timer:
-            timerBox.image = UIImage.box
-            timerLbl.textColor = UIColor.grayMain
-            timerImage.image = UIImage.timer
-            timerView.color = UIColor.extraLightBlackMain
-            timerView.backgroundColor = UIColor.clear
-        case .distance:
-            distanceBox.image = UIImage.box
-            distanceLbl.textColor = UIColor.grayMain
-            distanceImage.image = UIImage.distance
-            distanceView.color = UIColor.extraLightBlackMain
-            distanceView.backgroundColor = UIColor.clear
+    private func unselectAllType() {
+        weightBox.image = UIImage.box
+        weightLbl.textColor = UIColor.grayMain
+        weightImage.image = UIImage.weight
+        weightView.color = UIColor.extraLightBlackMain
+        weightView.backgroundColor = UIColor.clear
+        repeatsBox.image = UIImage.box
+        repeatsLbl.textColor = UIColor.grayMain
+        repeatsImage.image = UIImage.repeats
+        repeatsView.color = UIColor.extraLightBlackMain
+        repeatsView.backgroundColor = UIColor.clear
+        timerBox.image = UIImage.box
+        timerLbl.textColor = UIColor.grayMain
+        timerImage.image = UIImage.timer
+        timerView.color = UIColor.extraLightBlackMain
+        timerView.backgroundColor = UIColor.clear
+        distanceBox.image = UIImage.box
+        distanceLbl.textColor = UIColor.grayMain
+        distanceImage.image = UIImage.distance
+        distanceView.color = UIColor.extraLightBlackMain
+        distanceView.backgroundColor = UIColor.clear
+    }
+    
+    func toggleFormatSelection(type: FormatTraining) {
+        if trainingItem.firstItemType == type || trainingItem.secondItemType == type {
+            formatDelete(type: type)
+        } else {
+            formatAdd(type: type)
         }
     }
     
@@ -317,32 +346,17 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     @IBAction func selectFormatType(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-            if trainingItem.firstItemType == .weight || trainingItem.secondItemType == .weight {
-                formatDelete(type: .weight)
-            }else {
-                formatAdd(type: .weight)
-            }
+            toggleFormatSelection(type: .weight)
         case 1:
-            if trainingItem.firstItemType == .repeats || trainingItem.secondItemType == .repeats {
-                formatDelete(type: .repeats)
-            }else {
-                formatAdd(type: .repeats)
-            }
+            toggleFormatSelection(type: .repeats)
         case 2:
-            if trainingItem.firstItemType == .timer || trainingItem.secondItemType == .timer {
-                formatDelete(type: .timer)
-            }else {
-                formatAdd(type: .timer)
-            }
+            toggleFormatSelection(type: .timer)
         case 3:
-            if trainingItem.firstItemType == .distance || trainingItem.secondItemType == .distance {
-                formatDelete(type: .distance)
-            }else {
-                formatAdd(type: .distance)
-            }
+            toggleFormatSelection(type: .distance)
         default:
             break
         }
+        updateFormatUI()
     }
     
     @IBAction func applyDescription(_ sender: UIButton) {
@@ -357,6 +371,14 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         }else {
             toggleControlVideo(isPlay: false)
         }
+    }
+    
+    @IBAction func back(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
     
     @IBAction func fullScreen(_ sender: UIButton) {
@@ -437,6 +459,8 @@ extension AddTrainingModuleViewController: UICollectionViewDelegate, UICollectio
         if indexPath.row == presenter.module.trainingItems.count {
             presenter.module.trainingItems.append(trainingItem)
             trainingCollectionView.reloadData()
+            trainingCollectionView.layoutIfNeeded()
+            changeHeightCollection()
         }
     }
     
