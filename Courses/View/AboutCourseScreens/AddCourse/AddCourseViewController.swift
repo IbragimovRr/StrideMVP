@@ -11,11 +11,12 @@ import Alamofire
 import Lottie
 import WebKit
 import SwiftyMarkdown
+import InfomaniakRichHTMLEditor
 
 
 class AddCourseViewController: UIViewController {
-//    @IBOutlet weak var markdownTextView: UITextView!
     
+    @IBOutlet weak var editorBackView: UIView!
     @IBOutlet weak var redo: UIButton!
     @IBOutlet weak var undo: UIButton!
     @IBOutlet weak var loading: LottieAnimationView!
@@ -26,7 +27,7 @@ class AddCourseViewController: UIViewController {
     @IBOutlet weak var fontView: UIView!
     @IBOutlet weak var bottomConsoleView: NSLayoutConstraint!
     @IBOutlet weak var alingment: UIButton!
-    @IBOutlet weak var textView: MarkdownTextView!
+    var editor = RichHTMLEditorView()
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
@@ -39,20 +40,19 @@ class AddCourseViewController: UIViewController {
     private var colorSelect = UIColor.white {
         didSet {
             colorView.backgroundColor = colorSelect
-            textView.typingAttributes[.foregroundColor] = colorSelect
+            editor.setForegroundColor(colorSelect)
         }
     }
     private var fontSelect = UIFont.systemFont(ofSize: 16) {
         didSet {
             fontTitle.text = fontSelect.fontName
-            textView.typingAttributes[.font] = fontSelect
+            editor.setFontName(fontSelect.fontName)
         }
     }
     private var alignment = NSMutableParagraphStyle().alignment {
         didSet {
             let paragraph = NSMutableParagraphStyle()
             paragraph.alignment = alignment
-            textView.typingAttributes[.paragraphStyle] = paragraph
             changedAlignment(alignment)
         }
     }
@@ -62,12 +62,15 @@ class AddCourseViewController: UIViewController {
             let roundedSize = round(sizeFontSelect * 10) / 10
             sizeFontSelect = roundedSize
             sizeFont.text = "\(sizeFontSelect) пт"
+            let intSize = Int(sizeFontSelect)
+            editor.setFontSize(intSize)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        textView.delegate = self
+        setupRichEditorView()
+        loadInitialHTML()
 //        markdownTextView.delegate = self
         self.overrideUserInterfaceStyle = .dark
         getData()
@@ -99,6 +102,25 @@ class AddCourseViewController: UIViewController {
         FilePath().deleteAlamofireFiles()
     }
     
+    func setupRichEditorView() {
+        editor.isScrollEnabled = true
+        editor.translatesAutoresizingMaskIntoConstraints = false
+        editorBackView.addSubview(editor)
+        
+        NSLayoutConstraint.activate([
+            editor.topAnchor.constraint(equalTo: editorBackView.topAnchor),
+            editor.bottomAnchor.constraint(equalTo: editorBackView.bottomAnchor),
+            editor.trailingAnchor.constraint(equalTo: editorBackView.trailingAnchor),
+            editor.leadingAnchor.constraint(equalTo: editorBackView.leadingAnchor)
+        ])
+    }
+
+    func loadInitialHTML() {
+        let initialHTML = "<p>This is some initial <b>rich</b> text.</p>"
+        editor.html = initialHTML
+    }
+
+    
     private func loadingSettings() {
         loading.loopMode = .loop
         loading.contentMode = .scaleToFill
@@ -116,14 +138,9 @@ class AddCourseViewController: UIViewController {
     func getData() {
         Task {
             
-            
             let markdownText = """
         *italics* or _italics_
         """
-            textView.setMarkdown(markdownText)
-            textView.onTextChange = { newMarkdownText in
-                print("New Markdown text:\n \(newMarkdownText)")
-            }
             
         }
     }
@@ -138,28 +155,32 @@ class AddCourseViewController: UIViewController {
         case .left:
             alingment.setImage(UIImage.leftTextFull, for: .normal)
             alingment.tag = 1
+            editor.justify(.left)
         case .center:
             alingment.setImage(UIImage.centerTextFull, for: .normal)
             alingment.tag = 2
+            editor.justify(.center)
         case .right:
             alingment.setImage(UIImage.rightTextFull, for: .normal)
             alingment.tag = 3
+            editor.justify(.right)
         case .justified:
             alingment.setImage(UIImage.defaulTextFull, for: .normal)
             alingment.tag = 0
+            editor.justify(.full)
         default:
             break
         }
     }
     
     private func checkUndoRedo() {
-        if textView.undoManager?.canUndo == true {
+        if editor.undoManager?.canUndo == true {
             undo.setImage(UIImage.undoFill, for: .normal)
         }else {
             undo.setImage(UIImage.undo, for: .normal)
         }
         
-        if textView.undoManager?.canRedo == true {
+        if editor.undoManager?.canRedo == true {
             redo.setImage(UIImage.rendoFill, for: .normal)
         }else {
             redo.setImage(UIImage.rendo, for: .normal)
@@ -197,38 +218,15 @@ class AddCourseViewController: UIViewController {
         
         present(alert, animated: true)
     }
-    
-    func applyMarkdownFormatting(format: String){
-        
-        guard let selectedRange = textView.selectedTextRange else {
-            return
-        }
-        
-        guard let selectedText = textView.text(in: selectedRange) else {
-            return
-        }
-        
-        let markdownString = "\(format)\(selectedText)\(format)"
-        
-        textView.replace(selectedRange, withText: markdownString)
-        
-        if let cursorPosition = textView.position(from: selectedRange.end, offset: format.count) {
-            textView.selectedTextRange = textView.textRange(from: cursorPosition, to: cursorPosition)
-        }
-    }
-    
-//    func updateMarkdown() {
-//        let markdown = SwiftyMarkdown(string: markdownText)
-//        textView.attributedText = markdown.attributedString()
-//    }
+
 
     
     // MARK: - UIButton
     
     @IBAction func okFont(_ sender: Any) {
         fontView.isHidden = true
-        textView.isEditable = true
-        textView.becomeFirstResponder()
+//        editor.isEditable = true
+//        editor.becomeFirstResponder()
         isChangedText = false
         checkUndoRedo()
     }
@@ -236,10 +234,11 @@ class AddCourseViewController: UIViewController {
     
     
     @IBAction func save(_ sender: UIButton) {
-        textView.resignFirstResponder()
+//        textView.resignFirstResponder()
 //        Task {
 //            try await addCourse(text: textView.attributedText)
 //        }
+        editor.html = editor.html
     }
     
     @IBAction func color(_ sender: UIButton) {
@@ -259,13 +258,11 @@ class AddCourseViewController: UIViewController {
     }
     
     @IBAction func changedText(_ sender: UIButton) {
-//        textView.isSelectable = true
-//        textView.isEditable = false
-//        textView.becomeFirstResponder()
-//        fontView.isHidden = false
-//        isChangedText = true
-//        applyMarkdownFormatting(format: "**")
-        textView.toggleBoldOnSelection()
+//        editor.isSelectable = true
+//        editor.isEditable = false
+//        editor.becomeFirstResponder()
+        fontView.isHidden = false
+        isChangedText = true
     }
     
     @IBAction func fontBtn(_ sender: UIButton) {
@@ -278,9 +275,9 @@ class AddCourseViewController: UIViewController {
     
     @IBAction func undo(_ sender: UIButton) {
         if sender.tag == 0 {
-            textView.undoManager?.undo()
+            editor.undo()
         }else {
-            textView.undoManager?.redo()
+            editor.redo()
         }
         checkUndoRedo()
     }
@@ -328,8 +325,7 @@ class AddCourseViewController: UIViewController {
 }
 
 // MARK: - TextView
-extension AddCourseViewController: UITextViewDelegate {
-    
+extension AddCourseViewController: RichHTMLEditorViewDelegate {
     
 //    func textViewDidChange(_ textView: UITextView) {
 //        if let text = textView.text {

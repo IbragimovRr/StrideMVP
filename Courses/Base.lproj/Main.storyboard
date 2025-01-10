@@ -321,14 +321,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvN-T3-fMd" customClass="MarkdownTextView" customModule="Courses" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2d-Xk-gdu">
                                 <rect key="frame" x="10" y="128" width="373" height="640"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tcz-ME-6lc">
                                 <rect key="frame" x="15" y="768" width="363" height="50"/>
                                 <subviews>
@@ -676,16 +672,16 @@
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="top" secondItem="XmU-3q-Hr8" secondAttribute="top" id="2tt-Qg-RBW"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="jHI-pb-aUK" secondAttribute="trailing" id="3BT-8M-Lim"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="15" id="AWy-Bx-pCA"/>
-                            <constraint firstItem="mvN-T3-fMd" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="10" id="BcS-1q-ohi"/>
+                            <constraint firstItem="b2d-Xk-gdu" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="10" id="Chf-en-k0g"/>
+                            <constraint firstItem="Tcz-ME-6lc" firstAttribute="top" secondItem="b2d-Xk-gdu" secondAttribute="bottom" id="DYq-xf-gmq"/>
                             <constraint firstItem="1KA-rw-DuX" firstAttribute="bottom" secondItem="xnu-Sq-5BV" secondAttribute="bottom" id="L77-ad-Nnv"/>
-                            <constraint firstItem="mvN-T3-fMd" firstAttribute="top" secondItem="jHI-pb-aUK" secondAttribute="bottom" constant="15" id="OmC-ep-4Mu"/>
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="leading" secondItem="xnu-Sq-5BV" secondAttribute="leading" id="PCp-UW-C6E"/>
-                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="mvN-T3-fMd" secondAttribute="trailing" constant="10" id="W7o-h2-WG4"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="Tcz-ME-6lc" secondAttribute="trailing" constant="15" id="XSS-W7-GxF"/>
-                            <constraint firstItem="Tcz-ME-6lc" firstAttribute="top" secondItem="mvN-T3-fMd" secondAttribute="bottom" id="bY6-Nw-Td3"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="bottom" secondItem="Tcz-ME-6lc" secondAttribute="bottom" id="e27-Hi-dfQ"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="1KA-rw-DuX" secondAttribute="trailing" id="gfz-nV-f19"/>
                             <constraint firstItem="1KA-rw-DuX" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" id="qHu-Tc-1fi"/>
+                            <constraint firstItem="b2d-Xk-gdu" firstAttribute="top" secondItem="jHI-pb-aUK" secondAttribute="bottom" constant="15" id="yUz-hY-MgJ"/>
+                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="b2d-Xk-gdu" secondAttribute="trailing" constant="10" id="yvH-mm-2jl"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="6DX-c5-Fez" appends="YES" id="r7X-WK-ueB"/>
@@ -696,13 +692,13 @@
                         <outlet property="alingment" destination="dpF-O9-MbD" id="DVm-oD-HpC"/>
                         <outlet property="bottomConsoleView" destination="e27-Hi-dfQ" id="LxE-2H-sB8"/>
                         <outlet property="colorView" destination="V8X-tK-EOP" id="e3x-9n-n9O"/>
+                        <outlet property="editorBackView" destination="b2d-Xk-gdu" id="ki2-qB-78S"/>
                         <outlet property="fontTitle" destination="m4I-Cv-yY2" id="T1B-sI-OxA"/>
                         <outlet property="fontView" destination="1KA-rw-DuX" id="p3b-k0-3CV"/>
                         <outlet property="loading" destination="mhZ-Zq-gsT" id="oQR-fd-zmB"/>
                         <outlet property="nameCourseLBL" destination="SvU-CO-pHv" id="26o-h4-mvb"/>
                         <outlet property="redo" destination="tFr-7Y-trp" id="AQl-pw-Auj"/>
                         <outlet property="sizeFont" destination="Fzv-Om-RVI" id="e07-kn-y8v"/>
-                        <outlet property="textView" destination="mvN-T3-fMd" id="lWu-gL-6lB"/>
                         <outlet property="undo" destination="A5r-u0-99Q" id="cJR-De-vQi"/>
                     </connections>
                 </viewController>

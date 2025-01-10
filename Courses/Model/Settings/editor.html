@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Markdown Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/theme/monokai.min.css">
+    <style>
+        body { margin: 0; display: flex; flex-direction: column; }
+        #toolbar { padding: 10px; border-bottom: 1px solid #ccc; display: flex; justify-content: flex-start; }
+        #toolbar button { margin-right: 5px; padding: 5px 10px; cursor: pointer; }
+        #editorContainer { flex: 1; height: 50vh; } /* Уменьшил высоту для предпросмотра */
+        #previewContainer { flex: 1; height: 50vh; overflow-y: auto; padding: 20px; border-top: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <div id="toolbar">
+        <button onclick="insertMarkdown('# ')">Заголовок 1</button>
+        <button onclick="insertMarkdown('## ')">Заголовок 2</button>
+        <button onclick="insertMarkdown('### ')">Заголовок 3</button>
+        <button onclick="insertMarkdown('* ')">Список</button>
+        <button onclick="insertMarkdown('**текст**')">Жирный</button>
+        <button onclick="insertMarkdown('_текст_')">Курсив</button>
+        <button onclick="insertMarkdown('[текст](ссылка)')">Ссылка</button>
+    </div>
+    <div id="editorContainer"></div>
+    <div id="previewContainer"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.18/marked.min.js"></script>
+    <script>
+        var editor = CodeMirror(document.getElementById("editorContainer"), {
+            mode: "markdown",
+            lineNumbers: true,
+            theme: "monokai",
+            value: ""
+        });
+
+        var previewContainer = document.getElementById('previewContainer');
+
+        function updatePreview() {
+             var markdownText = editor.getValue();
+             var html = marked.parse(markdownText);
+             previewContainer.innerHTML = html;
+             window.webkit.messageHandlers.markdownHandler.postMessage(markdownText);
+        }
+         // Функция для вставки markdown
+        function insertMarkdown(markdown) {
+            var doc = editor.getDoc();
+            var cursor = doc.getCursor();
+            var replacement;
+
+            if (markdown === '**текст**' || markdown === '_текст_' || markdown === '[текст](ссылка)') {
+              var start = cursor.ch;
+              replacement = markdown.replace('текст', '');
+              doc.replaceRange(replacement, cursor);
+              var newCursorPos = {line: cursor.line, ch: start + markdown.indexOf("текст")};
+               doc.setCursor(newCursorPos);
+               editor.focus();
+           }else {
+                doc.replaceRange(markdown, cursor);
+                doc.setCursor({line:cursor.line, ch: cursor.ch + markdown.length});
+                editor.focus();
+           }
+           updatePreview(); // Обновляем предпросмотр после вставки
+        }
+
+
+        editor.on("change", function() {
+           updatePreview();
+        });
+
+        updatePreview(); // Initial update on load
+    </script>
+</body>
+</html>
