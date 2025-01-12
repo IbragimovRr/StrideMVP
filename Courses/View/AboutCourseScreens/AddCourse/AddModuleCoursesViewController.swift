@@ -33,6 +33,7 @@ class AddModuleCoursesViewController: UIViewController, AddModuleCoursesViewDele
 
     private let layout = PageModuleLayout()
     private var scaleView = false
+    private var positionAddModule = 0
     var presenter = AddModuleCoursesPresenter()
     var role: InfoCourses = .send
 
@@ -298,8 +299,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
         }else {
 
             if indexPath.row == presenter.course.courseDays[presenter.selectDay].modules.count {
-                
-//                presenter.addModule(dayID: presenter.course.courseDays[presenter.selectDay].dayID, position: indexPath.row)
+                positionAddModule = indexPath.row
                 performSegue(withIdentifier: "addModule", sender: self)
             }else {
                 presenter.selectModule = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row]
@@ -338,6 +338,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
         }else if segue.identifier == "addModule" {
             let vc = segue.destination as! TypeModuleViewController
             vc.delegate = self
+            vc.position = positionAddModule
         }
 
     }
@@ -401,17 +402,8 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
 }
 extension AddModuleCoursesViewController: ChangeInfoModule, TypeModuleDelegate {
     
-    func addModule(type: ModuleType) {
-        var module: ModuleProtocol!
-        switch type {
-        case .custom:
-            module = CustomModule(module: Modules(name: "", minutes: 0, id: 0))
-        case .video:
-            module = VideoModule(module: Modules(name: "", minutes: 0, id: 0))
-        case .training:
-            module = TrainingModule(module: Modules(name: "", minutes: 0, id: 0))
-        }
-        presenter.course.courseDays[presenter.selectDay].modules.append(module)
+    func addModule(type: ModuleType, position: Int) {
+        presenter.addModule(position: position, type: type)
         modulesCollectionView.reloadData()
     }
     

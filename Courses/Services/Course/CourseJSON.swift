@@ -27,22 +27,61 @@ class CourseJSON {
             let modulesArray = json["days"][x]["modules"].arrayValue
             let completed = json["days"][x]["day_completed"].boolValue
             if modulesArray.isEmpty == false {
-                for y in 0...modulesArray.count - 1 {
-                    let id = json["days"][x]["modules"][y]["id"].intValue
-                    let text = json["days"][x]["modules"][y]["data"].stringValue
-                    let min = json["days"][x]["modules"][y]["time_to_pass"].intValue
-                    let title = json["days"][x]["modules"][y]["title"].stringValue
-                    let image = json["days"][x]["modules"][y]["image"].stringValue
-                    let desc = json["days"][x]["modules"][y]["desc"].stringValue
-                    let index = json["days"][x]["modules"][y]["order"].intValue
-                    let completed = json["days"][x]["modules"][y]["module_complete"].boolValue
-                    modules.append(CustomModule(module: Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index), text: URL(string: text)))
-                }
+                modules += initialCustomModule(x: x, modulesCount: modulesArray.count, json: json)
+                modules += initialVideoModule(x: x, modulesCount: modulesArray.count, json: json)
+                modules += initialCustomModule(x: x, modulesCount: modulesArray.count, json: json)
             }
             course.courseDays.append(CourseDays(dayID: idDay, type: .noneSee, modules: modules, completed: completed))
             modules.removeAll()
         }
         return course
+    }
+    
+    private func initialCustomModule(x: Int, modulesCount: Int, json: JSON) -> [ModuleProtocol] {
+        var modules = [ModuleProtocol]()
+        for y in 0...modulesCount - 1 {
+            let id = json["days"][x]["modules"][y]["id"].intValue
+            let text = json["days"][x]["modules"][y]["data"].stringValue
+            let min = json["days"][x]["modules"][y]["time_to_pass"].intValue
+            let title = json["days"][x]["modules"][y]["title"].stringValue
+            let image = json["days"][x]["modules"][y]["image"].stringValue
+            let desc = json["days"][x]["modules"][y]["desc"].stringValue
+            let index = json["days"][x]["modules"][y]["order"].intValue
+            let completed = json["days"][x]["modules"][y]["module_complete"].boolValue
+            modules.append(CustomModule(module: Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index), text: URL(string: text)))
+        }
+        return modules
+    }
+    
+    private func initialTrainingModule(x: Int, modulesCount: Int, json: JSON) -> [ModuleProtocol] {
+        var modules = [ModuleProtocol]()
+        for y in 0...modulesCount - 1 {
+            let id = json["days"][x]["training_modules"][y]["id"].intValue
+            let min = json["days"][x]["training_modules"][y]["time_to_pass"].intValue
+            let title = json["days"][x]["training_modules"][y]["title"].stringValue
+            let image = json["days"][x]["training_modules"][y]["image"].stringValue
+            let desc = json["days"][x]["training_modules"][y]["desc"].stringValue
+            let index = json["days"][x]["training_modules"][y]["order"].intValue
+            let completed = json["days"][x]["training_modules"][y]["module_complete"].boolValue
+            modules.append(TrainingModule(module: Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index)))
+        }
+        return modules
+    }
+    
+    private func initialVideoModule(x: Int, modulesCount: Int, json: JSON) -> [ModuleProtocol] {
+        var modules = [ModuleProtocol]()
+        for y in 0...modulesCount - 1 {
+            let id = json["days"][x]["video_modules"][y]["id"].intValue
+            let text = json["days"][x]["video_modules"][y]["data"].stringValue
+            let min = json["days"][x]["video_modules"][y]["time_to_pass"].intValue
+            let title = json["days"][x]["video_modules"][y]["title"].stringValue
+            let image = json["days"][x]["video_modules"][y]["image"].stringValue
+            let desc = json["days"][x]["video_modules"][y]["desc"].stringValue
+            let index = json["days"][x]["video_modules"][y]["order"].intValue
+            let completed = json["days"][x]["video_modules"][y]["module_complete"].boolValue
+            modules.append(VideoModule(module: Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index)))
+        }
+        return modules
     }
     
     

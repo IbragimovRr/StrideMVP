@@ -11,7 +11,7 @@ import UIKit
 protocol AddModuleCoursesPresenterDelegate {
     func addCourseInfo()
     func addDay()
-    func addModule(dayID: Int, position: Int) 
+    func addModule(position: Int, type: ModuleType) 
     func deleteDay(dayID: Int)
     func changePositionModule(module: Modules)
 }
@@ -55,10 +55,23 @@ class AddModuleCoursesPresenter: AddModuleCoursesPresenterDelegate {
         }
     }
     
-    func addModule(dayID: Int, position: Int) {
+    func addModule(position: Int, type: ModuleType) {
+        let dayID = course.courseDays[selectDay].dayID
         Task {
             do {
-                let id = try await CourseServices().addModulesInCourse(dayID: dayID, position: position)
+                var id = 0
+                
+                switch type {
+                case .custom:
+                    id = try await CourseServices().addModulesInCourse(dayID: dayID, position: position)
+                    selectModule = CustomModule(module: Modules(name: "", minutes: 0, id: id))
+                case .video:
+                    id = try await CourseServices().addVideoModule(dayID: dayID, position: position)
+                    selectModule = VideoModule(module: Modules(name: "", minutes: 0, id: id))
+                case .training:
+                    id = try await CourseServices().addTrainingModule(dayID: dayID, position: position)
+                    selectModule = TrainingModule(module: Modules(name: "", minutes: 0, id: id))
+                }
                 course.courseDays[selectDay].modules.append(selectModule!)
                 DispatchQueue.main.async {
                     self.view?.showModule(position: position)

@@ -107,6 +107,7 @@ class ModulesCourseViewController: UIViewController {
     }
     
     private func checkModulesCompleted(day: Int) -> Bool {
+        guard course.courseDays[day].modules.isEmpty == false else {return false}
         for x in 0...course.courseDays[day].modules.count - 1 {
             if course.courseDays[day].modules[x].module.isCompleted == false {
                 return false
@@ -224,7 +225,11 @@ extension ModulesCourseViewController: UICollectionViewDelegate, UICollectionVie
             completedModule(module.module)
             course.courseDays[selectDay].modules[indexPath.row].module.isCompleted = true
             selectModule = module
-            performSegue(withIdentifier: "goToText", sender: self)
+            if course.courseDays[selectDay].modules[indexPath.row].type == .custom {
+                performSegue(withIdentifier: "goToText", sender: self)
+            }else if course.courseDays[selectDay].modules[indexPath.row].type == .video {
+                performSegue(withIdentifier: "goToVideo", sender: self)
+            }
         }
     }
 
@@ -233,6 +238,9 @@ extension ModulesCourseViewController: UICollectionViewDelegate, UICollectionVie
         if segue.identifier == "goToText" {
             let vc = segue.destination as! CourseTextViewController
             vc.module = selectModule as! CustomModule
+        }else if segue.identifier == "goToVideo" {
+            let vc = segue.destination as! VideoModuleViewController
+            vc.presenter.module = selectModule as! VideoModule
         }else if segue.identifier == "goToInfo" {
             let vc = segue.destination as! InfoCoursesViewController
             vc.presenter.course.id = idCourse

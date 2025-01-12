@@ -73,6 +73,8 @@
 		448301842C987A0700E40DBA /* DeepLinksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448301832C987A0700E40DBA /* DeepLinksManager.swift */; };
 		448765082CE00D15008A1E44 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */; };
 		4488EA152C769D9D0086765F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4488EA142C769D9D0086765F /* ErrorView.swift */; };
+		44897A472D343CF100ED8021 /* TrainingModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44897A462D343CF000ED8021 /* TrainingModule.swift */; };
+		44897A492D343D8C00ED8021 /* VideoModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44897A482D343D8C00ED8021 /* VideoModule.swift */; };
 		448E73EA2CFCD0DB00C3000D /* PromoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73E92CFCD0DB00C3000D /* PromoTableViewCell.swift */; };
 		448E73F42CFF071F00C3000D /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F32CFF071F00C3000D /* HomePresenter.swift */; };
 		448E73FA2CFF087A00C3000D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F92CFF087A00C3000D /* UserModel.swift */; };
@@ -226,6 +228,8 @@
 		448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		448765092CE01C2E008A1E44 /* Courses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Courses.entitlements; sourceTree = "<group>"; };
 		4488EA142C769D9D0086765F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		44897A462D343CF000ED8021 /* TrainingModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingModule.swift; sourceTree = "<group>"; };
+		44897A482D343D8C00ED8021 /* VideoModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModule.swift; sourceTree = "<group>"; };
 		448E73E92CFCD0DB00C3000D /* PromoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoTableViewCell.swift; sourceTree = "<group>"; };
 		448E73F32CFF071F00C3000D /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		448E73F92CFF087A00C3000D /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -607,6 +611,8 @@
 				440E1F712CA169E9002C6FC8 /* CourseMananger.swift */,
 				440E1F732CA16AD1002C6FC8 /* CourseErrors.swift */,
 				440E1F752CA16C86002C6FC8 /* CourseJSON.swift */,
+				44897A462D343CF000ED8021 /* TrainingModule.swift */,
+				44897A482D343D8C00ED8021 /* VideoModule.swift */,
 			);
 			path = Course;
 			sourceTree = "<group>";
@@ -760,6 +766,7 @@
 				449C124E2D00DDA30091F0F5 /* MyCoursesPresenter.swift in Sources */,
 				448E73EA2CFCD0DB00C3000D /* PromoTableViewCell.swift in Sources */,
 				44BC590B2CD0FB7E00AD7FFA /* Admin.swift in Sources */,
+				44897A492D343D8C00ED8021 /* VideoModule.swift in Sources */,
 				44228F5B2D2813C500D751ED /* AddTrainingModuleViewController.swift in Sources */,
 				444A07012C2B9D6C008F4E68 /* Extension.swift in Sources */,
 				7595784B2C5B9A7E00A9F811 /* AddInfoAboutModuleViewController.swift in Sources */,
@@ -795,6 +802,7 @@
 				44BD6CDE2C432C45001645A0 /* DaysCourseCollectionViewCell.swift in Sources */,
 				4450B3C92CB6066900F1F54B /* UpdateViewController.swift in Sources */,
 				448E73F42CFF071F00C3000D /* HomePresenter.swift in Sources */,
+				44897A472D343CF100ED8021 /* TrainingModule.swift in Sources */,
 				44682CA52D03577500087C62 /* WithdrawPresenter.swift in Sources */,
 				44DFB1162C3B199A005C8F44 /* RecomendationCollectionViewCell.swift in Sources */,
 				449CF0DB2C3370CA000D4528 /* CoursesCollectionViewCell.swift in Sources */,

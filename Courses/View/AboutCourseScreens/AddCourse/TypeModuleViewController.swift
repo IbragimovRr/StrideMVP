@@ -20,6 +20,7 @@ class TypeModuleViewController: UIViewController {
     private var selectTag: Int? = nil
     private var startPosition = CGPoint()
     var delegate: TypeModuleDelegate!
+    var position = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +97,7 @@ class TypeModuleViewController: UIViewController {
         case .some(_):
             break
         }
-        delegate.addModule(type: type)
+        delegate.addModule(type: type, position: position)
         dismiss(animated: false)
     }
     
