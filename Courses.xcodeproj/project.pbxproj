@@ -61,7 +61,7 @@
 		44682CAA2D03BF5700087C62 /* InfoCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */; };
 		44682CAC2D076A8B00087C62 /* ConfidetialityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CAB2D076A8B00087C62 /* ConfidetialityPresenter.swift */; };
 		44682CAE2D076BC500087C62 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CAD2D076BC500087C62 /* ThemeModel.swift */; };
-		446BF1A12D2C948000D8E534 /* MarkdownTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446BF1A02D2C948000D8E534 /* MarkdownTextView.swift */; };
+		446BF1A12D2C948000D8E534 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446BF1A02D2C948000D8E534 /* EditorView.swift */; };
 		4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */; };
 		447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */; };
 		447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */; };
@@ -74,14 +74,18 @@
 		448301842C987A0700E40DBA /* DeepLinksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448301832C987A0700E40DBA /* DeepLinksManager.swift */; };
 		448765082CE00D15008A1E44 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */; };
 		4488EA152C769D9D0086765F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4488EA142C769D9D0086765F /* ErrorView.swift */; };
-		44899EE02D30830E00582803 /* SwiftyMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = 44899EDF2D30830E00582803 /* SwiftyMarkdown */; };
-		44899EE32D308D1800582803 /* InfomaniakRichHTMLEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 44899EE22D308D1800582803 /* InfomaniakRichHTMLEditor */; };
-		44899EE52D3091F600582803 /* editor.css in Resources */ = {isa = PBXBuildFile; fileRef = 44899EE42D3091F500582803 /* editor.css */; };
-		44899EE72D30A2EA00582803 /* editor.html in Resources */ = {isa = PBXBuildFile; fileRef = 44899EE62D30A2EA00582803 /* editor.html */; };
+		44899F092D30ABA200582803 /* SwiftyMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = 44899F082D30ABA200582803 /* SwiftyMarkdown */; };
+		44899F1E2D319F1500582803 /* RichEditorView in Frameworks */ = {isa = PBXBuildFile; productRef = 44899F1D2D319F1500582803 /* RichEditorView */; };
 		448E73EA2CFCD0DB00C3000D /* PromoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73E92CFCD0DB00C3000D /* PromoTableViewCell.swift */; };
 		448E73F42CFF071F00C3000D /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F32CFF071F00C3000D /* HomePresenter.swift */; };
 		448E73FA2CFF087A00C3000D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F92CFF087A00C3000D /* UserModel.swift */; };
 		448E73FE2CFF09E200C3000D /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73FD2CFF09E200C3000D /* Segment.swift */; };
+		448FBC612D31A73C00476EE2 /* assert.js in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC592D31A73C00476EE2 /* assert.js */; };
+		448FBC622D31A73C00476EE2 /* normalize.css in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5A2D31A73C00476EE2 /* normalize.css */; };
+		448FBC652D31A73C00476EE2 /* rich_editor.html in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5D2D31A73C00476EE2 /* rich_editor.html */; };
+		448FBC662D31A73C00476EE2 /* rich_editor.js in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5E2D31A73C00476EE2 /* rich_editor.js */; };
+		448FBC672D31A73C00476EE2 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5F2D31A73C00476EE2 /* style.css */; };
+		448FBC692D31C24E00476EE2 /* AddCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */; };
 		44907E482C91F4D6002D4617 /* ImageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44907E472C91F4D6002D4617 /* ImageResize.swift */; };
 		44932A992C81303A00E0F86F /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44932A982C81303A00E0F86F /* PrivacyViewController.swift */; };
 		44932A9B2C81F87B00E0F86F /* LoadingStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44932A9A2C81F87B00E0F86F /* LoadingStartViewController.swift */; };
@@ -220,7 +224,7 @@
 		44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoursePresenter.swift; sourceTree = "<group>"; };
 		44682CAB2D076A8B00087C62 /* ConfidetialityPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfidetialityPresenter.swift; sourceTree = "<group>"; };
 		44682CAD2D076BC500087C62 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
-		446BF1A02D2C948000D8E534 /* MarkdownTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownTextView.swift; sourceTree = "<group>"; };
+		446BF1A02D2C948000D8E534 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMoneyInfoViewController.swift; sourceTree = "<group>"; };
 		447D8C802C85DEEB00EF2217 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		447D8C8D2C89D09600EF2217 /* emptyBox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyBox.json; sourceTree = "<group>"; };
@@ -232,12 +236,16 @@
 		448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		448765092CE01C2E008A1E44 /* Courses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Courses.entitlements; sourceTree = "<group>"; };
 		4488EA142C769D9D0086765F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		44899EE42D3091F500582803 /* editor.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = editor.css; sourceTree = "<group>"; };
-		44899EE62D30A2EA00582803 /* editor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = editor.html; sourceTree = "<group>"; };
 		448E73E92CFCD0DB00C3000D /* PromoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoTableViewCell.swift; sourceTree = "<group>"; };
 		448E73F32CFF071F00C3000D /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		448E73F92CFF087A00C3000D /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		448E73FD2CFF09E200C3000D /* Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
+		448FBC592D31A73C00476EE2 /* assert.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = assert.js; sourceTree = "<group>"; };
+		448FBC5A2D31A73C00476EE2 /* normalize.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = normalize.css; sourceTree = "<group>"; };
+		448FBC5D2D31A73C00476EE2 /* rich_editor.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = rich_editor.html; sourceTree = "<group>"; };
+		448FBC5E2D31A73C00476EE2 /* rich_editor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rich_editor.js; sourceTree = "<group>"; };
+		448FBC5F2D31A73C00476EE2 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoursePresenter.swift; sourceTree = "<group>"; };
 		44907E472C91F4D6002D4617 /* ImageResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResize.swift; sourceTree = "<group>"; };
 		44932A982C81303A00E0F86F /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		44932A9A2C81F87B00E0F86F /* LoadingStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStartViewController.swift; sourceTree = "<group>"; };
@@ -311,15 +319,15 @@
 				44D68AF82C5051E100F8F476 /* GoogleSignInSwift in Frameworks */,
 				44F395482C9B8BA200861759 /* CropViewController in Frameworks */,
 				44064C9C2C2861D700AB5227 /* SDWebImageMapKit in Frameworks */,
-				44899EE02D30830E00582803 /* SwiftyMarkdown in Frameworks */,
-				44899EE32D308D1800582803 /* InfomaniakRichHTMLEditor in Frameworks */,
 				44064C922C2861B900AB5227 /* Alamofire in Frameworks */,
+				44899F092D30ABA200582803 /* SwiftyMarkdown in Frameworks */,
 				44064C9A2C2861D700AB5227 /* SDWebImage in Frameworks */,
 				44F3954A2C9B8BA200861759 /* TOCropViewController in Frameworks */,
 				447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */,
 				44A406832C762FE1005509D0 /* SkeletonView in Frameworks */,
 				44F118D22D109025000FCDC3 /* AppMetricaCore in Frameworks */,
 				44F118D42D109025000FCDC3 /* AppMetricaCrashes in Frameworks */,
+				44899F1E2D319F1500582803 /* RichEditorView in Frameworks */,
 				44D68AF62C5051E100F8F476 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,7 +415,7 @@
 				447FE4922CDD2300007C5B31 /* MainTabBarController.swift */,
 				448E73FD2CFF09E200C3000D /* Segment.swift */,
 				440C9C3E2CED6C47007D0735 /* ProtectScreen.swift */,
-				446BF1A02D2C948000D8E534 /* MarkdownTextView.swift */,
+				446BF1A02D2C948000D8E534 /* EditorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -415,7 +423,7 @@
 		440E1F6C2CA1671F002C6FC8 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				44899EE42D3091F500582803 /* editor.css */,
+				448FBC602D31A73C00476EE2 /* Editor */,
 				448301832C987A0700E40DBA /* DeepLinksManager.swift */,
 				44907E472C91F4D6002D4617 /* ImageResize.swift */,
 				448301812C9504B600E40DBA /* ValidateTF.swift */,
@@ -426,7 +434,6 @@
 				44064C9F2C28634C00AB5227 /* Model.swift */,
 				449880C92CB621280052C3C3 /* NavigationControllerDelegate.swift */,
 				44F741532CA1D0720041F8FA /* Privacy.swift */,
-				44899EE62D30A2EA00582803 /* editor.html */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -477,6 +484,7 @@
 				4481D43B2D1C945E00DBE377 /* AddModuleCoursesPresenter.swift */,
 				4465B2FC2D1EFF5B005EA9D0 /* AddVideoModulePresenter.swift */,
 				442023B32D282751007C3E68 /* AddTrainingModulePresenter.swift */,
+				448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */,
 			);
 			path = CourseScreens;
 			sourceTree = "<group>";
@@ -544,6 +552,18 @@
 				751510402C34586D009978E6 /* SettingsViewController.swift */,
 			);
 			path = TabBarScreens;
+			sourceTree = "<group>";
+		};
+		448FBC602D31A73C00476EE2 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				448FBC592D31A73C00476EE2 /* assert.js */,
+				448FBC5A2D31A73C00476EE2 /* normalize.css */,
+				448FBC5D2D31A73C00476EE2 /* rich_editor.html */,
+				448FBC5E2D31A73C00476EE2 /* rich_editor.js */,
+				448FBC5F2D31A73C00476EE2 /* style.css */,
+			);
+			path = Editor;
 			sourceTree = "<group>";
 		};
 		449C124C2D00DD7E0091F0F5 /* TabBarScreensPresenter */ = {
@@ -687,8 +707,8 @@
 				44F118D12D109025000FCDC3 /* AppMetricaCore */,
 				44F118D32D109025000FCDC3 /* AppMetricaCrashes */,
 				44F118D52D109025000FCDC3 /* AppMetricaLibraryAdapter */,
-				44899EDF2D30830E00582803 /* SwiftyMarkdown */,
-				44899EE22D308D1800582803 /* InfomaniakRichHTMLEditor */,
+				44899F082D30ABA200582803 /* SwiftyMarkdown */,
+				44899F1D2D319F1500582803 /* RichEditorView */,
 			);
 			productName = Courses;
 			productReference = 440DAB302C1748D400C576FB /* Courses.app */;
@@ -728,8 +748,8 @@
 				447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */,
 				44F395462C9B8BA200861759 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */,
-				44899EDE2D30830E00582803 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
-				44899EE12D308D1800582803 /* XCRemoteSwiftPackageReference "swift-rich-html-editor" */,
+				44899F072D30ABA200582803 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
+				44899F1C2D319F1500582803 /* XCRemoteSwiftPackageReference "RichEditorView" */,
 			);
 			productRefGroup = 440DAB312C1748D400C576FB /* Products */;
 			projectDirPath = "";
@@ -751,14 +771,17 @@
 				447D8C8E2C89D09600EF2217 /* emptyBox.json in Resources */,
 				449CF0DF2C337100000D4528 /* Commissioner-Bold.ttf in Resources */,
 				44064C7B2C26EEB800AB5227 /* SF-Pro-Rounded-Semibold.otf in Resources */,
-				44899EE72D30A2EA00582803 /* editor.html in Resources */,
+				448FBC612D31A73C00476EE2 /* assert.js in Resources */,
+				448FBC622D31A73C00476EE2 /* normalize.css in Resources */,
 				44962E962C821B3600CB6A1C /* Main.storyboard in Resources */,
 				44DFB11B2C3B2637005C8F44 /* loading.json in Resources */,
-				44899EE52D3091F600582803 /* editor.css in Resources */,
+				448FBC652D31A73C00476EE2 /* rich_editor.html in Resources */,
 				44064C752C26ED8E00AB5227 /* Commissioner-Medium.ttf in Resources */,
+				448FBC662D31A73C00476EE2 /* rich_editor.js in Resources */,
 				44049A2E2C6CE0C30014BD9C /* credentials.plist in Resources */,
 				44064C7D2C26EEC100AB5227 /* SF-Pro-Rounded-Regular.otf in Resources */,
 				753A4F7E2C341E98007A8194 /* Inter-Medium.ttf in Resources */,
+				448FBC672D31A73C00476EE2 /* style.css in Resources */,
 				44064C792C26ED9D00AB5227 /* Commissioner-Regular.ttf in Resources */,
 				44064C862C26F8A500AB5227 /* Commissioner-VariableFont_wght.ttf in Resources */,
 				44064C772C26ED9500AB5227 /* Commissioner-SemiBold.ttf in Resources */,
@@ -832,13 +855,14 @@
 				44547E592CF4C1B50051C782 /* CreatePromoViewController.swift in Sources */,
 				44D84B282D1EF40C001A35CA /* AddVideoModuleViewController.swift in Sources */,
 				4442F3D82C31BFDB00203A36 /* PageLayout.swift in Sources */,
-				446BF1A12D2C948000D8E534 /* MarkdownTextView.swift in Sources */,
+				446BF1A12D2C948000D8E534 /* EditorView.swift in Sources */,
 				44E906372C2ADE8700FFA6DD /* BannerCollectionViewCell.swift in Sources */,
 				44064C812C26F0E800AB5227 /* Border.swift in Sources */,
 				44682CA72D0362B800087C62 /* ChangeInformationPresenter.swift in Sources */,
 				44E406202CFF7B9C004F633E /* CategoryModel.swift in Sources */,
 				44064C8F2C285F7C00AB5227 /* TextFieldFormat.swift in Sources */,
 				440C9C3F2CED6C47007D0735 /* ProtectScreen.swift in Sources */,
+				448FBC692D31C24E00476EE2 /* AddCoursePresenter.swift in Sources */,
 				44E00B922CE39F2400E62089 /* CoachCollectionViewCell.swift in Sources */,
 				44BD6CDA2C407864001645A0 /* ReviewsCollectionViewCell.swift in Sources */,
 				44BC59022CCEE6F600AD7FFA /* RefreshControll.swift in Sources */,
@@ -1161,7 +1185,7 @@
 				minimumVersion = 3.1.1;
 			};
 		};
-		44899EDE2D30830E00582803 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */ = {
+		44899F072D30ABA200582803 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SimonFairbairn/SwiftyMarkdown.git";
 			requirement = {
@@ -1169,12 +1193,12 @@
 				minimumVersion = 1.2.4;
 			};
 		};
-		44899EE12D308D1800582803 /* XCRemoteSwiftPackageReference "swift-rich-html-editor" */ = {
+		44899F1C2D319F1500582803 /* XCRemoteSwiftPackageReference "RichEditorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Infomaniak/swift-rich-html-editor.git";
+			repositoryURL = "https://github.com/cyber-gh/RichEditorView.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.0;
+				minimumVersion = 0.0.4;
 			};
 		};
 		44A406812C762FE1005509D0 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
@@ -1250,15 +1274,15 @@
 			package = 447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */;
 			productName = TinkoffASDKUI;
 		};
-		44899EDF2D30830E00582803 /* SwiftyMarkdown */ = {
+		44899F082D30ABA200582803 /* SwiftyMarkdown */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 44899EDE2D30830E00582803 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */;
+			package = 44899F072D30ABA200582803 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */;
 			productName = SwiftyMarkdown;
 		};
-		44899EE22D308D1800582803 /* InfomaniakRichHTMLEditor */ = {
+		44899F1D2D319F1500582803 /* RichEditorView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 44899EE12D308D1800582803 /* XCRemoteSwiftPackageReference "swift-rich-html-editor" */;
-			productName = InfomaniakRichHTMLEditor;
+			package = 44899F1C2D319F1500582803 /* XCRemoteSwiftPackageReference "RichEditorView" */;
+			productName = RichEditorView;
 		};
 		44A406822C762FE1005509D0 /* SkeletonView */ = {
 			isa = XCSwiftPackageProductDependency;

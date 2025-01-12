@@ -10,11 +10,16 @@ import SwiftyJSON
 import Alamofire
 import Lottie
 import WebKit
-import SwiftyMarkdown
-import InfomaniakRichHTMLEditor
 
+protocol AddCoursePresenterViewDelegate {
+    func isLoading(_ bool: Bool)
+    func setData(html: String)
+    func saveCourse()
+    func setError(_ error: String)
+    func setImage(_ size: CGSize, url: URL)
+}
 
-class AddCourseViewController: UIViewController {
+class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate {
     
     @IBOutlet weak var editorBackView: UIView!
     @IBOutlet weak var redo: UIButton!
@@ -27,26 +32,25 @@ class AddCourseViewController: UIViewController {
     @IBOutlet weak var fontView: UIView!
     @IBOutlet weak var bottomConsoleView: NSLayoutConstraint!
     @IBOutlet weak var alingment: UIButton!
-    var editor = RichHTMLEditorView()
+    
+    var editor = EditorView()
+    var presenter = AddCoursePresenter()
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
     private var isChangedText = false
     private var isSave = true
     
-    var module = CustomModule(module: Modules(name: "", minutes: 0, id: 0))
-    var nameCourse = ""
-    
     private var colorSelect = UIColor.white {
         didSet {
             colorView.backgroundColor = colorSelect
-            editor.setForegroundColor(colorSelect)
+            editor.textColor(colorSelect)
         }
     }
     private var fontSelect = UIFont.systemFont(ofSize: 16) {
         didSet {
             fontTitle.text = fontSelect.fontName
-            editor.setFontName(fontSelect.fontName)
+            editor.font(fontSelect.fontName)
         }
     }
     private var alignment = NSMutableParagraphStyle().alignment {
@@ -63,18 +67,18 @@ class AddCourseViewController: UIViewController {
             sizeFontSelect = roundedSize
             sizeFont.text = "\(sizeFontSelect) пт"
             let intSize = Int(sizeFontSelect)
-            editor.setFontSize(intSize)
+            editor.heading(intSize)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupRichEditorView()
-        loadInitialHTML()
-//        markdownTextView.delegate = self
         self.overrideUserInterfaceStyle = .dark
-        getData()
+        presenter.view = self
+//        getData()
         design()
+        setupRichEditorView()
+        loadingSettings()
         startPosition = errorView.center
     }
     
@@ -83,6 +87,7 @@ class AddCourseViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
+
     
     @objc func keyboardWillAppear(notification:Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
@@ -99,12 +104,14 @@ class AddCourseViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-        FilePath().deleteAlamofireFiles()
+        presenter.deleteAlamofireFiles()
     }
     
     func setupRichEditorView() {
-        editor.isScrollEnabled = true
+        let webConfiguration = WKWebViewConfiguration()
+        editor = EditorView(frame: .zero, configuration: webConfiguration)
         editor.translatesAutoresizingMaskIntoConstraints = false
+        editor.isOpaque = false
         editorBackView.addSubview(editor)
         
         NSLayoutConstraint.activate([
@@ -114,41 +121,54 @@ class AddCourseViewController: UIViewController {
             editor.leadingAnchor.constraint(equalTo: editorBackView.leadingAnchor)
         ])
     }
-
-    func loadInitialHTML() {
-        let initialHTML = "<p>This is some initial <b>rich</b> text.</p>"
-        editor.html = initialHTML
+    
+    func isLoading(_ bool: Bool) {
+        if bool {
+            loading.play()
+            loading.isHidden = false
+        }else {
+            loading.stop()
+            loading.isHidden = true
+        }
     }
-
+    
+    func setData(html: String) {
+        editor.html = html
+    }
+    
+    func saveCourse() {
+        isSave = true
+    }
+    
+    func setError(_ error: String) {
+        errorView.isHidden = false
+        errorView.configure(title: "Ошибка", description: error)
+        view.addSubview(errorView)
+        isLoading(false)
+    }
+    
+    func setImage(_ size: CGSize, url: URL) {
+        let widthInt = Int(size.width)
+        let heightInt = Int(size.height)
+        editor.insertImage(url: url.absoluteString, alt: "image", width: widthInt, height: heightInt)
+    }
     
     private func loadingSettings() {
         loading.loopMode = .loop
         loading.contentMode = .scaleToFill
-        
-        loading.play()
-        loading.isHidden = false
-    }
-    
-    private func loadingStop() {
-        loading.stop()
-        loading.isHidden = true
-    }
-    
-    
-    func getData() {
-        Task {
-            
-            let markdownText = """
-        *italics* or _italics_
-        """
-            
-        }
     }
     
     private func design() {
-        nameCourseLBL.text = module.module.name
+        nameCourseLBL.text = presenter.module.module.name
     }
     
+    func updateStyles(font: String, fontSize: CGFloat, color: String, textAlign: String) {
+//        fontSelect = font
+//        sizeFontSelect = fontSize
+//        colorSelect = UIColor(named: color) ?? .black
+//        alignment = NSTextAlignment(rawValue: textAlign)!
+        print(font, fontSize, color, textAlign)
+    }
     
     private func changedAlignment(_ alignment: NSTextAlignment) {
         switch alignment {
@@ -167,7 +187,7 @@ class AddCourseViewController: UIViewController {
         case .justified:
             alingment.setImage(UIImage.defaulTextFull, for: .normal)
             alingment.tag = 0
-            editor.justify(.full)
+            editor.justify(.justified)
         default:
             break
         }
@@ -184,21 +204,6 @@ class AddCourseViewController: UIViewController {
             redo.setImage(UIImage.rendoFill, for: .normal)
         }else {
             redo.setImage(UIImage.rendo, for: .normal)
-        }
-    }
-    
-    
-    private func addCourse(text: NSAttributedString) async throws {
-        do {
-            loadingSettings()
-            try await CourseServices().addModulesData(text: text, moduleID: module.module.id)
-            loadingStop()
-            isSave = true
-        }catch ErrorNetwork.runtimeError(let error) {
-            errorView.isHidden = false
-            errorView.configure(title: "Ошибка", description: error)
-            view.addSubview(errorView)
-            loadingStop()
         }
     }
     
@@ -225,8 +230,6 @@ class AddCourseViewController: UIViewController {
     
     @IBAction func okFont(_ sender: Any) {
         fontView.isHidden = true
-//        editor.isEditable = true
-//        editor.becomeFirstResponder()
         isChangedText = false
         checkUndoRedo()
     }
@@ -234,11 +237,8 @@ class AddCourseViewController: UIViewController {
     
     
     @IBAction func save(_ sender: UIButton) {
-//        textView.resignFirstResponder()
-//        Task {
-//            try await addCourse(text: textView.attributedText)
-//        }
-        editor.html = editor.html
+        editor.resignFirstResponder()
+        presenter.saveCourse(html: nil)
     }
     
     @IBAction func color(_ sender: UIButton) {
@@ -258,9 +258,6 @@ class AddCourseViewController: UIViewController {
     }
     
     @IBAction func changedText(_ sender: UIButton) {
-//        editor.isSelectable = true
-//        editor.isEditable = false
-//        editor.becomeFirstResponder()
         fontView.isHidden = false
         isChangedText = true
     }
@@ -324,28 +321,13 @@ class AddCourseViewController: UIViewController {
     
 }
 
-// MARK: - TextView
-extension AddCourseViewController: RichHTMLEditorViewDelegate {
-    
-//    func textViewDidChange(_ textView: UITextView) {
-//        if let text = textView.text {
-//            self.markdownText = text
-//            updateMarkdown()
-//        }
-//    }
-    
-//    func textViewDidChange(_ textView: UITextView) {
-//        
-//        checkUndoRedo()
-//        isSave = false
-//    }
-    
-}
+
 // MARK: - Image
 extension AddCourseViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage, let url = info[.imageURL] as? URL {
+            presenter.resizeImage(image: image, url: url)
             picker.dismiss(animated: true)
         }
     }
@@ -353,7 +335,7 @@ extension AddCourseViewController: UIImagePickerControllerDelegate & UINavigatio
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }
-    
+
     
 }
 // MARK: - Font

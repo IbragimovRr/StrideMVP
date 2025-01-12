@@ -107,3 +107,43 @@ extension NSAttributedString {
         return String(data: htmlData ?? Data(), encoding: .utf8)
     }
 }
+
+extension String {
+
+    var escaped: String {
+        let unicode = self.unicodeScalars
+        var newString = ""
+        for char in unicode {
+            if char.value == 39 || 
+                char.value < 9 ||
+                (char.value > 9 && char.value < 32)
+            {
+                let escaped = char.escaped(asASCII: true)
+                newString.append(escaped)
+            } else {
+                newString.append(String(char))
+            }
+        }
+        return newString
+    }
+
+}
+
+extension UIColor {
+
+    /// Hexadecimal representation of the UIColor.
+    /// For example, UIColor.blackColor() becomes "#000000".
+    var hex: String {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        self.getRed(&red, green: &green, blue: &blue, alpha: nil)
+
+        let r = Int(255.0 * red)
+        let g = Int(255.0 * green)
+        let b = Int(255.0 * blue)
+
+        let str = String(format: "#%02x%02x%02x", r, g, b)
+        return str
+    }
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CKEditor</title>
+    <script src="ckeditor/ckeditor.js"></script>
+</head>
+<body>
+    <textarea id="editor1"></textarea>
+    <script>
+        CKEDITOR.replace( 'editor1' );
+        
+         // Функция для отправки HTML контента обратно в Swift
+         function getEditorData() {
+             var data = CKEDITOR.instances.editor1.getData();
+             window.webkit.messageHandlers.jsHandler.postMessage(data);
+         }
+
+         window.getEditorData = getEditorData; // Привязка функции к глобальному window
+    </script>
+</body>
+</html>
