@@ -18,7 +18,6 @@
 var RE = {};
 
 RE.editor = document.getElementById('editor');
-RE.spinner = document.getElementById('image-spinner');
 
 
 // Not universally supported, but seems to work in iOS 7 and 8
@@ -287,18 +286,6 @@ RE.setLineHeight = function(height) {
     RE.editor.style.lineHeight = height;
 };
 
-RE.showSpinner = function() {
-    const cursorPosition = RE.getRelativeCaretYPosition();
-    
-    // Создаем HTML для спиннера
-    const spinnerHTML = `<div class="spinner" style="position:absolute; top:${cursorPosition.top}px; left:${cursorPosition.left}px;"></div>`;
-    
-    //Создаем обертку для картинки
-    const containerHTML = `<div class="image-container" style="display:inline-block; position: relative;">${img.outerHTML}${spinnerHTML}</div>`;
-    
-    insertHTML(containerHTML)
-}
-
 RE.insertImage = function(url, alt, width, height) {
     var img = document.createElement('img');
     img.setAttribute("src", url);
@@ -313,14 +300,15 @@ RE.insertImage = function(url, alt, width, height) {
     img.style.borderRadius = "5px";
 
     img.onload = RE.updateHeight;
-
+    
     RE.insertHTML(img.outerHTML);
     RE.callback("input");
 };
 
 RE.setBlockquote = function() {
-    document.execCommand('formatBlock', false, '<blockquote>');
+    document.execCommand('formatBlock', false, 'blockquote');
 };
+
 
 RE.insertHTML = function(html) {
     RE.restorerange();

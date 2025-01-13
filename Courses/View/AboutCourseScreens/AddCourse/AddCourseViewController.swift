@@ -67,7 +67,8 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
             sizeFontSelect = roundedSize
             sizeFont.text = "\(sizeFontSelect) пт"
             let intSize = Int(sizeFontSelect)
-            editor.heading(intSize)
+//            editor.heading(intSize)
+            editor.blockquote()
         }
     }
     
