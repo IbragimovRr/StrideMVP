@@ -212,7 +212,7 @@ extension CatalogViewController: UICollectionViewDelegate, UICollectionViewDataS
             let scrollOffset = scrollView.contentOffset.y
             
             guard presenter.courses.isEmpty == false else { return }
-            let nextURL = presenter.courses[presenter.courses.count - 1].next
+            let nextURL = presenter.courses[presenter.courses.count - 1].nextPage
             
             if scrollOffset >= contentHeight - scrollViewHeight && presenter.loadingMoreData == false && nextURL != "" {
                 loadingPage.isHidden = false

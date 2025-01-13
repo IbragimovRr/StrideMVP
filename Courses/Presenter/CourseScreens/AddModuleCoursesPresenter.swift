@@ -43,7 +43,7 @@ class AddModuleCoursesPresenter: AddModuleCoursesPresenterDelegate {
         Task {
             do {
                 let id = try await CourseServices().addDaysInCourse(courseID: idCourse)
-                course.courseDays.append(CourseDays(dayID: id, type: .noneSee))
+                course.courseDays.append(DayModel(dayID: id, type: .noneSee))
                 DispatchQueue.main.async {
                     self.view?.showDay()
                 }

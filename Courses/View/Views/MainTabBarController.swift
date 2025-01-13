@@ -47,6 +47,8 @@ class MainTabBarController: UITabBarController {
         }
     }
     
+    /// Нужно для изменения цвета картинки при изменении
+    /// Темы приложения
     private func selectImageByTabBarItem(image: String, theme: UIUserInterfaceStyle) -> UITabBarItem {
         let item = UITabBarItem()
         

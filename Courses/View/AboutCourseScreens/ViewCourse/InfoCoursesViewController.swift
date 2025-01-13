@@ -266,7 +266,7 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
         }
 
         if presenter.course.isBought == true {
-            if presenter.course.myRating == 0 {
+            if presenter.course.mySendRating == 0 {
                 interface = .review
                 return
             }else {

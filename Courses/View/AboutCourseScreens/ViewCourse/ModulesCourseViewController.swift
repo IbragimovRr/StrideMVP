@@ -240,7 +240,7 @@ extension ModulesCourseViewController: UICollectionViewDelegate, UICollectionVie
             vc.module = selectModule as! CustomModule
         }else if segue.identifier == "goToVideo" {
             let vc = segue.destination as! VideoModuleViewController
-            vc.presenter.module = selectModule as! VideoModule
+            vc.module = selectModule as! VideoModule
         }else if segue.identifier == "goToInfo" {
             let vc = segue.destination as! InfoCoursesViewController
             vc.presenter.course.id = idCourse

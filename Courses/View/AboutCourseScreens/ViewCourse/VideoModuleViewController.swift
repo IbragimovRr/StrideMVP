@@ -8,11 +8,7 @@
 import UIKit
 import AVKit
 
-protocol VideoModuleViewDelegate {
-    func showData()
-}
-
-class VideoModuleViewController: UIViewController, VideoModuleViewDelegate {
+class VideoModuleViewController: UIViewController {
     
     @IBOutlet weak var fullScreenBtn: UIButton!
     @IBOutlet weak var playView: UIView!
@@ -24,14 +20,13 @@ class VideoModuleViewController: UIViewController, VideoModuleViewDelegate {
     @IBOutlet weak var nameModule: UILabel!
     @IBOutlet weak var descriptionVideo: UITextView!
     
-    var presenter = VideoModulePresenter()
+    var module = VideoModule(module: Modules(name: "", minutes: 0, id: 0))
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.view = self
-        presenter.getModule()
+        showData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -41,7 +36,6 @@ class VideoModuleViewController: UIViewController, VideoModuleViewDelegate {
 
     
     func showData() {
-        let module = presenter.module
         authorName.text = module.author
         views.text = "\(module.views) просмотров"
         time.text = "\(module.timeVideo) минут"
@@ -95,6 +89,10 @@ class VideoModuleViewController: UIViewController, VideoModuleViewDelegate {
         present(playerViewController, animated: true) {
             self.player.play()
         }
+    }
+    
+    @IBAction func back(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

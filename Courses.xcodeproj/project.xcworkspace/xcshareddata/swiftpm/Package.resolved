@@ -1,5 +1,5 @@
 {
-  "originHash" : "8594a9b638f7cc7cc900894b33c02bc70378c5c8d7ca9cd4ea27b5742d0116cd",
+  "originHash" : "d6ea937997b68d241e304fd59d87ffccc56bb8fee445f725ae240e04cdd7bf4f",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -74,6 +74,15 @@
       }
     },
     {
+      "identity" : "richeditorview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/cyber-gh/RichEditorView.git",
+      "state" : {
+        "revision" : "70de05fe2f6d842e647d1da9818a945c43f90772",
+        "version" : "0.0.4"
+      }
+    },
+    {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
@@ -98,6 +107,15 @@
       "state" : {
         "revision" : "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
         "version" : "5.0.2"
+      }
+    },
+    {
+      "identity" : "swiftymarkdown",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SimonFairbairn/SwiftyMarkdown.git",
+      "state" : {
+        "revision" : "dde451ab4ed9b77b328e21baa471fdfa0cf61369",
+        "version" : "1.2.4"
       }
     },
     {

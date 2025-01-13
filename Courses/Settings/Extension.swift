@@ -7,12 +7,6 @@
 
 import UIKit
 
-extension Data {
-    func retrieveDataToString() -> NSAttributedString {
-        let attributedString = (try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(self) as? NSAttributedString)!
-        return attributedString
-    }
-}
 
 extension UIImage {
 

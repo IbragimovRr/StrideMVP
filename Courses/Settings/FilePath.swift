@@ -73,24 +73,12 @@ class FilePath {
           
         if let attachment = attributes[NSAttributedString.Key.attachment] as? NSTextAttachment,
           let image = attachment.image {
-          let targetSize = resizeImageAboutTextView(image: image)
-          attachment.bounds = CGRect(origin: .zero, size: targetSize)
-
           mutableAttributedString.replaceCharacters(in: range, with: NSAttributedString(attachment: attachment))
         }
       }
         
       return mutableAttributedString
     }
-
-    
-    private func resizeImageAboutTextView(image: UIImage) -> CGSize {
-        let targetWidth = UIScreen.main.bounds.width - 30
-        let aspectRatio = image.size.height / image.size.width
-        let targetSize = CGSize(width: targetWidth, height: targetWidth * aspectRatio)
-        return targetSize
-    }
-
 
 
 

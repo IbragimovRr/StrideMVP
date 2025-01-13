@@ -44,7 +44,7 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         super.viewDidLoad()
         presenter.view = self
         descriptionText.delegate = self
-        presenter.getModule()
+        presenter.checkUpload()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -134,8 +134,13 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         countCharacters.isHidden = false
     }
     
+    private func initialModule() {
+        presenter.module.videoDescription = descriptionText.text
+    }
     
     @IBAction func save(_ sender: UIButton) {
+        initialModule()
+        presenter.saveModule()
     }
     
     @IBAction func playVideo(_ sender: UIButton) {

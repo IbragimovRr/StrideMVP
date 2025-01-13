@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class Admin {
     
-    private var json = CourseJSON()
+    private var json = CourseResponse()
     
     func getNonVerificationCourses() async throws -> [CourseModel] {
         let url = Constants.url + "api/v1/courses/non_verification_courses/"

@@ -11,8 +11,8 @@ import SwiftyJSON
 
 class CourseServices {
     
-    private var mananger = CourseMananger()
-    private var json = CourseJSON()
+    private var mananger = CourseRequest()
+    private var json = CourseResponse()
     
     // MARK: - Получить дни и модули
     
@@ -85,8 +85,9 @@ class CourseServices {
     
     // MARK: - Изменить
     
-    func changeModuleInfo(info: Modules) async throws {
-        let url = Constants.url + "api/v1/module/update/\(info.id)/"
+    func changeModuleInfo(info: Modules, type: ModuleType) async throws {
+        let url = Constants.url + "api/v1/\(initialURLByModuleType(type))/update/\(info.id)/"
+        
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response =  AF.upload(multipartFormData: { multipartFormData in
             if let imageURL = info.imageURL, "\(imageURL)".starts(with: "file") {
@@ -110,6 +111,17 @@ class CourseServices {
             } else {
                 throw ErrorNetwork.runtimeError("Неизвестная ошибка")
             }
+        }
+    }
+    
+    private func initialURLByModuleType(_ type: ModuleType) -> String {
+        switch type {
+        case .custom:
+            return "module"
+        case .video:
+            return "video-module"
+        case .training:
+            return "training-module"
         }
     }
     

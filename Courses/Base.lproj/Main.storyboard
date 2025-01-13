@@ -8272,12 +8272,15 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="back:" destination="T0V-yd-3dg" eventType="touchUpInside" id="Imr-Vo-dsN"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dui-gg-JO3">
                                 <rect key="frame" x="0.0" y="330" width="393" height="512"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3A4-GW-Ffu">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="432"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="512"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BRv-1z-rtg">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="414"/>
@@ -8396,30 +8399,12 @@
                                         <viewLayoutGuide key="contentLayoutGuide" id="Q9a-PE-dbb"/>
                                         <viewLayoutGuide key="frameLayoutGuide" id="WCf-gc-AKk"/>
                                     </scrollView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrt-sz-tX1">
-                                        <rect key="frame" x="30" y="432" width="333" height="50"/>
-                                        <color key="backgroundColor" name="BlueMain"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="JHo-iS-nkV"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Commissioner-Thin_Bold" family="Commissioner" pointSize="13"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Перейти к следующему модулю">
-                                            <color key="titleColor" name="BlackMain"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="25"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="LightBlackMain"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Nrt-sz-tX1" secondAttribute="bottom" constant="30" id="6Hd-uW-FKP"/>
-                                    <constraint firstAttribute="trailing" secondItem="Nrt-sz-tX1" secondAttribute="trailing" constant="30" id="IyV-cS-t9c"/>
+                                    <constraint firstAttribute="bottom" secondItem="3A4-GW-Ffu" secondAttribute="bottom" id="DhK-lO-HTb"/>
                                     <constraint firstItem="3A4-GW-Ffu" firstAttribute="top" secondItem="Dui-gg-JO3" secondAttribute="top" id="KAe-Am-ZZa"/>
                                     <constraint firstAttribute="trailing" secondItem="3A4-GW-Ffu" secondAttribute="trailing" id="TDt-bs-fhU"/>
-                                    <constraint firstItem="Nrt-sz-tX1" firstAttribute="top" secondItem="3A4-GW-Ffu" secondAttribute="bottom" id="Tuv-HU-FwB"/>
-                                    <constraint firstItem="Nrt-sz-tX1" firstAttribute="leading" secondItem="Dui-gg-JO3" secondAttribute="leading" constant="30" id="aSJ-Yl-P8c"/>
                                     <constraint firstItem="3A4-GW-Ffu" firstAttribute="leading" secondItem="Dui-gg-JO3" secondAttribute="leading" id="r0e-wZ-zSn"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -11446,7 +11431,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="back:" destination="oER-lJ-V2z" eventType="touchUpInside" id="sFd-hp-VCQ"/>
+                                    <action selector="back:" destination="6Sn-2X-Yx6" eventType="touchUpInside" id="gfl-sU-G8b"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yyq-4f-fAl">
@@ -11694,7 +11679,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xNl-Pt-N34" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="oER-lJ-V2z" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="pZo-gy-S0a">
                     <connections>
                         <action selector="tap:" destination="6Sn-2X-Yx6" id="2cJ-Hh-4D2"/>

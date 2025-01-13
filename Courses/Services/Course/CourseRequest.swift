@@ -1,5 +1,5 @@
 //
-//  CourseMananger.swift
+//  CourseRequest.swift
 //  Courses
 //
 //  Created by Руслан on 23.09.2024.
@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class CourseMananger {
+class CourseRequest {
     
     func getDaysValue(id: Int) async throws -> Data {
         let url = Constants.url + "api/v1/courses/\(id)/"

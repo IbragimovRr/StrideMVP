@@ -26,7 +26,7 @@ class AddInfoAboutModuleViewController: UIViewController {
 
     weak var delegate: ChangeInfoModule?
     private var startPosition = CGPoint()
-    var module = Modules(name: "", minutes: 0, id: 0)
+    var module: ModuleProtocol!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,10 +60,10 @@ class AddInfoAboutModuleViewController: UIViewController {
     }
 
     func design() {
-        nameTextField.text = module.name
-        descriptionTextField.text = module.description
-        durationTextField.text = "\(module.minutes)"
-        if let imageURL = module.imageURL {
+        nameTextField.text = module.module.name
+        descriptionTextField.text = module.module.description
+        durationTextField.text = "\(module.module.minutes)"
+        if let imageURL = module.module.imageURL {
             imageBtn.sd_setImage(with: imageURL, for: .normal)
         }
         checkTFByCloseBtn()
@@ -93,8 +93,8 @@ class AddInfoAboutModuleViewController: UIViewController {
     private func deleteModuleRequest() {
         Task {
             do {
-                try await CourseServices().deleteModule(moduleID: module.id)
-                delegate?.deleteModuleDismiss(moduleID: module.id)
+                try await CourseServices().deleteModule(moduleID: module.module.id)
+                delegate?.deleteModuleDismiss(moduleID: module.module.id)
                 dismiss(animated: true)
             } catch ErrorNetwork.runtimeError(let error) {
                 errorView.isHidden = false
@@ -120,9 +120,9 @@ class AddInfoAboutModuleViewController: UIViewController {
     }
 
     func changeModule() {
-        module.minutes = Int(durationTextField.text!) ?? 0
-        module.name = nameTextField.text!
-        module.description = descriptionTextField.text!
+        module.module.minutes = Int(durationTextField.text!) ?? 0
+        module.module.name = nameTextField.text!
+        module.module.description = descriptionTextField.text!
     }
 
     @IBAction func addImage(_ sender: UIButton) {
@@ -160,8 +160,8 @@ class AddInfoAboutModuleViewController: UIViewController {
         Task {
             do {
                 changeModule()
-                try await CourseServices().changeModuleInfo(info: module)
-                delegate?.changeInfoModuleDismiss(module: module, moduleID: module.id)
+                try await CourseServices().changeModuleInfo(info: module.module, type: module.type)
+                delegate?.changeInfoModuleDismiss(module: module.module, moduleID: module.module.id)
                 saveBtn.isEnabled = true
                 dismiss(animated: true)
             } catch ErrorNetwork.runtimeError(let error) {
@@ -220,7 +220,7 @@ extension AddInfoAboutModuleViewController: UIImagePickerControllerDelegate & UI
     
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         imageBtn.setImage(image, for: .normal)
-        module.imageURL = ImageResize().imageToURL(image: image, fileName: "\(UUID().uuidString)")
+        module.module.imageURL = ImageResize().imageToURL(image: image, fileName: "\(UUID().uuidString)")
         cropViewController.dismiss(animated: true)
     }
     

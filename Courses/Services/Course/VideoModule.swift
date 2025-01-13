@@ -30,20 +30,16 @@ extension CourseServices {
         return id
     }
     
-    func changeVideoModuleInfo(info: Modules) async throws {
-        let url = Constants.url + "api/v1/video-module/update/\(info.id)/"
+    func addVideoModulesData(module: VideoModule) async throws {
+        let url = Constants.url + "api/v1/video-module/update/\(module.module.id)/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response =  AF.upload(multipartFormData: { multipartFormData in
-            if let imageURL = info.imageURL, "\(imageURL)".starts(with: "file") {
-                ImageResize.compressImageFromFileURL(fileURL: imageURL, maxSizeInMB: 0.1) { imageURL in
-                    multipartFormData.append(imageURL!, withName: "image")
-                }
+            if let videoURL = module.videoURL, "\(videoURL)".starts(with: "file") {
+                multipartFormData.append(videoURL, withName: "data")
             }
-            multipartFormData.append(Data(info.name.utf8), withName: "title")
-            if let description = info.description {
-                multipartFormData.append(Data(description.utf8), withName: "desc")
+            if let description = module.videoDescription {
+                multipartFormData.append(Data(description.utf8), withName: "video_desc")
             }
-            multipartFormData.append(Data("\(info.minutes)".utf8), withName: "time_to_pass")
         }, to: url, method: .patch, headers: headers).serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode
@@ -52,7 +48,7 @@ extension CourseServices {
             if let dictionary = json.dictionary {
                 let error = dictionary.first!.value[0].stringValue
                 throw ErrorNetwork.runtimeError(error)
-            } else {
+            }else {
                 throw ErrorNetwork.runtimeError("Неизвестная ошибка")
             }
         }

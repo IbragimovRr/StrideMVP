@@ -447,8 +447,8 @@ extension AddTrainingModuleViewController: UICollectionViewDelegate, UICollectio
         }else {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "repeats", for: indexPath) as! RepeatsCollectionViewCell
             let module = presenter.module
-            cell.firstItemType.text = module.trainingItems[indexPath.row].firstItemType?.rawValue
-            cell.secondItemType.text = module.trainingItems[indexPath.row].secondItemType?.rawValue
+            cell.firstItemType.text = module.trainingItems[indexPath.row].firstItemType?.initialDefaultName
+            cell.secondItemType.text = module.trainingItems[indexPath.row].secondItemType?.initialDefaultName
             cell.numbers.text = "\(indexPath.row + 1)"
         }
         

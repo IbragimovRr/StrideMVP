@@ -42,7 +42,6 @@ class ErrorView: UIView {
         return label
     }()
 
-    // Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -58,18 +57,14 @@ class ErrorView: UIView {
         self.layer.cornerRadius = 10
     }
 
-    // Setup UI
     private func setupView() {
-        // Add subviews
         addSubview(imageView)
         addSubview(contentStackView)
         contentStackView.addArrangedSubview(titleLabel)
         contentStackView.addArrangedSubview(descriptionLabel)
         designView()
 
-        // Set constraints
         NSLayoutConstraint.activate([
-            // Image View Constraints
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             centerYAnchor.constraint(equalTo: imageView.centerYAnchor, constant: 0),
             imageView.widthAnchor.constraint(equalToConstant: 25),
@@ -81,7 +76,6 @@ class ErrorView: UIView {
         ])
     }
     
-    // Setters for data
     func configure(image: UIImage = UIImage.error, title: String, description: String) {
         imageView.image = image
         titleLabel.text = title

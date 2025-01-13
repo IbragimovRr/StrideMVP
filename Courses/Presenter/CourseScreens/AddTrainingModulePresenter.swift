@@ -24,12 +24,6 @@ class AddTrainingModulePresenter: AddTrainingModulePresenterDelegate {
     }
     
     func getModule() {
-//        var trainingItems = [TrainingItem]()
-//        trainingItem.firstItemType = .weight
-//        trainingItem.secondItemType = .repeats
-//        trainingItems.append(trainingItem)
-//        trainingItems.append(trainingItem)
-//        module = TrainingModule(module: module.module, mediaURL: nil, description: "Качественное видео снятое в Москве", trainingItems: trainingItems)
         view?.showData()
         if module.mediaURL != nil {
             view?.showVideo()

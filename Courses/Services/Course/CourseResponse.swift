@@ -1,5 +1,5 @@
 //
-//  CourseJSON.swift
+//  CourseResponse.swift
 //  Courses
 //
 //  Created by Руслан on 23.09.2024.
@@ -8,13 +8,14 @@
 import Foundation
 import SwiftyJSON
 
-class CourseJSON {
+class CourseResponse {
     
     // MARK: - Days JSON
     func daysInCourse(value: Data) async throws -> CourseModel {
         let json = JSON(value)
         let course = CourseModel()
         var modules = [ModuleProtocol]()
+        /// Информация курса
         course.nameCourse = json["title"].stringValue
         course.id = json["id"].intValue
         course.isDraft = json["is_draft"].boolValue
@@ -23,21 +24,24 @@ class CourseJSON {
         guard daysCount > 0 else {throw ErrorNetwork.runtimeError("Пустой массив")}
 
         for x in 0...daysCount - 1 {
+            /// Информация модулей
             let idDay = json["days"][x]["id"].intValue
-            let modulesArray = json["days"][x]["modules"].arrayValue
+            let modulesArray = json["days"][x]["modules"].arrayValue.count
+            let trainingModulesArray = json["days"][x]["training_modules"].arrayValue.count
+            let videoModulesArray = json["days"][x]["video_modules"].arrayValue.count
             let completed = json["days"][x]["day_completed"].boolValue
-            if modulesArray.isEmpty == false {
-                modules += initialCustomModule(x: x, modulesCount: modulesArray.count, json: json)
-                modules += initialVideoModule(x: x, modulesCount: modulesArray.count, json: json)
-                modules += initialCustomModule(x: x, modulesCount: modulesArray.count, json: json)
-            }
-            course.courseDays.append(CourseDays(dayID: idDay, type: .noneSee, modules: modules, completed: completed))
+            modules += initialCustomModule(x: x, modulesCount: modulesArray, json: json)
+            modules += initialVideoModule(x: x, modulesCount: videoModulesArray, json: json)
+            modules += initialTrainingModule(x: x, modulesCount: trainingModulesArray, json: json)
+            course.courseDays.append(DayModel(dayID: idDay, type: .noneSee, modules: modules, completed: completed))
             modules.removeAll()
         }
         return course
     }
     
+    /// Достаются все Кастомные модули
     private func initialCustomModule(x: Int, modulesCount: Int, json: JSON) -> [ModuleProtocol] {
+        guard modulesCount != 0 else { return [] }
         var modules = [ModuleProtocol]()
         for y in 0...modulesCount - 1 {
             let id = json["days"][x]["modules"][y]["id"].intValue
@@ -53,7 +57,9 @@ class CourseJSON {
         return modules
     }
     
+    /// Достаются все Тренировочные модули
     private func initialTrainingModule(x: Int, modulesCount: Int, json: JSON) -> [ModuleProtocol] {
+        guard modulesCount != 0 else { return [] }
         var modules = [ModuleProtocol]()
         for y in 0...modulesCount - 1 {
             let id = json["days"][x]["training_modules"][y]["id"].intValue
@@ -63,23 +69,53 @@ class CourseJSON {
             let desc = json["days"][x]["training_modules"][y]["desc"].stringValue
             let index = json["days"][x]["training_modules"][y]["order"].intValue
             let completed = json["days"][x]["training_modules"][y]["module_complete"].boolValue
-            modules.append(TrainingModule(module: Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index)))
+            let mediaURL = json["days"][x]["training_modules"][y]["data"].stringValue
+            let description = json["days"][x]["training_modules"][y]["training_description"].stringValue
+            let trainingItemsCount = json["days"][x]["training_modules"][y]["training_items"].arrayValue.count
+            
+            let trainingItmes = initialTrainingItem(x: x, y: y, count: trainingItemsCount, json: json)
+            
+            var defaultModels = Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index)
+            
+            modules.append(TrainingModule(module: defaultModels, mediaURL: URL(string: mediaURL), description: description, trainingItems: trainingItmes))
         }
         return modules
     }
     
+    ///Достаются все тренировочные подходы
+    private func initialTrainingItem(x: Int, y: Int, count: Int, json: JSON) -> [TrainingItem] {
+        guard count != 0 else { return [] }
+        var items = [TrainingItem]()
+        for z in 0...count - 1 {
+            let firstType = json["days"][x]["training_modules"][y]["training_items"][z]["first_item"].stringValue
+            let firstData = json["days"][x]["training_modules"][y]["training_items"][z]["first_data"].stringValue
+            let secondType = json["days"][x]["training_modules"][y]["training_items"][z]["second_item"].stringValue
+            let secondData = json["days"][x]["training_modules"][y]["training_items"][z]["second_data"].stringValue
+            items.append(TrainingItem(firstItemType: FormatTraining(rawValue: firstType), firstItemData: firstData, secondItemType: FormatTraining(rawValue: secondType), secondItemData: secondData))
+        }
+        return items
+    }
+    
+    /// Достается все видео модули
     private func initialVideoModule(x: Int, modulesCount: Int, json: JSON) -> [ModuleProtocol] {
+        guard modulesCount != 0 else { return [] }
         var modules = [ModuleProtocol]()
         for y in 0...modulesCount - 1 {
             let id = json["days"][x]["video_modules"][y]["id"].intValue
-            let text = json["days"][x]["video_modules"][y]["data"].stringValue
             let min = json["days"][x]["video_modules"][y]["time_to_pass"].intValue
             let title = json["days"][x]["video_modules"][y]["title"].stringValue
             let image = json["days"][x]["video_modules"][y]["image"].stringValue
             let desc = json["days"][x]["video_modules"][y]["desc"].stringValue
             let index = json["days"][x]["video_modules"][y]["order"].intValue
             let completed = json["days"][x]["video_modules"][y]["module_complete"].boolValue
-            modules.append(VideoModule(module: Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index)))
+            
+            let video = json["days"][x]["video_modules"][y]["data"].stringValue
+            let videoDesc = json["days"][x]["video_modules"][y]["video_desc"].stringValue
+            
+            
+            var defaultModule = Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index)
+            
+            modules.append(VideoModule(module: defaultModule, videoURL: URL(string: video), views: 0, timeVideo: 0, author: "Кто-то", videoDescription: videoDesc))
         }
         return modules
     }
@@ -111,7 +147,7 @@ class CourseJSON {
             let isBought = json["results"][x]["bought"].boolValue
             let next = json["next"].stringValue
             let progressInDays = json["results"][x]["completed_days_count"].intValue
-            courses.append(CourseModel(daysCount: daysCount, nameCourse: title, price: price, imageURL: URL(string: image), rating: rating, id: id, description: description, dataCreated: dataCreated, progressInDays: progressInDays, countBuyer: countBuyer, isBought: isBought, next: next, author: UserModel(name:authorName, surname: authorSurname, id: authorID)))
+            courses.append(CourseModel(daysCount: daysCount, nameCourse: title, price: price, imageURL: URL(string: image), rating: rating, id: id, description: description, dataCreated: dataCreated, progressInDays: progressInDays, countBuyer: countBuyer, isBought: isBought, nextPage: next, author: UserModel(name:authorName, surname: authorSurname, id: authorID)))
         }
         return courses
     }
@@ -173,7 +209,7 @@ class CourseJSON {
         let isBought = json["bought"].boolValue
         let isDraft = json["is_draft"].boolValue
         let verification = Verification(rawValue: json["verification"].stringValue) ?? .proccess
-        let course = CourseModel(daysCount: daysCount, nameCourse: title, price: price, category: category, imageURL: URL(string: image),rating: rating, myRating: myRating, id: id, description: description, dataCreated: dataCreated, countBuyer: boughtCount, isBought: isBought, isDraft: isDraft, verification: verification, author: author)
+        let course = CourseModel(daysCount: daysCount, nameCourse: title, price: price, category: category, imageURL: URL(string: image),rating: rating, mySendRating: myRating, id: id, description: description, dataCreated: dataCreated, countBuyer: boughtCount, isBought: isBought, isDraft: isDraft, verification: verification, author: author)
         return course
     }
 }
