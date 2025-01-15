@@ -51,7 +51,7 @@ blockquote::before {
     left: 0;
     bottom: 0;
     width: 3px;
-    background-image: linear-gradient(to bottom, #45AEF5, #45AEF5);
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
 }
 

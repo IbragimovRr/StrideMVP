@@ -1,6 +1,10 @@
 import UIKit
 import WebKit
 
+protocol EditorViewDelegate {
+    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment)
+}
+
 class EditorView: WKWebView {
     
     
@@ -9,6 +13,8 @@ class EditorView: WKWebView {
             setHTML(html)
         }
     }
+    
+    var delegate: EditorViewDelegate?
     
     // MARK: - Initialization
     
@@ -126,6 +132,12 @@ class EditorView: WKWebView {
         
     }
     
+    func getFormat() {
+        runJS("RE.isCommandActive('bold');") { result in
+            print(result)
+        }
+    }
+    
     // Не работает
     public func checkbox() {
         evaluateJavaScript("RE.setCheckbox('\(UUID().uuidString.prefix(8))')")
@@ -181,6 +193,35 @@ class EditorView: WKWebView {
     
     func focus() {
         evaluateJavaScript("RE.focus()")
+    }
+    
+    func initialFormat(message: WKScriptMessage) {
+        if let messageBody = message.body as? [String: Any] {
+            if let formattingData = messageBody["formatting"] as? [String: Bool] {
+                let isBold = formattingData["bold"] ?? false
+                let isItalic = formattingData["italic"] ?? false
+                let isUnderline = formattingData["underline"] ?? false
+                let isStrikethrough = formattingData["strikethrough"] ?? false
+                let isBlockquote = formattingData["blockquote"] ?? false
+                let isJustifyLeft = formattingData["justifyLeft"] ?? false
+                let isJustifyCenter = formattingData["justifyCenter"] ?? false
+                let isJustifyRight = formattingData["justifyRight"] ?? false
+                let isJustifyFull = formattingData["justifyFull"] ?? false
+                
+                var alignment: NSTextAlignment = .natural
+                if isJustifyLeft {
+                    alignment = .left
+                } else if isJustifyCenter {
+                    alignment = .center
+                } else if isJustifyRight {
+                    alignment = .right
+                } else if isJustifyFull {
+                    alignment = .justified
+                }
+                
+                delegate?.format(isBold: isBold, isItalic: isItalic, isUnderline: isUnderline, isStrikethrough: isStrikethrough, isBlockquote: isBlockquote, aligment: alignment)
+            }
+        }
     }
     
     func getEditorContent(completion: @escaping (String?) -> Void) {

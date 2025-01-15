@@ -21,17 +21,23 @@ protocol AddCoursePresenterViewDelegate {
 
 class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate {
     
+    
     @IBOutlet weak var editorBackView: UIView!
-    @IBOutlet weak var redo: UIButton!
-    @IBOutlet weak var undo: UIButton!
     @IBOutlet weak var loading: LottieAnimationView!
     @IBOutlet weak var nameCourseLBL: UILabel!
-    @IBOutlet weak var sizeFont: UILabel!
-    @IBOutlet weak var colorView: UIView!
-    @IBOutlet weak var fontTitle: UILabel!
+    @IBOutlet weak var mainEditorView: UIView!
     @IBOutlet weak var fontView: UIView!
     @IBOutlet weak var bottomConsoleView: NSLayoutConstraint!
+    
+    // Text editor Format
     @IBOutlet weak var alingment: UIButton!
+    @IBOutlet weak var isUnderline: UIButton!
+    @IBOutlet weak var isStrikeThrough: UIButton!
+    @IBOutlet weak var isItalic: UIButton!
+    @IBOutlet weak var isBold: UIButton!
+    @IBOutlet weak var redo: UIButton!
+    @IBOutlet weak var undo: UIButton!
+    
     
     var editor = EditorView()
     var presenter = AddCoursePresenter()
@@ -40,37 +46,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     private var startPosition = CGPoint()
     private var isChangedText = false
     private var isSave = true
-    
-    private var colorSelect = UIColor.white {
-        didSet {
-            colorView.backgroundColor = colorSelect
-            editor.textColor(colorSelect)
-        }
-    }
-    private var fontSelect = UIFont.systemFont(ofSize: 16) {
-        didSet {
-            fontTitle.text = fontSelect.fontName
-            editor.font(fontSelect.fontName)
-        }
-    }
-    private var alignment = NSMutableParagraphStyle().alignment {
-        didSet {
-            let paragraph = NSMutableParagraphStyle()
-            paragraph.alignment = alignment
-            changedAlignment(alignment)
-        }
-    }
-    private var sizeFontSelect = 16.0 {
-        didSet {
-            fontSelect = UIFont(descriptor: fontSelect.fontDescriptor, size: sizeFontSelect)
-            let roundedSize = round(sizeFontSelect * 10) / 10
-            sizeFontSelect = roundedSize
-            sizeFont.text = "\(sizeFontSelect) пт"
-            let intSize = Int(sizeFontSelect)
-//            editor.heading(intSize)
-            editor.blockquote()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,10 +85,16 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     
     func setupRichEditorView() {
         let webConfiguration = WKWebViewConfiguration()
+        let contentController = WKUserContentController()
+        contentController.add(self, name: "format")
+        webConfiguration.userContentController = contentController
         editor = EditorView(frame: .zero, configuration: webConfiguration)
+        editor.delegate = self
+        
         editor.translatesAutoresizingMaskIntoConstraints = false
         editor.isOpaque = false
         editorBackView.addSubview(editor)
+        
         
         NSLayoutConstraint.activate([
             editor.topAnchor.constraint(equalTo: editorBackView.topAnchor),
@@ -122,6 +103,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
             editor.leadingAnchor.constraint(equalTo: editorBackView.leadingAnchor)
         ])
     }
+
     
     func isLoading(_ bool: Bool) {
         if bool {
@@ -163,12 +145,14 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         nameCourseLBL.text = presenter.module.module.name
     }
     
-    func updateStyles(font: String, fontSize: CGFloat, color: String, textAlign: String) {
-//        fontSelect = font
-//        sizeFontSelect = fontSize
-//        colorSelect = UIColor(named: color) ?? .black
-//        alignment = NSTextAlignment(rawValue: textAlign)!
-        print(font, fontSize, color, textAlign)
+    private func toggleFontView(isShow: Bool) {
+        if isShow {
+            fontView.isHidden = false
+            mainEditorView.isHidden = true
+        }else {
+            fontView.isHidden = true
+            mainEditorView.isHidden = false
+        }
     }
     
     private func changedAlignment(_ alignment: NSTextAlignment) {
@@ -186,7 +170,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
             alingment.tag = 3
             editor.justify(.right)
         case .justified:
-            alingment.setImage(UIImage.defaulTextFull, for: .normal)
+            alingment.setImage(UIImage.defaultTextFull, for: .normal)
             alingment.tag = 0
             editor.justify(.justified)
         default:
@@ -229,9 +213,8 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     
     // MARK: - UIButton
     
-    @IBAction func okFont(_ sender: Any) {
-        fontView.isHidden = true
-        isChangedText = false
+    @IBAction func closeFontView(_ sender: Any) {
+        toggleFontView(isShow: false)
         checkUndoRedo()
     }
     
@@ -239,14 +222,40 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     
     @IBAction func save(_ sender: UIButton) {
         editor.resignFirstResponder()
-        presenter.saveCourse(html: nil)
+        editor.getHtml(handler: { res in
+            print(res)
+        })
+//        presenter.saveCourse(html: nil)
     }
     
-    @IBAction func color(_ sender: UIButton) {
-        let picker = UIColorPickerViewController()
-        picker.selectedColor = colorView.backgroundColor!
-        picker.delegate = self
-        self.present(picker, animated: true, completion: nil)
+    
+    @IBAction func attributesFontBtn(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            let config = UIFontPickerViewController.Configuration()
+            config.includeFaces = false
+            let vc = UIFontPickerViewController()
+            vc.delegate = self
+            present(vc, animated: true)
+        case 1: // FontSize
+            break
+        case 2:
+            editor.bold()
+        case 3:
+            editor.italic()
+        case 4:
+            let picker = UIColorPickerViewController()
+            picker.delegate = self
+            self.present(picker, animated: true, completion: nil)
+        case 5:
+            editor.strikeThrough()
+        case 6:
+            editor.underline()
+        case 7:
+            editor.blockquote()
+        default:
+            break
+        }
     }
     
     @IBAction func addImage(_ sender: UIButton) {
@@ -259,17 +268,10 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     }
     
     @IBAction func changedText(_ sender: UIButton) {
-        fontView.isHidden = false
+        toggleFontView(isShow: true)
         isChangedText = true
     }
     
-    @IBAction func fontBtn(_ sender: UIButton) {
-        let config = UIFontPickerViewController.Configuration()
-        config.includeFaces = false
-        let vc = UIFontPickerViewController()
-        vc.delegate = self
-        present(vc, animated: true)
-    }
     
     @IBAction func undo(_ sender: UIButton) {
         if sender.tag == 0 {
@@ -283,27 +285,19 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     @IBAction func alignment(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-            alignment = .left
+            changedAlignment(.left)
             sender.tag = 1
         case 1:
-            alignment = .center
+            changedAlignment(.center)
             sender.tag = 2
         case 2:
-            alignment = .right
+            changedAlignment(.right)
             sender.tag = 3
         case 3:
-            alignment = .justified
+            changedAlignment(.justified)
             sender.tag = 0
         default:
             break
-        }
-    }
-    
-    @IBAction func stepper(_ sender: UIButton) {
-        if sender.tag == 0 {
-            sizeFontSelect -= 1
-        }else {
-            sizeFontSelect += 1
         }
     }
     
@@ -321,7 +315,27 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     }
     
 }
-
+extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate {
+    
+    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment) {
+        changedAlignment(aligment)
+        if isBold { self.isBold.backgroundColor = .extraLightBlackMain}
+        else { self.isBold.backgroundColor = .clear }
+        if isItalic { self.isItalic.backgroundColor = .extraLightBlackMain}
+        else { self.isItalic.backgroundColor = .clear }
+        if isUnderline { self.isUnderline.backgroundColor = .extraLightBlackMain}
+        else { self.isUnderline.backgroundColor = .clear }
+        if isStrikethrough { self.isStrikeThrough.backgroundColor = .extraLightBlackMain}
+        else { self.isStrikeThrough.backgroundColor = .clear }
+    }
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "format" {
+            editor.initialFormat(message: message)
+        }
+    }
+    
+}
 
 // MARK: - Image
 extension AddCourseViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
@@ -348,7 +362,8 @@ extension AddCourseViewController: UIFontPickerViewControllerDelegate {
     
     func fontPickerViewControllerDidPickFont(_ viewController: UIFontPickerViewController) {
         guard let descriptor = viewController.selectedFontDescriptor else {return}
-        fontSelect = UIFont(descriptor: descriptor, size: sizeFontSelect)
+        let fontName = UIFont(descriptor: descriptor, size: 16).fontName
+        editor.font(fontName)
         viewController.dismiss(animated: true)
     }
 }
@@ -356,11 +371,11 @@ extension AddCourseViewController: UIFontPickerViewControllerDelegate {
 extension AddCourseViewController: UIColorPickerViewControllerDelegate {
     
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
-        colorSelect = viewController.selectedColor
+        editor.textColor(viewController.selectedColor)
     }
     
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        colorSelect = viewController.selectedColor
+        editor.textColor(viewController.selectedColor)
     }
     
 }

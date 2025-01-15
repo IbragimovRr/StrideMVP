@@ -19,11 +19,44 @@ var RE = {};
 
 RE.editor = document.getElementById('editor');
 
+function getFormattingData() {
+    const commands = [
+        "bold",
+        "italic",
+        "underline",
+        "strikethrough",
+        "blockquote",
+        "justifyLeft",  // Left alignment
+        "justifyCenter", // Center alignment
+        "justifyRight", // Right alignment
+        "justifyFull"   // Full justification
+    ];
+     
+    const formattingData = {};
+    
+    for (const command of commands) {
+      // Для alignment мы будем использовать более точные значения
+        if (command.startsWith("justify")) {
+            formattingData[command] = RE.isCommandActive(command);
+        }else{
+          formattingData[command] = RE.isCommandActive(command);
+        }
+    }
 
-// Not universally supported, but seems to work in iOS 7 and 8
+    return formattingData;
+}
+
+function handleFormatChange() {
+    const formattingData = getFormattingData();
+    window.webkit.messageHandlers.format.postMessage({ formatting: formattingData });
+}
+
+
 document.addEventListener("selectionchange", function() {
     RE.backuprange();
+    handleFormatChange();
 });
+
 
 //looks specifically for a Range selection and not a Caret selection
 RE.rangeSelectionExists = function() {
@@ -109,6 +142,15 @@ RE.setHtml = function(contents) {
     RE.editor.innerHTML = tempWrapper.innerHTML;
     RE.updatePlaceholder();
 };
+
+RE.isCommandActive = function(command) {
+    try {
+        return document.queryCommandState(command);
+    } catch (e) {
+        return false;
+    }
+};
+
 
 RE.getHtml = function() {
     return RE.editor.innerHTML;
@@ -308,6 +350,17 @@ RE.insertImage = function(url, alt, width, height) {
 RE.setBlockquote = function() {
     document.execCommand('formatBlock', false, 'blockquote');
 };
+
+function findParent(element, tag) {
+    while (element && element.nodeType !== 9) { // 9 - document node
+        if (element.tagName && element.tagName.toLowerCase() === tag.toLowerCase()) {
+            return element;
+        }
+        element = element.parentNode;
+    }
+    return null;
+}
+
 
 
 RE.insertHTML = function(html) {
