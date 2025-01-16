@@ -322,7 +322,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2d-Xk-gdu">
-                                <rect key="frame" x="20" y="128" width="353" height="630"/>
+                                <rect key="frame" x="10" y="123" width="373" height="635"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pqz-eq-q0B">
@@ -617,7 +617,7 @@
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="font" id="dQp-5D-7KV" customClass="FontCollectionViewCell" customModule="Courses" customModuleProvider="target">
                                         <rect key="frame" x="10" y="0.0" width="132" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="TB4-FM-qxK" customClass="Border" customModule="Courses" customModuleProvider="target">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="TB4-FM-qxK">
                                             <rect key="frame" x="0.0" y="0.0" width="132" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -628,6 +628,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" name="LightBlackMain"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="mOd-Zl-eP3" secondAttribute="bottom" id="3Zh-YH-qwn"/>
                                                 <constraint firstItem="mOd-Zl-eP3" firstAttribute="top" secondItem="TB4-FM-qxK" secondAttribute="top" id="G6p-h0-lKr"/>
@@ -655,6 +656,74 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j3E-yc-avL">
+                                <rect key="frame" x="64" y="612" width="155" height="146"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="SiR-dM-Ljj">
+                                        <rect key="frame" x="8" y="5" width="139" height="136"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xo2-ci-zr0">
+                                                <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="ukh-E6-ON3"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Название">
+                                                    <fontDescription key="titleFontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="24"/>
+                                                    <color key="baseForegroundColor" red="0.53725490196078429" green="0.58039215686274503" blue="0.63921568627450975" alpha="1" colorSpace="calibratedRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="headingBtn:" destination="bKb-Fe-dxw" eventType="touchUpInside" id="1rN-rH-W1z"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1s-Tx-Zmb">
+                                                <rect key="frame" x="0.0" y="34" width="120.66666666666667" height="34"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Заголовок">
+                                                    <fontDescription key="titleFontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
+                                                    <color key="baseForegroundColor" red="0.53725490200000003" green="0.58039215690000001" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="headingBtn:" destination="bKb-Fe-dxw" eventType="touchUpInside" id="L4e-3J-Za0"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hZ-rz-KhZ">
+                                                <rect key="frame" x="0.0" y="68" width="139" height="34"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Подзаголовок">
+                                                    <fontDescription key="titleFontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                                                    <color key="baseForegroundColor" red="0.53725490200000003" green="0.58039215690000001" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="headingBtn:" destination="bKb-Fe-dxw" eventType="touchUpInside" id="0yf-6D-x2o"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1B-Yy-aUE">
+                                                <rect key="frame" x="0.0" y="102" width="129.33333333333334" height="34"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Основной текст">
+                                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                                    <color key="baseForegroundColor" red="0.53725490200000003" green="0.58039215690000001" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="headingBtn:" destination="bKb-Fe-dxw" eventType="touchUpInside" id="OPH-My-zk7"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="LightBlackMain"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="155" id="BbK-L0-uw3"/>
+                                    <constraint firstItem="SiR-dM-Ljj" firstAttribute="top" secondItem="j3E-yc-avL" secondAttribute="top" constant="5" id="EWY-VD-x1b"/>
+                                    <constraint firstItem="SiR-dM-Ljj" firstAttribute="leading" secondItem="j3E-yc-avL" secondAttribute="leading" constant="8" id="TeB-yz-6jB"/>
+                                    <constraint firstAttribute="trailing" secondItem="SiR-dM-Ljj" secondAttribute="trailing" constant="8" id="U2j-pd-w5H"/>
+                                    <constraint firstAttribute="bottom" secondItem="SiR-dM-Ljj" secondAttribute="bottom" constant="5" id="cuY-a2-lDg"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XmU-3q-Hr8"/>
                         <color key="backgroundColor" name="BlackMain"/>
@@ -663,18 +732,20 @@
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="top" secondItem="XmU-3q-Hr8" secondAttribute="top" id="2tt-Qg-RBW"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="jHI-pb-aUK" secondAttribute="trailing" id="3BT-8M-Lim"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="centerX" secondItem="xnu-Sq-5BV" secondAttribute="centerX" id="3O1-t2-0as"/>
-                            <constraint firstItem="b2d-Xk-gdu" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="20" id="Chf-en-k0g"/>
+                            <constraint firstItem="b2d-Xk-gdu" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="10" id="Chf-en-k0g"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="top" secondItem="b2d-Xk-gdu" secondAttribute="bottom" constant="10" id="DYq-xf-gmq"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="bottom" secondItem="pqz-eq-q0B" secondAttribute="bottom" id="G3E-kt-DQe"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="xYI-FY-3sc" secondAttribute="trailing" id="GOJ-2R-o6z"/>
+                            <constraint firstItem="pqz-eq-q0B" firstAttribute="top" secondItem="j3E-yc-avL" secondAttribute="bottom" constant="10" id="O0T-Nv-iGn"/>
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="leading" secondItem="xnu-Sq-5BV" secondAttribute="leading" id="PCp-UW-C6E"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="trailing" secondItem="Tcz-ME-6lc" secondAttribute="trailing" id="XSS-W7-GxF"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="top" secondItem="xYI-FY-3sc" secondAttribute="bottom" constant="10" id="e26-uF-qDc"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="bottom" secondItem="Tcz-ME-6lc" secondAttribute="bottom" id="e27-Hi-dfQ"/>
+                            <constraint firstItem="j3E-yc-avL" firstAttribute="leading" secondItem="pqz-eq-q0B" secondAttribute="leading" constant="35" id="eyy-oa-9PG"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="leading" secondItem="pqz-eq-q0B" secondAttribute="leading" id="hEl-vY-tTh"/>
                             <constraint firstItem="xYI-FY-3sc" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" id="rT6-4M-HFy"/>
-                            <constraint firstItem="b2d-Xk-gdu" firstAttribute="top" secondItem="jHI-pb-aUK" secondAttribute="bottom" constant="15" id="yUz-hY-MgJ"/>
-                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="b2d-Xk-gdu" secondAttribute="trailing" constant="20" id="yvH-mm-2jl"/>
+                            <constraint firstItem="b2d-Xk-gdu" firstAttribute="top" secondItem="jHI-pb-aUK" secondAttribute="bottom" constant="10" id="yUz-hY-MgJ"/>
+                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="b2d-Xk-gdu" secondAttribute="trailing" constant="10" id="yvH-mm-2jl"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="6DX-c5-Fez" appends="YES" id="r7X-WK-ueB"/>
@@ -687,7 +758,10 @@
                         <outlet property="editorBackView" destination="b2d-Xk-gdu" id="ki2-qB-78S"/>
                         <outlet property="fontCollectionView" destination="xYI-FY-3sc" id="vDM-LT-awr"/>
                         <outlet property="fontView" destination="pqz-eq-q0B" id="KNB-9C-Q0G"/>
+                        <outlet property="heightFontView" destination="j3E-yc-avL" id="zIJ-qY-jrd"/>
                         <outlet property="isBold" destination="vMl-o9-Pqz" id="280-Jw-qM5"/>
+                        <outlet property="isFontHeight" destination="oBo-i9-c6F" id="m8V-pS-kAG"/>
+                        <outlet property="isFontName" destination="qAf-nR-z8d" id="yoU-u7-RH9"/>
                         <outlet property="isItalic" destination="FHD-AG-YFj" id="Ygh-H8-FOx"/>
                         <outlet property="isStrikeThrough" destination="SoK-tQ-w94" id="Dk8-jm-dRf"/>
                         <outlet property="isUnderline" destination="TyP-g3-ktm" id="S2r-K3-BrR"/>

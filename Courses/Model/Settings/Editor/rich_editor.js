@@ -26,25 +26,43 @@ function getFormattingData() {
         "underline",
         "strikethrough",
         "blockquote",
-        "justifyLeft",  // Left alignment
-        "justifyCenter", // Center alignment
-        "justifyRight", // Right alignment
-        "justifyFull"   // Full justification
+        "justifyLeft",
+        "justifyCenter",
+        "justifyRight",
+        "justifyFull"
     ];
      
     const formattingData = {};
     
     for (const command of commands) {
-      // Для alignment мы будем использовать более точные значения
-        if (command.startsWith("justify")) {
-            formattingData[command] = RE.isCommandActive(command);
-        }else{
           formattingData[command] = RE.isCommandActive(command);
-        }
     }
-
+    
+    const fontName = getFontName();
+    formattingData.fontName = fontName;
+    
     return formattingData;
 }
+
+function getFontName() {
+    const selection = window.getSelection();
+    let fontName = null;
+    
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const node = range.commonAncestorContainer;
+        
+        let parentNode = node.nodeType === Node.TEXT_NODE ? node.parentNode : node;
+        
+        if(parentNode){
+            const style = window.getComputedStyle(parentNode);
+            fontName = style.fontFamily;
+        }
+        
+    }
+    return fontName;
+}
+
 
 function handleFormatChange() {
     const formattingData = getFormattingData();
@@ -216,10 +234,12 @@ RE.redo = function() {
 
 RE.setBold = function() {
     document.execCommand('bold', false, null);
+    handleFormatChange();
 };
 
 RE.setItalic = function() {
     document.execCommand('italic', false, null);
+    handleFormatChange();
 };
 
 
@@ -233,10 +253,12 @@ RE.setSuperscript = function() {
 
 RE.setStrikeThrough = function() {
     document.execCommand('strikeThrough', false, null);
+    handleFormatChange();
 };
 
 RE.setUnderline = function() {
     document.execCommand('underline', false, null);
+    handleFormatChange();
 };
 
 RE.setFont = function(font) {
@@ -260,9 +282,11 @@ RE.setTextBackgroundColor = function(color) {
     document.execCommand("styleWithCSS", null, false);
 };
 
-RE.setHeading = function(heading) {
+RE.setHeading = function(heading, fontName) {
     document.execCommand('formatBlock', false, '<h' + heading + '>');
+    document.execCommand('fontName', false, fontName);
 };
+
 
 RE.setIndent = function() {
     document.execCommand('indent', false, null);
@@ -328,24 +352,22 @@ RE.setLineHeight = function(height) {
     RE.editor.style.lineHeight = height;
 };
 
-RE.insertImage = function(url, alt, width, height) {
+RE.insertImage = function(url, alt) {
     var img = document.createElement('img');
     img.setAttribute("src", url);
     img.setAttribute("alt", alt);
     
-    if (width) {
-        img.setAttribute("width", width);
-    }
-    if (height) {
-        img.setAttribute("height", height);
-    }
-    img.style.borderRadius = "5px";
+    img.style.borderRadius = "3px";
+    img.style.maxWidth = "100%";
+    img.style.height = "auto";
+    img.style.display = "block";
 
     img.onload = RE.updateHeight;
     
     RE.insertHTML(img.outerHTML);
     RE.callback("input");
 };
+
 
 RE.setBlockquote = function() {
     document.execCommand('formatBlock', false, 'blockquote');

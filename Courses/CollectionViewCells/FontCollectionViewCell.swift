@@ -14,13 +14,13 @@ class FontCollectionViewCell: UICollectionViewCell {
     
     func configure(with fontName: String, isHighlighted: Bool) {
         self.fontName.text = fontName
-        self.fontName.font = UIFont(name: fontName, size: 8)
+        self.fontName.font = UIFont(name: fontName, size: 10)
         
         if isHighlighted {
-            self.fontName.font = UIFont(name: fontName, size: 8)
-            mainView.layer.borderColor = UIColor.grayMain.cgColor
+            self.fontName.font = UIFont(name: fontName, size: 10)
+            mainView.backgroundColor = UIColor.extraLightBlackMain
         } else {
-            mainView.layer.borderColor = UIColor.extraLightBlackMain.cgColor
+            mainView.backgroundColor = UIColor.lightBlackMain
         }
         
     }

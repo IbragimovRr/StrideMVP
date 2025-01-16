@@ -2,7 +2,7 @@ import UIKit
 import WebKit
 
 protocol EditorViewDelegate {
-    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment)
+    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName:String)
 }
 
 class EditorView: WKWebView {
@@ -40,6 +40,7 @@ class EditorView: WKWebView {
         translatesAutoresizingMaskIntoConstraints = false
         loadEditorHTML()
     }
+    
     
     private func loadEditorHTML() {
         guard let url = Bundle.main.url(forResource: "rich_editor", withExtension: "html") else { return }
@@ -98,13 +99,10 @@ class EditorView: WKWebView {
         runJS("RE.setFontSize('\(size)px')")
     }
     
-    func heading(_ size: Int) {
-        runJS("RE.setHeading('\(size)')")
+    func heading(_ size: Int, _ fontName: String) {
+        runJS("RE.setHeading('\(size)', '\(fontName)')")
     }
     
-    func heading(heading: Int) {
-        evaluateJavaScript("RE.setHeading(\(heading))")
-    }
     
     public func undo() {
         runJS("RE.undo()")
@@ -163,11 +161,11 @@ class EditorView: WKWebView {
         runJS("RE.showSpinner()")
     }
     
-    func insertImage(url: String, alt: String, width: Int, height: Int) {
+    func insertImage(url: String, alt: String) {
         let escapedURL = url
         let escapedAlt = alt
         
-        evaluateJavaScript("RE.insertImage('\(escapedURL)', '\(escapedAlt)', '\(width)', '\(height)')")
+        evaluateJavaScript("RE.insertImage('\(escapedURL)', '\(escapedAlt)')")
     }
     
     func blockquote() {
@@ -197,16 +195,18 @@ class EditorView: WKWebView {
     
     func initialFormat(message: WKScriptMessage) {
         if let messageBody = message.body as? [String: Any] {
-            if let formattingData = messageBody["formatting"] as? [String: Bool] {
-                let isBold = formattingData["bold"] ?? false
-                let isItalic = formattingData["italic"] ?? false
-                let isUnderline = formattingData["underline"] ?? false
-                let isStrikethrough = formattingData["strikethrough"] ?? false
-                let isBlockquote = formattingData["blockquote"] ?? false
-                let isJustifyLeft = formattingData["justifyLeft"] ?? false
-                let isJustifyCenter = formattingData["justifyCenter"] ?? false
-                let isJustifyRight = formattingData["justifyRight"] ?? false
-                let isJustifyFull = formattingData["justifyFull"] ?? false
+
+            if let formattingData = messageBody["formatting"] as? [String: Any] {
+                let isBold = formattingData["bold"] as? Bool ?? false
+                let isItalic = formattingData["italic"] as? Bool ?? false
+                let isUnderline = formattingData["underline"] as? Bool ?? false
+                let isStrikethrough = formattingData["strikethrough"] as? Bool ?? false
+                let isBlockquote = formattingData["blockquote"] as? Bool ?? false
+                let isJustifyLeft = formattingData["justifyLeft"] as? Bool ?? false
+                let isJustifyCenter = formattingData["justifyCenter"] as? Bool ?? false
+                let isJustifyRight = formattingData["justifyRight"] as? Bool ?? false
+                let isJustifyFull = formattingData["justifyFull"] as? Bool ?? false
+                let fontName = formattingData["fontName"] as? String ?? "Times New Roman"
                 
                 var alignment: NSTextAlignment = .natural
                 if isJustifyLeft {
@@ -218,8 +218,9 @@ class EditorView: WKWebView {
                 } else if isJustifyFull {
                     alignment = .justified
                 }
-                
-                delegate?.format(isBold: isBold, isItalic: isItalic, isUnderline: isUnderline, isStrikethrough: isStrikethrough, isBlockquote: isBlockquote, aligment: alignment)
+
+
+                delegate?.format(isBold: isBold, isItalic: isItalic, isUnderline: isUnderline, isStrikethrough: isStrikethrough, isBlockquote: isBlockquote, aligment: alignment, fontName: fontName)
             }
         }
     }

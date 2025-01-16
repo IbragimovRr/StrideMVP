@@ -16,12 +16,12 @@ protocol AddCoursePresenterViewDelegate {
     func setData(html: String)
     func saveCourse()
     func setError(_ error: String)
-    func setImage(_ size: CGSize, url: URL)
 }
 
 class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate {
     
     
+    @IBOutlet weak var heightFontView: UIView!
     @IBOutlet weak var fontCollectionView: UICollectionView!
     @IBOutlet weak var editorBackView: UIView!
     @IBOutlet weak var loading: LottieAnimationView!
@@ -34,6 +34,8 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     @IBOutlet weak var alingment: UIButton!
     @IBOutlet weak var isUnderline: UIButton!
     @IBOutlet weak var isStrikeThrough: UIButton!
+    @IBOutlet weak var isFontHeight: UIButton!
+    @IBOutlet weak var isFontName: UIButton!
     @IBOutlet weak var isItalic: UIButton!
     @IBOutlet weak var isBold: UIButton!
     @IBOutlet weak var redo: UIButton!
@@ -155,12 +157,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         isLoading(false)
     }
     
-    func setImage(_ size: CGSize, url: URL) {
-        let widthInt = Int(size.width)
-        let heightInt = Int(size.height)
-        editor.insertImage(url: url.absoluteString, alt: "image", width: widthInt, height: heightInt)
-    }
-    
     private func loadingSettings() {
         loading.loopMode = .loop
         loading.contentMode = .scaleToFill
@@ -176,8 +172,18 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
             mainEditorView.isHidden = true
         }else {
             fontView.isHidden = true
+            hiddenAllFontView()
             mainEditorView.isHidden = false
         }
+    }
+    
+    private func checkFont(fontName: String) -> Int {
+        for x in 0...fonts.count - 1 {
+            if fonts[x] == fontName {
+                return x
+            }
+        }
+        return 2
     }
     
     private func changedAlignment(_ alignment: NSTextAlignment) {
@@ -185,19 +191,15 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         case .left:
             alingment.setImage(UIImage.leftTextFull, for: .normal)
             alingment.tag = 1
-            editor.justify(.left)
         case .center:
             alingment.setImage(UIImage.centerTextFull, for: .normal)
             alingment.tag = 2
-            editor.justify(.center)
         case .right:
             alingment.setImage(UIImage.rightTextFull, for: .normal)
             alingment.tag = 3
-            editor.justify(.right)
         case .justified:
             alingment.setImage(UIImage.defaultTextFull, for: .normal)
             alingment.tag = 0
-            editor.justify(.justified)
         default:
             break
         }
@@ -217,14 +219,32 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         }
     }
     
-    private func toggleFontName(_ sender: UIButton) {
+    private func hiddenAllFontView() {
+        fontCollectionView.isHidden = true
+        isFontName.backgroundColor = .clear
+        heightFontView.isHidden = true
+        isFontHeight.backgroundColor = .clear
+    }
+    
+    private func toggleFontName() {
         if fontCollectionView.isHidden {
             fontCollectionView.isHidden = false
-            sender.backgroundColor = .extraLightBlackMain
+            isFontName.backgroundColor = .extraLightBlackMain
             editor.focus()
         }else {
             fontCollectionView.isHidden = true
-            sender.backgroundColor = .clear
+            isFontName.backgroundColor = .clear
+        }
+    }
+    
+    private func toggleFontHieght() {
+        if heightFontView.isHidden {
+            heightFontView.isHidden = false
+            isFontHeight.backgroundColor = .extraLightBlackMain
+            editor.focus()
+        }else {
+            heightFontView.isHidden = true
+            isFontHeight.backgroundColor = .clear
         }
     }
     
@@ -276,13 +296,28 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
 //        presenter.saveCourse(html: nil)
     }
     
+    @IBAction func headingBtn(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            editor.heading(1, fonts[selectedFontIndex])
+        case 1:
+            editor.heading(2, fonts[selectedFontIndex])
+        case 2:
+            editor.heading(3, fonts[selectedFontIndex])
+        case 3:
+            editor.heading(0, fonts[selectedFontIndex])
+        default:
+            break
+        }
+        toggleFontHieght()
+    }
     
     @IBAction func attributesFontBtn(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-            toggleFontName(sender)
-        case 1: // FontSize
-            break
+            toggleFontName()
+        case 1:
+            toggleFontHieght()
         case 2:
             editor.bold()
         case 3:
@@ -331,15 +366,19 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         case 0:
             changedAlignment(.left)
             sender.tag = 1
+            editor.justify(.left)
         case 1:
             changedAlignment(.center)
             sender.tag = 2
+            editor.justify(.center)
         case 2:
             changedAlignment(.right)
             sender.tag = 3
+            editor.justify(.right)
         case 3:
             changedAlignment(.justified)
             sender.tag = 0
+            editor.justify(.justified)
         default:
             break
         }
@@ -361,7 +400,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
 }
 extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate {
     
-    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment) {
+    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName: String) {
         changedAlignment(aligment)
         if isBold { self.isBold.backgroundColor = .extraLightBlackMain}
         else { self.isBold.backgroundColor = .clear }
@@ -386,7 +425,7 @@ extension AddCourseViewController: UIImagePickerControllerDelegate & UINavigatio
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage, let url = info[.imageURL] as? URL {
-            presenter.resizeImage(image: image, url: url)
+            editor.insertImage(url: url.absoluteString, alt: "image")
             picker.dismiss(animated: true)
         }
     }
@@ -398,52 +437,6 @@ extension AddCourseViewController: UIImagePickerControllerDelegate & UINavigatio
     
 }
 // MARK: - Font
-extension AddCourseViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fonts.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "font", for: indexPath) as! FontCollectionViewCell
-        
-        var isHighlighted = false
-        if selectedFontIndex == indexPath.row {
-            isHighlighted = true
-        }
-        
-        cell.configure(with: fonts[indexPath.row], isHighlighted: isHighlighted)
-        return cell
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let layout = fontCollectionView.collectionViewLayout as! CarouselLayout
-        let centerX = scrollView.contentOffset.x + scrollView.bounds.width / 2
-        
-        var minDistance = CGFloat.infinity
-        var closestIndex = 0
-        
-        for i in 0..<fonts.count {
-            if let attributes = layout.layoutAttributesForItem(at: IndexPath(item: i, section: 0)) {
-                let distance = abs(attributes.center.x - centerX)
-                if distance < minDistance {
-                    minDistance = distance
-                    closestIndex = i
-                }
-            }
-        }
-        
-        if closestIndex != selectedFontIndex {
-            selectedFontIndex = closestIndex
-            
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
-            
-            fontCollectionView.reloadData()
-        }
-    }
-
-}
 extension AddCourseViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

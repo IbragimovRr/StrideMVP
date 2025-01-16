@@ -11,7 +11,6 @@ protocol AddCoursePresenterDelegate {
     func deleteAlamofireFiles()
     func getData()
     func saveCourse(html: NSAttributedString?)
-    func resizeImage(image: UIImage, url: URL)
 }
 
 class AddCoursePresenter: AddCoursePresenterDelegate {
@@ -64,13 +63,6 @@ class AddCoursePresenter: AddCoursePresenterDelegate {
                 }
             }
         }
-    }
-    
-    func resizeImage(image: UIImage, url: URL) {
-        let targetWidth = UIScreen.main.bounds.width - 30
-        let aspectRatio = image.size.height / image.size.width
-        let targetSize = CGSize(width: targetWidth, height: targetWidth * aspectRatio)
-        view.setImage(targetSize, url: url)
     }
     
 }
