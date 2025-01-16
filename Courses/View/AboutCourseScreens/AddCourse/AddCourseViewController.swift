@@ -444,6 +444,52 @@ extension AddCourseViewController: UICollectionViewDataSource, UICollectionViewD
     }
 
 }
+extension AddCourseViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return fonts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "font", for: indexPath) as! FontCollectionViewCell
+        
+        var isHighlighted = false
+        if selectedFontIndex == indexPath.row {
+            isHighlighted = true
+        }
+        
+        cell.configure(with: fonts[indexPath.row], isHighlighted: isHighlighted)
+        return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let layout = fontCollectionView.collectionViewLayout as! CarouselLayout
+        let centerX = scrollView.contentOffset.x + scrollView.bounds.width / 2
+        
+        var minDistance = CGFloat.infinity
+        var closestIndex = 0
+        
+        for i in 0..<fonts.count {
+            if let attributes = layout.layoutAttributesForItem(at: IndexPath(item: i, section: 0)) {
+                let distance = abs(attributes.center.x - centerX)
+                if distance < minDistance {
+                    minDistance = distance
+                    closestIndex = i
+                }
+            }
+        }
+        
+        if closestIndex != selectedFontIndex {
+            selectedFontIndex = closestIndex
+            
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+            
+            fontCollectionView.reloadData()
+        }
+    }
+
+}
 // MARK: - Color
 extension AddCourseViewController: UIColorPickerViewControllerDelegate {
     
