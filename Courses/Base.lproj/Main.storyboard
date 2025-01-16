@@ -601,6 +601,60 @@
                                     <constraint firstItem="SvU-CO-pHv" firstAttribute="centerX" secondItem="jHI-pb-aUK" secondAttribute="centerX" id="wMm-Hz-hEA"/>
                                 </constraints>
                             </view>
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xYI-FY-3sc">
+                                <rect key="frame" x="0.0" y="728" width="393" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="RI3-va-Ja7"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LIb-Tl-lmJ">
+                                    <size key="itemSize" width="132" height="30"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="font" id="dQp-5D-7KV" customClass="FontCollectionViewCell" customModule="Courses" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="0.0" width="132" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="TB4-FM-qxK" customClass="Border" customModule="Courses" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="132" height="30"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commissioner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOd-Zl-eP3">
+                                                    <rect key="frame" x="0.0" y="0.0" width="132" height="30"/>
+                                                    <fontDescription key="fontDescription" name="Commissioner-Thin_Medium" family="Commissioner" pointSize="8"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="mOd-Zl-eP3" secondAttribute="bottom" id="3Zh-YH-qwn"/>
+                                                <constraint firstItem="mOd-Zl-eP3" firstAttribute="top" secondItem="TB4-FM-qxK" secondAttribute="top" id="G6p-h0-lKr"/>
+                                                <constraint firstItem="mOd-Zl-eP3" firstAttribute="leading" secondItem="TB4-FM-qxK" secondAttribute="leading" id="O46-Ua-t7U"/>
+                                                <constraint firstAttribute="trailing" secondItem="mOd-Zl-eP3" secondAttribute="trailing" id="hAH-p7-6CY"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="border">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                    <color key="value" name="ExtraLightBlackMain"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="132" height="30"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="fontName" destination="mOd-Zl-eP3" id="4eV-nq-HD9"/>
+                                            <outlet property="mainView" destination="TB4-FM-qxK" id="aWk-Ha-hwV"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XmU-3q-Hr8"/>
                         <color key="backgroundColor" name="BlackMain"/>
@@ -612,10 +666,13 @@
                             <constraint firstItem="b2d-Xk-gdu" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="20" id="Chf-en-k0g"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="top" secondItem="b2d-Xk-gdu" secondAttribute="bottom" constant="10" id="DYq-xf-gmq"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="bottom" secondItem="pqz-eq-q0B" secondAttribute="bottom" id="G3E-kt-DQe"/>
+                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="xYI-FY-3sc" secondAttribute="trailing" id="GOJ-2R-o6z"/>
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="leading" secondItem="xnu-Sq-5BV" secondAttribute="leading" id="PCp-UW-C6E"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="trailing" secondItem="Tcz-ME-6lc" secondAttribute="trailing" id="XSS-W7-GxF"/>
+                            <constraint firstItem="pqz-eq-q0B" firstAttribute="top" secondItem="xYI-FY-3sc" secondAttribute="bottom" constant="10" id="e26-uF-qDc"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="bottom" secondItem="Tcz-ME-6lc" secondAttribute="bottom" id="e27-Hi-dfQ"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="leading" secondItem="pqz-eq-q0B" secondAttribute="leading" id="hEl-vY-tTh"/>
+                            <constraint firstItem="xYI-FY-3sc" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" id="rT6-4M-HFy"/>
                             <constraint firstItem="b2d-Xk-gdu" firstAttribute="top" secondItem="jHI-pb-aUK" secondAttribute="bottom" constant="15" id="yUz-hY-MgJ"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="b2d-Xk-gdu" secondAttribute="trailing" constant="20" id="yvH-mm-2jl"/>
                         </constraints>
@@ -628,6 +685,7 @@
                         <outlet property="alingment" destination="dpF-O9-MbD" id="DVm-oD-HpC"/>
                         <outlet property="bottomConsoleView" destination="e27-Hi-dfQ" id="LxE-2H-sB8"/>
                         <outlet property="editorBackView" destination="b2d-Xk-gdu" id="ki2-qB-78S"/>
+                        <outlet property="fontCollectionView" destination="xYI-FY-3sc" id="vDM-LT-awr"/>
                         <outlet property="fontView" destination="pqz-eq-q0B" id="KNB-9C-Q0G"/>
                         <outlet property="isBold" destination="vMl-o9-Pqz" id="280-Jw-qM5"/>
                         <outlet property="isItalic" destination="FHD-AG-YFj" id="Ygh-H8-FOx"/>
@@ -2372,7 +2430,7 @@
                                 <rect key="frame" x="0.0" y="-5" width="393" height="862"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STRIDE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6H-Fu-ogK">
-                                        <rect key="frame" x="143" y="85" width="107" height="34.666666666666657"/>
+                                        <rect key="frame" x="143.33333333333334" y="85" width="106.66666666666666" height="34.333333333333343"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -9299,7 +9357,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="54"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Админ панель" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKP-L0-naN">
-                                        <rect key="frame" x="139.66666666666666" y="16.666666666666671" width="114" height="21"/>
+                                        <rect key="frame" x="139.33333333333334" y="16.666666666666671" width="114.33333333333334" height="21"/>
                                         <fontDescription key="fontDescription" name="Commissioner-SemiBold" family="Commissioner" pointSize="17"/>
                                         <color key="textColor" name="GrayMain"/>
                                         <nil key="highlightedColor"/>
@@ -12433,14 +12491,14 @@
     <inferredMetricsTieBreakers>
         <segue reference="kFQ-re-axD"/>
         <segue reference="vKu-9D-Hl7"/>
-        <segue reference="35z-4l-np9"/>
+        <segue reference="2uE-MH-jsq"/>
         <segue reference="nsh-RS-Plh"/>
-        <segue reference="IVu-BL-rNu"/>
-        <segue reference="M8w-WU-QND"/>
-        <segue reference="F7H-ew-eXR"/>
-        <segue reference="HHf-kQ-icL"/>
-        <segue reference="hAk-ad-GZt"/>
-        <segue reference="3aH-yg-pXb"/>
+        <segue reference="yNH-bw-Rcl"/>
+        <segue reference="afS-Cq-cau"/>
+        <segue reference="VAz-Cz-udn"/>
+        <segue reference="0B2-ml-wjG"/>
+        <segue reference="eaT-yL-Yiu"/>
+        <segue reference="AOP-mt-L4O"/>
         <segue reference="pPa-ol-Wiu"/>
         <segue reference="7iD-6h-6hO"/>
     </inferredMetricsTieBreakers>
