@@ -120,6 +120,8 @@
 		44D68B052C51B3EF00F8F476 /* InfoCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */; };
 		44D84B242D1DC798001A35CA /* TypeModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D84B232D1DC798001A35CA /* TypeModuleViewController.swift */; };
 		44D84B282D1EF40C001A35CA /* AddVideoModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D84B272D1EF40C001A35CA /* AddVideoModuleViewController.swift */; };
+		44DF69D92D38882B00BD1A22 /* FontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */; };
+		44DF69DB2D388A5200BD1A22 /* CarouselLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */; };
 		44DFB1162C3B199A005C8F44 /* RecomendationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DFB1152C3B199A005C8F44 /* RecomendationCollectionViewCell.swift */; };
 		44DFB11B2C3B2637005C8F44 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 44DFB11A2C3B2637005C8F44 /* loading.json */; };
 		44DFB11E2C3BE46B005C8F44 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 44DFB11D2C3BE46B005C8F44 /* Lottie */; };
@@ -278,6 +280,8 @@
 		44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCoursesViewController.swift; sourceTree = "<group>"; };
 		44D84B232D1DC798001A35CA /* TypeModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeModuleViewController.swift; sourceTree = "<group>"; };
 		44D84B272D1EF40C001A35CA /* AddVideoModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVideoModuleViewController.swift; sourceTree = "<group>"; };
+		44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCollectionViewCell.swift; sourceTree = "<group>"; };
+		44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselLayout.swift; sourceTree = "<group>"; };
 		44DFB1152C3B199A005C8F44 /* RecomendationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationCollectionViewCell.swift; sourceTree = "<group>"; };
 		44DFB11A2C3B2637005C8F44 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		44E00B912CE39F2400E62089 /* CoachCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -416,6 +420,7 @@
 				448E73FD2CFF09E200C3000D /* Segment.swift */,
 				440C9C3E2CED6C47007D0735 /* ProtectScreen.swift */,
 				446BF1A02D2C948000D8E534 /* EditorView.swift */,
+				44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -660,6 +665,7 @@
 				44E00B912CE39F2400E62089 /* CoachCollectionViewCell.swift */,
 				440C9C422CF49DD0007D0735 /* PromoCollectionViewCell.swift */,
 				44228F582D2804E000D751ED /* RepeatsCollectionViewCell.swift */,
+				44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -838,6 +844,7 @@
 				4450B3C92CB6066900F1F54B /* UpdateViewController.swift in Sources */,
 				448E73F42CFF071F00C3000D /* HomePresenter.swift in Sources */,
 				44682CA52D03577500087C62 /* WithdrawPresenter.swift in Sources */,
+				44DF69DB2D388A5200BD1A22 /* CarouselLayout.swift in Sources */,
 				44DFB1162C3B199A005C8F44 /* RecomendationCollectionViewCell.swift in Sources */,
 				449CF0DB2C3370CA000D4528 /* CoursesCollectionViewCell.swift in Sources */,
 				44682CAA2D03BF5700087C62 /* InfoCoursePresenter.swift in Sources */,
@@ -863,6 +870,7 @@
 				44064C8F2C285F7C00AB5227 /* TextFieldFormat.swift in Sources */,
 				440C9C3F2CED6C47007D0735 /* ProtectScreen.swift in Sources */,
 				448FBC692D31C24E00476EE2 /* AddCoursePresenter.swift in Sources */,
+				44DF69D92D38882B00BD1A22 /* FontCollectionViewCell.swift in Sources */,
 				44E00B922CE39F2400E62089 /* CoachCollectionViewCell.swift in Sources */,
 				44BD6CDA2C407864001645A0 /* ReviewsCollectionViewCell.swift in Sources */,
 				44BC59022CCEE6F600AD7FFA /* RefreshControll.swift in Sources */,

@@ -22,6 +22,7 @@ protocol AddCoursePresenterViewDelegate {
 class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate {
     
     
+    @IBOutlet weak var fontCollectionView: UICollectionView!
     @IBOutlet weak var editorBackView: UIView!
     @IBOutlet weak var loading: LottieAnimationView!
     @IBOutlet weak var nameCourseLBL: UILabel!
@@ -44,12 +45,31 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
+    var fonts = [
+            "Arial",
+            "Helvetica",
+            "Times New Roman",
+            "Courier New",
+            "Verdana",
+            "Georgia",
+            "Impact",
+            "Comic Sans MS",
+            "Trebuchet MS"
+        ]
+    var selectedFontIndex = 2 {
+        didSet {
+            editor.font(fonts[selectedFontIndex])
+        }
+    }
     private var isChangedText = false
     private var isSave = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.overrideUserInterfaceStyle = .dark
+        fontCollectionView.delegate = self
+        fontCollectionView.dataSource = self
+        fontCollectionView.collectionViewLayout = CarouselLayout()
         presenter.view = self
 //        getData()
         design()
@@ -64,6 +84,10 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scrollToCenterCell()
+    }
     
     @objc func keyboardWillAppear(notification:Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
@@ -90,7 +114,8 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         webConfiguration.userContentController = contentController
         editor = EditorView(frame: .zero, configuration: webConfiguration)
         editor.delegate = self
-        
+        editor.scrollView.showsVerticalScrollIndicator = false
+        editor.scrollView.showsHorizontalScrollIndicator = false
         editor.translatesAutoresizingMaskIntoConstraints = false
         editor.isOpaque = false
         editorBackView.addSubview(editor)
@@ -192,6 +217,29 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         }
     }
     
+    private func toggleFontName(_ sender: UIButton) {
+        if fontCollectionView.isHidden {
+            fontCollectionView.isHidden = false
+            sender.backgroundColor = .extraLightBlackMain
+            editor.focus()
+        }else {
+            fontCollectionView.isHidden = true
+            sender.backgroundColor = .clear
+        }
+    }
+    
+    func scrollToCenterCell() {
+        let indexPath = IndexPath(row: selectedFontIndex, section: 0)
+        
+        fontCollectionView.layoutIfNeeded()
+        if let attributes = fontCollectionView.layoutAttributesForItem(at: indexPath) {
+            let center = CGPoint(x: attributes.center.x - fontCollectionView.bounds.width / 2, y: 0)
+            fontCollectionView.setContentOffset(center, animated: false)
+            fontCollectionView.reloadData()
+        }
+    }
+
+    
     private func warningSave() {
         let alert = UIAlertController(title: "Вы не сохранили изменения", message: "Вы точно хотите выйти?", preferredStyle: .alert)
         
@@ -232,11 +280,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     @IBAction func attributesFontBtn(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-            let config = UIFontPickerViewController.Configuration()
-            config.includeFaces = false
-            let vc = UIFontPickerViewController()
-            vc.delegate = self
-            present(vc, animated: true)
+            toggleFontName(sender)
         case 1: // FontSize
             break
         case 2:
@@ -354,18 +398,51 @@ extension AddCourseViewController: UIImagePickerControllerDelegate & UINavigatio
     
 }
 // MARK: - Font
-extension AddCourseViewController: UIFontPickerViewControllerDelegate {
+extension AddCourseViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    func fontPickerViewControllerDidCancel(_ viewController: UIFontPickerViewController) {
-        viewController.dismiss(animated: true)
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return fonts.count
     }
     
-    func fontPickerViewControllerDidPickFont(_ viewController: UIFontPickerViewController) {
-        guard let descriptor = viewController.selectedFontDescriptor else {return}
-        let fontName = UIFont(descriptor: descriptor, size: 16).fontName
-        editor.font(fontName)
-        viewController.dismiss(animated: true)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "font", for: indexPath) as! FontCollectionViewCell
+        
+        var isHighlighted = false
+        if selectedFontIndex == indexPath.row {
+            isHighlighted = true
+        }
+        
+        cell.configure(with: fonts[indexPath.row], isHighlighted: isHighlighted)
+        return cell
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let layout = fontCollectionView.collectionViewLayout as! CarouselLayout
+        let centerX = scrollView.contentOffset.x + scrollView.bounds.width / 2
+        
+        var minDistance = CGFloat.infinity
+        var closestIndex = 0
+        
+        for i in 0..<fonts.count {
+            if let attributes = layout.layoutAttributesForItem(at: IndexPath(item: i, section: 0)) {
+                let distance = abs(attributes.center.x - centerX)
+                if distance < minDistance {
+                    minDistance = distance
+                    closestIndex = i
+                }
+            }
+        }
+        
+        if closestIndex != selectedFontIndex {
+            selectedFontIndex = closestIndex
+            
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+            
+            fontCollectionView.reloadData()
+        }
+    }
+
 }
 // MARK: - Color
 extension AddCourseViewController: UIColorPickerViewControllerDelegate {

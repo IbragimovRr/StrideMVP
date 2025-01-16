@@ -64,10 +64,36 @@ div {
     position: static;
 }
 
-#editor {
-    -webkit-user-select: auto !important;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
 }
+
+#editor::-webkit-scrollbar {
+    display: none;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+#editor {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 12pt;
+    padding: 10px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
 
 #editor:focus {
     outline: 0px solid transparent;
