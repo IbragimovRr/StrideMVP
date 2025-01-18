@@ -1,5 +1,5 @@
 {
-  "originHash" : "8ffaea68aa637cc894adc5c963188a84629eb0e1f22c983925a851f0601d80c9",
+  "originHash" : "8594a9b638f7cc7cc900894b33c02bc70378c5c8d7ca9cd4ea27b5742d0116cd",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -98,24 +98,6 @@
       "state" : {
         "revision" : "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
         "version" : "5.0.2"
-      }
-    },
-    {
-      "identity" : "swiftymarkdown",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SimonFairbairn/SwiftyMarkdown.git",
-      "state" : {
-        "revision" : "dde451ab4ed9b77b328e21baa471fdfa0cf61369",
-        "version" : "1.2.4"
-      }
-    },
-    {
-      "identity" : "therichtexteditor",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Criptext/TheRichTextEditor.git",
-      "state" : {
-        "revision" : "5967667041a51a2ac2c96fe5413fa5e0f7b6598b",
-        "version" : "0.3.3"
       }
     },
     {

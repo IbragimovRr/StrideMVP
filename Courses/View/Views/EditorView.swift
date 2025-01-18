@@ -38,6 +38,7 @@ class EditorView: WKWebView {
         backgroundColor = .clear
         isOpaque = false
         translatesAutoresizingMaskIntoConstraints = false
+        scrollView.isScrollEnabled = false
         loadEditorHTML()
     }
     
@@ -166,6 +167,7 @@ class EditorView: WKWebView {
         let escapedAlt = alt
         
         evaluateJavaScript("RE.insertImage('\(escapedURL)', '\(escapedAlt)')")
+        focus()
     }
     
     func blockquote() {

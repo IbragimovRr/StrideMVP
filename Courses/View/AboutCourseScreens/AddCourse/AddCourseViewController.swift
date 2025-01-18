@@ -73,7 +73,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         fontCollectionView.dataSource = self
         fontCollectionView.collectionViewLayout = CarouselLayout()
         presenter.view = self
-//        getData()
+//        presenter.getData()
         design()
         setupRichEditorView()
         loadingSettings()

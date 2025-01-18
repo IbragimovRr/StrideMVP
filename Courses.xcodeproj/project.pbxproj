@@ -74,7 +74,6 @@
 		448301842C987A0700E40DBA /* DeepLinksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448301832C987A0700E40DBA /* DeepLinksManager.swift */; };
 		448765082CE00D15008A1E44 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */; };
 		4488EA152C769D9D0086765F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4488EA142C769D9D0086765F /* ErrorView.swift */; };
-		44899F092D30ABA200582803 /* SwiftyMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = 44899F082D30ABA200582803 /* SwiftyMarkdown */; };
 		448E73EA2CFCD0DB00C3000D /* PromoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73E92CFCD0DB00C3000D /* PromoTableViewCell.swift */; };
 		448E73F42CFF071F00C3000D /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F32CFF071F00C3000D /* HomePresenter.swift */; };
 		448E73FA2CFF087A00C3000D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F92CFF087A00C3000D /* UserModel.swift */; };
@@ -133,7 +132,6 @@
 		44E406222CFF7BFA004F633E /* CategoryServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E406212CFF7BFA004F633E /* CategoryServices.swift */; };
 		44E906342C29A59B00FFA6DD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E906332C29A59B00FFA6DD /* HomeViewController.swift */; };
 		44E906372C2ADE8700FFA6DD /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E906362C2ADE8700FFA6DD /* BannerCollectionViewCell.swift */; };
-		44EDE2332D372308002388BE /* TheRichTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 44EDE2322D372308002388BE /* TheRichTextEditor */; };
 		44F118D22D109025000FCDC3 /* AppMetricaCore in Frameworks */ = {isa = PBXBuildFile; productRef = 44F118D12D109025000FCDC3 /* AppMetricaCore */; };
 		44F118D42D109025000FCDC3 /* AppMetricaCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 44F118D32D109025000FCDC3 /* AppMetricaCrashes */; };
 		44F118D62D109025000FCDC3 /* AppMetricaLibraryAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 44F118D52D109025000FCDC3 /* AppMetricaLibraryAdapter */; };
@@ -324,14 +322,12 @@
 				44F395482C9B8BA200861759 /* CropViewController in Frameworks */,
 				44064C9C2C2861D700AB5227 /* SDWebImageMapKit in Frameworks */,
 				44064C922C2861B900AB5227 /* Alamofire in Frameworks */,
-				44899F092D30ABA200582803 /* SwiftyMarkdown in Frameworks */,
 				44064C9A2C2861D700AB5227 /* SDWebImage in Frameworks */,
 				44F3954A2C9B8BA200861759 /* TOCropViewController in Frameworks */,
 				447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */,
 				44A406832C762FE1005509D0 /* SkeletonView in Frameworks */,
 				44F118D22D109025000FCDC3 /* AppMetricaCore in Frameworks */,
 				44F118D42D109025000FCDC3 /* AppMetricaCrashes in Frameworks */,
-				44EDE2332D372308002388BE /* TheRichTextEditor in Frameworks */,
 				44D68AF62C5051E100F8F476 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -713,8 +709,6 @@
 				44F118D12D109025000FCDC3 /* AppMetricaCore */,
 				44F118D32D109025000FCDC3 /* AppMetricaCrashes */,
 				44F118D52D109025000FCDC3 /* AppMetricaLibraryAdapter */,
-				44899F082D30ABA200582803 /* SwiftyMarkdown */,
-				44EDE2322D372308002388BE /* TheRichTextEditor */,
 			);
 			productName = Courses;
 			productReference = 440DAB302C1748D400C576FB /* Courses.app */;
@@ -754,8 +748,6 @@
 				447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */,
 				44F395462C9B8BA200861759 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */,
-				44899F072D30ABA200582803 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
-				44EDE2312D372308002388BE /* XCRemoteSwiftPackageReference "TheRichTextEditor" */,
 			);
 			productRefGroup = 440DAB312C1748D400C576FB /* Products */;
 			projectDirPath = "";
@@ -1193,14 +1185,6 @@
 				minimumVersion = 3.1.1;
 			};
 		};
-		44899F072D30ABA200582803 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SimonFairbairn/SwiftyMarkdown.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.4;
-			};
-		};
 		44A406812C762FE1005509D0 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
@@ -1223,14 +1207,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.4.3;
-			};
-		};
-		44EDE2312D372308002388BE /* XCRemoteSwiftPackageReference "TheRichTextEditor" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Criptext/TheRichTextEditor.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.3;
 			};
 		};
 		44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */ = {
@@ -1282,11 +1258,6 @@
 			package = 447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */;
 			productName = TinkoffASDKUI;
 		};
-		44899F082D30ABA200582803 /* SwiftyMarkdown */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 44899F072D30ABA200582803 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */;
-			productName = SwiftyMarkdown;
-		};
 		44A406822C762FE1005509D0 /* SkeletonView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 44A406812C762FE1005509D0 /* XCRemoteSwiftPackageReference "SkeletonView" */;
@@ -1306,11 +1277,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 44DFB11C2C3BE46A005C8F44 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		44EDE2322D372308002388BE /* TheRichTextEditor */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 44EDE2312D372308002388BE /* XCRemoteSwiftPackageReference "TheRichTextEditor" */;
-			productName = TheRichTextEditor;
 		};
 		44F118D12D109025000FCDC3 /* AppMetricaCore */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -22,31 +22,15 @@ class AddCoursePresenter: AddCoursePresenterDelegate {
     }
     
     func getData() {
-        Task {
-            
-            let initialHTML = """
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Заголовки и абзацы</title>
-                    <meta charset="utf-8">
-                </head>
-                <body>
-                    <h1>Заголовок<br>первого уровня</h1>
-                    <h2>Заголовок второго уровня</h2>
-                    <h3>Заголовок третьего уровня</h3>
-                    <h4>Заголовок четвертого уровня</h4>
-                    <h5>Заголовок пятого уровня</h5>
-                    <h6>Заголовок шестого уровня</h6>
-                    <hr>
-                    <p>Тест абзаца</p>
-                </body>
-                </html>
-                """
-            view.setData(html: initialHTML)
-            
+            Task {
+//                let attributedString = try await FilePath().downloadFileWithURL(url: module.text!)
+//                DispatchQueue.main.async {
+//                    self.view.setData(html: attributedString.htmlString()!)
+//                    self.view.setData(attr: attributedString)
+//                }
+                
+            }
         }
-    }
     
     func saveCourse(html: NSAttributedString?) {
         view.isLoading(true)
