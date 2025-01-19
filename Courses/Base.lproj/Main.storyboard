@@ -12567,10 +12567,10 @@
         <segue reference="vKu-9D-Hl7"/>
         <segue reference="2uE-MH-jsq"/>
         <segue reference="nsh-RS-Plh"/>
-        <segue reference="yNH-bw-Rcl"/>
+        <segue reference="IVu-BL-rNu"/>
         <segue reference="afS-Cq-cau"/>
         <segue reference="VAz-Cz-udn"/>
-        <segue reference="0B2-ml-wjG"/>
+        <segue reference="HHf-kQ-icL"/>
         <segue reference="eaT-yL-Yiu"/>
         <segue reference="AOP-mt-L4O"/>
         <segue reference="pPa-ol-Wiu"/>
@@ -12640,7 +12640,7 @@
         <image name="success 1" width="15" height="15"/>
         <image name="successBlue" width="15" height="15"/>
         <image name="successGreen" width="22" height="22"/>
-        <image name="text" width="18" height="15"/>
+        <image name="text" width="21" height="17"/>
         <image name="timeVideoModule" width="18" height="18"/>
         <image name="timer" width="20" height="20"/>
         <image name="trainingModule" width="28" height="28"/>

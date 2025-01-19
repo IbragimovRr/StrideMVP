@@ -90,9 +90,7 @@ class CourseServices {
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response =  AF.upload(multipartFormData: { multipartFormData in
             if let imageURL = info.imageURL, "\(imageURL)".starts(with: "file") {
-                ImageResize.compressImageFromFileURL(fileURL: imageURL, maxSizeInMB: 0.1) { imageURL in
-                    multipartFormData.append(imageURL!, withName: "image")
-                }
+                multipartFormData.append(imageURL, withName: "image")
             }
             multipartFormData.append(Data(info.name.utf8), withName: "title")
             if let description = info.description {
@@ -150,10 +148,8 @@ class CourseServices {
         let response = AF.upload(multipartFormData: { multipartFormData in
             // Image
             if "\(info.imageURL!)".starts(with: "file") {
-                ImageResize.compressImageFromFileURL(fileURL: info.imageURL!, maxSizeInMB: 0.1) { compressedURL in
-                    if let url = compressedURL {
-                        multipartFormData.append(url, withName: "image")
-                    }
+                if let url = info.imageURL {
+                    multipartFormData.append(url, withName: "image")
                 }
             }
             // Черновик
