@@ -14,12 +14,12 @@ import WebKit
 protocol AddCoursePresenterViewDelegate {
     func isLoading(_ bool: Bool)
     func setData(html: String)
+    func setImage(url: String)
     func saveCourse()
     func setError(_ error: String)
 }
 
 class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate {
-    
     
     @IBOutlet weak var heightFontView: UIView!
     @IBOutlet weak var fontCollectionView: UICollectionView!
@@ -73,7 +73,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         fontCollectionView.dataSource = self
         fontCollectionView.collectionViewLayout = CarouselLayout()
         presenter.view = self
-//        presenter.getData()
+        presenter.viewDidLoad()
         design()
         setupRichEditorView()
         loadingSettings()
@@ -140,6 +140,11 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
             loading.stop()
             loading.isHidden = true
         }
+    }
+    
+    func setImage(url: String) {
+        print(url)
+        editor.insertImage(url: url, alt: "image")
     }
     
     func setData(html: String) {
@@ -425,7 +430,8 @@ extension AddCourseViewController: UIImagePickerControllerDelegate & UINavigatio
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage, let url = info[.imageURL] as? URL {
-            editor.insertImage(url: url.absoluteString, alt: "image")
+            presenter.saveImageInCloud(filePath: url)
+            editor.unFocus()
             picker.dismiss(animated: true)
         }
     }

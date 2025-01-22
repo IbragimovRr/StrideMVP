@@ -163,11 +163,10 @@ class EditorView: WKWebView {
     }
     
     func insertImage(url: String, alt: String) {
-        let escapedURL = url
-        let escapedAlt = alt
+        let escapedURL = url.escaped
+        let escapedAlt = alt.escaped
         
         evaluateJavaScript("RE.insertImage('\(escapedURL)', '\(escapedAlt)')")
-        focus()
     }
     
     func blockquote() {
@@ -194,6 +193,11 @@ class EditorView: WKWebView {
     func focus() {
         evaluateJavaScript("RE.focus()")
     }
+    
+    func unFocus() {
+        evaluateJavaScript("RE.blurFocus()")
+    }
+    
     
     func initialFormat(message: WKScriptMessage) {
         if let messageBody = message.body as? [String: Any] {

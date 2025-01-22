@@ -43,6 +43,10 @@
 		44228F572D274B8800D751ED /* CloudServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44228F562D274B8800D751ED /* CloudServices.swift */; };
 		44228F592D2804E000D751ED /* RepeatsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44228F582D2804E000D751ED /* RepeatsCollectionViewCell.swift */; };
 		44228F5B2D2813C500D751ED /* AddTrainingModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44228F5A2D2813C500D751ED /* AddTrainingModuleViewController.swift */; };
+		44321F9A2D40496D00247DA9 /* AWSCore in Frameworks */ = {isa = PBXBuildFile; productRef = 44321F992D40496D00247DA9 /* AWSCore */; };
+		44321F9C2D40496D00247DA9 /* AWSS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 44321F9B2D40496D00247DA9 /* AWSS3 */; };
+		44321F9F2D404B7D00247DA9 /* ClientRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 44321F9E2D404B7D00247DA9 /* ClientRuntime */; };
+		44321FA12D404B7D00247DA9 /* Smithy in Frameworks */ = {isa = PBXBuildFile; productRef = 44321FA02D404B7D00247DA9 /* Smithy */; };
 		4442F3D82C31BFDB00203A36 /* PageLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442F3D72C31BFDB00203A36 /* PageLayout.swift */; };
 		44435CF42D184FFD00B879C3 /* VideoModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */; };
 		444A07012C2B9D6C008F4E68 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A07002C2B9D6C008F4E68 /* Extension.swift */; };
@@ -316,6 +320,7 @@
 			files = (
 				44DFB11E2C3BE46B005C8F44 /* Lottie in Frameworks */,
 				44F118D62D109025000FCDC3 /* AppMetricaLibraryAdapter in Frameworks */,
+				44321F9F2D404B7D00247DA9 /* ClientRuntime in Frameworks */,
 				44064C972C2861CA00AB5227 /* SwiftyJSON in Frameworks */,
 				447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */,
 				44D68AF82C5051E100F8F476 /* GoogleSignInSwift in Frameworks */,
@@ -325,7 +330,10 @@
 				44064C9A2C2861D700AB5227 /* SDWebImage in Frameworks */,
 				44F3954A2C9B8BA200861759 /* TOCropViewController in Frameworks */,
 				447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */,
+				44321F9A2D40496D00247DA9 /* AWSCore in Frameworks */,
 				44A406832C762FE1005509D0 /* SkeletonView in Frameworks */,
+				44321F9C2D40496D00247DA9 /* AWSS3 in Frameworks */,
+				44321FA12D404B7D00247DA9 /* Smithy in Frameworks */,
 				44F118D22D109025000FCDC3 /* AppMetricaCore in Frameworks */,
 				44F118D42D109025000FCDC3 /* AppMetricaCrashes in Frameworks */,
 				44D68AF62C5051E100F8F476 /* GoogleSignIn in Frameworks */,
@@ -709,6 +717,10 @@
 				44F118D12D109025000FCDC3 /* AppMetricaCore */,
 				44F118D32D109025000FCDC3 /* AppMetricaCrashes */,
 				44F118D52D109025000FCDC3 /* AppMetricaLibraryAdapter */,
+				44321F992D40496D00247DA9 /* AWSCore */,
+				44321F9B2D40496D00247DA9 /* AWSS3 */,
+				44321F9E2D404B7D00247DA9 /* ClientRuntime */,
+				44321FA02D404B7D00247DA9 /* Smithy */,
 			);
 			productName = Courses;
 			productReference = 440DAB302C1748D400C576FB /* Courses.app */;
@@ -748,6 +760,8 @@
 				447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */,
 				44F395462C9B8BA200861759 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */,
+				44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */,
+				44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */,
 			);
 			productRefGroup = 440DAB312C1748D400C576FB /* Products */;
 			projectDirPath = "";
@@ -1177,6 +1191,22 @@
 				minimumVersion = 5.19.3;
 			};
 		};
+		44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/aws-sdk-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.40.0;
+			};
+		};
+		44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/smithy-lang/smithy-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.111.0;
+			};
+		};
 		447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/tinkoff-mobile-tech/tinkoff-asdk-ios?tab=readme-ov-file#%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5";
@@ -1247,6 +1277,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 44064C982C2861D700AB5227 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
+		};
+		44321F992D40496D00247DA9 /* AWSCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSCore;
+		};
+		44321F9B2D40496D00247DA9 /* AWSS3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSS3;
+		};
+		44321F9E2D404B7D00247DA9 /* ClientRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */;
+			productName = ClientRuntime;
+		};
+		44321FA02D404B7D00247DA9 /* Smithy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */;
+			productName = Smithy;
 		};
 		447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */ = {
 			isa = XCSwiftPackageProductDependency;

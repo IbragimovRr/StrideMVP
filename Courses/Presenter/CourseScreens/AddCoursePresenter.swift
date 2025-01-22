@@ -9,11 +9,13 @@ import UIKit
 
 protocol AddCoursePresenterDelegate {
     func deleteAlamofireFiles()
-    func getData()
+    func viewDidLoad()
     func saveCourse(html: NSAttributedString?)
+    func saveImageInCloud(filePath: URL)
 }
 
 class AddCoursePresenter: AddCoursePresenterDelegate {
+    
     var view: AddCoursePresenterViewDelegate!
     var module = CustomModule(module: Modules(name: "", minutes: 0, id: 0))
     
@@ -21,16 +23,30 @@ class AddCoursePresenter: AddCoursePresenterDelegate {
         FilePath().deleteAlamofireFiles()
     }
     
-    func getData() {
-            Task {
+    func viewDidLoad() {
+        getData()
+    }
+    
+    private func getData() {
+        Task {
 //                let attributedString = try await FilePath().downloadFileWithURL(url: module.text!)
 //                DispatchQueue.main.async {
 //                    self.view.setData(html: attributedString.htmlString()!)
 //                    self.view.setData(attr: attributedString)
 //                }
-                
+        }
+    }
+    
+
+    
+    func saveImageInCloud(filePath: URL)  {
+        Task {
+            let url = try await CloudServices().uploadFileToS3(fileURL: filePath)
+            DispatchQueue.main.async {
+                self.view.setImage(url: url)
             }
         }
+    }
     
     func saveCourse(html: NSAttributedString?) {
         view.isLoading(true)
