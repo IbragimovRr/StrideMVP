@@ -14,7 +14,8 @@ extension CourseServices {
     func addTrainingModule(dayID: Int, position: Int) async throws -> Int {
         let url = Constants.url + "api/v1/training-module/create/\(dayID)/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
-        let response = AF.request(url, method: .post, headers: headers).serializingData()
+        let parameters = ["training_description":"a"]
+        let response = AF.request(url, method: .post, parameters: parameters, headers: headers).serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode
         let json = JSON(value)

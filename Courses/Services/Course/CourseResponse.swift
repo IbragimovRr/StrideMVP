@@ -52,7 +52,8 @@ class CourseResponse {
             let desc = json["days"][x]["modules"][y]["desc"].stringValue
             let index = json["days"][x]["modules"][y]["order"].intValue
             let completed = json["days"][x]["modules"][y]["module_complete"].boolValue
-            modules.append(CustomModule(module: Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index), text: URL(string: text)))
+            let isVisible = json["days"][x]["modules"][y]["is_visible"].boolValue
+            modules.append(CustomModule(module: Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index, isVisible: isVisible), text: URL(string: text)))
         }
         return modules
     }
@@ -69,13 +70,15 @@ class CourseResponse {
             let desc = json["days"][x]["training_modules"][y]["desc"].stringValue
             let index = json["days"][x]["training_modules"][y]["order"].intValue
             let completed = json["days"][x]["training_modules"][y]["module_complete"].boolValue
+            let isVisible = json["days"][x]["training_modules"][y]["is_visible"].boolValue
+            
             let mediaURL = json["days"][x]["training_modules"][y]["data"].stringValue
             let description = json["days"][x]["training_modules"][y]["training_description"].stringValue
             let trainingItemsCount = json["days"][x]["training_modules"][y]["training_items"].arrayValue.count
             
             let trainingItmes = initialTrainingItem(x: x, y: y, count: trainingItemsCount, json: json)
             
-            var defaultModels = Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index)
+            let defaultModels = Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index, isVisible: isVisible)
             
             modules.append(TrainingModule(module: defaultModels, mediaURL: URL(string: mediaURL), description: description, trainingItems: trainingItmes))
         }
@@ -108,12 +111,13 @@ class CourseResponse {
             let desc = json["days"][x]["video_modules"][y]["desc"].stringValue
             let index = json["days"][x]["video_modules"][y]["order"].intValue
             let completed = json["days"][x]["video_modules"][y]["module_complete"].boolValue
+            let isVisible = json["days"][x]["video_modules"][y]["is_visible"].boolValue
             
             let video = json["days"][x]["video_modules"][y]["data"].stringValue
             let videoDesc = json["days"][x]["video_modules"][y]["video_desc"].stringValue
             
             
-            var defaultModule = Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index)
+            let defaultModule = Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index, isVisible: isVisible)
             
             modules.append(VideoModule(module: defaultModule, videoURL: URL(string: video), views: 0, timeVideo: 0, author: "Кто-то", videoDescription: videoDesc))
         }

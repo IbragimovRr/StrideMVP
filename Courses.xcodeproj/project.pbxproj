@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		440254D32D42EB1600752940 /* PlanCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440254D22D42EB1600752940 /* PlanCoursesViewController.swift */; };
+		440254D52D42EC5D00752940 /* PlanCoursesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440254D42D42EC5D00752940 /* PlanCoursesPresenter.swift */; };
+		440254D72D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440254D62D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift */; };
 		44049A2E2C6CE0C30014BD9C /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44049A2D2C6CE0C30014BD9C /* credentials.plist */; };
 		44064C752C26ED8E00AB5227 /* Commissioner-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44064C742C26ED8E00AB5227 /* Commissioner-Medium.ttf */; };
 		44064C772C26ED9500AB5227 /* Commissioner-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44064C762C26ED9500AB5227 /* Commissioner-SemiBold.ttf */; };
@@ -42,6 +45,7 @@
 		442023B42D282751007C3E68 /* AddTrainingModulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442023B32D282751007C3E68 /* AddTrainingModulePresenter.swift */; };
 		44228F592D2804E000D751ED /* RepeatsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44228F582D2804E000D751ED /* RepeatsCollectionViewCell.swift */; };
 		44228F5B2D2813C500D751ED /* AddTrainingModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44228F5A2D2813C500D751ED /* AddTrainingModuleViewController.swift */; };
+		443B076C2D444E1F00C08DE2 /* AddPlanCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B076B2D444E1F00C08DE2 /* AddPlanCoursesViewController.swift */; };
 		4442F3D82C31BFDB00203A36 /* PageLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442F3D72C31BFDB00203A36 /* PageLayout.swift */; };
 		44435CF42D184FFD00B879C3 /* VideoModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */; };
 		444A07012C2B9D6C008F4E68 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A07002C2B9D6C008F4E68 /* Extension.swift */; };
@@ -164,6 +168,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		440254D22D42EB1600752940 /* PlanCoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCoursesViewController.swift; sourceTree = "<group>"; };
+		440254D42D42EC5D00752940 /* PlanCoursesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCoursesPresenter.swift; sourceTree = "<group>"; };
+		440254D62D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		44049A2D2C6CE0C30014BD9C /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
 		44064C742C26ED8E00AB5227 /* Commissioner-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Commissioner-Medium.ttf"; sourceTree = "<group>"; };
 		44064C762C26ED9500AB5227 /* Commissioner-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Commissioner-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -199,6 +206,7 @@
 		442023B32D282751007C3E68 /* AddTrainingModulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrainingModulePresenter.swift; sourceTree = "<group>"; };
 		44228F582D2804E000D751ED /* RepeatsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatsCollectionViewCell.swift; sourceTree = "<group>"; };
 		44228F5A2D2813C500D751ED /* AddTrainingModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrainingModuleViewController.swift; sourceTree = "<group>"; };
+		443B076B2D444E1F00C08DE2 /* AddPlanCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPlanCoursesViewController.swift; sourceTree = "<group>"; };
 		4442F3D72C31BFDB00203A36 /* PageLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLayout.swift; sourceTree = "<group>"; };
 		44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModuleViewController.swift; sourceTree = "<group>"; };
 		444A07002C2B9D6C008F4E68 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -470,6 +478,7 @@
 				4481D43B2D1C945E00DBE377 /* AddModuleCoursesPresenter.swift */,
 				4465B2FC2D1EFF5B005EA9D0 /* AddVideoModulePresenter.swift */,
 				442023B32D282751007C3E68 /* AddTrainingModulePresenter.swift */,
+				440254D42D42EC5D00752940 /* PlanCoursesPresenter.swift */,
 			);
 			path = CourseScreens;
 			sourceTree = "<group>";
@@ -575,6 +584,7 @@
 		44D84B252D1EF3A6001A35CA /* AddCourse */ = {
 			isa = PBXGroup;
 			children = (
+				443B076B2D444E1F00C08DE2 /* AddPlanCoursesViewController.swift */,
 				7595784A2C5B9A7D00A9F811 /* AddInfoAboutModuleViewController.swift */,
 				44BD6CE32C440974001645A0 /* AddModuleCoursesViewController.swift */,
 				44D68AFC2C51B3EF00F8F476 /* AddInfoAboutCourseVC.swift */,
@@ -594,6 +604,7 @@
 				44D68AFE2C51B3EF00F8F476 /* CourseTextViewController.swift */,
 				44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */,
 				44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */,
+				440254D22D42EB1600752940 /* PlanCoursesViewController.swift */,
 			);
 			path = ViewCourse;
 			sourceTree = "<group>";
@@ -636,6 +647,7 @@
 				44E00B912CE39F2400E62089 /* CoachCollectionViewCell.swift */,
 				440C9C422CF49DD0007D0735 /* PromoCollectionViewCell.swift */,
 				44228F582D2804E000D751ED /* RepeatsCollectionViewCell.swift */,
+				440254D62D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -781,6 +793,7 @@
 				7555DEB72C98822000B80A13 /* BanksTableViewCell.swift in Sources */,
 				440DAB342C1748D400C576FB /* AppDelegate.swift in Sources */,
 				44E4061C2CFF78F4004F633E /* CourseModel.swift in Sources */,
+				440254D72D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift in Sources */,
 				75106D792C38AFDB0036042B /* InfoAboutMeViewController.swift in Sources */,
 				44E406222CFF7BFA004F633E /* CategoryServices.swift in Sources */,
 				44064C8D2C285DA600AB5227 /* RegistrViewController.swift in Sources */,
@@ -796,12 +809,14 @@
 				44D68B032C51B3EF00F8F476 /* CoursesViewController.swift in Sources */,
 				44F3954C2C9B8BB900861759 /* CropImage.swift in Sources */,
 				7515103C2C343146009978E6 /* ProfileViewController.swift in Sources */,
+				443B076C2D444E1F00C08DE2 /* AddPlanCoursesViewController.swift in Sources */,
 				75D7F3562C4299EF0083DBEF /* UD.swift in Sources */,
 				44E2AB202D35C8FC00547228 /* Constants.swift in Sources */,
 				449880CA2CB621280052C3C3 /* NavigationControllerDelegate.swift in Sources */,
 				44BD149C2C808106006D0722 /* PickerModelViewController.swift in Sources */,
 				44E406192CFF7572004F633E /* CourseServices.swift in Sources */,
 				44682CA02D02874A00087C62 /* PromocodeModel.swift in Sources */,
+				440254D32D42EB1600752940 /* PlanCoursesViewController.swift in Sources */,
 				449CF0D92C337099000D4528 /* CatalogViewController.swift in Sources */,
 				44BD6CDE2C432C45001645A0 /* DaysCourseCollectionViewCell.swift in Sources */,
 				4450B3C92CB6066900F1F54B /* UpdateViewController.swift in Sources */,
@@ -871,6 +886,7 @@
 				440E1F722CA169E9002C6FC8 /* CourseRequest.swift in Sources */,
 				44682CAC2D076A8B00087C62 /* ConfidetialityPresenter.swift in Sources */,
 				751510412C34586D009978E6 /* SettingsViewController.swift in Sources */,
+				440254D52D42EC5D00752940 /* PlanCoursesPresenter.swift in Sources */,
 				44D68B052C51B3EF00F8F476 /* InfoCoursesViewController.swift in Sources */,
 				440C9C432CF49DD0007D0735 /* PromoCollectionViewCell.swift in Sources */,
 			);

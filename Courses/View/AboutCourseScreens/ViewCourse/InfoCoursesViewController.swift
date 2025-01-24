@@ -352,7 +352,11 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
         promoMainBtn.setTitle("Подтвердить", for: .normal)
         promoMainBtn.setImage(nil, for: .normal)
     }
-
+    
+    @IBAction func planCourse(_ sender: UIButton) {
+        performSegue(withIdentifier: "planCourses", sender: self)
+    }
+    
     @IBAction func coach(_ sender: UIButton) {
         performSegue(withIdentifier: "coach", sender: self)
     }
@@ -415,6 +419,9 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
         }else if segue.identifier == "goToAddReview" {
             let vc = segue.destination as! AddReviewViewController
             vc.idCourse = presenter.course.id
+        }else if segue.identifier == "planCourses" {
+            let vc = segue.destination as! PlanCoursesViewController
+            vc.presenter.idCourse = presenter.course.id
         }
     }
 
@@ -437,6 +444,7 @@ extension InfoCoursesViewController: UICollectionViewDelegate, UICollectionViewD
             return presenter.similarCourse.count
         }
     }
+
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == reviewsCollectionView {

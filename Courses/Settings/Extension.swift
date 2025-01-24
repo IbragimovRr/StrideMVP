@@ -101,3 +101,21 @@ extension NSAttributedString {
         return String(data: htmlData ?? Data(), encoding: .utf8)
     }
 }
+
+extension UIView {
+    
+    func applyBlurEffect() {
+        let blurEffect = UIBlurEffect(style: .prominent)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        insertSubview(blurEffectView, at: 0)
+    }
+    
+    func removeBlurEffect() {
+        let blurredEffectViews = self.subviews.filter{$0 is UIVisualEffectView}
+        blurredEffectViews.forEach{ blurView in
+          blurView.removeFromSuperview()
+        }
+      }
+}

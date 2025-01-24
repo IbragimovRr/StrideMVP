@@ -58,6 +58,7 @@ struct Modules {
     var id: Int
     var isCompleted: Bool = false
     var position: Int = 0
+    var isVisible: Bool = false
 }
 
 enum FormatTraining: String {

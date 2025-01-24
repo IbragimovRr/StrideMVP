@@ -174,7 +174,11 @@ class AddModuleCoursesViewController: UIViewController, AddModuleCoursesViewDele
 
     
     @IBAction func success(_ sender: UIButton) {
-        performSegue(withIdentifier: "preview", sender: self)
+        if role == .adminVerification {
+            performSegue(withIdentifier: "preview", sender: self)
+        }else {
+            performSegue(withIdentifier: "plan", sender: self)
+        }
     }
     
     @IBAction func longClickInView(_ sender: UILongPressGestureRecognizer) {
@@ -339,6 +343,11 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
             let vc = segue.destination as! TypeModuleViewController
             vc.delegate = self
             vc.position = positionAddModule
+        }else if segue.identifier == "plan" {
+            let vc = segue.destination as! AddPlanCoursesViewController
+            vc.presenter.days = presenter.course.courseDays
+            vc.presenter.idCourse = presenter.idCourse
+            vc.role = role
         }
 
     }
