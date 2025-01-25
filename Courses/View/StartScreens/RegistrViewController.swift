@@ -32,7 +32,6 @@ class RegistrViewController: UIViewController, RegistrViewDelegate {
     @IBOutlet weak var mail: UITextField!
 
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
-    var startPosition = CGPoint()
     var presenter = RegistrPresenter()
 
     override func viewDidLoad() {
@@ -43,7 +42,6 @@ class RegistrViewController: UIViewController, RegistrViewDelegate {
         presenter.view = self
         name.autocapitalizationType = .words
         lastName.autocapitalizationType = .words
-        startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
     }
@@ -146,7 +144,7 @@ class RegistrViewController: UIViewController, RegistrViewDelegate {
 
 
     @IBAction func swipeError(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
 
     @IBAction func tap(_ sender: UITapGestureRecognizer) {

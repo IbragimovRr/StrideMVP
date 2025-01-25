@@ -33,7 +33,7 @@ class AddTrainingModulePresenter: AddTrainingModulePresenterDelegate {
     }
     
     func saveModule() {
-        print(55)
+        print(module)
     }
     
     func uploadMedia(media: URL, isVideo: Bool) {

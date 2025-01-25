@@ -27,14 +27,12 @@ class VhodViewController: UIViewController, VhodViewDelegate {
     
     var presenter = VhodPresenter()
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
-    var startPosition = CGPoint()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         phone.delegate = self
         presenter.view = self
-        startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
     }
@@ -122,7 +120,7 @@ class VhodViewController: UIViewController, VhodViewDelegate {
     }
 
     @IBAction func swipeError(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
 
     @IBAction func tap(_ sender: UITapGestureRecognizer) {

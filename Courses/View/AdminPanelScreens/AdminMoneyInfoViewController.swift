@@ -52,7 +52,7 @@ class AdminMoneyInfoViewController: UIViewController {
     }
     
     @IBAction func swipe(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
     
 }

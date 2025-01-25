@@ -32,7 +32,6 @@ class AddInfoAboutCourseVC: UIViewController {
     @IBOutlet weak var name: UITextField!
 
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
-    private var startPosition = CGPoint()
     private var infoCourses = CourseModel()
     private var imageURL: URL?
     private var selectCategory: CategoryModel?
@@ -47,7 +46,6 @@ class AddInfoAboutCourseVC: UIViewController {
         promoCollectionView.dataSource = self
         price.delegate = self
         name.delegate = self
-        startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
     }
@@ -290,7 +288,7 @@ class AddInfoAboutCourseVC: UIViewController {
 
 
     @IBAction func swipe(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
 
 

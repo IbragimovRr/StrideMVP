@@ -35,7 +35,6 @@ class ChangeInformationViewController: UIViewController, ChangeInformationViewDe
     var presenter = ChangeInformationPresenter()
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
-    private var startPosition = CGPoint()
 
     private var avatarURL: URL?
     private var activateTF: UITextField?
@@ -48,7 +47,6 @@ class ChangeInformationViewController: UIViewController, ChangeInformationViewDe
         presenter.view = self
         surname.delegate = self
         mail.delegate = self
-        startPosition = errorView.center
         design()
         presenter.getUser()
     }
@@ -179,7 +177,7 @@ class ChangeInformationViewController: UIViewController, ChangeInformationViewDe
     }
 
     @IBAction func swipe(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
 
     @IBAction func back(_ sender: UIButton) {

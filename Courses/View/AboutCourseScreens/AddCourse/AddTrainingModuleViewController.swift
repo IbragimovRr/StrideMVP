@@ -50,13 +50,16 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     @IBOutlet weak var descriptionTop: NSLayoutConstraint!
     @IBOutlet weak var descriptionRight: NSLayoutConstraint!
     @IBOutlet weak var descriptionLeft: NSLayoutConstraint!
+    @IBOutlet weak var changeMediaBtn: UIButton!
     @IBOutlet weak var countType: UILabel!
     @IBOutlet weak var trainingCollectionView: UICollectionView!
     @IBOutlet weak var applyBtn: UIButton!
     
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
-    var presenter = AddTrainingModulePresenter()
+    let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
+    let presenter = AddTrainingModulePresenter()
+    var mediaURL: URL?
     var trainingItem: TrainingItem {
         get {
             return presenter.trainingItem
@@ -71,6 +74,7 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         trainingCollectionView.dataSource = self
         descriptionText.delegate = self
         presenter.view = self
+        view.addSubview(errorView)
         presenter.getModule()
     }
     
@@ -97,6 +101,7 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     func showVideo() {
         videoView.isHidden = false
         imView.isHidden = true
+        changeMediaBtn.isHidden = false
         uploadView.isHidden = true
         if let videoURL = presenter.module.mediaURL {
             settingsPlayer(videoURL: videoURL)
@@ -106,12 +111,14 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     func showUploadMedia() {
         videoView.isHidden = true
         imView.isHidden = true
+        changeMediaBtn.isHidden = true
         uploadView.isHidden = false
     }
     
     func showImage() {
         imView.isHidden = false
         videoView.isHidden = true
+        changeMediaBtn.isHidden = false
         uploadView.isHidden = true
         im.sd_setImage(with: presenter.module.mediaURL)
     }
@@ -332,6 +339,29 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         }
     }
     
+    private func initialTrainingModule() -> Result<Void, ErrorNetwork> {
+        guard let mediaURL = mediaURL else { return .failure(ErrorNetwork.runtimeError("Добавьте медиа файл")) }
+        guard descriptionText.text != "" else { return .failure(ErrorNetwork.runtimeError("Добавьте описание тренировки")) }
+        guard presenter.module.trainingItems.isEmpty == false else { return .failure(ErrorNetwork.runtimeError("Добавьте подходы для тренировки")) }
+        presenter.module.mediaURL = mediaURL
+        presenter.module.description = descriptionText.text
+        return .success(())
+    }
+    
+    @IBAction func save(_ sender: UIButton) {
+        switch initialTrainingModule() {
+        case .failure(ErrorNetwork.runtimeError(let error)):
+            errorView.configure(title: "Ошибка", description: error)
+            errorView.isHidden = false
+        case .success():
+            presenter.saveModule()
+        case .failure(.tryAgainLater):
+            break
+        case .failure(.notFound):
+            break
+        }
+    }
+    
     @IBAction func uploadMediaFile(_ sender: UIButton) {
         let privacy = Privacy().checkPhotoLibraryAuthorization()
         if privacy {
@@ -381,21 +411,29 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         view.endEditing(true)
     }
     
+    @IBAction func pan(_ sender: UIPanGestureRecognizer) {
+        errorView.swipe(sender: sender)
+    }
+    
     @IBAction func fullScreen(_ sender: UIButton) {
         present(playerViewController, animated: true) {
             self.player.play()
         }
     }
     
+    
+    
 }
 extension AddTrainingModuleViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let videoURL = info[.mediaURL] as? URL {
+            mediaURL = videoURL
             presenter.uploadMedia(media: videoURL, isVideo: true)
             dismiss(animated: true)
         }
         
         if let image = info[.imageURL] as? URL {
+            mediaURL = image
             presenter.uploadMedia(media: image, isVideo: false)
             dismiss(animated: true)
         }
@@ -449,7 +487,16 @@ extension AddTrainingModuleViewController: UICollectionViewDelegate, UICollectio
             let module = presenter.module
             cell.firstItemType.text = module.trainingItems[indexPath.row].firstItemType?.initialDefaultName
             cell.secondItemType.text = module.trainingItems[indexPath.row].secondItemType?.initialDefaultName
+            cell.firstItemTF.text = module.trainingItems[indexPath.row].firstItemData
+            cell.secondItemTF.text = module.trainingItems[indexPath.row].secondItemData
             cell.numbers.text = "\(indexPath.row + 1)"
+            cell.onTextChangedFirst = { [weak self] text in
+                self?.presenter.module.trainingItems[indexPath.row].firstItemData = text
+            }
+            cell.onTextChangedSecond = { [weak self] text in
+                self?.presenter.module.trainingItems[indexPath.row].secondItemData = text
+            }
+            
         }
         
         return cell

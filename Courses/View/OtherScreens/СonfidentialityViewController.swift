@@ -23,13 +23,11 @@ class ConfidentialityViewController: UIViewController, ConfidetialityViewDelegat
     @IBOutlet weak var oldPassword: UITextField!
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
-    private var startPosition = CGPoint()
     
     var presenter = ConfidetialityPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        startPosition = errorView.center
         errorView.isHidden = true
         presenter.view = self
         presenter.getTheme()
@@ -151,7 +149,7 @@ class ConfidentialityViewController: UIViewController, ConfidetialityViewDelegat
     }
     
     @IBAction func swipeError(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
     
 }

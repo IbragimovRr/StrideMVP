@@ -59,7 +59,6 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
     @IBOutlet weak var btnView: UIButton!
 
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
-    private var startPosition = CGPoint()
     
     var presenter = InfoCoursePresenter()
     
@@ -100,7 +99,6 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
         similarCoursesCollectionView.delegate = self
         similarCoursesCollectionView.dataSource = self
         promoTextField.delegate = self
-        startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
         presenter.viewDidLoad()
@@ -426,7 +424,7 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
     }
 
     @IBAction func swipe(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
     
     

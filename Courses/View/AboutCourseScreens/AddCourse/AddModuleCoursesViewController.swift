@@ -29,7 +29,6 @@ class AddModuleCoursesViewController: UIViewController, AddModuleCoursesViewDele
     @IBOutlet weak var modulesCollectionView: UICollectionView!
 
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
-    private var startPosition = CGPoint()
 
     private let layout = PageModuleLayout()
     private var scaleView = false
@@ -40,7 +39,6 @@ class AddModuleCoursesViewController: UIViewController, AddModuleCoursesViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionSettings()
-        startPosition = errorView.center
         presenter.view = self
     }
 
@@ -213,7 +211,7 @@ class AddModuleCoursesViewController: UIViewController, AddModuleCoursesViewDele
     }
 
     @IBAction func swipe(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
 
     @IBAction func back(_ sender: UIButton) {
@@ -331,6 +329,9 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
         }else if segue.identifier == "goToAddVideoModule" {
             let vc = segue.destination as! AddVideoModuleViewController
             vc.presenter.module = presenter.selectModule as! VideoModule
+        }else if segue.identifier == "goToAddTrainingModule" {
+            let vc = segue.destination as! AddTrainingModuleViewController
+            vc.presenter.module = presenter.selectModule as! TrainingModule
         }else if segue.identifier == "goToModuleSettings" {
             let vc = segue.destination as! AddInfoAboutModuleViewController
             vc.module = presenter.selectModule!

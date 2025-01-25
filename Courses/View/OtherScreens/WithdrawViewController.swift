@@ -17,7 +17,6 @@ class WithdrawViewController: UIViewController, WithdrawViewDelegate {
     @IBOutlet weak var cardTextField: UITextField!
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 40, height: 70))
-    var startPosition = CGPoint()
     var presenter = WithdrawPresenter()
     
     override func viewDidLoad() {
@@ -26,7 +25,6 @@ class WithdrawViewController: UIViewController, WithdrawViewDelegate {
         textFieldDesign()
         cardTextField.delegate = self
         presenter.view = self
-        startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
     }
@@ -111,7 +109,7 @@ class WithdrawViewController: UIViewController, WithdrawViewDelegate {
     }
     
     @IBAction func swipeError(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
     
     

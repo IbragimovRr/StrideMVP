@@ -41,8 +41,10 @@ class ErrorView: UIView {
         label.textColor = .white
         return label
     }()
-
-    override init(frame: CGRect) {
+    
+    var startPosition = CGPoint()
+    
+    override init(frame: CGRect = CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70)) {
         super.init(frame: frame)
         setupView()
     }
@@ -55,6 +57,7 @@ class ErrorView: UIView {
     private func designView() {
         self.backgroundColor = UIColor.errorRed
         self.layer.cornerRadius = 10
+        self.isHidden = true
     }
 
     private func setupView() {
@@ -63,6 +66,7 @@ class ErrorView: UIView {
         contentStackView.addArrangedSubview(titleLabel)
         contentStackView.addArrangedSubview(descriptionLabel)
         designView()
+        startPosition = self.center
 
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
@@ -99,8 +103,7 @@ class ErrorView: UIView {
         self.backgroundColor = UIColor.lightBlackMain
     }
     
-
-    func swipe(sender: UIPanGestureRecognizer, startPosition: CGPoint) {
+    func swipe(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: self)
         switch sender.state {
         case .changed:
@@ -108,17 +111,17 @@ class ErrorView: UIView {
             sender.setTranslation(CGPoint.zero, in: self)
         case .ended:
             UIView.animate(withDuration: 0.5, animations: {
-                if self.center.y < startPosition.y {
+                if self.center.y < self.startPosition.y {
                     self.alpha = 0.0
                     self.center = CGPoint(x: self.center.x, y: self.center.y - 50)
                 } else {
-                    self.center = startPosition
+                    self.center = self.startPosition
                 }
             }, completion: { _ in
                 if self.alpha == 0.0 {
                     self.alpha = 1.0
                     self.isHidden = true
-                    self.center = startPosition
+                    self.center = self.startPosition
                 }
             })
             

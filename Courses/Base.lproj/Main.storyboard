@@ -12309,22 +12309,43 @@
                                     <constraint firstAttribute="trailing" secondItem="qiA-n9-r7C" secondAttribute="trailing" id="rzi-xs-8fB"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHj-Fj-g7E">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gar-vN-lvq">
                                 <rect key="frame" x="25" y="74" width="40" height="40"/>
-                                <color key="backgroundColor" name="LightBlackMain"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="eeY-qU-azb"/>
-                                    <constraint firstAttribute="width" constant="40" id="pMz-fb-zIa"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="back" title=""/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="back:" destination="pRk-WP-w4F" eventType="touchUpInside" id="amQ-cR-fea"/>
-                                </connections>
-                            </button>
+                                <subviews>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHj-Fj-g7E">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <color key="backgroundColor" name="LightBlackMain"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="eeY-qU-azb"/>
+                                            <constraint firstAttribute="width" constant="40" id="pMz-fb-zIa"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="back" title=""/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="back:" destination="pRk-WP-w4F" eventType="touchUpInside" id="amQ-cR-fea"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vya-7x-mCY">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <color key="backgroundColor" name="LightBlackMain"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="Ilw-B9-CsS"/>
+                                            <constraint firstAttribute="height" constant="40" id="dGm-Zb-q03"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="change" title=""/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="uploadMediaFile:" destination="pRk-WP-w4F" eventType="touchUpInside" id="4yw-b5-pOl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E4a-kM-Qls">
                                 <rect key="frame" x="0.0" y="330" width="393" height="522"/>
                                 <subviews>
@@ -12891,6 +12912,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="25"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="save:" destination="pRk-WP-w4F" eventType="touchUpInside" id="oc4-nm-HHx"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="LightBlackMain"/>
@@ -12912,27 +12936,31 @@
                         <color key="backgroundColor" name="BlackMain"/>
                         <constraints>
                             <constraint firstItem="UA0-a4-ZiO" firstAttribute="top" secondItem="sjA-lw-mwo" secondAttribute="top" id="0Uh-1y-CNe"/>
-                            <constraint firstItem="iHj-Fj-g7E" firstAttribute="leading" secondItem="sjA-lw-mwo" secondAttribute="leading" constant="25" id="7jA-Ad-zPd"/>
                             <constraint firstItem="dJx-0I-jkg" firstAttribute="leading" secondItem="aDN-5t-JcO" secondAttribute="leading" id="9Wa-R9-HXb"/>
                             <constraint firstItem="E4a-kM-Qls" firstAttribute="leading" secondItem="sjA-lw-mwo" secondAttribute="leading" id="ATF-Ku-x57"/>
                             <constraint firstItem="aDN-5t-JcO" firstAttribute="trailing" secondItem="dJx-0I-jkg" secondAttribute="trailing" id="DzK-F5-uF9"/>
                             <constraint firstItem="E4a-kM-Qls" firstAttribute="top" secondItem="UA0-a4-ZiO" secondAttribute="bottom" constant="-20" id="ElW-kp-ocB"/>
                             <constraint firstItem="UA0-a4-ZiO" firstAttribute="leading" secondItem="aDN-5t-JcO" secondAttribute="leading" id="Fk2-T6-cIO"/>
                             <constraint firstItem="ty0-m6-YGm" firstAttribute="trailing" secondItem="dJx-0I-jkg" secondAttribute="trailing" id="GDJ-4q-kfq"/>
+                            <constraint firstItem="gar-vN-lvq" firstAttribute="leading" secondItem="aDN-5t-JcO" secondAttribute="leading" constant="25" id="GP1-BU-RdQ"/>
                             <constraint firstItem="ty0-m6-YGm" firstAttribute="leading" secondItem="dJx-0I-jkg" secondAttribute="leading" id="Tlv-fu-K2e"/>
                             <constraint firstItem="dJx-0I-jkg" firstAttribute="top" secondItem="sjA-lw-mwo" secondAttribute="top" id="eTJ-fT-Tnb"/>
                             <constraint firstItem="UA0-a4-ZiO" firstAttribute="trailing" secondItem="aDN-5t-JcO" secondAttribute="trailing" id="evA-Jt-KAw"/>
                             <constraint firstItem="aDN-5t-JcO" firstAttribute="trailing" secondItem="E4a-kM-Qls" secondAttribute="trailing" id="fvT-3w-hiT"/>
                             <constraint firstAttribute="bottom" secondItem="E4a-kM-Qls" secondAttribute="bottom" id="hie-YL-A6V"/>
                             <constraint firstItem="ty0-m6-YGm" firstAttribute="bottom" secondItem="dJx-0I-jkg" secondAttribute="bottom" id="ll7-dL-vQG"/>
+                            <constraint firstItem="gar-vN-lvq" firstAttribute="top" secondItem="aDN-5t-JcO" secondAttribute="top" constant="15" id="qEF-qi-gn0"/>
                             <constraint firstItem="E4a-kM-Qls" firstAttribute="top" secondItem="dJx-0I-jkg" secondAttribute="bottom" constant="-20" id="rr1-7U-fku"/>
-                            <constraint firstItem="iHj-Fj-g7E" firstAttribute="top" secondItem="aDN-5t-JcO" secondAttribute="top" constant="15" id="uHS-pp-waO"/>
                             <constraint firstItem="ty0-m6-YGm" firstAttribute="top" secondItem="dJx-0I-jkg" secondAttribute="top" id="vyM-MB-Gyz"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="8fx-PF-5NM" appends="YES" id="g5v-gw-hfH"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="y5b-aW-6Xf"/>
                     <connections>
                         <outlet property="applyBtn" destination="7Bq-y8-nfq" id="4TX-w7-9iA"/>
+                        <outlet property="changeMediaBtn" destination="vya-7x-mCY" id="5yW-mB-qhu"/>
                         <outlet property="countDescription" destination="lxS-Yo-u1Q" id="t7O-MM-M9f"/>
                         <outlet property="countType" destination="Mvn-aa-baV" id="5eK-Yh-IM0"/>
                         <outlet property="descriptionHeight" destination="rnI-Of-boM" id="plu-bL-jqh"/>
@@ -12970,6 +12998,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ihK-37-vbY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="8fx-PF-5NM">
+                    <connections>
+                        <action selector="pan:" destination="pRk-WP-w4F" id="sAl-xv-ZU7"/>
+                    </connections>
+                </panGestureRecognizer>
                 <tapGestureRecognizer cancelsTouchesInView="NO" id="kTd-LN-s9k">
                     <connections>
                         <action selector="tap:" destination="pRk-WP-w4F" id="qt9-Qm-MVH"/>
@@ -13486,6 +13519,7 @@
         <image name="box" width="12" height="12"/>
         <image name="catalog" width="19" height="19"/>
         <image name="catalogBlue" width="45" height="45"/>
+        <image name="change" width="15" height="15"/>
         <image name="changer" width="14" height="13"/>
         <image name="close" width="15" height="15"/>
         <image name="closeGray" width="13" height="13"/>
@@ -13573,7 +13607,7 @@
             <color red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="LightBlueMain">
-            <color red="0.40392156862745099" green="0.37647058823529411" blue="0.84313725490196079" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.40392156862745099" green="0.37647058823529411" blue="0.84313725490196079" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="OldPriceBack">
             <color red="0.58431372549019611" green="0.56470588235294117" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

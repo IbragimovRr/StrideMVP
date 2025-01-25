@@ -27,7 +27,6 @@ class WithdrawSBPViewController: UIViewController, WithdrawViewDelegate {
     @IBOutlet weak var numberTextField: UITextField!
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
-    var startPosition = CGPoint()
     var presenter = WithdrawPresenter()
     
     override func viewDidLoad() {
@@ -40,7 +39,6 @@ class WithdrawSBPViewController: UIViewController, WithdrawViewDelegate {
         presenter.view = self
         banksTableView.delegate = self
         banksTableView.dataSource = self
-        startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
     }
@@ -118,7 +116,7 @@ class WithdrawSBPViewController: UIViewController, WithdrawViewDelegate {
     
     
     @IBAction func swipeError(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
     
     @IBAction func fluent(_ sender: UIButton) {

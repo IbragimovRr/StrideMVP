@@ -26,7 +26,6 @@ class AddCourseViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
-    private var startPosition = CGPoint()
     private var isChangedText = false
     private var isSave = true
     
@@ -72,7 +71,6 @@ class AddCourseViewController: UIViewController {
         self.overrideUserInterfaceStyle = .dark
         getData()
         design()
-        startPosition = errorView.center
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -309,7 +307,7 @@ class AddCourseViewController: UIViewController {
     
     
     @IBAction func swipe(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
     
     @IBAction func back(_ sender: UIButton) {

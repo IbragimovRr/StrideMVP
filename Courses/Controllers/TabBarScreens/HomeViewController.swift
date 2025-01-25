@@ -30,10 +30,10 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     @IBOutlet weak var bannersCollectionView: UICollectionView!
     @IBOutlet weak var imProfile: UIImageView!
     @IBOutlet weak var recomendCollectionView: UICollectionView!
+    @IBOutlet weak var celebView: UIView!
+    
     
     var refreshControl = RefreshControll()
-    
-    @IBOutlet weak var celebView: UIView!
     private var presenter = HomePresenter()
     private var banners = [String]()
     private var coachs = [UserModel]()
@@ -43,7 +43,6 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     private let layout = PageLayout()
     private var selectCourses = CourseModel()
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
-    private var startPosition = CGPoint()
     private let animationView = LottieAnimationView()
     
     
@@ -55,7 +54,6 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         presenter.viewDidLoad()
         addRefreshControll()
         tabbar()
-        startPosition = errorView.center
         view.addSubview(errorView)
         errorView.isHidden = true
     }
@@ -182,7 +180,7 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     }
     
     @IBAction func swipeError(_ sender: UIPanGestureRecognizer) {
-        errorView.swipe(sender: sender, startPosition: startPosition)
+        errorView.swipe(sender: sender)
     }
     
     
