@@ -18,19 +18,30 @@ class RepeatsCollectionViewCell: UICollectionViewCell {
     var onTextChangedFirst: ((String) -> Void)?
     var onTextChangedSecond: ((String) -> Void)?
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         guard firstItemTF != nil && secondItemTF != nil else { return }
         firstItemTF.addTarget(self, action: #selector(textFieldDidChangeFirst), for: .editingChanged)
         secondItemTF.addTarget(self, action: #selector(textFieldDidChangeSecond), for: .editingChanged)
     }
+
     
-    @objc func textFieldDidChangeFirst() {
+    @objc func textFieldDidChangeFirst(_ sender: UITextField) {
+        maxFourCharacters(sender: sender)
         onTextChangedFirst?(firstItemTF.text ?? "")
     }
     
-    @objc func textFieldDidChangeSecond() {
+    @objc func textFieldDidChangeSecond(_ sender: UITextField) {
+        maxFourCharacters(sender: sender)
         onTextChangedSecond?(secondItemTF.text ?? "")
     }
+    
+    private func maxFourCharacters(sender: UITextField) {
+        if let text = sender.text, text.count > 4 {
+            sender.text = String(text.prefix(4))
+        }
+    }
+    
 }
 

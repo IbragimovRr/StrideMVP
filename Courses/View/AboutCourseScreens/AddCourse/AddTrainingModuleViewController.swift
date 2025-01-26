@@ -13,6 +13,7 @@ protocol AddTrainingModuleViewDelegate {
     func showVideo()
     func showImage()
     func showUploadMedia()
+    func showError(error: String)
     func saveData()
 }
 
@@ -124,7 +125,12 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     }
     
     func saveData() {
-        print(55)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func showError(error: String) {
+        errorView.configure(title: "Ошибка", description: error)
+        errorView.isHidden = false
     }
     
     func hiddenTrainingItems() {
@@ -343,6 +349,9 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         guard let mediaURL = mediaURL else { return .failure(ErrorNetwork.runtimeError("Добавьте медиа файл")) }
         guard descriptionText.text != "" else { return .failure(ErrorNetwork.runtimeError("Добавьте описание тренировки")) }
         guard presenter.module.trainingItems.isEmpty == false else { return .failure(ErrorNetwork.runtimeError("Добавьте подходы для тренировки")) }
+        guard trainingItem.firstItemType != nil && trainingItem.secondItemType != nil else {
+            return .failure(ErrorNetwork.runtimeError("Выберите формат тренировки"))
+        }
         presenter.module.mediaURL = mediaURL
         presenter.module.description = descriptionText.text
         return .success(())
@@ -351,8 +360,7 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     @IBAction func save(_ sender: UIButton) {
         switch initialTrainingModule() {
         case .failure(ErrorNetwork.runtimeError(let error)):
-            errorView.configure(title: "Ошибка", description: error)
-            errorView.isHidden = false
+            showError(error: error)
         case .success():
             presenter.saveModule()
         case .failure(.tryAgainLater):
@@ -472,6 +480,7 @@ extension AddTrainingModuleViewController: UITextViewDelegate {
 }
 extension AddTrainingModuleViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // MARK: - Создание ячеек
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         presenter.module.trainingItems.count + 1
     }
@@ -502,6 +511,29 @@ extension AddTrainingModuleViewController: UICollectionViewDelegate, UICollectio
         return cell
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        guard indexPath.row != presenter.module.trainingItems.count else {return nil}
+        
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let deleteAction = UIAction(title: "Удалить", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+                self?.deleteItem(at: indexPath)
+            }
+            return UIMenu(title: "", children: [deleteAction])
+        }
+        
+        return configuration
+    }
+    
+    // MARK: - Удаление элемента
+    
+    func deleteItem(at indexPath: IndexPath) {
+        presenter.module.trainingItems.remove(at: indexPath.row)
+        trainingCollectionView.reloadData()
+    }
+
+    // MARK: - Добавление элемента
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == presenter.module.trainingItems.count {
             presenter.module.trainingItems.append(trainingItem)

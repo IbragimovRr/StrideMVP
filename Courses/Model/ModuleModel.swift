@@ -70,25 +70,25 @@ enum FormatTraining: String {
     var initialDefaultName: String {
         switch self {
         case .weight:
-            return "Вес"
+            return "Вес (кг)"
         case .repeats:
             return "Повторения"
         case .timer:
-            return "Таймер"
+            return "Таймер (сек)"
         case .distance:
-            return "Дистанция"
+            return "Дистанция (км)"
         }
     }
     
     func initialFormatTraining(_ format: String) -> FormatTraining {
         switch format {
-        case "Вес":
+        case "Вес (кг)":
             return .weight
         case "Повторения":
             return .repeats
-        case "Таймер":
+        case "Таймер (сек)":
             return .timer
-        case "Дистанция":
+        case "Дистанция (км)":
             return .distance
         default:
             return .weight

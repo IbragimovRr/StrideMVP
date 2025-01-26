@@ -12693,7 +12693,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ndJ-53-n7U">
-                                                        <rect key="frame" x="30" y="531" width="333" height="150"/>
+                                                        <rect key="frame" x="0.0" y="531" width="393" height="150"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="150" id="vfI-0O-6eB"/>
@@ -12702,11 +12702,11 @@
                                                             <size key="itemSize" width="333" height="60"/>
                                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <inset key="sectionInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                                                         </collectionViewFlowLayout>
                                                         <cells>
                                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="repeats" id="J3Q-8t-ZWJ" customClass="RepeatsCollectionViewCell" customModule="Courses" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="333" height="60"/>
+                                                                <rect key="frame" x="30" y="0.0" width="333" height="60"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LgW-xJ-bVa">
                                                                     <rect key="frame" x="0.0" y="0.0" width="333" height="60"/>
@@ -12738,7 +12738,7 @@
                                                                                     <rect key="frame" x="0.0" y="13.333333333333336" width="140" height="16"/>
                                                                                     <color key="textColor" name="GrayMain"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                                    <textInputTraits key="textInputTraits"/>
+                                                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                                 </textField>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Повторений" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9j-yU-bUL">
                                                                                     <rect key="frame" x="0.0" y="39.333333333333336" width="140" height="8.6666666666666643"/>
@@ -12771,11 +12771,11 @@
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lI5-ZD-Jhz">
                                                                             <rect key="frame" x="212" y="0.0" width="121" height="60"/>
                                                                             <subviews>
-                                                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="--" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jfp-oz-BKk">
+                                                                                <textField opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="--" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jfp-oz-BKk">
                                                                                     <rect key="frame" x="0.0" y="13.333333333333336" width="121" height="16"/>
                                                                                     <color key="textColor" name="GrayMain"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                                    <textInputTraits key="textInputTraits"/>
+                                                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                                 </textField>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вес" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pp7-eQ-W9E">
                                                                                     <rect key="frame" x="0.0" y="39.333333333333336" width="121" height="8.6666666666666643"/>
@@ -12827,7 +12827,7 @@
                                                                 </connections>
                                                             </collectionViewCell>
                                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddRepeats" id="7bE-1d-275" customClass="RepeatsCollectionViewCell" customModule="Courses" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="70" width="333" height="60"/>
+                                                                <rect key="frame" x="30" y="70" width="333" height="60"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ejb-5v-z7v">
                                                                     <rect key="frame" x="0.0" y="0.0" width="333" height="60"/>
@@ -12864,7 +12864,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="ndJ-53-n7U" secondAttribute="bottom" constant="100" id="EKX-Fq-2CI"/>
                                                     <constraint firstItem="oLW-WQ-zHp" firstAttribute="top" secondItem="AiX-F4-NoF" secondAttribute="bottom" constant="10" id="RZY-pg-1nl"/>
                                                     <constraint firstItem="w2Y-hr-0eC" firstAttribute="leading" secondItem="MrJ-vR-bFQ" secondAttribute="leading" constant="35" id="SXv-rC-uJ8"/>
-                                                    <constraint firstAttribute="trailing" secondItem="ndJ-53-n7U" secondAttribute="trailing" constant="30" id="Sln-RX-f4B"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ndJ-53-n7U" secondAttribute="trailing" id="Sln-RX-f4B"/>
                                                     <constraint firstItem="ndJ-53-n7U" firstAttribute="top" secondItem="w2Y-hr-0eC" secondAttribute="bottom" constant="20" id="To8-dv-OZ5"/>
                                                     <constraint firstItem="jgy-Fq-bi9" firstAttribute="top" secondItem="4fE-G3-fg3" secondAttribute="bottom" constant="45" id="W5I-qR-tsf"/>
                                                     <constraint firstItem="lxS-Yo-u1Q" firstAttribute="top" secondItem="4fE-G3-fg3" secondAttribute="bottom" constant="10" id="WfV-nX-Y5W"/>
@@ -12874,7 +12874,7 @@
                                                     <constraint firstItem="AiX-F4-NoF" firstAttribute="top" secondItem="MrJ-vR-bFQ" secondAttribute="top" constant="28" id="fCN-nd-1VU"/>
                                                     <constraint firstAttribute="trailing" secondItem="w2Y-hr-0eC" secondAttribute="trailing" constant="35" id="gZL-Kh-4Uz"/>
                                                     <constraint firstItem="AiX-F4-NoF" firstAttribute="leading" secondItem="MrJ-vR-bFQ" secondAttribute="leading" constant="28" id="gh5-f4-Li9"/>
-                                                    <constraint firstItem="ndJ-53-n7U" firstAttribute="leading" secondItem="MrJ-vR-bFQ" secondAttribute="leading" constant="30" id="mTi-ud-IGV"/>
+                                                    <constraint firstItem="ndJ-53-n7U" firstAttribute="leading" secondItem="MrJ-vR-bFQ" secondAttribute="leading" id="mTi-ud-IGV"/>
                                                     <constraint firstItem="jgy-Fq-bi9" firstAttribute="leading" secondItem="MrJ-vR-bFQ" secondAttribute="leading" constant="28" id="nRM-cy-rt1"/>
                                                     <constraint firstItem="7Bq-y8-nfq" firstAttribute="top" secondItem="oLW-WQ-zHp" secondAttribute="bottom" constant="15" id="qP4-dg-k0U"/>
                                                     <constraint firstItem="4fE-G3-fg3" firstAttribute="leading" secondItem="MrJ-vR-bFQ" secondAttribute="leading" constant="30" id="sed-Y5-k6a"/>

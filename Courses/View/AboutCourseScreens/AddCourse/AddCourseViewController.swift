@@ -125,14 +125,6 @@ class AddCourseViewController: UIViewController {
         }
     }
     
-    private func downloadImageByURL() {
-        let links = textView.getURLs()
-        
-        for link in links {
-            addImageInTextView(imageURL: link)
-        }
-    }
-    
     
     private func design() {
         nameCourseLBL.text = module.module.name

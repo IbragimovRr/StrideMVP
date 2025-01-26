@@ -24,16 +24,47 @@ class AddTrainingModulePresenter: AddTrainingModulePresenterDelegate {
     }
     
     func getModule() {
+        initTrainingItem()
         view?.showData()
-        if module.mediaURL != nil {
-            view?.showVideo()
+        if let mediaURL = module.mediaURL {
+            checkType(media: mediaURL)
         }else {
             view?.showUploadMedia()
         }
     }
     
+    private func checkType(media: URL) {
+        let type = MediaTypeManager().determineFileType(from: media)
+        switch type {
+        case .image:
+            view.showImage()
+        case .video:
+            view.showVideo()
+        case .none:
+            view?.showUploadMedia()
+        }
+    }
+    
+    private func initTrainingItem() {
+        guard module.trainingItems.isEmpty == false else {return}
+        trainingItem = module.trainingItems[0]
+        trainingItem.firstItemData = nil
+        trainingItem.secondItemData = nil
+    }
+    
     func saveModule() {
-        print(module)
+        Task {
+            do {
+                try await CourseServices().changeTrainingModule(module: module)
+                DispatchQueue.main.async {
+                    self.view.saveData()
+                }
+            }catch ErrorNetwork.runtimeError(let error) {
+                DispatchQueue.main.async {
+                    self.view.showError(error: error)
+                }
+            }
+        }
     }
     
     func uploadMedia(media: URL, isVideo: Bool) {
@@ -52,4 +83,5 @@ class AddTrainingModulePresenter: AddTrainingModulePresenterDelegate {
             module.trainingItems[x].secondItemType = trainingItem.secondItemType
         }
     }
+    
 }

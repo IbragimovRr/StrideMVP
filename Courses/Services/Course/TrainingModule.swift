@@ -30,15 +30,25 @@ extension CourseServices {
         return id
     }
     
-    func changeTrainingModule(module: TrainingModule) async throws -> Int {
+    func changeTrainingModule(module: TrainingModule) async throws  {
+        try await changeTrainingItems(module: module)
+        try await changeOtherOptions(module: module)
+    }
+    
+    private func changeOtherOptions(module: TrainingModule) async throws {
         let url = Constants.url + "api/v1/training-module/update/\(module.module.id)/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
-        let response = AF.request(url, method: .patch, headers: headers).serializingData()
+        let response = AF.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(Data(module.description.utf8), withName: "training_description")
+            if let mediaURL = module.mediaURL {
+                multipartFormData.append(mediaURL, withName: "data")
+            }
+        }, to: url, method: .patch, headers: headers).serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode
         let json = JSON(value)
-        if code != 201 {
+        if code != 200 {
             if let dictionary = json.dictionary {
                 let error = dictionary.first!.value[0].stringValue
                 throw ErrorNetwork.runtimeError(error)
@@ -46,8 +56,27 @@ extension CourseServices {
                 throw ErrorNetwork.runtimeError("Неизвестная ошибка")
             }
         }
-        let id = json["id"].intValue
-        return id
+    }
+    
+    private func changeTrainingItems(module: TrainingModule) async throws {
+        let url = Constants.url + "api/v1/training-module/update/\(module.module.id)/"
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
+        let parameters = [
+            "training_items": module.trainingItems.map { $0.toDictionary }
+        ]
+        
+        let response = AF.request(url, method: .patch, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).serializingData()
+        let value = try await response.value
+        let code = await response.response.response?.statusCode
+        let json = JSON(value)
+        if code != 200 {
+            if let dictionary = json.dictionary {
+                let error = dictionary.first!.value[0].stringValue
+                throw ErrorNetwork.runtimeError(error)
+            }else {
+                throw ErrorNetwork.runtimeError("Неизвестная ошибка")
+            }
+        }
     }
     
     func deleteTrainingModule(moduleID: Int) async throws {

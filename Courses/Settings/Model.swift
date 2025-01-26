@@ -259,3 +259,7 @@ protocol AddPromoDelegate: AnyObject {
 protocol AddCategoryDelegate: AnyObject {
     func category(category: CategoryModel)
 }
+
+protocol AddTimeDelegate {
+    func time(minutes: String, seconds: String, index: Int)
+}
