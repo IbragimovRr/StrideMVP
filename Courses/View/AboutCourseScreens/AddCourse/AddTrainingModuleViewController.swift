@@ -88,6 +88,8 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         heigthCollection.constant = trainingCollectionView.contentSize.height
     }
     
+    // MARK: - Protocol function
+    
     func showData() {
         let module = presenter.module
         nameModule.text = module.module.name
@@ -133,7 +135,9 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         errorView.isHidden = false
     }
     
-    func hiddenTrainingItems() {
+    // MARK: - Private function
+    
+    private func hiddenTrainingItems() {
         if countType.text == "2/2" {
             trainingCollectionView.isHidden = false
             countType.isHidden = true
@@ -146,7 +150,7 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         }
     }
     
-    func countTypeChange(){
+    private func countTypeChange(){
         var count = 0
         if trainingItem.firstItemType != nil {
             count += 1
@@ -157,7 +161,7 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         countType.text = "\(count)/2"
     }
     
-    func settingsPlayer(videoURL: URL) {
+    private func settingsPlayer(videoURL: URL) {
         Task {
             let asset = AVAsset(url: videoURL)
             let playerItem = AVPlayerItem(asset: asset)
@@ -167,14 +171,14 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         }
     }
     
-    func setupView() {
+    private func setupView() {
         let layer = AVPlayerLayer(player: player)
         layer.frame = videoPlayerView.bounds
         layer.videoGravity = .resizeAspectFill
         videoPlayerView.layer.addSublayer(layer)
     }
     
-    func toggleControlVideo(isPlay: Bool) {
+    private func toggleControlVideo(isPlay: Bool) {
         if isPlay {
             player.play()
             playView.isHidden = true
@@ -337,7 +341,7 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         distanceView.backgroundColor = UIColor.clear
     }
     
-    func toggleFormatSelection(type: FormatTraining) {
+    private func toggleFormatSelection(type: FormatTraining) {
         if trainingItem.firstItemType == type || trainingItem.secondItemType == type {
             formatDelete(type: type)
         } else {
@@ -346,7 +350,7 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     }
     
     private func initialTrainingModule() -> Result<Void, ErrorNetwork> {
-        guard let mediaURL = mediaURL else { return .failure(ErrorNetwork.runtimeError("Добавьте медиа файл")) }
+        guard let mediaURL = presenter.module.mediaURL else { return .failure(ErrorNetwork.runtimeError("Добавьте медиа файл")) }
         guard descriptionText.text != "" else { return .failure(ErrorNetwork.runtimeError("Добавьте описание тренировки")) }
         guard presenter.module.trainingItems.isEmpty == false else { return .failure(ErrorNetwork.runtimeError("Добавьте подходы для тренировки")) }
         guard trainingItem.firstItemType != nil && trainingItem.secondItemType != nil else {
@@ -356,6 +360,8 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         presenter.module.description = descriptionText.text
         return .success(())
     }
+    
+    // MARK: - @IBAction
     
     @IBAction func save(_ sender: UIButton) {
         switch initialTrainingModule() {
@@ -411,6 +417,8 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         }
     }
     
+    // MARK: - Other Action
+    
     @IBAction func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -428,8 +436,6 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
             self.player.play()
         }
     }
-    
-    
     
 }
 extension AddTrainingModuleViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
@@ -536,10 +542,20 @@ extension AddTrainingModuleViewController: UICollectionViewDelegate, UICollectio
     // MARK: - Добавление элемента
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == presenter.module.trainingItems.count {
+            guard limitItems() else { return }
             presenter.module.trainingItems.append(trainingItem)
             trainingCollectionView.reloadData()
             trainingCollectionView.layoutIfNeeded()
             changeHeightCollection()
+        }
+    }
+    
+    private func limitItems() -> Bool {
+        if presenter.module.trainingItems.count >= 15 {
+            showError(error: "Вы достигли максимального количества повторений для текущего упражнения.")
+            return false
+        }else {
+            return true
         }
     }
     

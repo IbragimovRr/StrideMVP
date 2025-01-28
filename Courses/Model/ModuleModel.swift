@@ -94,6 +94,19 @@ enum FormatTraining: String {
             return .weight
         }
     }
+    
+    var trainingName: String {
+        switch self {
+        case .weight:
+            return "килограмм"
+        case .repeats:
+            return "повторов"
+        case .timer:
+            return "секунд"
+        case .distance:
+            return "километров"
+        }
+    }
 }
 
 /// Подходы в тренировочном модуле

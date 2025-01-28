@@ -76,7 +76,7 @@ class ErrorView: UIView {
 
             contentStackView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
             centerYAnchor.constraint(equalTo: contentStackView.centerYAnchor, constant: 0),
-            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 15),
+            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
         ])
     }
     

@@ -53,6 +53,8 @@
 		44547E572CF4BE380051C782 /* Promocodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44547E562CF4BE380051C782 /* Promocodes.swift */; };
 		44547E592CF4C1B50051C782 /* CreatePromoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44547E582CF4C1B50051C782 /* CreatePromoViewController.swift */; };
 		445757EA2D46E82300501511 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445757E92D46E82300501511 /* MediaType.swift */; };
+		445757EC2D46F18500501511 /* TrainingModulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445757EB2D46F18500501511 /* TrainingModulePresenter.swift */; };
+		445757EE2D46F1AC00501511 /* TrainingModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445757ED2D46F1AC00501511 /* TrainingModuleViewController.swift */; };
 		446475752C72088300ACD3D7 /* CommentsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446475742C72088300ACD3D7 /* CommentsServices.swift */; };
 		4464757B2C7496F100ACD3D7 /* FilePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464757A2C7496F100ACD3D7 /* FilePath.swift */; };
 		4465B2FD2D1EFF5B005EA9D0 /* AddVideoModulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4465B2FC2D1EFF5B005EA9D0 /* AddVideoModulePresenter.swift */; };
@@ -215,6 +217,8 @@
 		44547E562CF4BE380051C782 /* Promocodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promocodes.swift; sourceTree = "<group>"; };
 		44547E582CF4C1B50051C782 /* CreatePromoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePromoViewController.swift; sourceTree = "<group>"; };
 		445757E92D46E82300501511 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
+		445757EB2D46F18500501511 /* TrainingModulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingModulePresenter.swift; sourceTree = "<group>"; };
+		445757ED2D46F1AC00501511 /* TrainingModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingModuleViewController.swift; sourceTree = "<group>"; };
 		446475742C72088300ACD3D7 /* CommentsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsServices.swift; sourceTree = "<group>"; };
 		4464757A2C7496F100ACD3D7 /* FilePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePath.swift; sourceTree = "<group>"; };
 		4465B2FC2D1EFF5B005EA9D0 /* AddVideoModulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVideoModulePresenter.swift; sourceTree = "<group>"; };
@@ -482,6 +486,7 @@
 				4465B2FC2D1EFF5B005EA9D0 /* AddVideoModulePresenter.swift */,
 				442023B32D282751007C3E68 /* AddTrainingModulePresenter.swift */,
 				440254D42D42EC5D00752940 /* PlanCoursesPresenter.swift */,
+				445757EB2D46F18500501511 /* TrainingModulePresenter.swift */,
 			);
 			path = CourseScreens;
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 				44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */,
 				44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */,
 				440254D22D42EB1600752940 /* PlanCoursesViewController.swift */,
+				445757ED2D46F1AC00501511 /* TrainingModuleViewController.swift */,
 			);
 			path = ViewCourse;
 			sourceTree = "<group>";
@@ -862,6 +868,7 @@
 				75DBBEF42C8221A10063A489 /* Stars.swift in Sources */,
 				4464757B2C7496F100ACD3D7 /* FilePath.swift in Sources */,
 				440C9C412CF49D72007D0735 /* PromoViewController.swift in Sources */,
+				445757EC2D46F18500501511 /* TrainingModulePresenter.swift in Sources */,
 				44932A992C81303A00E0F86F /* PrivacyViewController.swift in Sources */,
 				44D68B012C51B3EF00F8F476 /* AddCourseViewController.swift in Sources */,
 				44BD6CE42C440974001645A0 /* AddModuleCoursesViewController.swift in Sources */,
@@ -870,6 +877,7 @@
 				448301822C9504B600E40DBA /* ValidateTF.swift in Sources */,
 				44BC59072CCFF36200AD7FFA /* AdminCoursesViewController.swift in Sources */,
 				44682C9B2D01189B00087C62 /* VhodPresenter.swift in Sources */,
+				445757EE2D46F1AC00501511 /* TrainingModuleViewController.swift in Sources */,
 				440DAB362C1748D400C576FB /* SceneDelegate.swift in Sources */,
 				44064C9E2C28628000AB5227 /* SignServices.swift in Sources */,
 				440CB67D2C5FA86F003FCAF0 /* CoachViewController.swift in Sources */,

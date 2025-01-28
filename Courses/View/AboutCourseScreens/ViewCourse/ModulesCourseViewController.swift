@@ -229,6 +229,8 @@ extension ModulesCourseViewController: UICollectionViewDelegate, UICollectionVie
                 performSegue(withIdentifier: "goToText", sender: self)
             }else if course.courseDays[selectDay].modules[indexPath.row].type == .video {
                 performSegue(withIdentifier: "goToVideo", sender: self)
+            }else if course.courseDays[selectDay].modules[indexPath.row].type == .training {
+                performSegue(withIdentifier: "goToTraining", sender: self)
             }
         }
     }
@@ -241,6 +243,9 @@ extension ModulesCourseViewController: UICollectionViewDelegate, UICollectionVie
         }else if segue.identifier == "goToVideo" {
             let vc = segue.destination as! VideoModuleViewController
             vc.module = selectModule as! VideoModule
+        }else if segue.identifier == "goToTraining" {
+            let vc = segue.destination as! TrainingModuleViewController
+            vc.presenter.module = selectModule as! TrainingModule
         }else if segue.identifier == "goToInfo" {
             let vc = segue.destination as! InfoCoursesViewController
             vc.presenter.course.id = idCourse

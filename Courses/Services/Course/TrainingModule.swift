@@ -41,7 +41,7 @@ extension CourseServices {
         
         let response = AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(Data(module.description.utf8), withName: "training_description")
-            if let mediaURL = module.mediaURL {
+            if let mediaURL = module.mediaURL, "\(mediaURL)".starts(with: "file") {
                 multipartFormData.append(mediaURL, withName: "data")
             }
         }, to: url, method: .patch, headers: headers).serializingData()
