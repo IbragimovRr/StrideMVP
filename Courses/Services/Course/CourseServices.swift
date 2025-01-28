@@ -228,11 +228,11 @@ class CourseServices {
         return id
     }
     
-    func addModulesData(text: NSAttributedString, moduleID: Int) async throws {
+    func addModulesData(text: String, moduleID: Int) async throws {
         let url = Constants.url + "api/v1/module/update/\(moduleID)/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
-        let file = FilePath().serializeAttributedStringToFile(text)!
-        let tempFileURL = file.deletingPathExtension().appendingPathExtension("data")
+        let file = FilePath().serializeHtmlFile(text)!
+        let tempFileURL = file.deletingPathExtension().appendingPathExtension("html")
         let response = AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(tempFileURL, withName: "data")
         }, to: url, method: .patch, headers: headers).serializingData()

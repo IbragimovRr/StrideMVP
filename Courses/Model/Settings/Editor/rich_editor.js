@@ -37,12 +37,27 @@ function getFormattingData() {
     for (const command of commands) {
           formattingData[command] = RE.isCommandActive(command);
     }
+    formattingData.blockquote = isBlockquoteActive();
     
     const fontName = getFontName();
     formattingData.fontName = fontName;
     
     return formattingData;
 }
+
+function isBlockquoteActive() {
+  const selection = window.getSelection();
+  if (!selection.rangeCount) return false;
+
+  const range = selection.getRangeAt(0);
+  let container = range.commonAncestorContainer;
+
+  while (container.nodeType === Node.TEXT_NODE) {
+    container = container.parentNode;
+  }
+  return container.tagName === "BLOCKQUOTE";
+}
+
 
 function getFontName() {
     const selection = window.getSelection();
@@ -124,6 +139,12 @@ RE.customAction = function(action) {
 
 RE.updateHeight = function() {
     RE.callback("updateHeight");
+}
+
+RE.scrollTop = function() {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    document.documentElement.scrollTop = scrollTop;
+    document.body.scrollTop = scrollTop;
 }
 
 RE.callbackQueue = [];
@@ -372,6 +393,10 @@ RE.insertImage = function(url, alt) {
 RE.setBlockquote = function() {
     document.execCommand('formatBlock', false, 'blockquote');
 };
+
+RE.exitBlockquote = function() {
+    document.execCommand('formatBlock', false, 'p');
+}
 
 function findParent(element, tag) {
     while (element && element.nodeType !== 9) { // 9 - document node

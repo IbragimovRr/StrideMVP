@@ -77,6 +77,8 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         design()
         setupRichEditorView()
         loadingSettings()
+        view.addSubview(errorView)
+        errorView.isHidden = true
         startPosition = errorView.center
     }
     
@@ -96,6 +98,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             bottomConsoleView.constant = keyboardHeight - 30
+            editor.scrollTop()
         }
     }
     
@@ -143,7 +146,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     }
     
     func setImage(url: String) {
-        print(url)
         editor.insertImage(url: url, alt: "image")
     }
     
@@ -295,10 +297,9 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     
     @IBAction func save(_ sender: UIButton) {
         editor.resignFirstResponder()
-        editor.getHtml(handler: { res in
-            print(res)
+        editor.getHtml(handler: { html in
+            self.presenter.saveCourse(html: html)
         })
-//        presenter.saveCourse(html: nil)
     }
     
     @IBAction func headingBtn(_ sender: UIButton) {
@@ -336,7 +337,9 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         case 6:
             editor.underline()
         case 7:
-            editor.blockquote()
+//            editor.blockquote()
+            errorView.configureUnavailable(title: "Недоступно", description: "Добавление цитат недоступно. Попробуйте снова позднее.")
+            errorView.isHidden = false
         default:
             break
         }

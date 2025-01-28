@@ -10,7 +10,7 @@ import UIKit
 protocol AddCoursePresenterDelegate {
     func deleteAlamofireFiles()
     func viewDidLoad()
-    func saveCourse(html: NSAttributedString?)
+    func saveCourse(html: String)
     func saveImageInCloud(filePath: URL)
 }
 
@@ -29,11 +29,10 @@ class AddCoursePresenter: AddCoursePresenterDelegate {
     
     private func getData() {
         Task {
-//                let attributedString = try await FilePath().downloadFileWithURL(url: module.text!)
-//                DispatchQueue.main.async {
-//                    self.view.setData(html: attributedString.htmlString()!)
-//                    self.view.setData(attr: attributedString)
-//                }
+            let html = try await FilePath().downloadHtmlFileWithURL(url: module.text!)
+            DispatchQueue.main.async {
+                self.view.setData(html: html!)
+            }
         }
     }
     
@@ -48,11 +47,11 @@ class AddCoursePresenter: AddCoursePresenterDelegate {
         }
     }
     
-    func saveCourse(html: NSAttributedString?) {
+    func saveCourse(html: String) {
         view.isLoading(true)
         Task {
             do {
-                try await CourseServices().addModulesData(text: html!, moduleID: module.module.id)
+                try await CourseServices().addModulesData(text: html, moduleID: module.module.id)
                 DispatchQueue.main.async {
                     self.view.isLoading(false)
                     self.view.saveCourse()

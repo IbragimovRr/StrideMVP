@@ -11,6 +11,20 @@ import UIKit
 
 class FilePath {
     
+    func downloadHtmlFileWithURL(url: URL) async throws -> String? {
+        return try await withUnsafeThrowingContinuation { continuation in
+            AF.download(url).responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let html = String(data: data, encoding: .utf8)
+                    continuation.resume(returning: html)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+    
     func downloadFileWithURL(url: URL) async throws -> NSAttributedString {
         return try await withUnsafeThrowingContinuation { continuation in
             AF.download(url).responseData { response in
@@ -46,6 +60,20 @@ class FilePath {
             }
         } catch {
             print("Ошибка десериализации: \(error)")
+            return nil
+        }
+    }
+    
+    func serializeHtmlFile(_ htmlString: String) -> URL? {
+        let fileManager = FileManager.default
+        let tempDirectory = fileManager.temporaryDirectory
+        let fileURL = tempDirectory.appendingPathComponent("attributedStringData").appendingPathExtension("html")
+        
+        do {
+            try htmlString.write(to: fileURL, atomically: true, encoding: .utf8)
+            return fileURL
+        } catch {
+            print("Error serializing attributed string to file: \(error)")
             return nil
         }
     }

@@ -137,11 +137,6 @@ class EditorView: WKWebView {
         }
     }
     
-    // Не работает
-    public func checkbox() {
-        evaluateJavaScript("RE.setCheckbox('\(UUID().uuidString.prefix(8))')")
-    }
-    
     
     func getLineHeight(completion: @escaping (String?) -> Void) {
         evaluateJavaScript("RE.getLineHeight()") { (result, error) in
@@ -158,8 +153,9 @@ class EditorView: WKWebView {
         evaluateJavaScript("RE.setLineHeight('\(height)')")
     }
     
-    func insertSpinner() {
-        runJS("RE.showSpinner()")
+
+    func scrollTop() {
+        runJS("RE.scrollTop();")
     }
     
     func insertImage(url: String, alt: String) {
@@ -170,7 +166,7 @@ class EditorView: WKWebView {
     }
     
     func blockquote() {
-        evaluateJavaScript("RE.setBlockquote()")
+        evaluateJavaScript("RE.setBlockquote();")
     }
     
     func insertTable(width: Int = 2, height: Int = 2) {
@@ -179,7 +175,7 @@ class EditorView: WKWebView {
     }
     
     func insertHTML(html: String) {
-        evaluateJavaScript("RE.insertHTML('\(html)')")
+        runJS("RE.insertHTML('\(html)')")
     }
     
     func insertLink(url: String, title: String) {
