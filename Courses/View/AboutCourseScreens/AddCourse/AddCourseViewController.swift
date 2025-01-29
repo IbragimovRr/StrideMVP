@@ -73,7 +73,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         fontCollectionView.dataSource = self
         fontCollectionView.collectionViewLayout = CarouselLayout()
         presenter.view = self
-        presenter.viewDidLoad()
         design()
         setupRichEditorView()
         loadingSettings()
@@ -119,6 +118,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         webConfiguration.userContentController = contentController
         editor = EditorView(frame: .zero, configuration: webConfiguration)
         editor.delegate = self
+        editor.navigationDelegate = self
         editor.scrollView.showsVerticalScrollIndicator = false
         editor.scrollView.showsHorizontalScrollIndicator = false
         editor.translatesAutoresizingMaskIntoConstraints = false
@@ -150,7 +150,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     }
     
     func setData(html: String) {
-        editor.html = html
+        self.editor.html = html
     }
     
     func saveCourse() {
@@ -337,7 +337,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         case 6:
             editor.underline()
         case 7:
-//            editor.blockquote()
             errorView.configureUnavailable(title: "Недоступно", description: "Добавление цитат недоступно. Попробуйте снова позднее.")
             errorView.isHidden = false
         default:
@@ -406,7 +405,11 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     }
     
 }
-extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate {
+extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        presenter.viewDidLoad()
+    }
     
     func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName: String) {
         changedAlignment(aligment)
