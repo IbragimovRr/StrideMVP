@@ -126,7 +126,7 @@
 		44E2AB1C2D35C4AF00547228 /* ModuleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E2AB1B2D35C4AF00547228 /* ModuleModel.swift */; };
 		44E2AB1E2D35C51E00547228 /* DayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E2AB1D2D35C51E00547228 /* DayModel.swift */; };
 		44E2AB202D35C8FC00547228 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E2AB1F2D35C8FC00547228 /* Constants.swift */; };
-		44E406192CFF7572004F633E /* CourseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E406182CFF7572004F633E /* CourseServices.swift */; };
+		44E402F52D4BF061006873BF /* CourseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E402F42D4BF061006873BF /* CourseServices.swift */; };
 		44E4061C2CFF78F4004F633E /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E4061B2CFF78F4004F633E /* CourseModel.swift */; };
 		44E4061E2CFF79F7004F633E /* CatalogPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E4061D2CFF79F7004F633E /* CatalogPresenter.swift */; };
 		44E406202CFF7B9C004F633E /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E4061F2CFF7B9C004F633E /* CategoryModel.swift */; };
@@ -285,7 +285,7 @@
 		44E2AB1B2D35C4AF00547228 /* ModuleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleModel.swift; sourceTree = "<group>"; };
 		44E2AB1D2D35C51E00547228 /* DayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayModel.swift; sourceTree = "<group>"; };
 		44E2AB1F2D35C8FC00547228 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		44E406182CFF7572004F633E /* CourseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseServices.swift; sourceTree = "<group>"; };
+		44E402F42D4BF061006873BF /* CourseServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseServices.swift; sourceTree = "<group>"; };
 		44E4061B2CFF78F4004F633E /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		44E4061D2CFF79F7004F633E /* CatalogPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogPresenter.swift; sourceTree = "<group>"; };
 		44E4061F2CFF7B9C004F633E /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
@@ -630,7 +630,7 @@
 		44E4061A2CFF75D2004F633E /* Course */ = {
 			isa = PBXGroup;
 			children = (
-				44E406182CFF7572004F633E /* CourseServices.swift */,
+				44E402F42D4BF061006873BF /* CourseServices.swift */,
 				440E1F712CA169E9002C6FC8 /* CourseRequest.swift */,
 				440E1F732CA16AD1002C6FC8 /* CourseErrors.swift */,
 				440E1F752CA16C86002C6FC8 /* CourseResponse.swift */,
@@ -823,7 +823,6 @@
 				44E2AB202D35C8FC00547228 /* Constants.swift in Sources */,
 				449880CA2CB621280052C3C3 /* NavigationControllerDelegate.swift in Sources */,
 				44BD149C2C808106006D0722 /* PickerModelViewController.swift in Sources */,
-				44E406192CFF7572004F633E /* CourseServices.swift in Sources */,
 				44682CA02D02874A00087C62 /* PromocodeModel.swift in Sources */,
 				440254D32D42EB1600752940 /* PlanCoursesViewController.swift in Sources */,
 				449CF0D92C337099000D4528 /* CatalogViewController.swift in Sources */,
@@ -834,6 +833,7 @@
 				44682CA52D03577500087C62 /* WithdrawPresenter.swift in Sources */,
 				44DFB1162C3B199A005C8F44 /* RecomendationCollectionViewCell.swift in Sources */,
 				449CF0DB2C3370CA000D4528 /* CoursesCollectionViewCell.swift in Sources */,
+				44E402F52D4BF061006873BF /* CourseServices.swift in Sources */,
 				44682CAA2D03BF5700087C62 /* InfoCoursePresenter.swift in Sources */,
 				44064C892C27042100AB5227 /* StartViewController.swift in Sources */,
 				449C12502D00E0AF0091F0F5 /* ProfilePresenter.swift in Sources */,

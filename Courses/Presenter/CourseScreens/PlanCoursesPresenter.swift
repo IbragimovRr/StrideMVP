@@ -9,6 +9,7 @@ import Foundation
 
 protocol PlanCoursesPresenterDelegate {
     func getData()
+    func savePlan()
 }
 
 class PlanCoursesPresenter: PlanCoursesPresenterDelegate {
@@ -21,6 +22,21 @@ class PlanCoursesPresenter: PlanCoursesPresenterDelegate {
             days = try await CourseServices().getDaysInCourse(id: idCourse).courseDays
             DispatchQueue.main.async {
                 self.view.setData()
+            }
+        }
+    }
+    
+    func savePlan() {
+        Task {
+            do {
+                try await CourseServices().addIsVisibleInModule(days: days)
+                DispatchQueue.main.async {
+                    self.view.savePlan()
+                }
+            }catch ErrorNetwork.runtimeError(let error) {
+                DispatchQueue.main.async {
+                    self.view.setError(error: error)
+                }
             }
         }
     }

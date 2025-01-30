@@ -265,6 +265,47 @@ class CourseServices {
         }
     }
     
+    func addIsVisibleInModule(days: [DayModel]) async throws {
+        try await addVisible(days: days, isVisible: false)
+        try await addVisible(days: days, isVisible: true)
+    }
+    
+    private func addVisible(days: [DayModel], isVisible: Bool) async throws {
+        let url = Constants.url + "api/v1/module-update-visibility"
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
+        
+        let moduleIDs = isVisible ? getVisibleModulesID(days) : getAllModulesID(days)
+        
+        let parameters: [String: Any] = [
+            "module_ids": moduleIDs,
+            "is_visible": isVisible
+        ]
+        
+        print(parameters)
+        
+        let response = AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).serializingData()
+        
+        let value = try await response.value
+        let code = await response.response.response?.statusCode
+        let json = JSON(value)
+        print(json, code)
+        guard code == 200 else {
+            let errorMessage = json.dictionary?.first?.value.arrayValue.first?.stringValue ?? "Неизвестная ошибка"
+            throw ErrorNetwork.runtimeError(errorMessage)
+        }
+    }
+    
+    private func getVisibleModulesID(_ days: [DayModel]) -> [Int] {
+        return days.flatMap { $0.modules }
+                       .filter { $0.module.isVisible }
+                       .map { $0.module.id }
+    }
+    
+    private func getAllModulesID(_ days: [DayModel]) -> [Int] {
+        return days.flatMap { $0.modules }
+                       .map { $0.module.id }
+    }
+    
     // MARK: - Удалить
     
     func deleteModule(moduleID: Int) async throws {

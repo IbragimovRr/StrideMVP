@@ -9,6 +9,13 @@ import UIKit
 
 protocol PlanCoursesViewDelegate {
     func setData()
+    func setError(error: String)
+    func savePlan()
+}
+
+extension PlanCoursesViewDelegate {
+    func setError(error: String) {}
+    func savePlan() {}
 }
 
 class PlanCoursesViewController: UIViewController, PlanCoursesViewDelegate {

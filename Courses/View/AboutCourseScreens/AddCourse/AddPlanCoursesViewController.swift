@@ -15,19 +15,31 @@ class AddPlanCoursesViewController: UIViewController, PlanCoursesViewDelegate {
     var presenter = PlanCoursesPresenter()
     var role: InfoCourses = .nothing
     
+    private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         modulesCollectionView.delegate = self
         modulesCollectionView.dataSource = self
         presenter.view = self
+        view.addSubview(errorView)
     }
     
     func setData() {
         modulesCollectionView.reloadData()
     }
     
-    @IBAction func preview(_ sender: UIButton) {
+    func setError(error: String) {
+        errorView.configure(title: "Ошибка", description: error)
+        errorView.isHidden = false
+    }
+    
+    func savePlan() {
         performSegue(withIdentifier: "preview", sender: self)
+    }
+    
+    @IBAction func preview(_ sender: UIButton) {
+        presenter.savePlan()
     }
     
     @IBAction func planInfoBtn(_ sender: UIButton) {
@@ -46,6 +58,10 @@ class AddPlanCoursesViewController: UIViewController, PlanCoursesViewDelegate {
             vc.interface = role
         }
 
+    }
+    
+    @IBAction func swipe(_ sender: UIPanGestureRecognizer) {
+        errorView.swipe(sender: sender)
     }
     
 }
