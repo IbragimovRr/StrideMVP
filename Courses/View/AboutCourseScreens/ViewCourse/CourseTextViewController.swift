@@ -7,20 +7,40 @@
 
 import UIKit
 import Lottie
+import WebKit
 
 class CourseTextViewController: UIViewController {
 
+    @IBOutlet weak var editorBackView: UIView!
     @IBOutlet weak var loading: LottieAnimationView!
-    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var nameCourse: UILabel!
 
     var module = CustomModule(module: Modules(name: "", minutes: 0, id: 0))
+    var editor = EditorView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getData()
         design()
-        textView.layer.makeHiddenOnCapture()
+    }
+    
+    func setupRichEditorView() {
+        let webConfiguration = WKWebViewConfiguration()
+        editor = EditorView(frame: .zero, configuration: webConfiguration)
+        editor.navigationDelegate = self
+        editor.layer.makeHiddenOnCapture()
+        editor.scrollView.showsVerticalScrollIndicator = false
+        editor.scrollView.showsHorizontalScrollIndicator = false
+        editor.translatesAutoresizingMaskIntoConstraints = false
+        editor.isOpaque = false
+        editorBackView.addSubview(editor)
+        
+        
+        NSLayoutConstraint.activate([
+            editor.topAnchor.constraint(equalTo: editorBackView.topAnchor),
+            editor.bottomAnchor.constraint(equalTo: editorBackView.bottomAnchor),
+            editor.trailingAnchor.constraint(equalTo: editorBackView.trailingAnchor),
+            editor.leadingAnchor.constraint(equalTo: editorBackView.leadingAnchor)
+        ])
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -36,17 +56,18 @@ class CourseTextViewController: UIViewController {
 
     private func design() {
         self.overrideUserInterfaceStyle = .dark
-        textView.textColor = .white
+        setupRichEditorView()
         loadingSettings()
         nameCourse.text = module.module.name
     }
 
     func getData() {
         Task {
+            guard let moduleText = module.text else { return }
             loading.play()
-            if let moduleText = module.text {
-                let attributedString = try await FilePath().downloadFileWithURL(url: moduleText)
-                textView.attributedText = attributedString
+            let html = try await FilePath().downloadHtmlFileWithURL(url: moduleText)
+            if let html = html {
+                editor.html = html
             }
             loading.stop()
             loading.isHidden = true
@@ -58,4 +79,9 @@ class CourseTextViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
+}
+extension CourseTextViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        getData()
+    }
 }

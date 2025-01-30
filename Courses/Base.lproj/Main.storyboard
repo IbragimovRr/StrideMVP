@@ -322,8 +322,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2d-Xk-gdu">
-                                <rect key="frame" x="10" y="123" width="373" height="635"/>
+                                <rect key="frame" x="10" y="408" width="373" height="350"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="vWJ-6s-LZz"/>
+                                </constraints>
                             </view>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pqz-eq-q0B">
                                 <rect key="frame" x="29" y="768" width="335" height="50"/>
@@ -724,14 +727,23 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bg9-BF-XPV">
+                                <rect key="frame" x="10" y="123" width="373" height="275"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XmU-3q-Hr8"/>
                         <color key="backgroundColor" name="BlackMain"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="Bg9-BF-XPV" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="10" id="23I-0y-GnJ"/>
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="top" secondItem="XmU-3q-Hr8" secondAttribute="top" id="2tt-Qg-RBW"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="jHI-pb-aUK" secondAttribute="trailing" id="3BT-8M-Lim"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="centerX" secondItem="xnu-Sq-5BV" secondAttribute="centerX" id="3O1-t2-0as"/>
+                            <constraint firstItem="Bg9-BF-XPV" firstAttribute="top" secondItem="jHI-pb-aUK" secondAttribute="bottom" constant="10" id="7Iv-1z-VhQ"/>
                             <constraint firstItem="b2d-Xk-gdu" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="10" id="Chf-en-k0g"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="top" secondItem="b2d-Xk-gdu" secondAttribute="bottom" constant="10" id="DYq-xf-gmq"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="bottom" secondItem="pqz-eq-q0B" secondAttribute="bottom" id="G3E-kt-DQe"/>
@@ -739,12 +751,13 @@
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="top" secondItem="j3E-yc-avL" secondAttribute="bottom" constant="10" id="O0T-Nv-iGn"/>
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="leading" secondItem="xnu-Sq-5BV" secondAttribute="leading" id="PCp-UW-C6E"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="trailing" secondItem="Tcz-ME-6lc" secondAttribute="trailing" id="XSS-W7-GxF"/>
+                            <constraint firstItem="b2d-Xk-gdu" firstAttribute="top" secondItem="Bg9-BF-XPV" secondAttribute="bottom" constant="10" id="dn3-fi-cYo"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="top" secondItem="xYI-FY-3sc" secondAttribute="bottom" constant="10" id="e26-uF-qDc"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="bottom" secondItem="Tcz-ME-6lc" secondAttribute="bottom" id="e27-Hi-dfQ"/>
                             <constraint firstItem="j3E-yc-avL" firstAttribute="leading" secondItem="pqz-eq-q0B" secondAttribute="leading" constant="35" id="eyy-oa-9PG"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="leading" secondItem="pqz-eq-q0B" secondAttribute="leading" id="hEl-vY-tTh"/>
                             <constraint firstItem="xYI-FY-3sc" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" id="rT6-4M-HFy"/>
-                            <constraint firstItem="b2d-Xk-gdu" firstAttribute="top" secondItem="jHI-pb-aUK" secondAttribute="bottom" constant="10" id="yUz-hY-MgJ"/>
+                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="Bg9-BF-XPV" secondAttribute="trailing" constant="10" id="scj-T7-ksQ"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="b2d-Xk-gdu" secondAttribute="trailing" constant="10" id="yvH-mm-2jl"/>
                         </constraints>
                         <connections>
@@ -768,6 +781,7 @@
                         <outlet property="loading" destination="mhZ-Zq-gsT" id="oQR-fd-zmB"/>
                         <outlet property="mainEditorView" destination="Tcz-ME-6lc" id="UZx-eQ-DcI"/>
                         <outlet property="nameCourseLBL" destination="SvU-CO-pHv" id="26o-h4-mvb"/>
+                        <outlet property="oldTextView" destination="Bg9-BF-XPV" id="2wE-qc-Dfg"/>
                         <outlet property="redo" destination="tFr-7Y-trp" id="AQl-pw-Auj"/>
                         <outlet property="undo" destination="A5r-u0-99Q" id="cJR-De-vQi"/>
                     </connections>
@@ -6404,33 +6418,29 @@
                                     <constraint firstItem="6Jv-cX-fvN" firstAttribute="centerX" secondItem="RXq-it-oLu" secondAttribute="centerX" id="oSH-ae-HbZ"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uVW-wj-qFZ">
-                                <rect key="frame" x="10" y="128" width="373" height="724"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u0V-PD-oIL">
+                                <rect key="frame" x="10" y="123" width="373" height="729"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IvA-gO-CbQ"/>
                         <color key="backgroundColor" name="BlackMain"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="uVW-wj-qFZ" secondAttribute="bottom" id="4N8-pn-02U"/>
-                            <constraint firstItem="uVW-wj-qFZ" firstAttribute="top" secondItem="RXq-it-oLu" secondAttribute="bottom" constant="15" id="5eP-Ku-Ism"/>
                             <constraint firstItem="RXq-it-oLu" firstAttribute="top" secondItem="IvA-gO-CbQ" secondAttribute="top" id="99e-ga-l2e"/>
-                            <constraint firstItem="IvA-gO-CbQ" firstAttribute="trailing" secondItem="uVW-wj-qFZ" secondAttribute="trailing" constant="10" id="BeD-FT-mEu"/>
-                            <constraint firstItem="uVW-wj-qFZ" firstAttribute="leading" secondItem="IvA-gO-CbQ" secondAttribute="leading" constant="10" id="K8v-sQ-gaA"/>
+                            <constraint firstItem="u0V-PD-oIL" firstAttribute="top" secondItem="RXq-it-oLu" secondAttribute="bottom" constant="10" id="FYY-xe-hK8"/>
                             <constraint firstItem="RXq-it-oLu" firstAttribute="leading" secondItem="IvA-gO-CbQ" secondAttribute="leading" id="Kcp-fM-NnA"/>
+                            <constraint firstItem="IvA-gO-CbQ" firstAttribute="trailing" secondItem="u0V-PD-oIL" secondAttribute="trailing" constant="10" id="SSB-be-N5N"/>
                             <constraint firstItem="IvA-gO-CbQ" firstAttribute="trailing" secondItem="RXq-it-oLu" secondAttribute="trailing" id="fSG-i5-EzY"/>
+                            <constraint firstItem="u0V-PD-oIL" firstAttribute="leading" secondItem="X32-vl-6Zf" secondAttribute="leading" constant="10" id="oFR-jg-9EN"/>
+                            <constraint firstAttribute="bottom" secondItem="u0V-PD-oIL" secondAttribute="bottom" id="qfP-nZ-aOb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uki-rg-chu"/>
                     <connections>
+                        <outlet property="editorBackView" destination="u0V-PD-oIL" id="RIs-57-zaV"/>
                         <outlet property="loading" destination="tLG-7V-OQG" id="gBt-x4-zvz"/>
                         <outlet property="nameCourse" destination="6Jv-cX-fvN" id="If5-rS-Te9"/>
-                        <outlet property="textView" destination="uVW-wj-qFZ" id="Tcs-T3-foe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Hx-Hm-dka" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

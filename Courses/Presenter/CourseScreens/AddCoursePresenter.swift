@@ -28,10 +28,20 @@ class AddCoursePresenter: AddCoursePresenterDelegate {
     }
     
     private func getData() {
+        guard let urlHtml = module.text else { return }
         Task {
-            let html = try await FilePath().downloadHtmlFileWithURL(url: module.text!)
+            let html = try await FilePath().downloadHtmlFileWithURL(url: urlHtml)
             DispatchQueue.main.async {
-                self.view.setData(html: html!)
+                if let html = html {
+                    self.view.setData(html: html)
+                }
+            }
+        }
+        
+        Task {
+            let attributedString = try await FilePath().downloadFileWithURL(url: urlHtml)
+            DispatchQueue.main.async {
+                self.view.setData(attributedString: attributedString)
             }
         }
     }

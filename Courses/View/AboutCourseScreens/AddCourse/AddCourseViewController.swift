@@ -14,6 +14,7 @@ import WebKit
 protocol AddCoursePresenterViewDelegate {
     func isLoading(_ bool: Bool)
     func setData(html: String)
+    func setData(attributedString: NSAttributedString)
     func setImage(url: String)
     func saveCourse()
     func setError(_ error: String)
@@ -21,6 +22,7 @@ protocol AddCoursePresenterViewDelegate {
 
 class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate {
     
+    @IBOutlet weak var oldTextView: UITextView!
     @IBOutlet weak var heightFontView: UIView!
     @IBOutlet weak var fontCollectionView: UICollectionView!
     @IBOutlet weak var editorBackView: UIView!
@@ -147,6 +149,10 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     
     func setImage(url: String) {
         editor.insertImage(url: url, alt: "image")
+    }
+    
+    func setData(attributedString: NSAttributedString) {
+        oldTextView.attributedText = attributedString
     }
     
     func setData(html: String) {
