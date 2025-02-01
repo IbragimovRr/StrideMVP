@@ -11,66 +11,76 @@ import Alamofire
 import Lottie
 import WebKit
 
-class AddCourseViewController: UIViewController {
+protocol AddCoursePresenterViewDelegate {
+    func isLoading(_ bool: Bool)
+    func setData(html: String)
+    func setData(attributedString: NSAttributedString)
+    func setImage(url: String)
+    func saveCourse()
+    func setError(_ error: String)
+}
+
+class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate {
     
-    @IBOutlet weak var redo: UIButton!
-    @IBOutlet weak var undo: UIButton!
+    @IBOutlet weak var oldTextView: UITextView!
+    @IBOutlet weak var heightFontView: UIView!
+    @IBOutlet weak var fontCollectionView: UICollectionView!
+    @IBOutlet weak var editorBackView: UIView!
     @IBOutlet weak var loading: LottieAnimationView!
     @IBOutlet weak var nameCourseLBL: UILabel!
-    @IBOutlet weak var sizeFont: UILabel!
-    @IBOutlet weak var colorView: UIView!
-    @IBOutlet weak var fontTitle: UILabel!
+    @IBOutlet weak var mainEditorView: UIView!
     @IBOutlet weak var fontView: UIView!
     @IBOutlet weak var bottomConsoleView: NSLayoutConstraint!
+    
+    // Text editor Format
     @IBOutlet weak var alingment: UIButton!
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var isUnderline: UIButton!
+    @IBOutlet weak var isStrikeThrough: UIButton!
+    @IBOutlet weak var isFontHeight: UIButton!
+    @IBOutlet weak var isFontName: UIButton!
+    @IBOutlet weak var isItalic: UIButton!
+    @IBOutlet weak var isBold: UIButton!
+    @IBOutlet weak var redo: UIButton!
+    @IBOutlet weak var undo: UIButton!
+    
+    
+    var editor = EditorView()
+    var presenter = AddCoursePresenter()
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
+    private var startPosition = CGPoint()
+    var fonts = [
+            "Arial",
+            "Helvetica",
+            "Times New Roman",
+            "Courier New",
+            "Verdana",
+            "Georgia",
+            "Impact",
+            "Comic Sans MS",
+            "Trebuchet MS"
+        ]
+    var selectedFontIndex = 2 {
+        didSet {
+            editor.font(fonts[selectedFontIndex])
+        }
+    }
     private var isChangedText = false
     private var isSave = true
     
-    var module = CustomModule(module: Modules(name: "", minutes: 0, id: 0))
-    var nameCourse = ""
-    
-    
-    private var colorSelect = UIColor.white {
-        didSet {
-            colorView.backgroundColor = colorSelect
-            textView.typingAttributes[.foregroundColor] = colorSelect
-            selectText(attributes: [.font: fontSelect, .foregroundColor: colorSelect])
-        }
-    }
-    private var fontSelect = UIFont.systemFont(ofSize: 16) {
-        didSet {
-            fontTitle.text = fontSelect.fontName
-            textView.typingAttributes[.font] = fontSelect
-            selectText(attributes: [.font: fontSelect, .foregroundColor: colorSelect])
-        }
-    }
-    private var alignment = NSMutableParagraphStyle().alignment {
-        didSet {
-            let paragraph = NSMutableParagraphStyle()
-            paragraph.alignment = alignment
-            textView.typingAttributes[.paragraphStyle] = paragraph
-            changedAlignment(alignment)
-            selectText(attributes: [.paragraphStyle: paragraph])
-        }
-    }
-    private var sizeFontSelect = 16.0 {
-        didSet {
-            fontSelect = UIFont(descriptor: fontSelect.fontDescriptor, size: sizeFontSelect)
-            let roundedSize = round(sizeFontSelect * 10) / 10
-            sizeFontSelect = roundedSize
-            sizeFont.text = "\(sizeFontSelect) пт"
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.delegate = self
         self.overrideUserInterfaceStyle = .dark
-        getData()
+        fontCollectionView.delegate = self
+        fontCollectionView.dataSource = self
+        fontCollectionView.collectionViewLayout = CarouselLayout()
+        presenter.view = self
         design()
+        setupRichEditorView()
+        loadingSettings()
+        view.addSubview(errorView)
+        errorView.isHidden = true
+        startPosition = errorView.center
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,12 +88,18 @@ class AddCourseViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scrollToCenterCell()
+    }
     
     @objc func keyboardWillAppear(notification:Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             bottomConsoleView.constant = keyboardHeight - 30
+            editor.scrollTop()
         }
     }
     
@@ -94,42 +110,94 @@ class AddCourseViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-        FilePath().deleteAlamofireFiles()
+        presenter.deleteAlamofireFiles()
+    }
+    
+    func setupRichEditorView() {
+        let webConfiguration = WKWebViewConfiguration()
+        let contentController = WKUserContentController()
+        contentController.add(self, name: "format")
+        webConfiguration.userContentController = contentController
+        editor = EditorView(frame: .zero, configuration: webConfiguration)
+        editor.delegate = self
+        editor.navigationDelegate = self
+        editor.scrollView.showsVerticalScrollIndicator = false
+        editor.scrollView.showsHorizontalScrollIndicator = false
+        editor.translatesAutoresizingMaskIntoConstraints = false
+        editor.isOpaque = false
+        editorBackView.addSubview(editor)
+        
+        
+        NSLayoutConstraint.activate([
+            editor.topAnchor.constraint(equalTo: editorBackView.topAnchor),
+            editor.bottomAnchor.constraint(equalTo: editorBackView.bottomAnchor),
+            editor.trailingAnchor.constraint(equalTo: editorBackView.trailingAnchor),
+            editor.leadingAnchor.constraint(equalTo: editorBackView.leadingAnchor)
+        ])
+    }
+
+    
+    func isLoading(_ bool: Bool) {
+        if bool {
+            loading.play()
+            loading.isHidden = false
+        }else {
+            loading.stop()
+            loading.isHidden = true
+        }
+    }
+    
+    func setImage(url: String) {
+        editor.insertImage(url: url, alt: "image")
+    }
+    
+    func setData(attributedString: NSAttributedString) {
+        oldTextView.attributedText = attributedString
+    }
+    
+    func setData(html: String) {
+        self.editor.html = html
+    }
+    
+    func saveCourse() {
+        isSave = true
+    }
+    
+    func setError(_ error: String) {
+        errorView.isHidden = false
+        errorView.configure(title: "Ошибка", description: error)
+        view.addSubview(errorView)
+        isLoading(false)
     }
     
     private func loadingSettings() {
         loading.loopMode = .loop
         loading.contentMode = .scaleToFill
-        
-        loading.play()
-        loading.isHidden = false
     }
     
-    private func loadingStop() {
-        loading.stop()
-        loading.isHidden = true
+    private func design() {
+        nameCourseLBL.text = presenter.module.module.name
     }
     
-    
-    func getData() {
-        Task {
-            loadingSettings()
-            guard let module = module.text else {
-                loadingStop()
-                return
-            }
-            let attributedString = try await FilePath().downloadFileWithURL(url: module)
-            textView.attributedText = attributedString
-            
-            loadingStop()
+    private func toggleFontView(isShow: Bool) {
+        if isShow {
+            fontView.isHidden = false
+            mainEditorView.isHidden = true
+        }else {
+            fontView.isHidden = true
+            hiddenAllFontView()
+            mainEditorView.isHidden = false
         }
     }
     
-    
-    private func design() {
-        nameCourseLBL.text = module.module.name
+    private func checkFont(fontName: String) -> Int {
+        for x in 0...fonts.count - 1 {
+            if fonts[x] == fontName {
+                return x
+            }
+        }
+        return 2
     }
-    
     
     private func changedAlignment(_ alignment: NSTextAlignment) {
         switch alignment {
@@ -143,7 +211,7 @@ class AddCourseViewController: UIViewController {
             alingment.setImage(UIImage.rightTextFull, for: .normal)
             alingment.tag = 3
         case .justified:
-            alingment.setImage(UIImage.defaulTextFull, for: .normal)
+            alingment.setImage(UIImage.defaultTextFull, for: .normal)
             alingment.tag = 0
         default:
             break
@@ -151,46 +219,59 @@ class AddCourseViewController: UIViewController {
     }
     
     private func checkUndoRedo() {
-        if textView.undoManager?.canUndo == true {
+        if editor.undoManager?.canUndo == true {
             undo.setImage(UIImage.undoFill, for: .normal)
         }else {
             undo.setImage(UIImage.undo, for: .normal)
         }
         
-        if textView.undoManager?.canRedo == true {
+        if editor.undoManager?.canRedo == true {
             redo.setImage(UIImage.rendoFill, for: .normal)
         }else {
             redo.setImage(UIImage.rendo, for: .normal)
         }
     }
     
-    
-    private func selectText(attributes: [NSAttributedString.Key: Any]) {
-        guard let selectedRange = textView.selectedTextRange else { return }
-        let selectedText = textView.text(in: selectedRange)
-        guard selectedText != "" else {return}
-        let nsRange = textView.convertUITextRangeToNSRange(range: selectedRange)
-        let previousAttributes = textView.attributedText.attributedSubstring(from: nsRange)
-        textView.replaceRange(nsRange, withAttributedText: previousAttributes)
-        textView.textStorage.addAttributes(attributes, range: nsRange)
-        textView.selectedTextRange = selectedRange
-        checkUndoRedo()
+    private func hiddenAllFontView() {
+        fontCollectionView.isHidden = true
+        isFontName.backgroundColor = .clear
+        heightFontView.isHidden = true
+        isFontHeight.backgroundColor = .clear
     }
     
-    
-    private func addCourse(text: NSAttributedString) async throws {
-        do {
-            loadingSettings()
-            try await CourseServices().addModulesData(text: text, moduleID: module.module.id)
-            loadingStop()
-            isSave = true
-        }catch ErrorNetwork.runtimeError(let error) {
-            errorView.isHidden = false
-            errorView.configure(title: "Ошибка", description: error)
-            view.addSubview(errorView)
-            loadingStop()
+    private func toggleFontName() {
+        if fontCollectionView.isHidden {
+            fontCollectionView.isHidden = false
+            isFontName.backgroundColor = .extraLightBlackMain
+            editor.focus()
+        }else {
+            fontCollectionView.isHidden = true
+            isFontName.backgroundColor = .clear
         }
     }
+    
+    private func toggleFontHieght() {
+        if heightFontView.isHidden {
+            heightFontView.isHidden = false
+            isFontHeight.backgroundColor = .extraLightBlackMain
+            editor.focus()
+        }else {
+            heightFontView.isHidden = true
+            isFontHeight.backgroundColor = .clear
+        }
+    }
+    
+    func scrollToCenterCell() {
+        let indexPath = IndexPath(row: selectedFontIndex, section: 0)
+        
+        fontCollectionView.layoutIfNeeded()
+        if let attributes = fontCollectionView.layoutAttributesForItem(at: indexPath) {
+            let center = CGPoint(x: attributes.center.x - fontCollectionView.bounds.width / 2, y: 0)
+            fontCollectionView.setContentOffset(center, animated: false)
+            fontCollectionView.reloadData()
+        }
+    }
+
     
     private func warningSave() {
         let alert = UIAlertController(title: "Вы не сохранили изменения", message: "Вы точно хотите выйти?", preferredStyle: .alert)
@@ -208,31 +289,65 @@ class AddCourseViewController: UIViewController {
         
         present(alert, animated: true)
     }
+
+
     
     // MARK: - UIButton
     
-    @IBAction func okFont(_ sender: Any) {
-        fontView.isHidden = true
-        textView.isEditable = true
-        textView.becomeFirstResponder()
-        isChangedText = false
+    @IBAction func closeFontView(_ sender: Any) {
+        toggleFontView(isShow: false)
         checkUndoRedo()
     }
     
     
     
     @IBAction func save(_ sender: UIButton) {
-        textView.resignFirstResponder()
-        Task {
-            try await addCourse(text: textView.attributedText)
-        }
+        editor.resignFirstResponder()
+        editor.getHtml(handler: { html in
+            self.presenter.saveCourse(html: html)
+        })
     }
     
-    @IBAction func color(_ sender: UIButton) {
-        let picker = UIColorPickerViewController()
-        picker.selectedColor = colorView.backgroundColor!
-        picker.delegate = self
-        self.present(picker, animated: true, completion: nil)
+    @IBAction func headingBtn(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            editor.heading(1, fonts[selectedFontIndex])
+        case 1:
+            editor.heading(2, fonts[selectedFontIndex])
+        case 2:
+            editor.heading(3, fonts[selectedFontIndex])
+        case 3:
+            editor.heading(0, fonts[selectedFontIndex])
+        default:
+            break
+        }
+        toggleFontHieght()
+    }
+    
+    @IBAction func attributesFontBtn(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            toggleFontName()
+        case 1:
+            toggleFontHieght()
+        case 2:
+            editor.bold()
+        case 3:
+            editor.italic()
+        case 4:
+            let picker = UIColorPickerViewController()
+            picker.delegate = self
+            self.present(picker, animated: true, completion: nil)
+        case 5:
+            editor.strikeThrough()
+        case 6:
+            editor.underline()
+        case 7:
+            errorView.configureUnavailable(title: "Недоступно", description: "Добавление цитат недоступно. Попробуйте снова позднее.")
+            errorView.isHidden = false
+        default:
+            break
+        }
     }
     
     @IBAction func addImage(_ sender: UIButton) {
@@ -245,27 +360,16 @@ class AddCourseViewController: UIViewController {
     }
     
     @IBAction func changedText(_ sender: UIButton) {
-        textView.isSelectable = true
-        textView.isEditable = false
-        textView.becomeFirstResponder()
-        fontView.isHidden = false
+        toggleFontView(isShow: true)
         isChangedText = true
-        textStyleBar()
     }
     
-    @IBAction func fontBtn(_ sender: UIButton) {
-        let config = UIFontPickerViewController.Configuration()
-        config.includeFaces = false
-        let vc = UIFontPickerViewController()
-        vc.delegate = self
-        present(vc, animated: true)
-    }
     
     @IBAction func undo(_ sender: UIButton) {
         if sender.tag == 0 {
-            textView.undoManager?.undo()
+            editor.undo()
         }else {
-            textView.undoManager?.redo()
+            editor.redo()
         }
         checkUndoRedo()
     }
@@ -273,27 +377,23 @@ class AddCourseViewController: UIViewController {
     @IBAction func alignment(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-            alignment = .left
+            changedAlignment(.left)
             sender.tag = 1
+            editor.justify(.left)
         case 1:
-            alignment = .center
+            changedAlignment(.center)
             sender.tag = 2
+            editor.justify(.center)
         case 2:
-            alignment = .right
+            changedAlignment(.right)
             sender.tag = 3
+            editor.justify(.right)
         case 3:
-            alignment = .justified
+            changedAlignment(.justified)
             sender.tag = 0
+            editor.justify(.justified)
         default:
             break
-        }
-    }
-    
-    @IBAction func stepper(_ sender: UIButton) {
-        if sender.tag == 0 {
-            sizeFontSelect -= 1
-        }else {
-            sizeFontSelect += 1
         }
     }
     
@@ -311,69 +411,39 @@ class AddCourseViewController: UIViewController {
     }
     
 }
-
-// MARK: - TextView
-extension AddCourseViewController: UITextViewDelegate {
+extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, WKNavigationDelegate {
     
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        let selectedRange = textView.selectedRange
-        
-        if selectedRange.length > 0 && isChangedText {
-            let attributedText = textView.attributedText!
-            
-            let font = attributedText.attribute(.font, at: selectedRange.location, effectiveRange: nil) as? UIFont ?? textView.font
-            let color = attributedText.attribute(.foregroundColor, at: selectedRange.location, effectiveRange: nil) as? UIColor ?? textView.textColor
-            
-            
-            
-            if let font = font {
-                fontSelect = font
-                sizeFontSelect = font.pointSize
-            }
-            
-            if let color = color {
-                colorSelect = color
-            }
-            
-        }
-        
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        presenter.viewDidLoad()
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        checkUndoRedo()
-        isSave = false
-        textStyleBar()
+    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName: String) {
+        changedAlignment(aligment)
+        if isBold { self.isBold.backgroundColor = .extraLightBlackMain}
+        else { self.isBold.backgroundColor = .clear }
+        if isItalic { self.isItalic.backgroundColor = .extraLightBlackMain}
+        else { self.isItalic.backgroundColor = .clear }
+        if isUnderline { self.isUnderline.backgroundColor = .extraLightBlackMain}
+        else { self.isUnderline.backgroundColor = .clear }
+        if isStrikethrough { self.isStrikeThrough.backgroundColor = .extraLightBlackMain}
+        else { self.isStrikeThrough.backgroundColor = .clear }
     }
     
-    private func textStyleBar() {
-        if let font = textView.typingAttributes[.font] as? UIFont {
-            fontSelect = font
-            sizeFontSelect = font.pointSize
-        }else {
-            let font = fontSelect
-            fontSelect = font
-            let size = sizeFont
-            sizeFont = size
-        }
-        if let color = textView.typingAttributes[.foregroundColor] as? UIColor {
-            colorSelect = color
-        }else {
-            colorSelect = .white
-        }
-        if let align = textView.typingAttributes[.paragraphStyle] as? NSParagraphStyle {
-            alignment = align.alignment
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "format" {
+            editor.initialFormat(message: message)
         }
     }
     
 }
+
 // MARK: - Image
 extension AddCourseViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage, let url = info[.imageURL] as? URL {
-            ImageResize().deleteTempImage(atURL: url)
-            let resizeImage = ImageResize.resizeAndCompressImage(image: image, maxSizeKB: 300 * 1024)
-            addImageInTextView(image: resizeImage)
+            presenter.saveImageInCloud(filePath: url)
+            editor.unFocus()
             picker.dismiss(animated: true)
         }
     }
@@ -381,84 +451,65 @@ extension AddCourseViewController: UIImagePickerControllerDelegate & UINavigatio
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }
-    
-    
-    private func addImageInTextView(image: UIImage) {
-        let attachment = NSTextAttachment()
-        let cornerImage = image.withRoundedCorners(radius: 15)
-        attachment.image = cornerImage
-        let targetSize = resizeImageAboutTextView(image: image)
-        attachment.bounds = CGRect(origin: .zero, size: targetSize)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        let attributedString = NSMutableAttributedString(attachment: attachment)
-        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
-        let combinedString = NSMutableAttributedString(attributedString: self.textView.attributedText)
-        combinedString.insert(attributedString, at: textView.selectedRange.location)
-        self.textView.attributedText = combinedString
-    }
-    
-    private func addImageInTextView(imageURL: URL) {
-        let attachment = NSTextAttachment()
-        
-        if let imageData = try? Data(contentsOf: imageURL),
-           let image = UIImage(data: imageData) {
-            
-            let cornerImage = image.withRoundedCorners(radius: 15)
-            
-            attachment.image = cornerImage
-            
-            let targetSize = resizeImageAboutTextView(image: cornerImage)
-            attachment.bounds = CGRect(origin: .zero, size: targetSize)
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .center
-            
-            let attributedString = NSMutableAttributedString(attachment: attachment)
-            attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
-            
-            if let range = textView.attributedText.string.range(of: imageURL.absoluteString) {
-                
-                let combinedString = NSMutableAttributedString(attributedString: self.textView.attributedText)
-                combinedString.replaceCharacters(in: NSRange(range, in: combinedString.string), with: attributedString)
-                self.textView.attributedText = combinedString
-            }
-        }
-    }
 
-
-    
-    private func resizeImageAboutTextView(image: UIImage) -> CGSize {
-        let targetWidth = UIScreen.main.bounds.width - 30
-        let aspectRatio = image.size.height / image.size.width
-        let targetSize = CGSize(width: targetWidth, height: targetWidth * aspectRatio)
-        return targetSize
-    }
-    
     
 }
 // MARK: - Font
-extension AddCourseViewController: UIFontPickerViewControllerDelegate {
+extension AddCourseViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    func fontPickerViewControllerDidCancel(_ viewController: UIFontPickerViewController) {
-        viewController.dismiss(animated: true)
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return fonts.count
     }
     
-    func fontPickerViewControllerDidPickFont(_ viewController: UIFontPickerViewController) {
-        guard let descriptor = viewController.selectedFontDescriptor else {return}
-        fontSelect = UIFont(descriptor: descriptor, size: sizeFontSelect)
-        viewController.dismiss(animated: true)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "font", for: indexPath) as! FontCollectionViewCell
+        
+        var isHighlighted = false
+        if selectedFontIndex == indexPath.row {
+            isHighlighted = true
+        }
+        
+        cell.configure(with: fonts[indexPath.row], isHighlighted: isHighlighted)
+        return cell
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let layout = fontCollectionView.collectionViewLayout as! CarouselLayout
+        let centerX = scrollView.contentOffset.x + scrollView.bounds.width / 2
+        
+        var minDistance = CGFloat.infinity
+        var closestIndex = 0
+        
+        for i in 0..<fonts.count {
+            if let attributes = layout.layoutAttributesForItem(at: IndexPath(item: i, section: 0)) {
+                let distance = abs(attributes.center.x - centerX)
+                if distance < minDistance {
+                    minDistance = distance
+                    closestIndex = i
+                }
+            }
+        }
+        
+        if closestIndex != selectedFontIndex {
+            selectedFontIndex = closestIndex
+            
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+            
+            fontCollectionView.reloadData()
+        }
+    }
+
 }
 // MARK: - Color
 extension AddCourseViewController: UIColorPickerViewControllerDelegate {
     
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
-        colorSelect = viewController.selectedColor
+        editor.textColor(viewController.selectedColor)
     }
     
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        colorSelect = viewController.selectedColor
+        editor.textColor(viewController.selectedColor)
     }
     
 }

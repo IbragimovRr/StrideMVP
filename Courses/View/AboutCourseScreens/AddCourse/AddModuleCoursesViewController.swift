@@ -324,8 +324,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
 
         if segue.identifier == "goToAddCourse2" {
             let vc = segue.destination as! AddCourseViewController
-            vc.module = presenter.selectModule as! CustomModule
-            vc.nameCourse = presenter.course.nameCourse
+            vc.presenter.module = presenter.selectModule as! CustomModule
         }else if segue.identifier == "goToAddVideoModule" {
             let vc = segue.destination as! AddVideoModuleViewController
             vc.presenter.module = presenter.selectModule as! VideoModule

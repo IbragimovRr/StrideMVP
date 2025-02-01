@@ -46,6 +46,10 @@
 		44228F592D2804E000D751ED /* RepeatsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44228F582D2804E000D751ED /* RepeatsCollectionViewCell.swift */; };
 		44228F5B2D2813C500D751ED /* AddTrainingModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44228F5A2D2813C500D751ED /* AddTrainingModuleViewController.swift */; };
 		443B076C2D444E1F00C08DE2 /* AddPlanCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B076B2D444E1F00C08DE2 /* AddPlanCoursesViewController.swift */; };
+		44321F9A2D40496D00247DA9 /* AWSCore in Frameworks */ = {isa = PBXBuildFile; productRef = 44321F992D40496D00247DA9 /* AWSCore */; };
+		44321F9C2D40496D00247DA9 /* AWSS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 44321F9B2D40496D00247DA9 /* AWSS3 */; };
+		44321F9F2D404B7D00247DA9 /* ClientRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 44321F9E2D404B7D00247DA9 /* ClientRuntime */; };
+		44321FA12D404B7D00247DA9 /* Smithy in Frameworks */ = {isa = PBXBuildFile; productRef = 44321FA02D404B7D00247DA9 /* Smithy */; };
 		4442F3D82C31BFDB00203A36 /* PageLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442F3D72C31BFDB00203A36 /* PageLayout.swift */; };
 		44435CF42D184FFD00B879C3 /* VideoModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */; };
 		444A07012C2B9D6C008F4E68 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A07002C2B9D6C008F4E68 /* Extension.swift */; };
@@ -67,6 +71,7 @@
 		44682CAA2D03BF5700087C62 /* InfoCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */; };
 		44682CAC2D076A8B00087C62 /* ConfidetialityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CAB2D076A8B00087C62 /* ConfidetialityPresenter.swift */; };
 		44682CAE2D076BC500087C62 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CAD2D076BC500087C62 /* ThemeModel.swift */; };
+		446BF1A12D2C948000D8E534 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446BF1A02D2C948000D8E534 /* EditorView.swift */; };
 		4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */; };
 		447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */; };
 		447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */; };
@@ -84,6 +89,12 @@
 		448E73F42CFF071F00C3000D /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F32CFF071F00C3000D /* HomePresenter.swift */; };
 		448E73FA2CFF087A00C3000D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F92CFF087A00C3000D /* UserModel.swift */; };
 		448E73FE2CFF09E200C3000D /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73FD2CFF09E200C3000D /* Segment.swift */; };
+		448FBC612D31A73C00476EE2 /* assert.js in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC592D31A73C00476EE2 /* assert.js */; };
+		448FBC622D31A73C00476EE2 /* normalize.css in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5A2D31A73C00476EE2 /* normalize.css */; };
+		448FBC652D31A73C00476EE2 /* rich_editor.html in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5D2D31A73C00476EE2 /* rich_editor.html */; };
+		448FBC662D31A73C00476EE2 /* rich_editor.js in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5E2D31A73C00476EE2 /* rich_editor.js */; };
+		448FBC672D31A73C00476EE2 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5F2D31A73C00476EE2 /* style.css */; };
+		448FBC692D31C24E00476EE2 /* AddCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */; };
 		44907E482C91F4D6002D4617 /* ImageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44907E472C91F4D6002D4617 /* ImageResize.swift */; };
 		44932A992C81303A00E0F86F /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44932A982C81303A00E0F86F /* PrivacyViewController.swift */; };
 		44932A9B2C81F87B00E0F86F /* LoadingStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44932A9A2C81F87B00E0F86F /* LoadingStartViewController.swift */; };
@@ -119,6 +130,8 @@
 		44D68B052C51B3EF00F8F476 /* InfoCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */; };
 		44D84B242D1DC798001A35CA /* TypeModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D84B232D1DC798001A35CA /* TypeModuleViewController.swift */; };
 		44D84B282D1EF40C001A35CA /* AddVideoModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D84B272D1EF40C001A35CA /* AddVideoModuleViewController.swift */; };
+		44DF69D92D38882B00BD1A22 /* FontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */; };
+		44DF69DB2D388A5200BD1A22 /* CarouselLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */; };
 		44DFB1162C3B199A005C8F44 /* RecomendationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DFB1152C3B199A005C8F44 /* RecomendationCollectionViewCell.swift */; };
 		44DFB11B2C3B2637005C8F44 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 44DFB11A2C3B2637005C8F44 /* loading.json */; };
 		44DFB11E2C3BE46B005C8F44 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 44DFB11D2C3BE46B005C8F44 /* Lottie */; };
@@ -231,6 +244,7 @@
 		44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoursePresenter.swift; sourceTree = "<group>"; };
 		44682CAB2D076A8B00087C62 /* ConfidetialityPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfidetialityPresenter.swift; sourceTree = "<group>"; };
 		44682CAD2D076BC500087C62 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
+		446BF1A02D2C948000D8E534 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMoneyInfoViewController.swift; sourceTree = "<group>"; };
 		447D8C802C85DEEB00EF2217 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		447D8C8D2C89D09600EF2217 /* emptyBox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyBox.json; sourceTree = "<group>"; };
@@ -247,6 +261,12 @@
 		448E73F32CFF071F00C3000D /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		448E73F92CFF087A00C3000D /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		448E73FD2CFF09E200C3000D /* Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
+		448FBC592D31A73C00476EE2 /* assert.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = assert.js; sourceTree = "<group>"; };
+		448FBC5A2D31A73C00476EE2 /* normalize.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = normalize.css; sourceTree = "<group>"; };
+		448FBC5D2D31A73C00476EE2 /* rich_editor.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = rich_editor.html; sourceTree = "<group>"; };
+		448FBC5E2D31A73C00476EE2 /* rich_editor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rich_editor.js; sourceTree = "<group>"; };
+		448FBC5F2D31A73C00476EE2 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoursePresenter.swift; sourceTree = "<group>"; };
 		44907E472C91F4D6002D4617 /* ImageResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResize.swift; sourceTree = "<group>"; };
 		44932A982C81303A00E0F86F /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		44932A9A2C81F87B00E0F86F /* LoadingStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStartViewController.swift; sourceTree = "<group>"; };
@@ -279,6 +299,8 @@
 		44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCoursesViewController.swift; sourceTree = "<group>"; };
 		44D84B232D1DC798001A35CA /* TypeModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeModuleViewController.swift; sourceTree = "<group>"; };
 		44D84B272D1EF40C001A35CA /* AddVideoModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVideoModuleViewController.swift; sourceTree = "<group>"; };
+		44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCollectionViewCell.swift; sourceTree = "<group>"; };
+		44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselLayout.swift; sourceTree = "<group>"; };
 		44DFB1152C3B199A005C8F44 /* RecomendationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationCollectionViewCell.swift; sourceTree = "<group>"; };
 		44DFB11A2C3B2637005C8F44 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		44E00B912CE39F2400E62089 /* CoachCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -318,6 +340,7 @@
 			files = (
 				44DFB11E2C3BE46B005C8F44 /* Lottie in Frameworks */,
 				44F118D62D109025000FCDC3 /* AppMetricaLibraryAdapter in Frameworks */,
+				44321F9F2D404B7D00247DA9 /* ClientRuntime in Frameworks */,
 				44064C972C2861CA00AB5227 /* SwiftyJSON in Frameworks */,
 				447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */,
 				44D68AF82C5051E100F8F476 /* GoogleSignInSwift in Frameworks */,
@@ -327,7 +350,10 @@
 				44064C9A2C2861D700AB5227 /* SDWebImage in Frameworks */,
 				44F3954A2C9B8BA200861759 /* TOCropViewController in Frameworks */,
 				447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */,
+				44321F9A2D40496D00247DA9 /* AWSCore in Frameworks */,
 				44A406832C762FE1005509D0 /* SkeletonView in Frameworks */,
+				44321F9C2D40496D00247DA9 /* AWSS3 in Frameworks */,
+				44321FA12D404B7D00247DA9 /* Smithy in Frameworks */,
 				44F118D22D109025000FCDC3 /* AppMetricaCore in Frameworks */,
 				44F118D42D109025000FCDC3 /* AppMetricaCrashes in Frameworks */,
 				44D68AF62C5051E100F8F476 /* GoogleSignIn in Frameworks */,
@@ -418,6 +444,8 @@
 				447FE4922CDD2300007C5B31 /* MainTabBarController.swift */,
 				448E73FD2CFF09E200C3000D /* Segment.swift */,
 				440C9C3E2CED6C47007D0735 /* ProtectScreen.swift */,
+				446BF1A02D2C948000D8E534 /* EditorView.swift */,
+				44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -487,6 +515,7 @@
 				442023B32D282751007C3E68 /* AddTrainingModulePresenter.swift */,
 				440254D42D42EC5D00752940 /* PlanCoursesPresenter.swift */,
 				445757EB2D46F18500501511 /* TrainingModulePresenter.swift */,
+				448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */,
 			);
 			path = CourseScreens;
 			sourceTree = "<group>";
@@ -555,6 +584,18 @@
 				751510402C34586D009978E6 /* SettingsViewController.swift */,
 			);
 			path = TabBarScreens;
+			sourceTree = "<group>";
+		};
+		448FBC602D31A73C00476EE2 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				448FBC592D31A73C00476EE2 /* assert.js */,
+				448FBC5A2D31A73C00476EE2 /* normalize.css */,
+				448FBC5D2D31A73C00476EE2 /* rich_editor.html */,
+				448FBC5E2D31A73C00476EE2 /* rich_editor.js */,
+				448FBC5F2D31A73C00476EE2 /* style.css */,
+			);
+			path = Editor;
 			sourceTree = "<group>";
 		};
 		449C124C2D00DD7E0091F0F5 /* TabBarScreensPresenter */ = {
@@ -657,6 +698,8 @@
 				44E00B912CE39F2400E62089 /* CoachCollectionViewCell.swift */,
 				440C9C422CF49DD0007D0735 /* PromoCollectionViewCell.swift */,
 				440254D62D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift */,
+				44228F582D2804E000D751ED /* RepeatsCollectionViewCell.swift */,
+				44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -704,6 +747,10 @@
 				44F118D12D109025000FCDC3 /* AppMetricaCore */,
 				44F118D32D109025000FCDC3 /* AppMetricaCrashes */,
 				44F118D52D109025000FCDC3 /* AppMetricaLibraryAdapter */,
+				44321F992D40496D00247DA9 /* AWSCore */,
+				44321F9B2D40496D00247DA9 /* AWSS3 */,
+				44321F9E2D404B7D00247DA9 /* ClientRuntime */,
+				44321FA02D404B7D00247DA9 /* Smithy */,
 			);
 			productName = Courses;
 			productReference = 440DAB302C1748D400C576FB /* Courses.app */;
@@ -743,6 +790,8 @@
 				447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */,
 				44F395462C9B8BA200861759 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */,
+				44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */,
+				44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */,
 			);
 			productRefGroup = 440DAB312C1748D400C576FB /* Products */;
 			projectDirPath = "";
@@ -764,12 +813,17 @@
 				447D8C8E2C89D09600EF2217 /* emptyBox.json in Resources */,
 				449CF0DF2C337100000D4528 /* Commissioner-Bold.ttf in Resources */,
 				44064C7B2C26EEB800AB5227 /* SF-Pro-Rounded-Semibold.otf in Resources */,
+				448FBC612D31A73C00476EE2 /* assert.js in Resources */,
+				448FBC622D31A73C00476EE2 /* normalize.css in Resources */,
 				44962E962C821B3600CB6A1C /* Main.storyboard in Resources */,
 				44DFB11B2C3B2637005C8F44 /* loading.json in Resources */,
+				448FBC652D31A73C00476EE2 /* rich_editor.html in Resources */,
 				44064C752C26ED8E00AB5227 /* Commissioner-Medium.ttf in Resources */,
+				448FBC662D31A73C00476EE2 /* rich_editor.js in Resources */,
 				44049A2E2C6CE0C30014BD9C /* credentials.plist in Resources */,
 				44064C7D2C26EEC100AB5227 /* SF-Pro-Rounded-Regular.otf in Resources */,
 				753A4F7E2C341E98007A8194 /* Inter-Medium.ttf in Resources */,
+				448FBC672D31A73C00476EE2 /* style.css in Resources */,
 				44064C792C26ED9D00AB5227 /* Commissioner-Regular.ttf in Resources */,
 				44064C862C26F8A500AB5227 /* Commissioner-VariableFont_wght.ttf in Resources */,
 				44064C772C26ED9500AB5227 /* Commissioner-SemiBold.ttf in Resources */,
@@ -831,6 +885,7 @@
 				448E73F42CFF071F00C3000D /* HomePresenter.swift in Sources */,
 				44897A472D343CF100ED8021 /* TrainingModule.swift in Sources */,
 				44682CA52D03577500087C62 /* WithdrawPresenter.swift in Sources */,
+				44DF69DB2D388A5200BD1A22 /* CarouselLayout.swift in Sources */,
 				44DFB1162C3B199A005C8F44 /* RecomendationCollectionViewCell.swift in Sources */,
 				449CF0DB2C3370CA000D4528 /* CoursesCollectionViewCell.swift in Sources */,
 				44E402F52D4BF061006873BF /* CourseServices.swift in Sources */,
@@ -849,12 +904,15 @@
 				44547E592CF4C1B50051C782 /* CreatePromoViewController.swift in Sources */,
 				44D84B282D1EF40C001A35CA /* AddVideoModuleViewController.swift in Sources */,
 				4442F3D82C31BFDB00203A36 /* PageLayout.swift in Sources */,
+				446BF1A12D2C948000D8E534 /* EditorView.swift in Sources */,
 				44E906372C2ADE8700FFA6DD /* BannerCollectionViewCell.swift in Sources */,
 				44064C812C26F0E800AB5227 /* Border.swift in Sources */,
 				44682CA72D0362B800087C62 /* ChangeInformationPresenter.swift in Sources */,
 				44E406202CFF7B9C004F633E /* CategoryModel.swift in Sources */,
 				44064C8F2C285F7C00AB5227 /* TextFieldFormat.swift in Sources */,
 				440C9C3F2CED6C47007D0735 /* ProtectScreen.swift in Sources */,
+				448FBC692D31C24E00476EE2 /* AddCoursePresenter.swift in Sources */,
+				44DF69D92D38882B00BD1A22 /* FontCollectionViewCell.swift in Sources */,
 				44E00B922CE39F2400E62089 /* CoachCollectionViewCell.swift in Sources */,
 				44BD6CDA2C407864001645A0 /* ReviewsCollectionViewCell.swift in Sources */,
 				44BC59022CCEE6F600AD7FFA /* RefreshControll.swift in Sources */,
@@ -1173,6 +1231,22 @@
 				minimumVersion = 5.19.3;
 			};
 		};
+		44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/aws-sdk-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.40.0;
+			};
+		};
+		44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/smithy-lang/smithy-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.111.0;
+			};
+		};
 		447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/tinkoff-mobile-tech/tinkoff-asdk-ios?tab=readme-ov-file#%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5";
@@ -1243,6 +1317,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 44064C982C2861D700AB5227 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
+		};
+		44321F992D40496D00247DA9 /* AWSCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSCore;
+		};
+		44321F9B2D40496D00247DA9 /* AWSS3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSS3;
+		};
+		44321F9E2D404B7D00247DA9 /* ClientRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */;
+			productName = ClientRuntime;
+		};
+		44321FA02D404B7D00247DA9 /* Smithy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */;
+			productName = Smithy;
 		};
 		447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */ = {
 			isa = XCSwiftPackageProductDependency;
