@@ -420,7 +420,6 @@
 				440DAB412C1748D600C576FB /* Info.plist */,
 				44049A2D2C6CE0C30014BD9C /* credentials.plist */,
 				440DAB3E2C1748D600C576FB /* LaunchScreen.storyboard */,
-				440E1F6C2CA1671F002C6FC8 /* Settings */,
 				7515103D2C345816009978E6 /* TableViewCells */,
 				44E906352C2ADE5900FFA6DD /* CollectionViewCells */,
 				44064C712C26ED4F00AB5227 /* Fonts */,
@@ -522,6 +521,7 @@
 		448E73EC2CFF05E000C3000D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				440E1F6C2CA1671F002C6FC8 /* Settings */,
 				448E73F92CFF087A00C3000D /* UserModel.swift */,
 				44682C9F2D02874A00087C62 /* PromocodeModel.swift */,
 				44E4061B2CFF78F4004F633E /* CourseModel.swift */,
