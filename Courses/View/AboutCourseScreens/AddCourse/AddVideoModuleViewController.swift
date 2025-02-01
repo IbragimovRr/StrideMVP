@@ -55,7 +55,6 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     func showData() {
         let module = presenter.module
         authorText.text = module.author
-        viewsCount.text = "\(module.views) просмотров"
         timeCount.text = "\(module.timeVideo) минут"
         nameModule.text = module.module.name
         descriptionText.text = module.videoDescription

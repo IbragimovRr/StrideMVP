@@ -74,7 +74,6 @@
 		447D8C8E2C89D09600EF2217 /* emptyBox.json in Resources */ = {isa = PBXBuildFile; fileRef = 447D8C8D2C89D09600EF2217 /* emptyBox.json */; };
 		447FE4932CDD2300007C5B31 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447FE4922CDD2300007C5B31 /* MainTabBarController.swift */; };
 		4481D43C2D1C945E00DBE377 /* AddModuleCoursesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481D43B2D1C945E00DBE377 /* AddModuleCoursesPresenter.swift */; };
-		448301842C987A0700E40DBA /* DeepLinksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448301832C987A0700E40DBA /* DeepLinksManager.swift */; };
 		448765082CE00D15008A1E44 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */; };
 		4488EA152C769D9D0086765F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4488EA142C769D9D0086765F /* ErrorView.swift */; };
 		44897A472D343CF100ED8021 /* TrainingModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44897A462D343CF000ED8021 /* TrainingModule.swift */; };
@@ -83,11 +82,6 @@
 		448E73F42CFF071F00C3000D /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F32CFF071F00C3000D /* HomePresenter.swift */; };
 		448E73FA2CFF087A00C3000D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F92CFF087A00C3000D /* UserModel.swift */; };
 		448E73FE2CFF09E200C3000D /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73FD2CFF09E200C3000D /* Segment.swift */; };
-		448FBC612D31A73C00476EE2 /* assert.js in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC592D31A73C00476EE2 /* assert.js */; };
-		448FBC622D31A73C00476EE2 /* normalize.css in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5A2D31A73C00476EE2 /* normalize.css */; };
-		448FBC652D31A73C00476EE2 /* rich_editor.html in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5D2D31A73C00476EE2 /* rich_editor.html */; };
-		448FBC662D31A73C00476EE2 /* rich_editor.js in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5E2D31A73C00476EE2 /* rich_editor.js */; };
-		448FBC672D31A73C00476EE2 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 448FBC5F2D31A73C00476EE2 /* style.css */; };
 		448FBC692D31C24E00476EE2 /* AddCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */; };
 		44932A992C81303A00E0F86F /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44932A982C81303A00E0F86F /* PrivacyViewController.swift */; };
 		44932A9B2C81F87B00E0F86F /* LoadingStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44932A9A2C81F87B00E0F86F /* LoadingStartViewController.swift */; };
@@ -128,6 +122,7 @@
 		44C9F93D2D4E4E6200C10A68 /* UD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9F92F2D4E4E6200C10A68 /* UD.swift */; };
 		44C9F93F2D4E4EAF00C10A68 /* CloudServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9F93E2D4E4EAF00C10A68 /* CloudServices.swift */; };
 		44C9F9412D4E4EDA00C10A68 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9F9402D4E4EDA00C10A68 /* HomeViewController.swift */; };
+		44C9F9432D4E549000C10A68 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9F9422D4E548F00C10A68 /* MediaType.swift */; };
 		44D68AF32C4ACC0C00F8F476 /* UserServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D68AF22C4ACC0C00F8F476 /* UserServices.swift */; };
 		44D68AF62C5051E100F8F476 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 44D68AF52C5051E100F8F476 /* GoogleSignIn */; };
 		44D68AF82C5051E100F8F476 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 44D68AF72C5051E100F8F476 /* GoogleSignInSwift */; };
@@ -249,7 +244,6 @@
 		447D8C8D2C89D09600EF2217 /* emptyBox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyBox.json; sourceTree = "<group>"; };
 		447FE4922CDD2300007C5B31 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		4481D43B2D1C945E00DBE377 /* AddModuleCoursesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddModuleCoursesPresenter.swift; sourceTree = "<group>"; };
-		448301832C987A0700E40DBA /* DeepLinksManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinksManager.swift; sourceTree = "<group>"; };
 		448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		448765092CE01C2E008A1E44 /* Courses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Courses.entitlements; sourceTree = "<group>"; };
 		4488EA142C769D9D0086765F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -259,11 +253,6 @@
 		448E73F32CFF071F00C3000D /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		448E73F92CFF087A00C3000D /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		448E73FD2CFF09E200C3000D /* Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
-		448FBC592D31A73C00476EE2 /* assert.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = assert.js; sourceTree = "<group>"; };
-		448FBC5A2D31A73C00476EE2 /* normalize.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = normalize.css; sourceTree = "<group>"; };
-		448FBC5D2D31A73C00476EE2 /* rich_editor.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = rich_editor.html; sourceTree = "<group>"; };
-		448FBC5E2D31A73C00476EE2 /* rich_editor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rich_editor.js; sourceTree = "<group>"; };
-		448FBC5F2D31A73C00476EE2 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoursePresenter.swift; sourceTree = "<group>"; };
 		44932A982C81303A00E0F86F /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		44932A9A2C81F87B00E0F86F /* LoadingStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStartViewController.swift; sourceTree = "<group>"; };
@@ -303,6 +292,7 @@
 		44C9F92F2D4E4E6200C10A68 /* UD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UD.swift; sourceTree = "<group>"; };
 		44C9F93E2D4E4EAF00C10A68 /* CloudServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudServices.swift; sourceTree = "<group>"; };
 		44C9F9402D4E4EDA00C10A68 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		44C9F9422D4E548F00C10A68 /* MediaType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		44D68AF22C4ACC0C00F8F476 /* UserServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServices.swift; sourceTree = "<group>"; };
 		44D68AFB2C51B3EF00F8F476 /* AddCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
 		44D68AFC2C51B3EF00F8F476 /* AddInfoAboutCourseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddInfoAboutCourseVC.swift; sourceTree = "<group>"; };
@@ -404,7 +394,6 @@
 			children = (
 				440DAB322C1748D400C576FB /* Courses */,
 				440DAB312C1748D400C576FB /* Products */,
-				44C9F9202D4E4B6400C10A68 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -467,6 +456,7 @@
 				44C9F92A2D4E4E6200C10A68 /* Extension.swift */,
 				44C9F92B2D4E4E6200C10A68 /* FilePath.swift */,
 				44C9F92F2D4E4E6200C10A68 /* UD.swift */,
+				44C9F9422D4E548F00C10A68 /* MediaType.swift */,
 				44C9F9272D4E4E6200C10A68 /* ImageResize.swift */,
 				44C9F92E2D4E4E6200C10A68 /* NavigationControllerDelegate.swift */,
 				44C9F92D2D4E4E6200C10A68 /* DeepLinksManager.swift */,
@@ -570,7 +560,6 @@
 		448E73EF2CFF063E00C3000D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				448301832C987A0700E40DBA /* DeepLinksManager.swift */,
 				447D8C802C85DEEB00EF2217 /* PaymentServices.swift */,
 				44547E562CF4BE380051C782 /* Promocodes.swift */,
 				44BC590A2CD0FB7E00AD7FFA /* Admin.swift */,
@@ -617,18 +606,6 @@
 				4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */,
 			);
 			path = AdminPanelScreens;
-			sourceTree = "<group>";
-		};
-		44C9F9202D4E4B6400C10A68 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				448FBC592D31A73C00476EE2 /* assert.js */,
-				448FBC5A2D31A73C00476EE2 /* normalize.css */,
-				448FBC5D2D31A73C00476EE2 /* rich_editor.html */,
-				448FBC5E2D31A73C00476EE2 /* rich_editor.js */,
-				448FBC5F2D31A73C00476EE2 /* style.css */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		44C9F9252D4E4E6200C10A68 /* Editor */ = {
@@ -836,17 +813,12 @@
 				44064C7B2C26EEB800AB5227 /* SF-Pro-Rounded-Semibold.otf in Resources */,
 				44C9F9302D4E4E6200C10A68 /* normalize.css in Resources */,
 				44C9F9322D4E4E6200C10A68 /* rich_editor.js in Resources */,
-				448FBC612D31A73C00476EE2 /* assert.js in Resources */,
-				448FBC622D31A73C00476EE2 /* normalize.css in Resources */,
 				44962E962C821B3600CB6A1C /* Main.storyboard in Resources */,
 				44DFB11B2C3B2637005C8F44 /* loading.json in Resources */,
-				448FBC652D31A73C00476EE2 /* rich_editor.html in Resources */,
 				44064C752C26ED8E00AB5227 /* Commissioner-Medium.ttf in Resources */,
-				448FBC662D31A73C00476EE2 /* rich_editor.js in Resources */,
 				44049A2E2C6CE0C30014BD9C /* credentials.plist in Resources */,
 				44064C7D2C26EEC100AB5227 /* SF-Pro-Rounded-Regular.otf in Resources */,
 				753A4F7E2C341E98007A8194 /* Inter-Medium.ttf in Resources */,
-				448FBC672D31A73C00476EE2 /* style.css in Resources */,
 				44064C792C26ED9D00AB5227 /* Commissioner-Regular.ttf in Resources */,
 				44C9F9312D4E4E6200C10A68 /* rich_editor.html in Resources */,
 				44064C862C26F8A500AB5227 /* Commissioner-VariableFont_wght.ttf in Resources */,
@@ -915,11 +887,11 @@
 				44064C892C27042100AB5227 /* StartViewController.swift in Sources */,
 				449C12502D00E0AF0091F0F5 /* ProfilePresenter.swift in Sources */,
 				44BC59092CCFF37500AD7FFA /* AdminOtherViewController.swift in Sources */,
+				44C9F9432D4E549000C10A68 /* MediaType.swift in Sources */,
 				447FE4932CDD2300007C5B31 /* MainTabBarController.swift in Sources */,
 				4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */,
 				446475752C72088300ACD3D7 /* CommentsServices.swift in Sources */,
 				44BD6CE02C432C82001645A0 /* ModuleCourseCollectionViewCell.swift in Sources */,
-				448301842C987A0700E40DBA /* DeepLinksManager.swift in Sources */,
 				44547E572CF4BE380051C782 /* Promocodes.swift in Sources */,
 				442023B42D282751007C3E68 /* AddTrainingModulePresenter.swift in Sources */,
 				44547E592CF4C1B50051C782 /* CreatePromoViewController.swift in Sources */,
@@ -1156,7 +1128,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.8;
+				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1194,7 +1166,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.8;
+				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

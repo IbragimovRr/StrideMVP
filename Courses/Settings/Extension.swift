@@ -147,3 +147,36 @@ extension UIColor {
         return str
     }
 }
+
+extension UIView {
+    
+    func applyBlurEffect() {
+        let blurEffect = UIBlurEffect(style: .prominent)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        insertSubview(blurEffectView, at: 0)
+    }
+    
+    func removeBlurEffect() {
+        let blurredEffectViews = self.subviews.filter{$0 is UIVisualEffectView}
+        blurredEffectViews.forEach{ blurView in
+            blurView.removeFromSuperview()
+        }
+    }
+}
+
+extension TrainingItem {
+    var toDictionary: [String: String] {
+        return [
+            "first_item": firstItemType?.rawValue ?? "",
+            "first_data": firstItemData ?? "",
+            "second_item": secondItemType?.rawValue ?? "",
+            "second_data": secondItemData ?? ""
+        ]
+    }
+    
+    func toData() throws -> Data? {
+        return try JSONSerialization.data(withJSONObject: self.toDictionary, options: .prettyPrinted)
+    }
+}

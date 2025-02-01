@@ -37,7 +37,6 @@ class VideoModuleViewController: UIViewController {
     
     func showData() {
         authorName.text = module.author
-        views.text = "\(module.views) просмотров"
         time.text = "\(module.timeVideo) минут"
         nameModule.text = module.module.name
         descriptionVideo.text = module.videoDescription
