@@ -40,6 +40,5 @@ class ValidateTF {
             return false
         }
     }
-
     
 }

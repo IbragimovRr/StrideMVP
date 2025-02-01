@@ -7,6 +7,12 @@
 
 import UIKit
 
+extension Data {
+    func retrieveDataToString() -> NSAttributedString {
+        let attributedString = (try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(self) as? NSAttributedString)!
+        return attributedString
+    }
+}
 
 extension UIImage {
 
@@ -54,6 +60,21 @@ extension UITextView {
          textStorage.replaceCharacters(in: range, with: text)
          selectedRange = NSMakeRange(previousSelectedRange.location, text.length)
      }
+    
+    func getURLs() -> [URL] {
+        // Используйте регулярное выражение для поиска URL
+        let pattern = "(https?://[\\w\\.-]+(/[\\w\\.-]+)+)"
+        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+        let matches = regex.matches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count))
+        
+        // Извлечение URL из совпадений
+        return matches.compactMap { match in
+            let range = Range(match.range, in: text)!
+            return URL(string: String(text[range]))
+        }
+    }
+
+
 
 }
 
@@ -87,35 +108,42 @@ extension NSAttributedString {
     }
 }
 
-extension UIView {
-    
-    func applyBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .prominent)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        insertSubview(blurEffectView, at: 0)
-    }
-    
-    func removeBlurEffect() {
-        let blurredEffectViews = self.subviews.filter{$0 is UIVisualEffectView}
-        blurredEffectViews.forEach{ blurView in
-            blurView.removeFromSuperview()
+extension String {
+
+    var escaped: String {
+        let unicode = self.unicodeScalars
+        var newString = ""
+        for char in unicode {
+            if char.value == 39 || 
+                char.value < 9 ||
+                (char.value > 9 && char.value < 32)
+            {
+                let escaped = char.escaped(asASCII: true)
+                newString.append(escaped)
+            } else {
+                newString.append(String(char))
+            }
         }
+        return newString
     }
+
 }
 
-extension TrainingItem {
-    var toDictionary: [String: String] {
-        return [
-            "first_item": firstItemType?.rawValue ?? "",
-            "first_data": firstItemData ?? "",
-            "second_item": secondItemType?.rawValue ?? "",
-            "second_data": secondItemData ?? ""
-        ]
-    }
-    
-    func toData() throws -> Data? {
-        return try JSONSerialization.data(withJSONObject: self.toDictionary, options: .prettyPrinted)
+extension UIColor {
+
+    /// Hexadecimal representation of the UIColor.
+    /// For example, UIColor.blackColor() becomes "#000000".
+    var hex: String {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        self.getRed(&red, green: &green, blue: &blue, alpha: nil)
+
+        let r = Int(255.0 * red)
+        let g = Int(255.0 * green)
+        let b = Int(255.0 * blue)
+
+        let str = String(format: "#%02x%02x%02x", r, g, b)
+        return str
     }
 }

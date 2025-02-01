@@ -11,6 +11,20 @@ import UIKit
 
 class FilePath {
     
+    func downloadHtmlFileWithURL(url: URL) async throws -> String? {
+        return try await withUnsafeThrowingContinuation { continuation in
+            AF.download(url).responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let html = String(data: data, encoding: .utf8)
+                    continuation.resume(returning: html)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+    
     func downloadFileWithURL(url: URL) async throws -> NSAttributedString {
         return try await withUnsafeThrowingContinuation { continuation in
             AF.download(url).responseData { response in
@@ -50,6 +64,20 @@ class FilePath {
         }
     }
     
+    func serializeHtmlFile(_ htmlString: String) -> URL? {
+        let fileManager = FileManager.default
+        let tempDirectory = fileManager.temporaryDirectory
+        let fileURL = tempDirectory.appendingPathComponent("attributedStringData").appendingPathExtension("html")
+        
+        do {
+            try htmlString.write(to: fileURL, atomically: true, encoding: .utf8)
+            return fileURL
+        } catch {
+            print("Error serializing attributed string to file: \(error)")
+            return nil
+        }
+    }
+    
     // Запаковать файл
     func serializeAttributedStringToFile(_ attributedString: NSAttributedString) -> URL? {
         let fileManager = FileManager.default
@@ -73,12 +101,24 @@ class FilePath {
           
         if let attachment = attributes[NSAttributedString.Key.attachment] as? NSTextAttachment,
           let image = attachment.image {
+          let targetSize = resizeImageAboutTextView(image: image)
+          attachment.bounds = CGRect(origin: .zero, size: targetSize)
+
           mutableAttributedString.replaceCharacters(in: range, with: NSAttributedString(attachment: attachment))
         }
       }
         
       return mutableAttributedString
     }
+
+    
+    private func resizeImageAboutTextView(image: UIImage) -> CGSize {
+        let targetWidth = UIScreen.main.bounds.width - 30
+        let aspectRatio = image.size.height / image.size.width
+        let targetSize = CGSize(width: targetWidth, height: targetWidth * aspectRatio)
+        return targetSize
+    }
+
 
 
 

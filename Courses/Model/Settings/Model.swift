@@ -9,6 +9,13 @@ import Foundation
 import UIKit
 
 
+class Constants {
+    static let url = "https://stridecourses.ru/"
+//    static let url = "http://127.0.0.1:8000/"
+    static let telegramURL = URL(string: "https://t.me/+ydJXQ2Xo8PBkYWUy")!
+    static let formsURL = URL(string: "https://forms.yandex.ru/u/670e623ef47e734408a563df/")!
+}
+
 // MARK: - Collection
 struct Banks {
     let name: String
@@ -208,6 +215,13 @@ enum Picker {
     case intention
 }
 
+enum Alignment {
+    case left
+    case center
+    case right
+    case defaultCenter
+}
+
 enum CourseCatalog {
     case myCreate
     case recomend
@@ -238,7 +252,7 @@ enum InfoCourses {
 
 // MARK: - Protocol
 protocol TypeModuleDelegate: AnyObject {
-    func addModule(type: ModuleType, position: Int)
+    func addModule(type: ModuleType)
 }
 
 protocol ChangeInfoModule: AnyObject {
@@ -258,8 +272,4 @@ protocol AddPromoDelegate: AnyObject {
 
 protocol AddCategoryDelegate: AnyObject {
     func category(category: CategoryModel)
-}
-
-protocol AddTimeDelegate {
-    func time(minutes: String, seconds: String, index: Int)
 }

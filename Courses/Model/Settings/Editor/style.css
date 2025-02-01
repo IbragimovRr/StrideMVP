@@ -1,0 +1,152 @@
+/**
+ • Copyright (C) 2015 Wasabeef
+ *
+ • Licensed under the Apache License, Version 2.0 (the "License");
+ • you may not use this file except in compliance with the License.
+ • You may obtain a copy of the License at
+ *
+ • http://www.apache.org/licenses/LICENSE-2.0
+ *
+ • Unless required by applicable law or agreed to in writing, software
+ • distributed under the License is distributed on an "AS IS" BASIS,
+ • WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ • See the License for the specific language governing permissions and
+ • limitations under the License.
+ */
+
+@charset "UTF-8";
+
+:root {
+    color-scheme: light dark;
+}
+
+
+html {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100%;
+    overflow: auto;
+    font: -apple-system-body;
+    overflow-x: hidden;
+}
+
+blockquote {
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    border-left: 5px solid transparent;
+    font-style: italic;
+    position: relative;
+    overflow: hidden;
+}
+
+blockquote > p {
+    margin: 0;
+}
+
+blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+blockquote:empty::before {
+    content: "\u200B";
+}
+
+
+body, h1, p, ul, ol {
+    margin: 0;
+}
+
+div {
+    display: block;
+    position: static;
+}
+
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    overflow-x: hidden;
+}
+
+#editor::-webkit-scrollbar {
+    display: none;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+#editor {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 12pt;
+    padding: 10px;
+    display: block;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
+
+#editor:focus {
+    outline: 0px solid transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+    body, #editor {
+    }
+}
+
+.placeholder[placeholder]:after {
+    content: attr(placeholder);
+    position: absolute;
+    top: 0px;
+    color: #cccccc;
+}
+
+
+
+input[type=checkbox] {
+    transform: scale(1.4);
+    margin-right: 9px;
+}
+
+video {
+    width: 100%  !important;
+    height: auto !important;
+}
+
+table {
+    overflow-x: auto;
+}
+
+th, td {
+    max-width: 200px;
+    min-width:50px;
+}
+table, td, th{
+    border-collapse:collapse;
+    border:1px solid #777;
+}
+td{
+    padding:5px 10px;
+    height:35px;
+}
