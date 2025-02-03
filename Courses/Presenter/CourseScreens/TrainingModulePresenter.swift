@@ -9,6 +9,8 @@ import Foundation
 
 protocol TrainingModulePresenterDelegate {
     func getData()
+    func saveTraining()
+    func getTraining()
 }
 
 class TrainingModulePresenter: TrainingModulePresenterDelegate {
@@ -20,6 +22,16 @@ class TrainingModulePresenter: TrainingModulePresenterDelegate {
         if let mediaURL = module.mediaURL {
             checkType(media: mediaURL)
         }
+    }
+    
+    func saveTraining() {
+        LocalCloudServices().saveTrainingProgress(moduleId: module.module.id, items: module.trainingItems)
+        getTraining()
+    }
+    
+    func getTraining() {
+        let trainingItems = LocalCloudServices().loadTrainingProgress(moduleId: module.module.id)
+        view.showSavedTraining(trainingItems: trainingItems)
     }
     
     private func checkType(media: URL) {
