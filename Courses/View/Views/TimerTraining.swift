@@ -9,13 +9,17 @@ import Foundation
 
 protocol TimerDelegate: AnyObject {
     func timerDidStart()
-    func timerDidPause()
-    func timerDidEnd()
+    func timerDidControlState(state: TimerState)
     func timerDidUpdate(resultData: String)
 }
 
-enum ControlsTimer {
+enum TimerState {
     case pause, process, end, reload, next
+}
+
+
+enum TimerMode {
+    case stopwatch, timer
 }
 
 class TimerTraining {
@@ -28,48 +32,58 @@ class TimerTraining {
             delegate?.timerDidUpdate(resultData: formatTime(seconds: seconds))
         }
     }
-    var control: ControlsTimer = .pause
+    var mode: TimerMode = .stopwatch
+    var control: TimerState = .pause {
+        didSet {
+            delegate?.timerDidControlState(state: control)
+        }
+    }
     weak var delegate: TimerDelegate?
     
-    func initial(seconds: Int) {
-        self.initialSeconds = seconds
-        self.seconds = seconds
+    func configure(seconds: Int, mode: TimerMode) {
+        if mode == .timer {
+            self.initialSeconds = seconds
+            self.seconds = seconds
+        }else {
+            self.seconds = 0
+        }
         control = .pause
-    }
-    
-    func start(seconds: Int) {
-        initialSeconds = seconds
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        control = .process
-        delegate?.timerDidStart()
+        self.mode = mode
+        stop()
     }
     
     //Если секунды уже были добавлены
     func start() {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         control = .process
-        delegate?.timerDidStart()
     }
     
     @objc func updateTimer() {
-        if seconds > 0 {
-            seconds -= 1
-        } else {
-            stop()
-            delegate?.timerDidEnd()
-            control = .end
+        switch mode {
+        case .timer:
+            if seconds > 0 {
+                seconds -= 1
+            } else {
+                stop()
+                control = .end
+            }
+        case .stopwatch:
+            seconds += 1
         }
     }
     
     func stop() {
         timer?.invalidate()
         timer = nil
-        delegate?.timerDidPause()
         control = .pause
     }
     
     func reload() {
-        seconds = initialSeconds
+        if mode == .timer {
+            seconds = initialSeconds
+        }else {
+            seconds = 0
+        }
         stop()
     }
 
