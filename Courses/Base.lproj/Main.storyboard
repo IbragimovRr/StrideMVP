@@ -11960,7 +11960,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="442"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSj-af-z4c">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="450"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="417"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название модуля" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpf-kC-9jk">
                                                         <rect key="frame" x="28" y="28" width="337" height="25"/>
@@ -11982,37 +11982,37 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="TyE-KU-mqa">
-                                                        <rect key="frame" x="28" y="316" width="135.66666666666666" height="84"/>
+                                                        <rect key="frame" x="28" y="316" width="135.66666666666666" height="51"/>
                                                         <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="G6Y-Ki-kzk">
-                                                                <rect key="frame" x="0.0" y="0.0" width="135.66666666666666" height="51"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="G6Y-Ki-kzk">
+                                                                <rect key="frame" x="0.0" y="0.0" width="135.66666666666666" height="18"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="timeVideoModule" translatesAutoresizingMaskIntoConstraints="NO" id="kRD-ag-6hC">
-                                                                        <rect key="frame" x="0.0" y="16.666666666666629" width="18" height="18"/>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timeVideoModule" translatesAutoresizingMaskIntoConstraints="NO" id="kRD-ag-6hC">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="18" id="fYn-2P-vyr"/>
                                                                             <constraint firstAttribute="width" constant="18" id="phW-kH-CxB"/>
                                                                         </constraints>
                                                                     </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0 минут" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNX-qB-nkW">
-                                                                        <rect key="frame" x="28.000000000000007" y="18" width="107.66666666666669" height="15"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 минут" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNX-qB-nkW">
+                                                                        <rect key="frame" x="28.000000000000007" y="1.6666666666666288" width="107.66666666666669" height="15"/>
                                                                         <fontDescription key="fontDescription" name="Commissioner-Thin_Regular" family="Commissioner" pointSize="12"/>
                                                                         <color key="textColor" name="GrayMain"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="k7r-85-WfS">
-                                                                <rect key="frame" x="0.0" y="66" width="135.66666666666666" height="18"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="k7r-85-WfS">
+                                                                <rect key="frame" x="0.0" y="33" width="135.66666666666666" height="18"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="authorVideoModule" translatesAutoresizingMaskIntoConstraints="NO" id="Dk6-Ga-xOK">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="authorVideoModule" translatesAutoresizingMaskIntoConstraints="NO" id="Dk6-Ga-xOK">
                                                                         <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="18" id="9fI-vk-laM"/>
                                                                             <constraint firstAttribute="width" constant="18" id="eD9-TG-TUq"/>
                                                                         </constraints>
                                                                     </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Эльдар Ибрагимов" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPd-yp-0LI">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Эльдар Ибрагимов" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPd-yp-0LI">
                                                                         <rect key="frame" x="28.000000000000007" y="1.6666666666666288" width="107.66666666666669" height="15"/>
                                                                         <fontDescription key="fontDescription" name="Commissioner-Thin_Regular" family="Commissioner" pointSize="12"/>
                                                                         <color key="textColor" name="GrayMain"/>
@@ -12021,9 +12021,6 @@
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="84" id="haq-qe-O2k"/>
-                                                        </constraints>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sKe-5c-YAc" customClass="Border" customModule="Courses" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="111" width="333" height="175"/>

@@ -30,21 +30,23 @@ class LoadingStartViewController: UIViewController {
         loadingSettings()
     }
     
+    private func updateApp() {
+        Task {
+            let maxVersion = try await AppStoreVersion().getVersion()
+            let isLastVersion = AppStoreVersion().isVersion(lessThan: maxVersion)
+            print(isLastVersion)
+            if isLastVersion == true {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let updateViewController = storyboard.instantiateViewController(identifier: "UpdateViewController")
+                navigationController?.pushViewController(updateViewController, animated: false)
+            }
+        }
+    }
 
     private func loadingSettings() {
         loading.loopMode = .loop
         loading.contentMode = .scaleAspectFill
         loading.play()
-    }
-    
-    private func updateApp() async throws -> Bool {
-        let isLastVersion = try await AppStoreVersion().checkVersionApp()
-        if isLastVersion == false {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let updateViewController = storyboard.instantiateViewController(identifier: "UpdateViewController")
-            navigationController!.pushViewController(updateViewController, animated: false)
-        }
-        return isLastVersion
     }
 
     private func allTitle() {

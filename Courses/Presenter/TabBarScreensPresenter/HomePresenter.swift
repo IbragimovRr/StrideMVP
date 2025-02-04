@@ -53,6 +53,7 @@ class HomePresenter: HomePresenterProtocol {
             let coachs = try await self.userService.getAllCoachs()
             let recomendCourses = try await CourseServices().getRecomendedCourses()
             let celebrity = try await self.userService.getCelebreties()
+            let maxVersion = try await AppStoreVersion().getVersion()
             
             DispatchQueue.main.async {
                 self.userModel = user
