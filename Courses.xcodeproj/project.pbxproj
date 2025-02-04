@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44000EAC2D50F130004E54A8 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 44000EAB2D50F130004E54A8 /* RealmSwift */; };
+		44000EAD2D50F369004E54A8 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 44000EAB2D50F130004E54A8 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		440254D32D42EB1600752940 /* PlanCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440254D22D42EB1600752940 /* PlanCoursesViewController.swift */; };
 		440254D52D42EC5D00752940 /* PlanCoursesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440254D42D42EC5D00752940 /* PlanCoursesPresenter.swift */; };
 		440254D72D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440254D62D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift */; };
@@ -45,8 +47,6 @@
 		44228F5B2D2813C500D751ED /* AddTrainingModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44228F5A2D2813C500D751ED /* AddTrainingModuleViewController.swift */; };
 		44321F9A2D40496D00247DA9 /* AWSCore in Frameworks */ = {isa = PBXBuildFile; productRef = 44321F992D40496D00247DA9 /* AWSCore */; };
 		44321F9C2D40496D00247DA9 /* AWSS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 44321F9B2D40496D00247DA9 /* AWSS3 */; };
-		44321F9F2D404B7D00247DA9 /* ClientRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 44321F9E2D404B7D00247DA9 /* ClientRuntime */; };
-		44321FA12D404B7D00247DA9 /* Smithy in Frameworks */ = {isa = PBXBuildFile; productRef = 44321FA02D404B7D00247DA9 /* Smithy */; };
 		443B076C2D444E1F00C08DE2 /* AddPlanCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B076B2D444E1F00C08DE2 /* AddPlanCoursesViewController.swift */; };
 		4442F3D82C31BFDB00203A36 /* PageLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442F3D72C31BFDB00203A36 /* PageLayout.swift */; };
 		44435CF42D184FFD00B879C3 /* VideoModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */; };
@@ -68,6 +68,9 @@
 		44682CAE2D076BC500087C62 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44682CAD2D076BC500087C62 /* ThemeModel.swift */; };
 		446BF1A12D2C948000D8E534 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446BF1A02D2C948000D8E534 /* EditorView.swift */; };
 		4475CE712CD1240100B44299 /* AdminMoneyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */; };
+		447652E42D4EE54C00AA5C48 /* LocalCloudServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447652E32D4EE54C00AA5C48 /* LocalCloudServices.swift */; };
+		447652EB2D4FDBB400AA5C48 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447652EA2D4FDBB400AA5C48 /* RealmModel.swift */; };
+		447652F62D50238A00AA5C48 /* DateHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447652F52D50238A00AA5C48 /* DateHeaderCollectionReusableView.swift */; };
 		447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */; };
 		447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */; };
 		447D8C812C85DEEB00EF2217 /* PaymentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D8C802C85DEEB00EF2217 /* PaymentServices.swift */; };
@@ -133,6 +136,7 @@
 		44D68B052C51B3EF00F8F476 /* InfoCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */; };
 		44D84B242D1DC798001A35CA /* TypeModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D84B232D1DC798001A35CA /* TypeModuleViewController.swift */; };
 		44D84B282D1EF40C001A35CA /* AddVideoModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D84B272D1EF40C001A35CA /* AddVideoModuleViewController.swift */; };
+		44DA9F9E2D52443E00735179 /* TimerTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA9F9D2D52443E00735179 /* TimerTraining.swift */; };
 		44DF69D92D38882B00BD1A22 /* FontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */; };
 		44DF69DB2D388A5200BD1A22 /* CarouselLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */; };
 		44DFB1162C3B199A005C8F44 /* RecomendationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DFB1152C3B199A005C8F44 /* RecomendationCollectionViewCell.swift */; };
@@ -176,6 +180,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				44000EAD2D50F369004E54A8 /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +245,9 @@
 		44682CAD2D076BC500087C62 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
 		446BF1A02D2C948000D8E534 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMoneyInfoViewController.swift; sourceTree = "<group>"; };
+		447652E32D4EE54C00AA5C48 /* LocalCloudServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCloudServices.swift; sourceTree = "<group>"; };
+		447652EA2D4FDBB400AA5C48 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		447652F52D50238A00AA5C48 /* DateHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		447D8C802C85DEEB00EF2217 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		447D8C8D2C89D09600EF2217 /* emptyBox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyBox.json; sourceTree = "<group>"; };
 		447FE4922CDD2300007C5B31 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -301,6 +309,7 @@
 		44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCoursesViewController.swift; sourceTree = "<group>"; };
 		44D84B232D1DC798001A35CA /* TypeModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeModuleViewController.swift; sourceTree = "<group>"; };
 		44D84B272D1EF40C001A35CA /* AddVideoModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVideoModuleViewController.swift; sourceTree = "<group>"; };
+		44DA9F9D2D52443E00735179 /* TimerTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTraining.swift; sourceTree = "<group>"; };
 		44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCollectionViewCell.swift; sourceTree = "<group>"; };
 		44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselLayout.swift; sourceTree = "<group>"; };
 		44DFB1152C3B199A005C8F44 /* RecomendationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -338,7 +347,6 @@
 			files = (
 				44DFB11E2C3BE46B005C8F44 /* Lottie in Frameworks */,
 				44F118D62D109025000FCDC3 /* AppMetricaLibraryAdapter in Frameworks */,
-				44321F9F2D404B7D00247DA9 /* ClientRuntime in Frameworks */,
 				44064C972C2861CA00AB5227 /* SwiftyJSON in Frameworks */,
 				447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */,
 				44D68AF82C5051E100F8F476 /* GoogleSignInSwift in Frameworks */,
@@ -349,9 +357,9 @@
 				44F3954A2C9B8BA200861759 /* TOCropViewController in Frameworks */,
 				447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */,
 				44321F9A2D40496D00247DA9 /* AWSCore in Frameworks */,
+				44000EAC2D50F130004E54A8 /* RealmSwift in Frameworks */,
 				44A406832C762FE1005509D0 /* SkeletonView in Frameworks */,
 				44321F9C2D40496D00247DA9 /* AWSS3 in Frameworks */,
-				44321FA12D404B7D00247DA9 /* Smithy in Frameworks */,
 				44F118D22D109025000FCDC3 /* AppMetricaCore in Frameworks */,
 				44F118D42D109025000FCDC3 /* AppMetricaCrashes in Frameworks */,
 				44D68AF62C5051E100F8F476 /* GoogleSignIn in Frameworks */,
@@ -443,6 +451,7 @@
 				440C9C3E2CED6C47007D0735 /* ProtectScreen.swift */,
 				446BF1A02D2C948000D8E534 /* EditorView.swift */,
 				44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */,
+				44DA9F9D2D52443E00735179 /* TimerTraining.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -518,6 +527,15 @@
 			path = CourseScreens;
 			sourceTree = "<group>";
 		};
+		447652F42D50236D00AA5C48 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				440254D62D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift */,
+				447652F52D50238A00AA5C48 /* DateHeaderCollectionReusableView.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 		448E73EC2CFF05E000C3000D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,6 +547,7 @@
 				44E2AB1D2D35C51E00547228 /* DayModel.swift */,
 				44E4061F2CFF7B9C004F633E /* CategoryModel.swift */,
 				44682CAD2D076BC500087C62 /* ThemeModel.swift */,
+				447652EA2D4FDBB400AA5C48 /* RealmModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -564,6 +583,7 @@
 				44547E562CF4BE380051C782 /* Promocodes.swift */,
 				44BC590A2CD0FB7E00AD7FFA /* Admin.swift */,
 				44C9F93E2D4E4EAF00C10A68 /* CloudServices.swift */,
+				447652E32D4EE54C00AA5C48 /* LocalCloudServices.swift */,
 				44064C9D2C28628000AB5227 /* SignServices.swift */,
 				44D68AF22C4ACC0C00F8F476 /* UserServices.swift */,
 				44E406212CFF7BFA004F633E /* CategoryServices.swift */,
@@ -682,6 +702,7 @@
 		44E906352C2ADE5900FFA6DD /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				447652F42D50236D00AA5C48 /* Header */,
 				44E906362C2ADE8700FFA6DD /* BannerCollectionViewCell.swift */,
 				449CF0DA2C3370CA000D4528 /* CoursesCollectionViewCell.swift */,
 				449CF0DC2C3370E0000D4528 /* CategoriesCollectionViewCell.swift */,
@@ -694,7 +715,6 @@
 				448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */,
 				44E00B912CE39F2400E62089 /* CoachCollectionViewCell.swift */,
 				440C9C422CF49DD0007D0735 /* PromoCollectionViewCell.swift */,
-				440254D62D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift */,
 				44228F582D2804E000D751ED /* RepeatsCollectionViewCell.swift */,
 				44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */,
 			);
@@ -746,8 +766,7 @@
 				44F118D52D109025000FCDC3 /* AppMetricaLibraryAdapter */,
 				44321F992D40496D00247DA9 /* AWSCore */,
 				44321F9B2D40496D00247DA9 /* AWSS3 */,
-				44321F9E2D404B7D00247DA9 /* ClientRuntime */,
-				44321FA02D404B7D00247DA9 /* Smithy */,
+				44000EAB2D50F130004E54A8 /* RealmSwift */,
 			);
 			productName = Courses;
 			productReference = 440DAB302C1748D400C576FB /* Courses.app */;
@@ -788,7 +807,7 @@
 				44F395462C9B8BA200861759 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */,
 				44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */,
-				44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */,
+				44000EAA2D50F130004E54A8 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 440DAB312C1748D400C576FB /* Products */;
 			projectDirPath = "";
@@ -834,6 +853,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75F6FDB42C9323B500A57EA9 /* WithdrawViewController.swift in Sources */,
+				447652EB2D4FDBB400AA5C48 /* RealmModel.swift in Sources */,
 				44D68B042C51B3EF00F8F476 /* CourseTextViewController.swift in Sources */,
 				447D8C812C85DEEB00EF2217 /* PaymentServices.swift in Sources */,
 				449C124E2D00DDA30091F0F5 /* MyCoursesPresenter.swift in Sources */,
@@ -841,6 +861,7 @@
 				44C9F9352D4E4E6200C10A68 /* ImageResize.swift in Sources */,
 				44BC590B2CD0FB7E00AD7FFA /* Admin.swift in Sources */,
 				44897A492D343D8C00ED8021 /* VideoModule.swift in Sources */,
+				447652E42D4EE54C00AA5C48 /* LocalCloudServices.swift in Sources */,
 				44228F5B2D2813C500D751ED /* AddTrainingModuleViewController.swift in Sources */,
 				7595784B2C5B9A7E00A9F811 /* AddInfoAboutModuleViewController.swift in Sources */,
 				44E2AB1C2D35C4AF00547228 /* ModuleModel.swift in Sources */,
@@ -904,6 +925,7 @@
 				44064C812C26F0E800AB5227 /* Border.swift in Sources */,
 				44682CA72D0362B800087C62 /* ChangeInformationPresenter.swift in Sources */,
 				44C9F93C2D4E4E6200C10A68 /* NavigationControllerDelegate.swift in Sources */,
+				447652F62D50238A00AA5C48 /* DateHeaderCollectionReusableView.swift in Sources */,
 				44E406202CFF7B9C004F633E /* CategoryModel.swift in Sources */,
 				44064C8F2C285F7C00AB5227 /* TextFieldFormat.swift in Sources */,
 				440C9C3F2CED6C47007D0735 /* ProtectScreen.swift in Sources */,
@@ -941,6 +963,7 @@
 				75D68C612C80A361001407F0 /* AddReviewViewController.swift in Sources */,
 				4481D43C2D1C945E00DBE377 /* AddModuleCoursesPresenter.swift in Sources */,
 				44BD6CDC2C428A2C001645A0 /* ModulesCourseViewController.swift in Sources */,
+				44DA9F9E2D52443E00735179 /* TimerTraining.swift in Sources */,
 				441E4AEF2CD2AD6100800EE4 /* СonfidentialityViewController.swift in Sources */,
 				7515103F2C34583B009978E6 /* SettingsTableViewCell.swift in Sources */,
 				440E1F742CA16AD1002C6FC8 /* CourseErrors.swift in Sources */,
@@ -1128,6 +1151,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_execute;
 				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1166,6 +1190,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_execute;
 				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1203,6 +1228,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		44000EAA2D50F130004E54A8 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		44064C902C2861B900AB5227 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1233,14 +1266,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.40.0;
-			};
-		};
-		44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/smithy-lang/smithy-swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.111.0;
 			};
 		};
 		447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */ = {
@@ -1294,6 +1319,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		44000EAB2D50F130004E54A8 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44000EAA2D50F130004E54A8 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		44064C912C2861B900AB5227 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 44064C902C2861B900AB5227 /* XCRemoteSwiftPackageReference "Alamofire" */;
@@ -1323,16 +1353,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
 			productName = AWSS3;
-		};
-		44321F9E2D404B7D00247DA9 /* ClientRuntime */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */;
-			productName = ClientRuntime;
-		};
-		44321FA02D404B7D00247DA9 /* Smithy */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 44321F9D2D404B7C00247DA9 /* XCRemoteSwiftPackageReference "smithy-swift" */;
-			productName = Smithy;
 		};
 		447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */ = {
 			isa = XCSwiftPackageProductDependency;

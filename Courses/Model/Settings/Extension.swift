@@ -180,3 +180,12 @@ extension TrainingItem {
         return try JSONSerialization.data(withJSONObject: self.toDictionary, options: .prettyPrinted)
     }
 }
+
+extension Date {
+    func formattedDayMonth() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMMM"
+        formatter.locale = Locale(identifier: "ru_RU")
+        return formatter.string(from: self)
+    }
+}
