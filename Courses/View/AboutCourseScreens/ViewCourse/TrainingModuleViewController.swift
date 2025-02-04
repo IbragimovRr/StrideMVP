@@ -57,6 +57,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     private var trainingItems = [TrainingSession]()
     //Нажат ли просмотр всей истории тренировок
     private var moreTraining = false
+    private var modeTimer: TimerMode = .timer
     
     var selectRepeats: Int = 0 {
         didSet {
@@ -138,12 +139,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         timerView.isHidden = false
         imView.isHidden = true
         videoView.isHidden = true
-        let item = presenter.module.trainingItems[selectRepeats]
-        if item.firstItemType == .timer {
-            timer.initial(seconds: Int(item.firstItemData ?? "0") ?? 0)
-        }else if item.secondItemType == .timer {
-            timer.initial(seconds: Int(item.secondItemData ?? "0") ?? 0)
-        }
+        initialTimer()
     }
     
     func showSelectRepeat() {
@@ -183,6 +179,15 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     }
     
     // MARK: - Private function
+    private func initialTimer() {
+        let item = presenter.module.trainingItems[selectRepeats]
+        if item.firstItemType == .timer {
+            timer.configure(seconds: Int(item.firstItemData ?? "0") ?? 0, mode: modeTimer)
+        }else if item.secondItemType == .timer {
+            timer.configure(seconds: Int(item.secondItemData ?? "0") ?? 0, mode: modeTimer)
+        }
+    }
+    
     private func chechkEndRepeats() {
         if presenter.module.trainingItems.count - 1 == selectRepeats {
             content = .save
@@ -303,6 +308,17 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         }
     }
     
+    @IBAction func toggleTimerMode(_ sender: UIButton) {
+        if modeTimer == .timer {
+            modeTimer = .stopwatch
+            sender.setImage(UIImage.timer2, for: .normal)
+        }else {
+            modeTimer = .timer
+            sender.setImage(UIImage.secundomer, for: .normal)
+        }
+        initialTimer()
+    }
+    
     @IBAction func startTraining(_ sender: UIButton) {
         toggleTraining(isTraining: true)
     }
@@ -361,12 +377,19 @@ extension TrainingModuleViewController: TimerDelegate {
         controlTimerBtn.setImage(UIImage.pauseTimer, for: .normal)
     }
     
-    func timerDidPause() {
-        controlTimerBtn.setImage(UIImage.playTimer, for: .normal)
-    }
-    
-    func timerDidEnd() {
-        controlTimerBtn.setImage(UIImage.playTimer, for: .normal)
+    func timerDidControlState(state: TimerState) {
+        switch state {
+        case .pause:
+            controlTimerBtn.setImage(UIImage.playTimer, for: .normal)
+        case .process:
+            controlTimerBtn.setImage(UIImage.pauseTimer, for: .normal)
+        case .end:
+            controlTimerBtn.setImage(UIImage.playTimer, for: .normal)
+        case .reload:
+            break
+        case .next:
+            break
+        }
     }
     
     func timerDidUpdate(resultData: String) {
