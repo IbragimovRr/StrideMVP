@@ -1,0 +1,23 @@
+# Игнорируем файлы Xcode, которые не нужны в репозитории
+*.xcuserstate
+*.xcscmblueprint
+*.xcworkspace/
+.DS_Store
+
+# Игнорируем временные файлы сборки
+DerivedData/
+Build/
+*.ipa
+*.app
+
+# Игнорируем файлы CocoaPods
+Pods/
+Podfile.lock
+
+# Игнорируем файлы Swift Package Manager
+.swiftpm/
+Package.resolved
+
+# Игнорируем Carthage
+Carthage/Checkouts
+Carthage/Build
