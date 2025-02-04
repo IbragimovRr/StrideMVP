@@ -250,6 +250,12 @@ enum InfoCourses {
     case adminVerification
 }
 
+enum ContentTrainingModule {
+    case next
+    case save
+    case timer
+}
+
 // MARK: - Protocol
 protocol TypeModuleDelegate: AnyObject {
     func addModule(type: ModuleType, position: Int)
