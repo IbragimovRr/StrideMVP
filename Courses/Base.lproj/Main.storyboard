@@ -14390,6 +14390,7 @@
                     <navigationItem key="navigationItem" id="82d-Ft-Svt"/>
                     <connections>
                         <outlet property="allHistoryBtn" destination="7eW-io-7rl" id="NGS-Fw-T81"/>
+                        <outlet property="controlTimerBtn" destination="TBD-Fs-rEj" id="ElZ-T0-ewL"/>
                         <outlet property="countLbl" destination="7zL-fW-hLs" id="C7V-4H-UT0"/>
                         <outlet property="descriptionHeight" destination="0Ed-ac-Xq9" id="Sug-sB-qeH"/>
                         <outlet property="descriptionModule" destination="qSV-HO-FgH" id="948-T4-QI9"/>

@@ -9,16 +9,22 @@ import UIKit
 import AVKit
 
 protocol TrainingModuleViewDelegate {
+    var selectRepeats: Int { get set }
+    var repeats: [TrainingItem] { get set }
+    var content: ContentTrainingModule { get set }
+    
     func showData()
     func showVideo()
     func showImage()
     func showTimer()
     func showError(error: String)
     func showSavedTraining(trainingItems: [TrainingSession])
+    func endRepeats()
 }
 
 class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate {
     
+    @IBOutlet weak var controlTimerBtn: UIButton!
     @IBOutlet weak var timerCount: UILabel!
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var allHistoryBtn: UIButton!
@@ -45,18 +51,28 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
+    private var timer = TimerTraining()
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
-    private var repeats = [TrainingItem]()
+    var repeats = [TrainingItem]()
     private var trainingItems = [TrainingSession]()
+    //Нажат ли просмотр всей истории тренировок
     private var moreTraining = false
-    private var isTimer = false
     
-    private var selectRepeats = 0 {
+    var selectRepeats: Int = 0 {
         didSet {
-            if presenter.module.trainingItems.count == selectRepeats {
-                selectRepeats = oldValue
-            }else {
-                reloadDataRepeats()
+            showSelectRepeat()
+        }
+    }
+
+    var content: ContentTrainingModule = .next {
+        didSet {
+            switch content {
+            case .timer:
+                trainingBtn.setImage(UIImage.timerTrainingModule, for: .normal)
+            case .next:
+                trainingBtn.setImage(UIImage.nextRepeats, for: .normal)
+            case .save:
+                trainingBtn.setImage(UIImage.successTrainingModule, for: .normal)
             }
         }
     }
@@ -72,6 +88,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         firstTF.delegate = self
         secondTF.delegate = self
         presenter.view = self
+        timer.delegate = self
         presenter.getData()
         presenter.getTraining()
     }
@@ -96,7 +113,6 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         descriptionModule.text = module.description
         let size = descriptionModule.contentSize
         descriptionHeight.constant = size.height + 15
-        trainingBtn.setImage(getTrainingImage(), for: .normal) 
         addViewByCountRepeats()
         trainingCollectionView.reloadData()
         changeHeightCollection()
@@ -122,11 +138,32 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         timerView.isHidden = false
         imView.isHidden = true
         videoView.isHidden = true
-        if presenter.module.trainingItems[selectRepeats].firstItemType == .timer {
-            timerCount.text = presenter.module.trainingItems[selectRepeats].firstItemData
-        }else if presenter.module.trainingItems[selectRepeats].secondItemType == .timer {
-            timerCount.text = presenter.module.trainingItems[selectRepeats].secondItemData
+        let item = presenter.module.trainingItems[selectRepeats]
+        if item.firstItemType == .timer {
+            timer.initial(seconds: Int(item.firstItemData ?? "0") ?? 0)
+        }else if item.secondItemType == .timer {
+            timer.initial(seconds: Int(item.secondItemData ?? "0") ?? 0)
         }
+    }
+    
+    func showSelectRepeat() {
+        let views = stackView.arrangedSubviews
+        for x in 0...views.count - 1 {
+            if selectRepeats >= x {
+                views[x].backgroundColor = .blueMain
+            }else {
+                views[x].backgroundColor = .extraLightBlackMain
+            }
+        }
+        labelCount()
+        initialTextField()
+        initialTrainingBtn()
+        trainingCollectionView.reloadData()
+        changeHeightCollection()
+    }
+    
+    func endRepeats() {
+        content = .save
     }
     
     func showError(error: String) {
@@ -146,48 +183,31 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     }
     
     // MARK: - Private function
-    
-    private func reloadDataRepeats() {
-        let views = stackView.arrangedSubviews
-        for x in 0...views.count - 1 {
-            if selectRepeats >= x {
-                views[x].backgroundColor = .blueMain
-            }else {
-                views[x].backgroundColor = .extraLightBlackMain
-            }
+    private func chechkEndRepeats() {
+        if presenter.module.trainingItems.count - 1 == selectRepeats {
+            content = .save
+        }else {
+            content = .next
         }
-        labelCount()
-        initialTextField()
-        initialTrainingBtn()
     }
     
     private func initialTrainingBtn() {
-        if presenter.module.trainingItems.count - 1 == selectRepeats {
-            if isTimer == false {
-                trainingBtn.setImage(UIImage.successTrainingModule, for: .normal)
-            }
-            trainingBtn.tag = 1
+        guard let firstItem = presenter.module.trainingItems.first else { return }
+        
+        if firstItem.firstItemType == .timer || firstItem.secondItemType == .timer {
+            content = .timer
         }else {
-            trainingBtn.tag = 0
-            trainingBtn.setImage(getTrainingImage(), for: .normal)
+            chechkEndRepeats()
         }
     }
     
-    private func getTrainingImage() -> UIImage {
-        guard let firstItem = presenter.module.trainingItems.first else {
-            return UIImage.nextRepeats
-        }
-        
-        let hasTimer = firstItem.firstItemType == .timer || firstItem.secondItemType == .timer
-        isTimer = hasTimer
-        return hasTimer ? UIImage.timerTrainingModule : UIImage.nextRepeats
-    }
     
     private func labelCount() {
         let select = selectRepeats + 1
         let count = presenter.module.trainingItems.count
         countLbl.text = "\(select) из \(count)"
     }
+
     
     private func initialTextField() {
         let item = presenter.module.trainingItems[selectRepeats]
@@ -208,7 +228,6 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
             let view = createView()
             stackView.addArrangedSubview(view)
         }
-        reloadDataRepeats()
     }
     
     private func createView() -> UIView {
@@ -258,43 +277,29 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
             stackViewTF.isHidden = true
             countLbl.isHidden = true
             startTrainingBtn.isHidden = false
-            selectRepeats = 0
+            presenter.restartTraining()
         }
     }
     
-    private func endRepeat() {
+    private func saveTraining() {
         toggleTraining(isTraining: false)
         presenter.saveTraining()
         repeats.removeAll()
-    }
-    
-    private func nextRepeats() {
-        guard selectRepeats != presenter.module.trainingItems.count else { return }
-        if repeats.count - 1 >= selectRepeats {
-            repeats[selectRepeats] = presenter.module.trainingItems[selectRepeats]
-        }else {
-            repeats.append(presenter.module.trainingItems[selectRepeats])
-        }
-        
-        if trainingBtn.tag == 1 {
-            endRepeat()
-        }else {
-            selectRepeats += 1
-        }
-        
         trainingCollectionView.reloadData()
         changeHeightCollection()
     }
-
     
     
     // MARK: - @IBAction
     
     @IBAction func complete(_ sender: UIButton) {
-        if isTimer {
+        switch content {
+        case .timer:
             showTimer()
-        }else {
-            nextRepeats()
+        case .next:
+            presenter.nextRepeat()
+        case .save:
+            saveTraining()
         }
     }
     
@@ -318,13 +323,24 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     }
     
     @IBAction func successTimer(_ sender: UIButton) {
-        nextRepeats()
+        // Убирает таймер и добавляет картинку или видео
+        if let mediaURL = presenter.module.mediaURL {
+            presenter.checkType(media: mediaURL)
+        }
+        chechkEndRepeats()
+        timer.stop()
     }
     
     @IBAction func reloadTimer(_ sender: Any) {
+        timer.reload()
     }
     
     @IBAction func playTimer(_ sender: UIButton) {
+        if timer.control == .pause {
+            timer.start()
+        }else if timer.control == .process {
+            timer.stop()
+        }
     }
     
     // MARK: - Other Action
@@ -337,6 +353,24 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         present(playerViewController, animated: true) {
             self.player.play()
         }
+    }
+}
+extension TrainingModuleViewController: TimerDelegate {
+    
+    func timerDidStart() {
+        controlTimerBtn.setImage(UIImage.pauseTimer, for: .normal)
+    }
+    
+    func timerDidPause() {
+        controlTimerBtn.setImage(UIImage.playTimer, for: .normal)
+    }
+    
+    func timerDidEnd() {
+        controlTimerBtn.setImage(UIImage.playTimer, for: .normal)
+    }
+    
+    func timerDidUpdate(resultData: String) {
+        timerCount.text = resultData
     }
 }
 extension TrainingModuleViewController: UICollectionViewDelegate, UICollectionViewDataSource {

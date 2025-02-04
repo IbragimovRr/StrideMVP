@@ -136,6 +136,7 @@
 		44D68B052C51B3EF00F8F476 /* InfoCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */; };
 		44D84B242D1DC798001A35CA /* TypeModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D84B232D1DC798001A35CA /* TypeModuleViewController.swift */; };
 		44D84B282D1EF40C001A35CA /* AddVideoModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D84B272D1EF40C001A35CA /* AddVideoModuleViewController.swift */; };
+		44DA9F9E2D52443E00735179 /* TimerTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA9F9D2D52443E00735179 /* TimerTraining.swift */; };
 		44DF69D92D38882B00BD1A22 /* FontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */; };
 		44DF69DB2D388A5200BD1A22 /* CarouselLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */; };
 		44DFB1162C3B199A005C8F44 /* RecomendationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DFB1152C3B199A005C8F44 /* RecomendationCollectionViewCell.swift */; };
@@ -308,6 +309,7 @@
 		44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCoursesViewController.swift; sourceTree = "<group>"; };
 		44D84B232D1DC798001A35CA /* TypeModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeModuleViewController.swift; sourceTree = "<group>"; };
 		44D84B272D1EF40C001A35CA /* AddVideoModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVideoModuleViewController.swift; sourceTree = "<group>"; };
+		44DA9F9D2D52443E00735179 /* TimerTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTraining.swift; sourceTree = "<group>"; };
 		44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCollectionViewCell.swift; sourceTree = "<group>"; };
 		44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselLayout.swift; sourceTree = "<group>"; };
 		44DFB1152C3B199A005C8F44 /* RecomendationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				440C9C3E2CED6C47007D0735 /* ProtectScreen.swift */,
 				446BF1A02D2C948000D8E534 /* EditorView.swift */,
 				44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */,
+				44DA9F9D2D52443E00735179 /* TimerTraining.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -960,6 +963,7 @@
 				75D68C612C80A361001407F0 /* AddReviewViewController.swift in Sources */,
 				4481D43C2D1C945E00DBE377 /* AddModuleCoursesPresenter.swift in Sources */,
 				44BD6CDC2C428A2C001645A0 /* ModulesCourseViewController.swift in Sources */,
+				44DA9F9E2D52443E00735179 /* TimerTraining.swift in Sources */,
 				441E4AEF2CD2AD6100800EE4 /* СonfidentialityViewController.swift in Sources */,
 				7515103F2C34583B009978E6 /* SettingsTableViewCell.swift in Sources */,
 				440E1F742CA16AD1002C6FC8 /* CourseErrors.swift in Sources */,

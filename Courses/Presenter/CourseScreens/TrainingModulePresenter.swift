@@ -11,6 +11,8 @@ protocol TrainingModulePresenterDelegate {
     func getData()
     func saveTraining()
     func getTraining()
+    func nextRepeat()
+    func restartTraining()
 }
 
 class TrainingModulePresenter: TrainingModulePresenterDelegate {
@@ -19,6 +21,7 @@ class TrainingModulePresenter: TrainingModulePresenterDelegate {
     
     func getData() {
         view?.showData()
+        view.selectRepeats = 0
         if let mediaURL = module.mediaURL {
             checkType(media: mediaURL)
         }
@@ -34,7 +37,29 @@ class TrainingModulePresenter: TrainingModulePresenterDelegate {
         view.showSavedTraining(trainingItems: trainingItems)
     }
     
-    private func checkType(media: URL) {
+    func nextRepeat() {
+        guard view.selectRepeats != module.trainingItems.count else { return }
+        
+        if view.repeats.count - 1 >= view.selectRepeats {
+            view.repeats[view.selectRepeats] = module.trainingItems[view.selectRepeats]
+        }else {
+            view.repeats.append(module.trainingItems[view.selectRepeats])
+        }
+        
+        if module.trainingItems.count - 2 == view.selectRepeats {
+            view.endRepeats()
+        }
+    
+        if module.trainingItems.count - 1 != view.selectRepeats {
+            view.selectRepeats += 1
+        }
+    }
+    
+    func restartTraining() {
+        view.selectRepeats = 0
+    }
+    
+    func checkType(media: URL) {
         let type = MediaTypeManager().determineFileType(from: media)
         switch type {
         case .image:
