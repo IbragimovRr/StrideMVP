@@ -33,14 +33,24 @@ class AddVideoModulePresenter: AddVideoModuleDelegate {
     }
     
     func saveModule() {
+        view?.showLoading(isLoading: true)
         Task {
             do {
                 try await CourseServices().addVideoModulesData(module: module)
                 DispatchQueue.main.async {
                     self.view?.saveData()
+                    self.view?.showLoading(isLoading: false)
                 }
             }catch ErrorNetwork.runtimeError(let error) {
-                print(error)
+                DispatchQueue.main.async {
+                    self.view?.showError(error: error)
+                    self.view?.showLoading(isLoading: false)
+                }
+            }catch {
+                DispatchQueue.main.async {
+                    self.view?.showError(error: "Повторите попытку позже.")
+                    self.view?.showLoading(isLoading: false)
+                }
             }
         }
     }

@@ -12127,6 +12127,16 @@
                                             <action selector="save:" destination="6Sn-2X-Yx6" eventType="touchUpInside" id="Lgv-ZG-JYn"/>
                                         </connections>
                                     </button>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Owa-Kn-cIC" customClass="LottieAnimationView" customModule="Lottie">
+                                        <rect key="frame" x="176.66666666666666" y="447" width="40" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="UKa-Ov-zbM"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="loading"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" name="LightBlackMain"/>
                                 <constraints>
@@ -12134,7 +12144,10 @@
                                     <constraint firstItem="k02-fO-2PN" firstAttribute="top" secondItem="9R6-Y2-GrW" secondAttribute="bottom" id="Ofo-9F-e4p"/>
                                     <constraint firstAttribute="bottom" secondItem="k02-fO-2PN" secondAttribute="bottom" constant="30" id="Sqq-ua-yMF"/>
                                     <constraint firstItem="k02-fO-2PN" firstAttribute="leading" secondItem="Yyq-4f-fAl" secondAttribute="leading" constant="30" id="SzG-Dd-G86"/>
+                                    <constraint firstItem="Owa-Kn-cIC" firstAttribute="top" secondItem="k02-fO-2PN" secondAttribute="top" constant="5" id="T2R-Ge-FJN"/>
                                     <constraint firstAttribute="trailing" secondItem="k02-fO-2PN" secondAttribute="trailing" constant="30" id="WXO-N5-I5R"/>
+                                    <constraint firstItem="Owa-Kn-cIC" firstAttribute="centerX" secondItem="Yyq-4f-fAl" secondAttribute="centerX" id="XLG-NK-E15"/>
+                                    <constraint firstItem="Owa-Kn-cIC" firstAttribute="bottom" secondItem="k02-fO-2PN" secondAttribute="bottom" constant="-5" id="cuK-me-gYN"/>
                                     <constraint firstItem="9R6-Y2-GrW" firstAttribute="top" secondItem="Yyq-4f-fAl" secondAttribute="top" id="rwc-d3-wxw"/>
                                     <constraint firstAttribute="trailing" secondItem="9R6-Y2-GrW" secondAttribute="trailing" id="vXR-xV-rQ0"/>
                                 </constraints>
@@ -12177,9 +12190,11 @@
                         <outlet property="descriptionViewRightConstraint" destination="MiB-5Z-KS1" id="17b-eU-0hK"/>
                         <outlet property="descriptionViewTopConstraint" destination="4D9-OW-838" id="0Fu-71-Iss"/>
                         <outlet property="fullScreenBtn" destination="1rs-7h-IG6" id="rW6-SE-16F"/>
+                        <outlet property="loading" destination="Owa-Kn-cIC" id="xmd-9c-g8U"/>
                         <outlet property="nameModule" destination="Jpf-kC-9jk" id="Cc2-xZ-YIr"/>
                         <outlet property="playImage" destination="SuX-vI-OPE" id="2BG-S7-qcm"/>
                         <outlet property="playView" destination="hSO-MU-xVe" id="gRI-gG-s3X"/>
+                        <outlet property="saveBtn" destination="k02-fO-2PN" id="DTV-V7-WB7"/>
                         <outlet property="timeCount" destination="eNX-qB-nkW" id="bXe-14-v7i"/>
                         <outlet property="uploadView" destination="j4o-AD-QoZ" id="Z5u-ew-bLC"/>
                         <outlet property="videoPlayerView" destination="qEt-yp-kzW" id="55B-U5-nQA"/>

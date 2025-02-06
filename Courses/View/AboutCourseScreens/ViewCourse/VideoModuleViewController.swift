@@ -46,12 +46,22 @@ class VideoModuleViewController: UIViewController {
     }
     
     func settingsPlayer(videoURL: URL) {
-        Task {
-            let asset = AVAsset(url: videoURL)
-            let playerItem = AVPlayerItem(asset: asset)
-            player = AVPlayer(playerItem: playerItem)
-            playerViewController.player = player
-            setupView()
+        let asset = AVURLAsset(url: videoURL)
+        let playerItem = AVPlayerItem(asset: asset)
+        playerItem.preferredForwardBufferDuration = 5
+        playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = true
+        player = AVPlayer(playerItem: playerItem)
+        playerViewController.player = player
+        audioInitial()
+        setupView()
+    }
+    
+    func audioInitial() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("❌ Ошибка аудиосессии: \(error.localizedDescription)")
         }
     }
     
