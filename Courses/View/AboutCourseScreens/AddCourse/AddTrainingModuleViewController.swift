@@ -161,17 +161,27 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         countType.text = "\(count)/2"
     }
     
-    private func settingsPlayer(videoURL: URL) {
-        Task {
-            let asset = AVAsset(url: videoURL)
-            let playerItem = AVPlayerItem(asset: asset)
-            player = AVPlayer(playerItem: playerItem)
-            playerViewController.player = player
-            setupView()
+    func settingsPlayer(videoURL: URL) {
+        let asset = AVURLAsset(url: videoURL)
+        let playerItem = AVPlayerItem(asset: asset)
+        playerItem.preferredForwardBufferDuration = 5
+        playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = true
+        player = AVPlayer(playerItem: playerItem)
+        playerViewController.player = player
+        audioInitial()
+        setupView()
+    }
+    
+    func audioInitial() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("❌ Ошибка аудиосессии: \(error.localizedDescription)")
         }
     }
     
-    private func setupView() {
+    func setupView() {
         let layer = AVPlayerLayer(player: player)
         layer.frame = videoPlayerView.bounds
         layer.videoGravity = .resizeAspectFill

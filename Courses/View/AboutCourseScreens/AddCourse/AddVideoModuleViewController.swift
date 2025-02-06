@@ -7,16 +7,21 @@
 
 import UIKit
 import AVKit
+import Lottie
 
 protocol AddVideoViewDelegate {
     func showData()
     func showVideo()
     func showUploadVideo()
     func saveData()
+    func showLoading(isLoading: Bool)
+    func showError(error: String)
 }
 
 class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
+    @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var loading: LottieAnimationView!
     @IBOutlet weak var descriptionViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var descriptionViewRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var descriptionViewLeftConstraint: NSLayoutConstraint!
@@ -46,6 +51,7 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         descriptionText.delegate = self
         view.layer.makeHiddenOnCapture()
         view.addSubview(errorView)
+        loadingSettings()
         presenter.checkUpload()
     }
     
@@ -81,14 +87,48 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
+    func showLoading(isLoading: Bool) {
+        if isLoading {
+            loading.play()
+            loading.isHidden = false
+            saveBtn.isHidden = true
+        }else {
+            loading.stop()
+            loading.isHidden = true
+            saveBtn.isHidden = false
+        }
+    }
+    
+    func showError(error: String) {
+        errorView.configure(title: "Ошибка", description: error)
+        errorView.isHidden = false
+    }
+    
+    private func loadingSettings() {
+        loading.loopMode = .loop
+        loading.contentMode = .scaleToFill
+        loading.isHidden = true
+    }
     
     func settingsPlayer(videoURL: URL) {
-        Task {
-            let asset = AVAsset(url: videoURL)
-            let playerItem = AVPlayerItem(asset: asset)
-            player = AVPlayer(playerItem: playerItem)
-            playerViewController.player = player
-            setupView()
+        let asset = AVURLAsset(url: videoURL)
+        let playerItem = AVPlayerItem(asset: asset)
+        playerItem.preferredForwardBufferDuration = 5
+        playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = true
+        player = AVPlayer(playerItem: playerItem)
+        playerViewController.player = player
+        player.automaticallyWaitsToMinimizeStalling = false
+        player.playImmediately(atRate: 1.0)
+        audioInitial()
+        setupView()
+    }
+    
+    func audioInitial() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("\(error.localizedDescription)")
         }
     }
     
@@ -167,8 +207,7 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         case .success():
             presenter.saveModule()
         case .failure(ErrorNetwork.runtimeError(let error)):
-            errorView.configure(title: "Ошибка", description: error)
-            errorView.isHidden = false
+            showError(error: error)
         case .failure(.tryAgainLater):
             break
         case .failure(.notFound):
