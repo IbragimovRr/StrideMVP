@@ -26,7 +26,6 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     @IBOutlet weak var playView: UIView!
     @IBOutlet weak var fullScreenBtn: UIButton!
     @IBOutlet weak var authorText: UILabel!
-    @IBOutlet weak var viewsCount: UILabel!
     @IBOutlet weak var timeCount: UILabel!
     @IBOutlet weak var descriptionHeight: NSLayoutConstraint!
     @IBOutlet weak var descriptionText: UITextView!
@@ -39,11 +38,14 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     var presenter = AddVideoModulePresenter()
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
+    let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.view = self
         descriptionText.delegate = self
+        view.layer.makeHiddenOnCapture()
+        view.addSubview(errorView)
         presenter.checkUpload()
     }
     
@@ -133,13 +135,45 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         countCharacters.isHidden = false
     }
     
-    private func initialModule() {
+    private func getTimeInVideo() -> Int {
+        if let currentItem = player.currentItem {
+            let duration = currentItem.duration
+            let durationInSeconds = CMTimeGetSeconds(duration)
+            if durationInSeconds.isFinite {
+                let durationInMinutes = durationInSeconds / 60
+                return Int(durationInMinutes)
+            } else {
+                return 0
+            }
+        }
+        return 0
+    }
+    
+    
+    
+    private func initialModule() -> Result<Void, ErrorNetwork> {
+        guard let _ = presenter.module.videoURL else { return .failure(ErrorNetwork.runtimeError("Добавьте видео файл")) }
+        guard descriptionText.text != "" else { return .failure(ErrorNetwork.runtimeError("Добавьте описание тренировки")) }
+        
         presenter.module.videoDescription = descriptionText.text
+        let me = UD().getMyInfo()
+        presenter.module.author = "\(me.name) \(me.surname)"
+        presenter.module.timeVideo = getTimeInVideo()
+        return .success(())
     }
     
     @IBAction func save(_ sender: UIButton) {
-        initialModule()
-        presenter.saveModule()
+        switch initialModule() {
+        case .success():
+            presenter.saveModule()
+        case .failure(ErrorNetwork.runtimeError(let error)):
+            errorView.configure(title: "Ошибка", description: error)
+            errorView.isHidden = false
+        case .failure(.tryAgainLater):
+            break
+        case .failure(.notFound):
+            break
+        }
     }
     
     @IBAction func playVideo(_ sender: UIButton) {
@@ -174,6 +208,10 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
     @IBAction func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func swipe(_ sender: UIPanGestureRecognizer) {
+        errorView.swipe(sender: sender)
     }
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {

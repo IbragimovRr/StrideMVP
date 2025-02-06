@@ -40,6 +40,10 @@ extension CourseServices {
             if let description = module.videoDescription {
                 multipartFormData.append(Data(description.utf8), withName: "video_desc")
             }
+            if let author = module.author {
+                multipartFormData.append(Data(author.utf8), withName: "author")
+            }
+            multipartFormData.append(Data("\(module.timeVideo)".utf8), withName: "time")
         }, to: url, method: .patch, headers: headers).serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode

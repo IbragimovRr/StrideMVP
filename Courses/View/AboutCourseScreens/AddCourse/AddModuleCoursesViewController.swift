@@ -55,17 +55,14 @@ class AddModuleCoursesViewController: UIViewController, AddModuleCoursesViewDele
         switch presenter.course.verification {
         case .proccessVerificate:
             role = .send
-            successBtn.isHidden = true
         case .noneVerificate:
             role = .nothing
-            successBtn.isHidden = false
         case .proccess:
             role = .nothing
-            successBtn.isHidden = false
         case .verificate:
             role = .send
-            successBtn.isHidden = true
         }
+        successBtn.isHidden = false
     }
 
 

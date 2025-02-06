@@ -58,6 +58,11 @@ class EditorView: WKWebView {
         runJS("RE.setHtml('\(value.escaped)')")
     }
     
+    func disableEditing() {
+        print(66)
+        runJS("RE.disableEditing()")
+    }
+    
     func strikeThrough() {
         evaluateJavaScript("RE.setStrikeThrough()")
     }
@@ -78,10 +83,6 @@ class EditorView: WKWebView {
         runJS("RE.prepareInsert()")
         runJS("RE.setTextColor('\(color.hex)')")
     }
-    
-//    func editorFontColor(_ color: UIColor) {
-//        runJS("RE.setBaseTextColor('\(color.hex)')")
-//    }
     
     func horizontalRule() {
         runJS("RE.horizontalRule()")

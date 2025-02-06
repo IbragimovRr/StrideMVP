@@ -28,6 +28,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     @IBOutlet weak var timerCount: UILabel!
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var allHistoryBtn: UIButton!
+    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var savedTrainingCollectionView: UICollectionView!
     @IBOutlet weak var trainingBtn: UIButton!
     @IBOutlet weak var startTrainingBtn: UIButton!
@@ -88,6 +89,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         trainingCollectionView.dataSource = self
         firstTF.delegate = self
         secondTF.delegate = self
+        view.layer.makeHiddenOnCapture()
         presenter.view = self
         timer.delegate = self
         presenter.getData()
@@ -123,6 +125,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         videoView.isHidden = false
         imView.isHidden = true
         timerView.isHidden = true
+        backBtn.backgroundColor = .lightBlackMain
         if let videoURL = presenter.module.mediaURL {
             settingsPlayer(videoURL: videoURL)
         }
@@ -132,6 +135,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         imView.isHidden = false
         videoView.isHidden = true
         timerView.isHidden = true
+        backBtn.backgroundColor = .lightBlackMain
         im.sd_setImage(with: presenter.module.mediaURL)
     }
     
@@ -139,6 +143,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         timerView.isHidden = false
         imView.isHidden = true
         videoView.isHidden = true
+        backBtn.backgroundColor = .clear
         initialTimer()
     }
     
@@ -363,6 +368,11 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     
     @IBAction func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        firstTF.resignFirstResponder()
+        secondTF.resignFirstResponder()
     }
     
     @IBAction func fullScreen(_ sender: UIButton) {

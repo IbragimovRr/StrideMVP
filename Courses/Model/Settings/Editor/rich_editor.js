@@ -190,6 +190,10 @@ RE.isCommandActive = function(command) {
     }
 };
 
+RE.disableEditing = function () {
+    RE.editor.contentEditable = "false";
+    RE.editor.style.userSelect = "none";
+};
 
 RE.getHtml = function() {
     return RE.editor.innerHTML;
@@ -218,10 +222,6 @@ RE.updatePlaceholder = function() {
 RE.removeFormat = function() {
     document.execCommand('removeFormat', false, null);
 };
-
-//RE.setFontSize = function(size) {
-//    RE.editor.style.fontSize = size;
-//};
 
 RE.setFontSize = function(size) {
     RE.restorerange();

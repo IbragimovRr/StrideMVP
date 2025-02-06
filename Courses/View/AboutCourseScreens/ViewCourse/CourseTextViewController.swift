@@ -22,6 +22,19 @@ class CourseTextViewController: UIViewController {
         super.viewDidLoad()
         design()
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        FilePath().deleteAlamofireFiles()
+    }
+    
+    
+    private func design() {
+        self.overrideUserInterfaceStyle = .dark
+        setupRichEditorView()
+        loadingSettings()
+        nameCourse.text = module.module.name
+    }
     
     func setupRichEditorView() {
         let webConfiguration = WKWebViewConfiguration()
@@ -34,7 +47,6 @@ class CourseTextViewController: UIViewController {
         editor.isOpaque = false
         editorBackView.addSubview(editor)
         
-        
         NSLayoutConstraint.activate([
             editor.topAnchor.constraint(equalTo: editorBackView.topAnchor),
             editor.bottomAnchor.constraint(equalTo: editorBackView.bottomAnchor),
@@ -43,22 +55,10 @@ class CourseTextViewController: UIViewController {
         ])
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        FilePath().deleteAlamofireFiles()
-    }
-
     private func loadingSettings() {
         loading.loopMode = .loop
         loading.contentMode = .scaleToFill
         loading.isHidden = false
-    }
-
-    private func design() {
-        self.overrideUserInterfaceStyle = .dark
-        setupRichEditorView()
-        loadingSettings()
-        nameCourse.text = module.module.name
     }
 
     func getData() {
@@ -83,5 +83,6 @@ class CourseTextViewController: UIViewController {
 extension CourseTextViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         getData()
+        editor.disableEditing()
     }
 }

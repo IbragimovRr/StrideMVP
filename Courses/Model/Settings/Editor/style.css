@@ -71,7 +71,10 @@ div {
     position: static;
 }
 
-
+.no-select {
+    user-select: none;
+    pointer-events: none;
+}
 
 html, body {
     margin: 0;

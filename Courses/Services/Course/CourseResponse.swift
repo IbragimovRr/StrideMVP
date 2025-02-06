@@ -112,6 +112,8 @@ class CourseResponse {
             let index = json["days"][x]["video_modules"][y]["order"].intValue
             let completed = json["days"][x]["video_modules"][y]["module_complete"].boolValue
             let isVisible = json["days"][x]["video_modules"][y]["is_visible"].boolValue
+            let author = json["days"][x]["video_modules"][y]["author"].stringValue
+            let time = json["days"][x]["video_modules"][y]["time"].intValue
             
             let video = json["days"][x]["video_modules"][y]["data"].stringValue
             let videoDesc = json["days"][x]["video_modules"][y]["video_desc"].stringValue
@@ -119,7 +121,7 @@ class CourseResponse {
             
             let defaultModule = Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index, isVisible: isVisible)
             
-            modules.append(VideoModule(module: defaultModule, videoURL: URL(string: video), views: 0, timeVideo: 0, author: "Кто-то", videoDescription: videoDesc))
+            modules.append(VideoModule(module: defaultModule, videoURL: URL(string: video), views: 0, timeVideo: time, author: author, videoDescription: videoDesc))
         }
         return modules
     }

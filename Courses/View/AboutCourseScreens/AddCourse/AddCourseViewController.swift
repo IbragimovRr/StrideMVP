@@ -410,6 +410,10 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         }
     }
     
+    @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
 }
 extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, WKNavigationDelegate {
     
