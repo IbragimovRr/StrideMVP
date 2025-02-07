@@ -49,17 +49,39 @@ class HomePresenter: HomePresenterProtocol {
     func getData(isLoading: Bool) {
         getBanners()
         Task {
-            let user = try await userService.getMyInfo()
-            let coachs = try await self.userService.getAllCoachs()
-            let recomendCourses = try await CourseServices().getRecomendedCourses()
-            let celebrity = try await self.userService.getCelebreties()
             let maxVersion = try await AppStoreVersion().getVersion()
+            let isLastVersion = AppStoreVersion().isVersion(lessThan: maxVersion)
+            if isLastVersion {
+                DispatchQueue.main.async {
+                    self.view?.disableLoading()
+                    self.view?.importantUpdate()
+                }
+                return
+            }
+            
+            async let user = try? await userService.getMyInfo()
+            async let coachs = try? await self.userService.getAllCoachs()
+            async let recomendCourses = try? await CourseServices().getRecomendedCourses()
+            async let celebrity = try? await self.userService.getCelebreties()
+            
+            let userResult = await user
+            let coachsResult = await coachs
+            let recomendCoursesResult = await recomendCourses
+            let celebrityResult = await celebrity
             
             DispatchQueue.main.async {
-                self.userModel = user
-                self.view?.showCelebrity(celebrity: celebrity)
-                self.view?.showRecomendedCourses(courses: recomendCourses)
-                self.view?.showCoachs(coachs: coachs)
+                if let user = userResult {
+                    self.userModel = user
+                }
+                if let celebrity = celebrityResult {
+                    self.view?.showCelebrity(celebrity: celebrity)
+                }
+                if let recomendCourses = recomendCoursesResult {
+                    self.view?.showRecomendedCourses(courses: recomendCourses)
+                }
+                if let coachs = coachsResult {
+                    self.view?.showCoachs(coachs: coachs)
+                }
                 if isLoading {
                     self.view?.disableLoading()
                 }else {

@@ -18,6 +18,7 @@ protocol HomeViewProtocol: AnyObject {
     func navigateToLoading()
     func disableLoading()
     func update()
+    func importantUpdate()
 }
 
 class HomeViewController: UIViewController, HomeViewProtocol {
@@ -116,8 +117,14 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         recomendCollectionView.reloadData()
     }
     
+    // Смахивание вниз
     func update() {
         refreshControl.refreshControl.endRefreshing()
+    }
+    
+    // Важное обновление без которого приложение не будет работать
+    func importantUpdate() {
+        performSegue(withIdentifier: "importantUpdate", sender: self)
     }
     
     private func tabbar() {

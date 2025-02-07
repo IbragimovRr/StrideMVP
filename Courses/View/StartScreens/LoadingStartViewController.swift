@@ -8,6 +8,7 @@
 import UIKit
 import Lottie
 
+
 class LoadingStartViewController: UIViewController {
 
     @IBOutlet weak var viewFon: UIView!
@@ -28,19 +29,6 @@ class LoadingStartViewController: UIViewController {
         allImages()
         randomImageAndTitle()
         loadingSettings()
-    }
-    
-    private func updateApp() {
-        Task {
-            let maxVersion = try await AppStoreVersion().getVersion()
-            let isLastVersion = AppStoreVersion().isVersion(lessThan: maxVersion)
-            print(isLastVersion)
-            if isLastVersion == true {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let updateViewController = storyboard.instantiateViewController(identifier: "UpdateViewController")
-                navigationController?.pushViewController(updateViewController, animated: false)
-            }
-        }
     }
 
     private func loadingSettings() {
