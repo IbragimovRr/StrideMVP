@@ -33,8 +33,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppMetrica.activate(with: configuration)
         }
         
-        
         return true
+    }
+    
+    func showUpdateScreen() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let updateVC = storyboard.instantiateViewController(withIdentifier: "UpdateViewController") as? UpdateViewController else { return }
+        guard let navigationController = window?.rootViewController as? UINavigationController else { return }
+        navigationController.pushViewController(updateVC, animated: false)
+        navigationController.navigationBar.isHidden = true
     }
 
     // MARK: UISceneSession Lifecycle

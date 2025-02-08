@@ -44,17 +44,15 @@ class DeepLinksManager {
     func openCourses(with window: UIWindow, isOpen: Bool = false) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        guard let vc = storyboard.instantiateViewController(identifier: "InfoCoursesViewController") as? InfoCoursesViewController else { return }
+        //Если не авторизован
+        guard UD().getCurrent() else { return }
+        
         guard let vcHome = storyboard.instantiateViewController(identifier: "UITabBarController") as? UITabBarController else { return }
-        
-        
-        vc.presenter.course.id = DeepLinksManager.courseID!
+
         
         guard let navigationController = window.rootViewController as? UINavigationController else { return }
-        if isOpen == false {
-            navigationController.pushViewController(vcHome, animated: true)
-        }
-        navigationController.pushViewController(vc, animated: true)
+        
+        navigationController.pushViewController(vcHome, animated: false)
         navigationController.navigationBar.isHidden = true
     }
     

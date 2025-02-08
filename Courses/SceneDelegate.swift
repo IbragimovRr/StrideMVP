@@ -11,14 +11,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    
     func scene(_ scene: UIScene,willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         ConfidetialityPresenter().getTheme()
         ConfidetialityPresenter.isStart = true
         DeepLinksManager().fetchURL(connectionOptions: connectionOptions)
-        if DeepLinksManager.isLink {
-            DeepLinksManager().openCourses(with: window!)
-        }
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
