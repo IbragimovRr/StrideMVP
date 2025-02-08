@@ -19,6 +19,7 @@ protocol AddTrainingModuleViewDelegate {
 
 class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDelegate {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var heigthCollection: NSLayoutConstraint!
     @IBOutlet weak var distanceView: Border!
     @IBOutlet weak var timerView: Border!
@@ -60,6 +61,8 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     private var player = AVPlayer()
     let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     let presenter = AddTrainingModulePresenter()
+    
+    var selectTF = UITextField()
     var mediaURL: URL?
     var trainingItem: TrainingItem {
         get {
@@ -82,6 +85,27 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         toggleControlVideo(isPlay: false)
+    }
+    
+    // Работа с клавиатурой
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func keyboardWillAppear(notification: Notification) {
+        //Скролл до низа nextField c клавиатурой
+        selectTF.scrollBottomText(scrollView: scrollView, notification: notification)
+    }
+
+    @objc func keyboardWillDisappear() {
+        scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: 0), animated: true)
     }
     
     private func changeHeightCollection() {
@@ -468,7 +492,7 @@ extension AddTrainingModuleViewController: UIImagePickerControllerDelegate & UIN
     }
     
 }
-extension AddTrainingModuleViewController: UITextViewDelegate {
+extension AddTrainingModuleViewController: UITextViewDelegate, UITextFieldDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         enabledTextWrite()
@@ -493,6 +517,10 @@ extension AddTrainingModuleViewController: UITextViewDelegate {
         countDescription.text = "\(count)/\(400)"
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        selectTF = textField
+    }
+    
 }
 extension AddTrainingModuleViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -514,6 +542,8 @@ extension AddTrainingModuleViewController: UICollectionViewDelegate, UICollectio
             cell.secondItemType.text = module.trainingItems[indexPath.row].secondItemType?.initialDefaultName
             cell.firstItemTF.text = module.trainingItems[indexPath.row].firstItemData
             cell.secondItemTF.text = module.trainingItems[indexPath.row].secondItemData
+            cell.firstItemTF.delegate = self
+            cell.secondItemTF.delegate = self
             cell.numbers.text = "\(indexPath.row + 1)"
             cell.onTextChangedFirst = { [weak self] text in
                 self?.presenter.module.trainingItems[indexPath.row].firstItemData = text

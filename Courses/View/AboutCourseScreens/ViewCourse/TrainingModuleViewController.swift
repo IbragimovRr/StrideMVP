@@ -24,6 +24,7 @@ protocol TrainingModuleViewDelegate {
 
 class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var controlTimerBtn: UIButton!
     @IBOutlet weak var timerCount: UILabel!
     @IBOutlet weak var timerView: UIView!
@@ -99,6 +100,27 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         toggleControlVideo(isPlay: false)
+    }
+    
+    // Работа с клавиатурой
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func keyboardWillAppear(notification: Notification) {
+        //Скролл до низа nextField c клавиатурой
+        firstTF.scrollBottomText(scrollView: scrollView, notification: notification)
+    }
+
+    @objc func keyboardWillDisappear() {
+        scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: 0), animated: true)
     }
     
     private func changeHeightCollection() {

@@ -20,6 +20,7 @@ protocol AddVideoViewDelegate {
 
 class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
+    @IBOutlet weak var changeVideo: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var loading: LottieAnimationView!
     @IBOutlet weak var descriptionViewTopConstraint: NSLayoutConstraint!
@@ -71,6 +72,7 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
     func showVideo() {
         videoView.isHidden = false
+        changeVideo.isHidden = false
         uploadView.isHidden = true
         if let videoURL = presenter.module.videoURL {
             settingsPlayer(videoURL: videoURL)
@@ -78,6 +80,7 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     }
     
     func showUploadVideo() {
+        changeVideo.isHidden = true
         videoView.isHidden = true
         uploadView.isHidden = false
     }

@@ -189,3 +189,18 @@ extension Date {
         return formatter.string(from: self)
     }
 }
+
+extension UITextField {
+
+    func scrollBottomText(scrollView: UIScrollView, notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            let textFieldRect = self.convert(self.bounds, to: scrollView)
+            let textFieldBottom = textFieldRect.maxY + 100
+
+            let scrollY = textFieldBottom - keyboardHeight
+            scrollView.setContentOffset(CGPoint(x: 0, y: scrollY), animated: true)
+        }
+    }
+}
