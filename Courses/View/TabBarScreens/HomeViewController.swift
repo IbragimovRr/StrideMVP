@@ -15,9 +15,11 @@ protocol HomeViewProtocol: AnyObject {
     func showUser(user: UserModel)
     func showCelebrity(celebrity: [UserModel])
     func showRecomendedCourses(courses: [CourseModel])
+    func navigateToInfoCourses(idCourses: Int)
     func navigateToLoading()
     func disableLoading()
     func update()
+    func importantUpdate()
 }
 
 class HomeViewController: UIViewController, HomeViewProtocol {
@@ -79,6 +81,13 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         performSegue(withIdentifier: "loading", sender: self)
     }
     
+    func navigateToInfoCourses(idCourses: Int) {
+        selectCourses.id = idCourses
+        DeepLinksManager.isLink = false
+        DeepLinksManager.courseID = nil
+        performSegue(withIdentifier: "infoCourses", sender: self)
+    }
+    
     func disableLoading() {
         navigationController?.popViewController(animated: false)
         refreshControl.refreshControl.endRefreshing()
@@ -116,8 +125,14 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         recomendCollectionView.reloadData()
     }
     
+    // Смахивание вниз
     func update() {
         refreshControl.refreshControl.endRefreshing()
+    }
+    
+    // Важное обновление без которого приложение не будет работать
+    func importantUpdate() {
+        performSegue(withIdentifier: "importantUpdate", sender: self)
     }
     
     private func tabbar() {
@@ -235,7 +250,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }else if collectionView == celebrityCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "celebrity", for: indexPath) as! CelebrityCollectionViewCell
             cell.name.text = "\(celebrities[indexPath.row].name) \(celebrities[indexPath.row].surname)"
-            //            cell.rating.text = "\(celebrities[indexPath.row].rating)"
+            cell.rating.text = "\(celebrities[indexPath.row].coach.rating)"
             cell.im.sd_setImage(with: celebrities[indexPath.row].avatarURL)
             return cell
         }else {
@@ -250,8 +265,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == recomendCollectionView {
-            selectCourses = recomendCourses[indexPath.row]
-            performSegue(withIdentifier: "infoCourses", sender: self)
+            navigateToInfoCourses(idCourses: recomendCourses[indexPath.row].id)
         }else if collectionView == coachCollectionView {
             selectCoachs = coachs[indexPath.row]
             performSegue(withIdentifier: "coach", sender: self)

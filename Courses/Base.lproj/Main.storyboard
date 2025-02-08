@@ -1914,6 +1914,7 @@
                         <segue destination="bWz-El-6Ec" kind="show" identifier="deepLink" id="38y-op-05K"/>
                         <segue destination="LT7-Zo-YpS" kind="show" identifier="popular" id="Ect-gX-bg4"/>
                         <segue destination="chR-ym-W6o" kind="show" identifier="coach" id="2uE-MH-jsq"/>
+                        <segue destination="mSe-ji-nb8" kind="show" identifier="importantUpdate" animates="NO" id="33k-mw-D1T"/>
                     </connections>
                 </viewController>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="bIx-P8-vIm">
@@ -14494,6 +14495,7 @@
         <segue reference="IVu-BL-rNu"/>
         <segue reference="M8w-WU-QND"/>
         <segue reference="38y-op-05K"/>
+        <segue reference="RsJ-Z8-4Bo"/>
         <segue reference="HHf-kQ-icL"/>
         <segue reference="eaT-yL-Yiu"/>
         <segue reference="3aH-yg-pXb"/>

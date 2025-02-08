@@ -54,29 +54,30 @@ class Privacy {
 
 class AppStoreVersion {
     
-    let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+    let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
     
-    private func versionMaxAllowed(maxVersion: String) -> Bool {
-        let result = maxVersion.compare(version, options: .numeric) == .orderedSame
-        if result {
-            return true
-        }else {
-            return false
+    func isVersion(lessThan otherVersion: String) -> Bool {
+        let currentComponents = currentVersion.split(separator: ".").compactMap { Int($0) }
+        let otherComponents = otherVersion.split(separator: ".").compactMap { Int($0) }
+        
+        for (v1, v2) in zip(currentComponents, otherComponents) {
+            if v1 < v2 { return true }
+            if v1 > v2 { return false }
         }
+        
+        return currentComponents.count < otherComponents.count
     }
     
-    func getVersionAppStore() async throws -> String {
-        let urlString = "https://itunes.apple.com/lookup?bundleId=com.courses.Stride"
-        let value = try await AF.request(urlString,method: .get).serializingData().value
+    func getVersion() async throws -> String {
+        let url = Constants.url + "api/v1/users/version/get/"
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
+        let value = try await AF.request(
+            url,method: .get,
+            headers: headers
+        ).serializingData().value
         let json = JSON(value)
-        let version = json["results"][0]["version"].stringValue
-        print(version, self.version)
+        let version = json["version"].stringValue
         return version
-    }
-    
-    func checkVersionApp() async throws -> Bool {
-        let maxVersion = try await getVersionAppStore()
-        return versionMaxAllowed(maxVersion: maxVersion)
     }
     
 }

@@ -8,6 +8,7 @@
 import UIKit
 import Lottie
 
+
 class LoadingStartViewController: UIViewController {
 
     @IBOutlet weak var viewFon: UIView!
@@ -29,22 +30,11 @@ class LoadingStartViewController: UIViewController {
         randomImageAndTitle()
         loadingSettings()
     }
-    
 
     private func loadingSettings() {
         loading.loopMode = .loop
         loading.contentMode = .scaleAspectFill
         loading.play()
-    }
-    
-    private func updateApp() async throws -> Bool {
-        let isLastVersion = try await AppStoreVersion().checkVersionApp()
-        if isLastVersion == false {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let updateViewController = storyboard.instantiateViewController(identifier: "UpdateViewController")
-            navigationController!.pushViewController(updateViewController, animated: false)
-        }
-        return isLastVersion
     }
 
     private func allTitle() {
