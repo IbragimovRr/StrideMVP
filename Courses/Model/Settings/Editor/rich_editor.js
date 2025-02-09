@@ -230,6 +230,10 @@ RE.setFontSize = function(size) {
     document.execCommand("styleWithCSS", null, false);
 };
 
+RE.setFont = function(fontName) {
+    document.execCommand("fontName", false, fontName);
+}
+
 RE.setBackgroundColor = function(color) {
     RE.editor.style.backgroundColor = color;
 };

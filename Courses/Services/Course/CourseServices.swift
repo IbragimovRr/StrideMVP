@@ -64,7 +64,7 @@ class CourseServices {
     
     func getRecomendedCourses() async throws -> [CourseModel] {
         let value = try await mananger.getRecomendedCourses()
-        let courses = json.allCoursesByUser(value: value)
+        let courses = json.allCourses(value: value)
         return courses
     }
     

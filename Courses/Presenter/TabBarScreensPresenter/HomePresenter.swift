@@ -88,8 +88,9 @@ class HomePresenter: HomePresenterProtocol {
     
     private func checkVersion() {
         Task {
-            let maxVersion = try await AppStoreVersion().getVersion()
-            let isLastVersion = AppStoreVersion().isVersion(lessThan: maxVersion)
+            let maxVersion = try await AppStoreVersion.shared.getVersion()
+            let isLastVersion = AppStoreVersion.shared.isVersion(lessThan: maxVersion)
+            AppStoreVersion.shared.isUpdate = isLastVersion
             if isLastVersion {
                 DispatchQueue.main.async {
                     self.view?.disableLoading()

@@ -50,15 +50,14 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     private var startPosition = CGPoint()
     var fonts = [
-            "Arial",
-            "Helvetica",
-            "Times New Roman",
+            "Dots",
+            "Attractive",
             "Courier New",
-            "Verdana",
-            "Georgia",
-            "Impact",
-            "Comic Sans MS",
-            "Trebuchet MS"
+            "Montserrat",
+            "Commissioner",
+            "Raleway",
+            "Sans",
+            "Inter"
         ]
     var selectedFontIndex = 2 {
         didSet {
@@ -243,7 +242,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         if fontCollectionView.isHidden {
             fontCollectionView.isHidden = false
             isFontName.backgroundColor = .extraLightBlackMain
-            editor.focus()
+//            editor.focus()
         }else {
             fontCollectionView.isHidden = true
             isFontName.backgroundColor = .clear
@@ -298,8 +297,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         toggleFontView(isShow: false)
         checkUndoRedo()
     }
-    
-    
     
     @IBAction func save(_ sender: UIButton) {
         editor.resignFirstResponder()

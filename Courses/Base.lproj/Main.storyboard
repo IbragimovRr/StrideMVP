@@ -321,13 +321,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2d-Xk-gdu">
-                                <rect key="frame" x="10" y="398" width="373" height="350"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhS-eT-1zy">
+                                <rect key="frame" x="10" y="123" width="373" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="350" id="vWJ-6s-LZz"/>
+                                    <constraint firstAttribute="height" constant="300" id="AhJ-1w-Hlg"/>
                                 </constraints>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bg9-BF-XPV">
+                                <rect key="frame" x="10" y="438" width="373" height="310"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pqz-eq-q0B">
                                 <rect key="frame" x="29" y="768" width="335" height="50"/>
                                 <subviews>
@@ -727,13 +734,6 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bg9-BF-XPV">
-                                <rect key="frame" x="10" y="123" width="373" height="265"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XmU-3q-Hr8"/>
                         <color key="backgroundColor" name="BlackMain"/>
@@ -743,22 +743,22 @@
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="top" secondItem="XmU-3q-Hr8" secondAttribute="top" id="2tt-Qg-RBW"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="jHI-pb-aUK" secondAttribute="trailing" id="3BT-8M-Lim"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="centerX" secondItem="xnu-Sq-5BV" secondAttribute="centerX" id="3O1-t2-0as"/>
-                            <constraint firstItem="Bg9-BF-XPV" firstAttribute="top" secondItem="jHI-pb-aUK" secondAttribute="bottom" constant="10" id="7Iv-1z-VhQ"/>
-                            <constraint firstItem="b2d-Xk-gdu" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="10" id="Chf-en-k0g"/>
-                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="bottom" secondItem="b2d-Xk-gdu" secondAttribute="bottom" constant="70" id="DYq-xf-gmq"/>
+                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="bottom" secondItem="Bg9-BF-XPV" secondAttribute="bottom" constant="70" id="6yU-nz-WhP"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="bottom" secondItem="pqz-eq-q0B" secondAttribute="bottom" id="G3E-kt-DQe"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="xYI-FY-3sc" secondAttribute="trailing" id="GOJ-2R-o6z"/>
+                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="RhS-eT-1zy" secondAttribute="trailing" constant="10" id="Kla-ZE-oxI"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="top" secondItem="j3E-yc-avL" secondAttribute="bottom" constant="10" id="O0T-Nv-iGn"/>
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="leading" secondItem="xnu-Sq-5BV" secondAttribute="leading" id="PCp-UW-C6E"/>
+                            <constraint firstItem="Bg9-BF-XPV" firstAttribute="top" secondItem="RhS-eT-1zy" secondAttribute="bottom" constant="15" id="SbF-Gb-rac"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="trailing" secondItem="Tcz-ME-6lc" secondAttribute="trailing" id="XSS-W7-GxF"/>
-                            <constraint firstItem="b2d-Xk-gdu" firstAttribute="top" secondItem="Bg9-BF-XPV" secondAttribute="bottom" constant="10" id="dn3-fi-cYo"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="top" secondItem="xYI-FY-3sc" secondAttribute="bottom" constant="10" id="e26-uF-qDc"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="bottom" secondItem="Tcz-ME-6lc" secondAttribute="bottom" id="e27-Hi-dfQ"/>
                             <constraint firstItem="j3E-yc-avL" firstAttribute="leading" secondItem="pqz-eq-q0B" secondAttribute="leading" constant="35" id="eyy-oa-9PG"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="leading" secondItem="pqz-eq-q0B" secondAttribute="leading" id="hEl-vY-tTh"/>
                             <constraint firstItem="xYI-FY-3sc" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" id="rT6-4M-HFy"/>
+                            <constraint firstItem="RhS-eT-1zy" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="10" id="s38-fL-OgB"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="Bg9-BF-XPV" secondAttribute="trailing" constant="10" id="scj-T7-ksQ"/>
-                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="b2d-Xk-gdu" secondAttribute="trailing" constant="10" id="yvH-mm-2jl"/>
+                            <constraint firstItem="RhS-eT-1zy" firstAttribute="top" secondItem="jHI-pb-aUK" secondAttribute="bottom" constant="10" id="ueu-rL-FNJ"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="6DX-c5-Fez" appends="YES" id="r7X-WK-ueB"/>
@@ -769,7 +769,7 @@
                     <connections>
                         <outlet property="alingment" destination="dpF-O9-MbD" id="DVm-oD-HpC"/>
                         <outlet property="bottomConsoleView" destination="e27-Hi-dfQ" id="LxE-2H-sB8"/>
-                        <outlet property="editorBackView" destination="b2d-Xk-gdu" id="ki2-qB-78S"/>
+                        <outlet property="editorBackView" destination="RhS-eT-1zy" id="PhV-Jr-lNC"/>
                         <outlet property="fontCollectionView" destination="xYI-FY-3sc" id="vDM-LT-awr"/>
                         <outlet property="fontView" destination="pqz-eq-q0B" id="KNB-9C-Q0G"/>
                         <outlet property="heightFontView" destination="j3E-yc-avL" id="zIJ-qY-jrd"/>
@@ -3293,7 +3293,7 @@
                                     <size key="itemSize" width="350" height="120"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="course" id="JxC-Rh-egg" customClass="CoursesCollectionViewCell" customModule="Courses" customModuleProvider="target">
@@ -14493,9 +14493,8 @@
         <segue reference="2uE-MH-jsq"/>
         <segue reference="nzc-9n-Ktz"/>
         <segue reference="IVu-BL-rNu"/>
-        <segue reference="M8w-WU-QND"/>
-        <segue reference="38y-op-05K"/>
-        <segue reference="RsJ-Z8-4Bo"/>
+        <segue reference="afS-Cq-cau"/>
+        <segue reference="ID3-qF-T3b"/>
         <segue reference="HHf-kQ-icL"/>
         <segue reference="eaT-yL-Yiu"/>
         <segue reference="3aH-yg-pXb"/>

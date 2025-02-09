@@ -39,6 +39,11 @@
 		<string>SF-Pro-Rounded-Semibold.otf</string>
 		<string>SF-Pro-Rounded-Regular.otf</string>
 		<string>Montserrat-Bold.ttf</string>
+		<string>Raleway.ttf</string>
+		<string>Sans.otf</string>
+		<string>Dots.ttf</string>
+		<string>Attractive.ttf</string>
+		<string>Inter.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

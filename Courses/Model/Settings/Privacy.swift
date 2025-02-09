@@ -53,7 +53,9 @@ class Privacy {
 }
 
 class AppStoreVersion {
+    static let shared = AppStoreVersion()
     
+    var isUpdate = false
     let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
     
     func isVersion(lessThan otherVersion: String) -> Bool {
@@ -64,8 +66,8 @@ class AppStoreVersion {
             if v1 < v2 { return true }
             if v1 > v2 { return false }
         }
-        
-        return currentComponents.count < otherComponents.count
+        let result = currentComponents.count < otherComponents.count
+        return result
     }
     
     func getVersion() async throws -> String {

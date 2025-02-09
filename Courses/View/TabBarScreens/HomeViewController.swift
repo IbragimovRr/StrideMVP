@@ -89,6 +89,7 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     }
     
     func disableLoading() {
+        guard AppStoreVersion.shared.isUpdate == false else { return }
         navigationController?.popViewController(animated: false)
         refreshControl.refreshControl.endRefreshing()
     }
@@ -130,7 +131,7 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         refreshControl.refreshControl.endRefreshing()
     }
     
-    // Важное обновление без которого приложение не будет работать
+    // Важное обновление 
     func importantUpdate() {
         performSegue(withIdentifier: "importantUpdate", sender: self)
     }

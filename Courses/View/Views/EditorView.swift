@@ -59,7 +59,6 @@ class EditorView: WKWebView {
     }
     
     func disableEditing() {
-        print(66)
         runJS("RE.disableEditing()")
     }
     
