@@ -47,6 +47,12 @@ class TypeModuleViewController: UIViewController {
         }
     }
     
+    private func showErrorTypes() {
+        customView.color = UIColor.errorRed
+        videoView.color = UIColor.errorRed
+        trainingView.color = UIColor.errorRed
+    }
+    
     private func unselectView() {
         switch selectTag {
         case 0:
@@ -72,19 +78,8 @@ class TypeModuleViewController: UIViewController {
         trainingImage.image = UIImage.trainingModule2
     }
     
-    @IBAction func selectType(_ sender: UIButton) {
-        unselectView()
-        if selectTag == sender.tag {
-            unselectView()
-            selectTag = nil
-        }else {
-            selectTag = sender.tag
-            selectView()
-        }
-    }
-    
-    @IBAction func save(_ sender: UIButton) {
-        var type: ModuleType = .custom
+    private func initialType() -> Result<ModuleType, ErrorNetwork> {
+        var type: ModuleType? = nil
         switch selectTag {
         case 0:
             type = .custom
@@ -97,8 +92,32 @@ class TypeModuleViewController: UIViewController {
         case .some(_):
             break
         }
-        delegate.addModule(type: type, position: position)
-        dismiss(animated: false)
+        if let type = type {
+            return .success(type)
+        }else {
+            return .failure(ErrorNetwork.notFound)
+        }
+    }
+    
+    @IBAction func selectType(_ sender: UIButton) {
+        unselectAllView()
+        if selectTag == sender.tag {
+            unselectView()
+            selectTag = nil
+        }else {
+            selectTag = sender.tag
+            selectView()
+        }
+    }
+    
+    @IBAction func save(_ sender: UIButton) {
+        switch initialType() {
+        case .success(let type):
+            delegate.addModule(type: type, position: position)
+            dismiss(animated: false)
+        case .failure(_):
+            showErrorTypes()
+        }
     }
     
     
@@ -120,11 +139,6 @@ class TypeModuleViewController: UIViewController {
         default:
             break
         }
-    }
-    
-    
-    @IBAction func back(_ sender: UIButton) {
-        dismiss(animated: false)
     }
     
 }

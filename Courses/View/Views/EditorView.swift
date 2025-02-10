@@ -101,7 +101,11 @@ class EditorView: WKWebView {
     }
     
     func heading(_ size: Int, _ fontName: String) {
-        runJS("RE.setHeading('\(size)', '\(fontName)')")
+        if size == 0 {
+            runJS("RE.resetHeading()")
+        }else {
+            runJS("RE.setHeading('\(size)', '\(fontName)')")
+        }
     }
     
     

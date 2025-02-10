@@ -62,7 +62,7 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     let presenter = AddTrainingModulePresenter()
     
-    var selectTF = UITextField()
+    var selectTF: UITextField?
     var mediaURL: URL?
     var trainingItem: TrainingItem {
         get {
@@ -100,12 +100,15 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     }
 
     @objc func keyboardWillAppear(notification: Notification) {
+        guard let selectTF = selectTF else { return }
         //Скролл до низа nextField c клавиатурой
         selectTF.scrollBottomText(scrollView: scrollView, notification: notification)
+        self.selectTF = nil
     }
 
     @objc func keyboardWillDisappear() {
         scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: 0), animated: true)
+        selectTF = nil
     }
     
     private func changeHeightCollection() {

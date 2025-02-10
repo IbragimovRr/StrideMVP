@@ -49,6 +49,7 @@ class WithdrawSBPViewController: UIViewController, WithdrawViewDelegate {
     }
     
     private func design() {
+        banksTableView.roundBottomCorners(radius: 15)
         banksTableView.isHidden = true
         moneyCount.text = "\(presenter.money)"
     }

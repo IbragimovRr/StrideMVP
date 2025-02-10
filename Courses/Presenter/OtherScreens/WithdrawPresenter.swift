@@ -20,7 +20,7 @@ class WithdrawPresenter: WithdrawPresenterDelegate {
     var arrayBanks = [Banks]()
     
     func getBanks() {
-        arrayBanks = [Banks(name: "Сбербанк", image: ""), Banks(name: "Т-Банк", image: ""), Banks(name: "АльфаБанк", image: ""), Banks(name: "ГазПромБанк", image: "")]
+        arrayBanks = [Banks(name: "Сбербанк", image: "sber"), Banks(name: "Т-Банк", image: "tinkoff"), Banks(name: "АльфаБанк", image: "alfa"), Banks(name: "ГазПромБанк", image: "gaz")]
         view?.showBank()
     }
     

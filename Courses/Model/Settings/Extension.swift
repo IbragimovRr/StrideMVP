@@ -190,6 +190,21 @@ extension Date {
     }
 }
 
+extension UIView {
+    func roundBottomCorners(radius: CGFloat) {
+        let maskPath = UIBezierPath(
+            roundedRect: bounds,
+            byRoundingCorners: [.bottomLeft, .bottomRight],
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
+        
+        let shape = CAShapeLayer()
+        shape.path = maskPath.cgPath
+        layer.mask = shape
+    }
+}
+
+
 extension UITextField {
 
     func scrollBottomText(scrollView: UIScrollView, notification: Notification) {

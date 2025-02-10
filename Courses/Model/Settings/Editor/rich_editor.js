@@ -312,6 +312,9 @@ RE.setHeading = function(heading, fontName) {
     document.execCommand('fontName', false, fontName);
 };
 
+RE.resetHeading = function() {
+    document.execCommand('formatBlock', false, '<p>'); // Возвращает текст в параграф
+};
 
 RE.setIndent = function() {
     document.execCommand('indent', false, null);

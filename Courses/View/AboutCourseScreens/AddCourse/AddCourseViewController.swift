@@ -242,7 +242,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         if fontCollectionView.isHidden {
             fontCollectionView.isHidden = false
             isFontName.backgroundColor = .extraLightBlackMain
-//            editor.focus()
         }else {
             fontCollectionView.isHidden = true
             isFontName.backgroundColor = .clear
@@ -253,7 +252,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         if heightFontView.isHidden {
             heightFontView.isHidden = false
             isFontHeight.backgroundColor = .extraLightBlackMain
-            editor.focus()
         }else {
             heightFontView.isHidden = true
             isFontHeight.backgroundColor = .clear
