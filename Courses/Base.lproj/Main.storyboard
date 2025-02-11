@@ -10903,11 +10903,11 @@
             <objects>
                 <viewController id="igB-po-8rm" customClass="PromoViewController" customModule="Courses" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hyr-E9-DwU">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcJ-dg-CP3">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="54"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="54"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44f-dS-ZzO">
                                         <rect key="frame" x="15" y="13" width="32" height="28"/>
@@ -10919,7 +10919,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Промокоды" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baF-Cg-LTa">
-                                        <rect key="frame" x="147.66666666666666" y="16.666666666666668" width="97.666666666666657" height="21.000000000000004"/>
+                                        <rect key="frame" x="147.66666666666666" y="16.666666666666671" width="97.666666666666657" height="21"/>
                                         <fontDescription key="fontDescription" name="Commissioner-SemiBold" family="Commissioner" pointSize="17"/>
                                         <color key="textColor" name="GrayMain"/>
                                         <nil key="highlightedColor"/>
@@ -10935,7 +10935,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hDl-Hl-R8z">
-                                <rect key="frame" x="20" y="84" width="353" height="728"/>
+                                <rect key="frame" x="20" y="143" width="353" height="645"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hSZ-SB-2QC">
                                     <size key="itemSize" width="170" height="85"/>
@@ -11056,7 +11056,7 @@
                                 </cells>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GwR-G4-CNk">
-                                <rect key="frame" x="25" y="812" width="343" height="0.0"/>
+                                <rect key="frame" x="25" y="788" width="343" height="0.0"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BsJ-LW-Mex">
                                         <rect key="frame" x="0.0" y="0.0" width="61" height="50"/>
@@ -13141,7 +13141,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GM9-92-XMe">
                                 <rect key="frame" x="0.0" y="128" width="393" height="35"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Информация модуля которая будет видна пользователю в плане курса еще до покупки" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuX-g9-z6g">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Информация модуля, которая будет видна пользователю в плане курса еще до покупки" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuX-g9-z6g">
                                         <rect key="frame" x="32" y="0.0" width="301" height="35"/>
                                         <fontDescription key="fontDescription" name="Commissioner-SemiBold" family="Commissioner" pointSize="12"/>
                                         <color key="textColor" name="GrayMain"/>
@@ -14472,17 +14472,17 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kFQ-re-axD"/>
+        <segue reference="oYQ-p4-idr"/>
         <segue reference="vKu-9D-Hl7"/>
         <segue reference="2uE-MH-jsq"/>
         <segue reference="nsh-RS-Plh"/>
         <segue reference="IVu-BL-rNu"/>
         <segue reference="afS-Cq-cau"/>
-        <segue reference="ID3-qF-T3b"/>
+        <segue reference="6lb-rV-2hg"/>
         <segue reference="HHf-kQ-icL"/>
         <segue reference="eaT-yL-Yiu"/>
         <segue reference="3aH-yg-pXb"/>
-        <segue reference="Ect-gX-bg4"/>
+        <segue reference="pPa-ol-Wiu"/>
         <segue reference="7iD-6h-6hO"/>
     </inferredMetricsTieBreakers>
     <resources>

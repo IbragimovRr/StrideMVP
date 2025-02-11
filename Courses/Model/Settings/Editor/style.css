@@ -245,3 +245,80 @@ td{
     font-weight: 700;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Baskerville';
+    src: url('Baskerville.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Baskerville';
+    src: url('Baskerville-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MarkerFelt';
+    src: url('MarkerFelt.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cochin';
+    src: url('Cochin.otf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cochin';
+    src: url('Cochin-Bold.otf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DINCondensed';
+    src: url('DINCondensed.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Palatino';
+    src: url('Palatino.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Palatino';
+    src: url('Palatino-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rockwell';
+    src: url('Rockwell.otf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Copperplate';
+    src: url('Copperplate.otf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Copperplate';
+    src: url('Copperplate-Bold.otf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}

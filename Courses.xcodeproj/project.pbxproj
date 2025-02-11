@@ -98,6 +98,17 @@
 		448E73FA2CFF087A00C3000D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F92CFF087A00C3000D /* UserModel.swift */; };
 		448E73FE2CFF09E200C3000D /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73FD2CFF09E200C3000D /* Segment.swift */; };
 		448FBC692D31C24E00476EE2 /* AddCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */; };
+		449215AE2D5B73470080184D /* Baskerville.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 449215AC2D5B73470080184D /* Baskerville.ttf */; };
+		449215AF2D5B73470080184D /* Baskerville-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 449215AD2D5B73470080184D /* Baskerville-Bold.ttf */; };
+		449215B12D5B736F0080184D /* MarkerFelt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 449215B02D5B736F0080184D /* MarkerFelt.ttf */; };
+		449215B42D5B739F0080184D /* Cochin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 449215B22D5B739F0080184D /* Cochin-Bold.otf */; };
+		449215B52D5B739F0080184D /* Cochin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 449215B32D5B739F0080184D /* Cochin.otf */; };
+		449215B72D5B73DB0080184D /* DINCondensed.otf in Resources */ = {isa = PBXBuildFile; fileRef = 449215B62D5B73DB0080184D /* DINCondensed.otf */; };
+		449215BA2D5B74260080184D /* Palatino.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 449215B82D5B74260080184D /* Palatino.ttf */; };
+		449215BB2D5B74260080184D /* Palatino-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 449215B92D5B74260080184D /* Palatino-Bold.ttf */; };
+		449215BD2D5B743E0080184D /* Rockwell.otf in Resources */ = {isa = PBXBuildFile; fileRef = 449215BC2D5B743E0080184D /* Rockwell.otf */; };
+		449215C02D5B74670080184D /* Copperplate.otf in Resources */ = {isa = PBXBuildFile; fileRef = 449215BE2D5B74670080184D /* Copperplate.otf */; };
+		449215C12D5B74670080184D /* Copperplate-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 449215BF2D5B74670080184D /* Copperplate-Bold.otf */; };
 		44932A992C81303A00E0F86F /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44932A982C81303A00E0F86F /* PrivacyViewController.swift */; };
 		44932A9B2C81F87B00E0F86F /* LoadingStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44932A9A2C81F87B00E0F86F /* LoadingStartViewController.swift */; };
 		44962E962C821B3600CB6A1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44962E942C821B3600CB6A1C /* Main.storyboard */; };
@@ -286,6 +297,17 @@
 		448E73F92CFF087A00C3000D /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		448E73FD2CFF09E200C3000D /* Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
 		448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoursePresenter.swift; sourceTree = "<group>"; };
+		449215AC2D5B73470080184D /* Baskerville.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Baskerville.ttf; sourceTree = "<group>"; };
+		449215AD2D5B73470080184D /* Baskerville-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baskerville-Bold.ttf"; sourceTree = "<group>"; };
+		449215B02D5B736F0080184D /* MarkerFelt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MarkerFelt.ttf; sourceTree = "<group>"; };
+		449215B22D5B739F0080184D /* Cochin-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cochin-Bold.otf"; sourceTree = "<group>"; };
+		449215B32D5B739F0080184D /* Cochin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cochin.otf; sourceTree = "<group>"; };
+		449215B62D5B73DB0080184D /* DINCondensed.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINCondensed.otf; sourceTree = "<group>"; };
+		449215B82D5B74260080184D /* Palatino.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Palatino.ttf; sourceTree = "<group>"; };
+		449215B92D5B74260080184D /* Palatino-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Palatino-Bold.ttf"; sourceTree = "<group>"; };
+		449215BC2D5B743E0080184D /* Rockwell.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rockwell.otf; sourceTree = "<group>"; };
+		449215BE2D5B74670080184D /* Copperplate.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Copperplate.otf; sourceTree = "<group>"; };
+		449215BF2D5B74670080184D /* Copperplate-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Copperplate-Bold.otf"; sourceTree = "<group>"; };
 		44932A982C81303A00E0F86F /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		44932A9A2C81F87B00E0F86F /* LoadingStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStartViewController.swift; sourceTree = "<group>"; };
 		44962E952C821B3600CB6A1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -554,6 +576,13 @@
 		446B1E332D591B3100A3A851 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				449215AB2D5B71A80080184D /* Copperplate */,
+				449215AA2D5B71A00080184D /* Rockwell */,
+				449215A92D5B71990080184D /* Palatino */,
+				449215A82D5B71900080184D /* DINCondensed */,
+				449215A72D5B71750080184D /* Cochin */,
+				449215A62D5B716B0080184D /* MarkerFelt */,
+				449215A52D5B71540080184D /* Baskerville */,
 				446B1E502D59204E00A3A851 /* Raleway */,
 				446B1E4F2D59204800A3A851 /* Inter */,
 				446B1E482D591F5900A3A851 /* Sans */,
@@ -695,6 +724,66 @@
 				751510402C34586D009978E6 /* SettingsViewController.swift */,
 			);
 			path = TabBarScreens;
+			sourceTree = "<group>";
+		};
+		449215A52D5B71540080184D /* Baskerville */ = {
+			isa = PBXGroup;
+			children = (
+				449215AC2D5B73470080184D /* Baskerville.ttf */,
+				449215AD2D5B73470080184D /* Baskerville-Bold.ttf */,
+			);
+			path = Baskerville;
+			sourceTree = "<group>";
+		};
+		449215A62D5B716B0080184D /* MarkerFelt */ = {
+			isa = PBXGroup;
+			children = (
+				449215B02D5B736F0080184D /* MarkerFelt.ttf */,
+			);
+			path = MarkerFelt;
+			sourceTree = "<group>";
+		};
+		449215A72D5B71750080184D /* Cochin */ = {
+			isa = PBXGroup;
+			children = (
+				449215B22D5B739F0080184D /* Cochin-Bold.otf */,
+				449215B32D5B739F0080184D /* Cochin.otf */,
+			);
+			path = Cochin;
+			sourceTree = "<group>";
+		};
+		449215A82D5B71900080184D /* DINCondensed */ = {
+			isa = PBXGroup;
+			children = (
+				449215B62D5B73DB0080184D /* DINCondensed.otf */,
+			);
+			path = DINCondensed;
+			sourceTree = "<group>";
+		};
+		449215A92D5B71990080184D /* Palatino */ = {
+			isa = PBXGroup;
+			children = (
+				449215B92D5B74260080184D /* Palatino-Bold.ttf */,
+				449215B82D5B74260080184D /* Palatino.ttf */,
+			);
+			path = Palatino;
+			sourceTree = "<group>";
+		};
+		449215AA2D5B71A00080184D /* Rockwell */ = {
+			isa = PBXGroup;
+			children = (
+				449215BC2D5B743E0080184D /* Rockwell.otf */,
+			);
+			path = Rockwell;
+			sourceTree = "<group>";
+		};
+		449215AB2D5B71A80080184D /* Copperplate */ = {
+			isa = PBXGroup;
+			children = (
+				449215BF2D5B74670080184D /* Copperplate-Bold.otf */,
+				449215BE2D5B74670080184D /* Copperplate.otf */,
+			);
+			path = Copperplate;
 			sourceTree = "<group>";
 		};
 		449C124C2D00DD7E0091F0F5 /* TabBarScreensPresenter */ = {
@@ -919,8 +1008,13 @@
 				44611D1C2D59213100772D6E /* Raleway.ttf in Resources */,
 				44C9F9332D4E4E6200C10A68 /* style.css in Resources */,
 				440DAB3D2C1748D600C576FB /* Assets.xcassets in Resources */,
+				449215B72D5B73DB0080184D /* DINCondensed.otf in Resources */,
 				44611D1D2D59213100772D6E /* Raleway-Bold.ttf in Resources */,
+				449215C02D5B74670080184D /* Copperplate.otf in Resources */,
+				449215BD2D5B743E0080184D /* Rockwell.otf in Resources */,
+				449215B42D5B739F0080184D /* Cochin-Bold.otf in Resources */,
 				446B1E4C2D591F6500A3A851 /* Sans.otf in Resources */,
+				449215B12D5B736F0080184D /* MarkerFelt.ttf in Resources */,
 				446B1E4E2D591FC000A3A851 /* MinSans-Bold.otf in Resources */,
 				440DAB402C1748D600C576FB /* Base in Resources */,
 				447D8C8E2C89D09600EF2217 /* emptyBox.json in Resources */,
@@ -930,11 +1024,15 @@
 				44C9F9322D4E4E6200C10A68 /* rich_editor.js in Resources */,
 				446B1E3C2D591B9700A3A851 /* Montserrat-BoldItalic.ttf in Resources */,
 				44962E962C821B3600CB6A1C /* Main.storyboard in Resources */,
+				449215C12D5B74670080184D /* Copperplate-Bold.otf in Resources */,
 				446B1E442D591D1800A3A851 /* Attractive-Italic.ttf in Resources */,
 				446B1E3D2D591B9700A3A851 /* Montserrat-Medium.ttf in Resources */,
+				449215BA2D5B74260080184D /* Palatino.ttf in Resources */,
 				446B1E432D591D1800A3A851 /* Attractive.ttf in Resources */,
 				44DFB11B2C3B2637005C8F44 /* loading.json in Resources */,
+				449215B52D5B739F0080184D /* Cochin.otf in Resources */,
 				44064C752C26ED8E00AB5227 /* Commissioner-Medium.ttf in Resources */,
+				449215AF2D5B73470080184D /* Baskerville-Bold.ttf in Resources */,
 				446B1E462D591EB200A3A851 /* Dots.ttf in Resources */,
 				446B1E532D59208300A3A851 /* Inter.ttf in Resources */,
 				44049A2E2C6CE0C30014BD9C /* credentials.plist in Resources */,
@@ -945,6 +1043,8 @@
 				44064C792C26ED9D00AB5227 /* Commissioner-Regular.ttf in Resources */,
 				44C9F9312D4E4E6200C10A68 /* rich_editor.html in Resources */,
 				44064C862C26F8A500AB5227 /* Commissioner-VariableFont_wght.ttf in Resources */,
+				449215BB2D5B74260080184D /* Palatino-Bold.ttf in Resources */,
+				449215AE2D5B73470080184D /* Baskerville.ttf in Resources */,
 				44064C772C26ED9500AB5227 /* Commissioner-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
