@@ -11,11 +11,13 @@ protocol PlanCoursesViewDelegate {
     func setData()
     func setError(error: String)
     func savePlan()
+    func isEnabledBtn(_ bool: Bool)
 }
 
 extension PlanCoursesViewDelegate {
     func setError(error: String) {}
     func savePlan() {}
+    func isEnabledBtn(_ bool: Bool) {}
 }
 
 class PlanCoursesViewController: UIViewController, PlanCoursesViewDelegate {

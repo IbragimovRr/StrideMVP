@@ -90,6 +90,15 @@ document.addEventListener("selectionchange", function() {
     handleFormatChange();
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    document.body.addEventListener("click", function(event) {
+        let target = event.target;
+        if (target.tagName === "IMG") {
+            let imageUrl = target.src;
+            window.webkit.messageHandlers.imageClicked.postMessage(imageUrl);
+        }
+    });
+});
 
 //looks specifically for a Range selection and not a Caret selection
 RE.rangeSelectionExists = function() {

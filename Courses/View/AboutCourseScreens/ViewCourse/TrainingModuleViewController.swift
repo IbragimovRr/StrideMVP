@@ -53,6 +53,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
+    private var playerLayer = AVPlayerLayer()
     private var timer = TimerTraining()
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     var repeats = [TrainingItem]()
@@ -95,6 +96,11 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         timer.delegate = self
         presenter.getData()
         presenter.getTraining()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        playerLayer.frame = videoPlayerView.bounds
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -293,10 +299,10 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     }
     
     func setupView() {
-        let layer = AVPlayerLayer(player: player)
-        layer.frame = videoPlayerView.bounds
-        layer.videoGravity = .resizeAspectFill
-        videoPlayerView.layer.addSublayer(layer)
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = videoPlayerView.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        videoPlayerView.layer.addSublayer(playerLayer)
     }
     
     private func toggleControlVideo(isPlay: Bool) {

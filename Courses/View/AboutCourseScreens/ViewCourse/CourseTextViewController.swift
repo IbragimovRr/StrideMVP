@@ -8,6 +8,7 @@
 import UIKit
 import Lottie
 import WebKit
+import Lightbox
 
 class CourseTextViewController: UIViewController {
 
@@ -34,10 +35,13 @@ class CourseTextViewController: UIViewController {
         setupRichEditorView()
         loadingSettings()
         nameCourse.text = module.module.name
-    }
+    } 
     
     func setupRichEditorView() {
         let webConfiguration = WKWebViewConfiguration()
+        let contentController = WKUserContentController()
+        contentController.add(self, name: "imageClicked")
+        webConfiguration.userContentController = contentController
         editor = EditorView(frame: .zero, configuration: webConfiguration)
         editor.navigationDelegate = self
         editor.layer.makeHiddenOnCapture()
@@ -74,6 +78,20 @@ class CourseTextViewController: UIViewController {
         }
     }
     
+    func imageShow(imageURL: String) {
+        LightboxConfig.loadImage = { imageView, url, completion in
+            imageView.sd_setImage(with: url) { image, _, _, _ in
+                completion?(image)
+            }
+        }
+        let images = [LightboxImage(imageURL: URL(string: imageURL)!)]
+        let controller = LightboxController(images: images)
+        controller.dynamicBackground = true
+        controller.footerView.isHidden = true
+        
+        present(controller, animated: true)
+    }
+    
 
     @IBAction func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -84,5 +102,13 @@ extension CourseTextViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         getData()
         editor.disableEditing()
+    }
+}
+extension CourseTextViewController: WKScriptMessageHandler {
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "imageClicked", let imageUrl = message.body as? String {
+            imageShow(imageURL: imageUrl)
+        }
     }
 }

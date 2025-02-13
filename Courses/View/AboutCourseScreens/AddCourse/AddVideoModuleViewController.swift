@@ -44,6 +44,8 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     var presenter = AddVideoModulePresenter()
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
+    private var playerLayer = AVPlayerLayer()
+    private var isLoaded = false
     let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     
     override func viewDidLoad() {
@@ -54,6 +56,11 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         view.addSubview(errorView)
         loadingSettings()
         presenter.checkUpload()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        playerLayer.frame = videoPlayerView.bounds
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -95,10 +102,12 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
             loading.play()
             loading.isHidden = false
             saveBtn.isHidden = true
+            isLoaded = true
         }else {
             loading.stop()
             loading.isHidden = true
             saveBtn.isHidden = false
+            isLoaded = false
         }
     }
     
@@ -135,10 +144,10 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     }
     
     func setupView() {
-        let layer = AVPlayerLayer(player: player)
-        layer.frame = videoPlayerView.bounds
-        layer.videoGravity = .resizeAspectFill
-        videoPlayerView.layer.addSublayer(layer)
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = videoPlayerView.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        videoPlayerView.layer.addSublayer(playerLayer)
     }
     
     func toggleControlVideo(isPlay: Bool) {
@@ -248,7 +257,11 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     }
     
     @IBAction func back(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        if isLoaded {
+            errorView.warningSave(self, title: "Загрузка еще не завершена")
+        }else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func swipe(_ sender: UIPanGestureRecognizer) {
@@ -286,7 +299,7 @@ extension AddVideoModuleViewController: UITextViewDelegate {
         
         let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
         
-        if newText.count <= 400 {
+        if newText.count <= 1000 {
             updateCharCountLabel(count: newText.count)
             return true
         }
@@ -295,7 +308,7 @@ extension AddVideoModuleViewController: UITextViewDelegate {
     }
     
     func updateCharCountLabel(count: Int){
-        countCharacters.text = "\(count)/\(400)"
+        countCharacters.text = "\(count)/\(1000)"
     }
     
 }

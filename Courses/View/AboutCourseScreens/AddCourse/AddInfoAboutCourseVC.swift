@@ -189,8 +189,6 @@ class AddInfoAboutCourseVC: UIViewController {
         loading.isHidden = true
         saveBtn.isHidden = false
     }
-    
-    
 
     func addInfoInVar() {
         infoCourses.nameCourse = name.text!

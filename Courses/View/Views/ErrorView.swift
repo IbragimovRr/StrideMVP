@@ -129,5 +129,22 @@ class ErrorView: UIView {
             break
         }
     }
+    
+    func warningSave(_ vc: UIViewController, title: String = "Вы не сохранили изменения") {
+        let alert = UIAlertController(title: title, message: "Вы точно хотите выйти?", preferredStyle: .alert)
+        
+        let deleteAction = UIAlertAction(title: "Выйти", style: .default) { _ in
+            vc.navigationController?.popViewController(animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _ in
+            vc.dismiss(animated: true)
+        }
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        vc.present(alert, animated: true)
+    }
 
 }

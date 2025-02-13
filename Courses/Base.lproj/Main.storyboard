@@ -2899,8 +2899,8 @@
                         <outlet property="emptyView" destination="ouL-l7-yhD" id="DsP-Un-odS"/>
                         <outlet property="textField" destination="XxR-PQ-HrL" id="kf8-Yg-HOB"/>
                         <outlet property="titleLbl" destination="H68-pd-EvD" id="Y3O-KQ-CKk"/>
-                        <segue destination="Zof-OM-ayt" kind="show" identifier="changeCourse" id="yNH-bw-Rcl"/>
                         <segue destination="bWz-El-6Ec" kind="show" identifier="infoCourses" id="VAz-Cz-udn"/>
+                        <segue destination="bdF-Md-SrY" kind="show" identifier="changeCourse" id="VEv-hw-ZY6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ilt-dx-COc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -12995,6 +12995,16 @@
                                             <action selector="save:" destination="pRk-WP-w4F" eventType="touchUpInside" id="oc4-nm-HHx"/>
                                         </connections>
                                     </button>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jo9-p3-zF7" customClass="LottieAnimationView" customModule="Lottie">
+                                        <rect key="frame" x="171.66666666666666" y="442" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="gH1-xW-MeQ"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="loading"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" name="LightBlackMain"/>
                                 <constraints>
@@ -13004,7 +13014,10 @@
                                     <constraint firstAttribute="trailing" secondItem="e5V-bS-wVR" secondAttribute="trailing" constant="30" id="Tfm-KK-28t"/>
                                     <constraint firstItem="e5V-bS-wVR" firstAttribute="top" secondItem="l4p-Qi-WVG" secondAttribute="bottom" id="Y5y-us-SQP"/>
                                     <constraint firstItem="l4p-Qi-WVG" firstAttribute="leading" secondItem="E4a-kM-Qls" secondAttribute="leading" id="fUn-Pl-24m"/>
+                                    <constraint firstItem="jo9-p3-zF7" firstAttribute="centerX" secondItem="E4a-kM-Qls" secondAttribute="centerX" id="g9E-nW-IUa"/>
+                                    <constraint firstItem="jo9-p3-zF7" firstAttribute="top" secondItem="e5V-bS-wVR" secondAttribute="top" id="lws-0B-BL1"/>
                                     <constraint firstItem="l4p-Qi-WVG" firstAttribute="top" secondItem="E4a-kM-Qls" secondAttribute="top" id="r6P-qk-S5u"/>
+                                    <constraint firstItem="jo9-p3-zF7" firstAttribute="bottom" secondItem="e5V-bS-wVR" secondAttribute="bottom" id="whW-Hn-s15"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="25"/>
@@ -13056,12 +13069,14 @@
                         <outlet property="heigthCollection" destination="vfI-0O-6eB" id="CHh-9e-uOK"/>
                         <outlet property="im" destination="qiA-n9-r7C" id="M3I-AI-72p"/>
                         <outlet property="imView" destination="ty0-m6-YGm" id="rTu-rm-OK2"/>
+                        <outlet property="loading" destination="jo9-p3-zF7" id="v7b-mU-n6n"/>
                         <outlet property="nameModule" destination="AiX-F4-NoF" id="2BQ-2F-rhV"/>
                         <outlet property="playView" destination="mGm-QG-hge" id="ERe-FK-Uie"/>
                         <outlet property="repeatsBox" destination="Q13-aO-EIk" id="L4Q-YO-y4E"/>
                         <outlet property="repeatsImage" destination="3T8-fI-Dy0" id="Zks-Un-10D"/>
                         <outlet property="repeatsLbl" destination="EMt-kf-0Gh" id="TcP-iK-Rlf"/>
                         <outlet property="repeatsView" destination="S7W-8C-Hmd" id="JPk-9P-vNx"/>
+                        <outlet property="saveBtn" destination="e5V-bS-wVR" id="LiH-lg-aeE"/>
                         <outlet property="scrollView" destination="l4p-Qi-WVG" id="ibJ-l9-8TY"/>
                         <outlet property="timerBox" destination="U56-Qf-d0q" id="oUf-CK-KB1"/>
                         <outlet property="timerImage" destination="9V5-7J-JKO" id="qhL-D2-dzH"/>
@@ -13574,6 +13589,7 @@
                     <navigationItem key="navigationItem" id="AvE-M9-afk"/>
                     <connections>
                         <outlet property="modulesCollectionView" destination="bw5-rC-UFM" id="bmB-08-bqo"/>
+                        <outlet property="nextBtn" destination="FpW-sQ-OFm" id="lw1-3r-2u7"/>
                         <outlet property="planInfoView" destination="Rzj-Zb-RpV" id="ZPO-QS-1W6"/>
                         <segue destination="bWz-El-6Ec" kind="show" identifier="preview" id="6lb-rV-2hg"/>
                     </connections>
@@ -14477,8 +14493,8 @@
         <segue reference="2uE-MH-jsq"/>
         <segue reference="nsh-RS-Plh"/>
         <segue reference="IVu-BL-rNu"/>
-        <segue reference="afS-Cq-cau"/>
-        <segue reference="6lb-rV-2hg"/>
+        <segue reference="VEv-hw-ZY6"/>
+        <segue reference="VAz-Cz-udn"/>
         <segue reference="HHf-kQ-icL"/>
         <segue reference="eaT-yL-Yiu"/>
         <segue reference="3aH-yg-pXb"/>

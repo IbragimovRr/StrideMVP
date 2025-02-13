@@ -66,7 +66,7 @@ class AppStoreVersion {
             if v1 < v2 { return true }
             if v1 > v2 { return false }
         }
-        let result = currentComponents.count < otherComponents.count
+        let result = currentComponents.count <= otherComponents.count
         return result
     }
     

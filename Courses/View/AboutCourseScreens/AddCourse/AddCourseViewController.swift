@@ -276,24 +276,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         }
     }
 
-    
-    private func warningSave() {
-        let alert = UIAlertController(title: "Вы не сохранили изменения", message: "Вы точно хотите выйти?", preferredStyle: .alert)
-        
-        let deleteAction = UIAlertAction(title: "Выйти", style: .default) { _ in
-            self.navigationController?.popViewController(animated: true)
-        }
-        
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _ in
-            self.dismiss(animated: true)
-        }
-        
-        alert.addAction(deleteAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true)
-    }
-
 
     
     // MARK: - UIButton
@@ -406,7 +388,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     
     @IBAction func back(_ sender: UIButton) {
         if isSave == false {
-            warningSave()
+            errorView.warningSave(self)
         }else {
             self.navigationController?.popViewController(animated: true)
         }

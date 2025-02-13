@@ -7,6 +7,7 @@
 
 import UIKit
 import AVKit
+import Lottie
 
 protocol AddTrainingModuleViewDelegate {
     func showData()
@@ -15,10 +16,13 @@ protocol AddTrainingModuleViewDelegate {
     func showUploadMedia()
     func showError(error: String)
     func saveData()
+    func showLoading(isLoading: Bool)
 }
 
 class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDelegate {
 
+    @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var loading: LottieAnimationView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var heigthCollection: NSLayoutConstraint!
     @IBOutlet weak var distanceView: Border!
@@ -59,9 +63,10 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
+    private var playerLayer = AVPlayerLayer()
     let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     let presenter = AddTrainingModulePresenter()
-    
+    var isLoaded = false
     var selectTF: UITextField?
     var mediaURL: URL?
     var trainingItem: TrainingItem {
@@ -80,6 +85,11 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         presenter.view = self
         view.addSubview(errorView)
         presenter.getModule()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        playerLayer.frame = videoPlayerView.bounds
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -107,7 +117,6 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     }
 
     @objc func keyboardWillDisappear() {
-        scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: 0), animated: true)
         selectTF = nil
     }
     
@@ -162,6 +171,20 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         errorView.isHidden = false
     }
     
+    func showLoading(isLoading: Bool) {
+        if isLoading {
+            loading.play()
+            loading.isHidden = false
+            saveBtn.isHidden = true
+            isLoaded = true
+        }else {
+            loading.stop()
+            loading.isHidden = true
+            saveBtn.isHidden = false
+            isLoaded = false
+        }
+    }
+    
     // MARK: - Private function
     
     private func hiddenTrainingItems() {
@@ -209,10 +232,10 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     }
     
     func setupView() {
-        let layer = AVPlayerLayer(player: player)
-        layer.frame = videoPlayerView.bounds
-        layer.videoGravity = .resizeAspectFill
-        videoPlayerView.layer.addSublayer(layer)
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = videoPlayerView.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        videoPlayerView.layer.addSublayer(playerLayer)
     }
     
     private func toggleControlVideo(isPlay: Bool) {
@@ -457,7 +480,11 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     // MARK: - Other Action
     
     @IBAction func back(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        if isLoaded {
+            errorView.warningSave(self, title: "Загрузка еще не завершена")
+        }else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
@@ -508,7 +535,7 @@ extension AddTrainingModuleViewController: UITextViewDelegate, UITextFieldDelega
         
         let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
         
-        if newText.count <= 400 {
+        if newText.count <= 1000 {
             updateCharCountLabel(count: newText.count)
             return true
         }
@@ -517,7 +544,7 @@ extension AddTrainingModuleViewController: UITextViewDelegate, UITextFieldDelega
     }
     
     func updateCharCountLabel(count: Int){
-        countDescription.text = "\(count)/\(400)"
+        countDescription.text = "\(count)/\(1000)"
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

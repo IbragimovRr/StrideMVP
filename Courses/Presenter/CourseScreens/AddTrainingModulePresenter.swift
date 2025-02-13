@@ -53,15 +53,25 @@ class AddTrainingModulePresenter: AddTrainingModulePresenterDelegate {
     }
     
     func saveModule() {
+        view.showLoading(isLoading: true)
         Task {
             do {
+                print(44)
                 try await CourseServices().changeTrainingModule(module: module)
+                print(55)
                 DispatchQueue.main.async {
+                    self.view.showLoading(isLoading: false)
                     self.view.saveData()
                 }
             }catch ErrorNetwork.runtimeError(let error) {
                 DispatchQueue.main.async {
                     self.view.showError(error: error)
+                    self.view.showLoading(isLoading: false)
+                }
+            }catch {
+                DispatchQueue.main.async {
+                    self.view.showError(error: "Неизвестная ошибка попробуйте позже")
+                    self.view.showLoading(isLoading: false)
                 }
             }
         }

@@ -105,6 +105,8 @@ class CoursesViewController: UIViewController {
         case .celebrity:
             titleLbl.text = "Курсы от знаменитостей"
             getCelebrityCourses()
+        case .myBought:
+            titleLbl.text = "Мои курсы"
         }
     }
     
@@ -153,8 +155,7 @@ extension CoursesViewController: UICollectionViewDelegate, UICollectionViewDataS
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "changeCourse" {
-            let vc = segue.destination as! AddInfoAboutCourseVC
-            vc.create = false
+            let vc = segue.destination as! ModulesCourseViewController
             vc.idCourse = selectIDCourse
         }else if segue.identifier == "infoCourses" {
             let vc = segue.destination as! InfoCoursesViewController

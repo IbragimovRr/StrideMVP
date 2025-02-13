@@ -15,7 +15,6 @@ class VideoModuleViewController: UIViewController {
     @IBOutlet weak var playImageControl: UIImageView!
     @IBOutlet weak var videoPlayerView: UIView!
     @IBOutlet weak var authorName: UILabel!
-    @IBOutlet weak var views: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var nameModule: UILabel!
     @IBOutlet weak var descriptionVideo: UITextView!
@@ -23,10 +22,16 @@ class VideoModuleViewController: UIViewController {
     var module = VideoModule(module: Modules(name: "", minutes: 0, id: 0))
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
+    private var playerLayer = AVPlayerLayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         showData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        playerLayer.frame = videoPlayerView.bounds
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -66,10 +71,10 @@ class VideoModuleViewController: UIViewController {
     }
     
     func setupView() {
-        let layer = AVPlayerLayer(player: player)
-        layer.frame = videoPlayerView.bounds
-        layer.videoGravity = .resizeAspectFill
-        videoPlayerView.layer.addSublayer(layer)
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = videoPlayerView.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        videoPlayerView.layer.addSublayer(playerLayer)
     }
     
     func toggleControlVideo(isPlay: Bool) {

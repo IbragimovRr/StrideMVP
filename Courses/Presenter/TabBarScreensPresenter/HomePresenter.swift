@@ -90,6 +90,7 @@ class HomePresenter: HomePresenterProtocol {
         Task {
             let maxVersion = try await AppStoreVersion.shared.getVersion()
             let isLastVersion = AppStoreVersion.shared.isVersion(lessThan: maxVersion)
+            print(maxVersion, isLastVersion)
             AppStoreVersion.shared.isUpdate = isLastVersion
             if isLastVersion {
                 DispatchQueue.main.async {

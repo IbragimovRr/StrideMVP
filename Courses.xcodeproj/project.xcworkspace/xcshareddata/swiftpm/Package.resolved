@@ -1,5 +1,5 @@
 {
-  "originHash" : "a55b479ee610e033331cdb20d32cf59d0c5fc07725633d507c86c9ff3264eb22",
+  "originHash" : "e3bd03c1c38c5af56cc501164a1a64fd90d1cea259175e9bf163da386656d809",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -71,6 +71,15 @@
       "state" : {
         "revision" : "e62b01179f951ffa6670af186b21f00657a92557",
         "version" : "2.0.0-rc.8"
+      }
+    },
+    {
+      "identity" : "lightbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hyperoslo/Lightbox",
+      "state" : {
+        "revision" : "398ee143f00bfc070023c155e6d088ffb399c8cb",
+        "version" : "2.5.1"
       }
     },
     {

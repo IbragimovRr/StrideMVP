@@ -9,6 +9,7 @@ import UIKit
 
 class AddPlanCoursesViewController: UIViewController, PlanCoursesViewDelegate {
 
+    @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var planInfoView: UIView!
     @IBOutlet weak var modulesCollectionView: UICollectionView!
     
@@ -36,6 +37,10 @@ class AddPlanCoursesViewController: UIViewController, PlanCoursesViewDelegate {
     
     func savePlan() {
         performSegue(withIdentifier: "preview", sender: self)
+    }
+    
+    func isEnabledBtn(_ bool: Bool) {
+        nextBtn.isEnabled = bool
     }
     
     @IBAction func preview(_ sender: UIButton) {
