@@ -39,9 +39,14 @@ function getFormattingData() {
     }
     formattingData.blockquote = isBlockquoteActive();
     
-    const fontName = getFontName();
+    // Получаем название шрифта
+    const fontName = document.queryCommandValue("fontName");
     formattingData.fontName = fontName;
-    
+
+    // Получаем цвет текста
+    const fontColor = document.queryCommandValue("foreColor");
+    formattingData.fontColor = fontColor;
+
     return formattingData;
 }
 

@@ -90,6 +90,15 @@ class CoursesViewController: UIViewController {
             catalogCollectionView.reloadData()
         }
     }
+    
+    private func getMyBoughtCourses() {
+        Task {
+            course = try await CourseServices().getBoughtCourses()
+            filteredCourse = course
+            emptyCheck()
+            catalogCollectionView.reloadData()
+        }
+    }
 
     private func getCoursesBecauseTitle() {
         switch typeCourse {
@@ -107,6 +116,7 @@ class CoursesViewController: UIViewController {
             getCelebrityCourses()
         case .myBought:
             titleLbl.text = "Мои курсы"
+            getMyBoughtCourses()
         }
     }
     

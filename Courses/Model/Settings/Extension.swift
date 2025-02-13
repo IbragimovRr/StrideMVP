@@ -130,9 +130,6 @@ extension String {
 }
 
 extension UIColor {
-
-    /// Hexadecimal representation of the UIColor.
-    /// For example, UIColor.blackColor() becomes "#000000".
     var hex: String {
         var red: CGFloat = 0
         var green: CGFloat = 0
@@ -147,6 +144,33 @@ extension UIColor {
         return str
     }
 }
+
+extension String {
+    func toUIColor() -> UIColor? {
+        let cleanedString = self.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard cleanedString.hasPrefix("rgb("), cleanedString.hasSuffix(")") else {
+            return nil
+        }
+        
+        let rgbValues = cleanedString.dropFirst(4).dropLast().split(separator: ",")
+        
+        if rgbValues.count == 3 {
+            let red = CGFloat((rgbValues[0] as NSString).floatValue)
+            let green = CGFloat((rgbValues[1] as NSString).floatValue)
+            let blue = CGFloat((rgbValues[2] as NSString).floatValue)
+            
+            // Возвращаем UIColor
+            return UIColor(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: 1.0)
+        }
+        
+        return nil
+    }
+}
+
+
+
+
 
 extension UIView {
     

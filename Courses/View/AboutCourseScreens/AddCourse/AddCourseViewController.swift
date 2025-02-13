@@ -48,6 +48,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     var presenter = AddCoursePresenter()
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
+    let colorPicker = UIColorPickerViewController()
     private var startPosition = CGPoint()
     var fonts = [
             "Dots",
@@ -66,11 +67,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
             "Sans",
             "Inter"
         ]
-    var selectedFontIndex = 2 {
-        didSet {
-            editor.font(fonts[selectedFontIndex])
-        }
-    }
+    var selectedFontIndex = 2
     private var isChangedText = false
     private var isSave = true
     
@@ -97,7 +94,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        scrollToCenterCell()
+        scrollToFontCenterCell()
     }
     
     @objc func keyboardWillAppear(notification:Notification) {
@@ -265,7 +262,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         }
     }
     
-    func scrollToCenterCell() {
+    func scrollToFontCenterCell() {
         let indexPath = IndexPath(row: selectedFontIndex, section: 0)
         
         fontCollectionView.layoutIfNeeded()
@@ -276,6 +273,15 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         }
     }
 
+    private func getIndexByFontName(name: String) {
+        for x in 0...fonts.count - 1 {
+            print(fonts[x] == name, fonts[x], name)
+            if fonts[x] == name {
+                selectedFontIndex = x
+            }
+        }
+//        scrollToFontCenterCell()
+    }
 
     
     // MARK: - UIButton
@@ -319,9 +325,8 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         case 3:
             editor.italic()
         case 4:
-            let picker = UIColorPickerViewController()
-            picker.delegate = self
-            self.present(picker, animated: true, completion: nil)
+            colorPicker.delegate = self
+            self.present(colorPicker, animated: true, completion: nil)
         case 5:
             editor.strikeThrough()
         case 6:
@@ -405,7 +410,7 @@ extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, W
         presenter.viewDidLoad()
     }
     
-    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName: String) {
+    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName: String, fontColor: String) {
         changedAlignment(aligment)
         if isBold { self.isBold.backgroundColor = .extraLightBlackMain}
         else { self.isBold.backgroundColor = .clear }
@@ -415,10 +420,13 @@ extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, W
         else { self.isUnderline.backgroundColor = .clear }
         if isStrikethrough { self.isStrikeThrough.backgroundColor = .extraLightBlackMain}
         else { self.isStrikeThrough.backgroundColor = .clear }
+        getIndexByFontName(name: fontName)
+        colorPicker.selectedColor =  fontColor.toUIColor() ?? .white
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "format" {
+            print(message.body)
             editor.initialFormat(message: message)
         }
     }
@@ -480,6 +488,7 @@ extension AddCourseViewController: UICollectionViewDataSource, UICollectionViewD
         
         if closestIndex != selectedFontIndex {
             selectedFontIndex = closestIndex
+            editor.font(fonts[selectedFontIndex])
             
             let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.impactOccurred()
