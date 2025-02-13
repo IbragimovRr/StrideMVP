@@ -63,28 +63,21 @@ function isBlockquoteActive() {
   return container.tagName === "BLOCKQUOTE";
 }
 
-
-function getFontName() {
-    const selection = window.getSelection();
-    let fontName = null;
-    
-    if (selection.rangeCount > 0) {
-        const range = selection.getRangeAt(0);
-        const node = range.commonAncestorContainer;
-        
-        let parentNode = node.nodeType === Node.TEXT_NODE ? node.parentNode : node;
-        
-        if(parentNode){
-            const style = window.getComputedStyle(parentNode);
-            fontName = style.fontFamily;
-        }
-        
-    }
-    return fontName;
-}
-
+let lastSelectionRange = null;
 
 function handleFormatChange() {
+    const selection = window.getSelection();
+    
+    if (!selection.rangeCount) return;
+    
+    const newRange = selection.getRangeAt(0);
+    
+    if (lastSelectionRange && newRange.compareBoundaryPoints(Range.START_TO_START, lastSelectionRange) === 0) {
+        return;
+    }
+    
+    lastSelectionRange = newRange.cloneRange();
+    
     const formattingData = getFormattingData();
     window.webkit.messageHandlers.format.postMessage({ formatting: formattingData });
 }
@@ -323,7 +316,15 @@ RE.setTextBackgroundColor = function(color) {
 
 RE.setHeading = function(heading, fontName) {
     document.execCommand('formatBlock', false, '<h' + heading + '>');
-    document.execCommand('fontName', false, fontName);
+    setTimeout(() => {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+
+            const headingElement = selection.anchorNode.parentElement;
+            if (headingElement.tagName.toLowerCase() === 'h' + heading) {
+                headingElement.style.fontFamily = fontName;
+            }
+        }, 10);
 };
 
 RE.resetHeading = function() {
