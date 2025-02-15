@@ -96,6 +96,10 @@ class EditorView: WKWebView {
         runJS("RE.setFont('\(name)')")
     }
     
+    func standartFont() {
+        runJS("document.getElementById('editor').style.fontFamily = 'Montserrat';")
+    }
+    
     func fontSize(_ size: Int) {
         runJS("RE.setFontSize('\(size)px')")
     }
@@ -134,13 +138,6 @@ class EditorView: WKWebView {
         }
         
     }
-    
-    func getFormat() {
-        runJS("RE.isCommandActive('bold');") { result in
-            print(result)
-        }
-    }
-    
     
     func getLineHeight(completion: @escaping (String?) -> Void) {
         evaluateJavaScript("RE.getLineHeight()") { (result, error) in

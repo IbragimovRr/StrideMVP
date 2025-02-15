@@ -230,6 +230,12 @@ enum CourseCatalog {
     case celebrity
 }
 
+enum VideoControl {
+    case play
+    case pause
+    case reload
+}
+
 enum SelectBtn {
     case firstButton
     case secondButton

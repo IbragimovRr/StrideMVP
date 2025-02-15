@@ -24,6 +24,7 @@ protocol TrainingModuleViewDelegate {
 
 class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate {
     
+    @IBOutlet weak var reloadView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var controlTimerBtn: UIButton!
     @IBOutlet weak var timerCount: UILabel!
@@ -105,7 +106,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        toggleControlVideo(isPlay: false)
+        toggleControlVideo(controll: .pause)
     }
     
     // Работа с клавиатурой
@@ -283,6 +284,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         let playerItem = AVPlayerItem(asset: asset)
         playerItem.preferredForwardBufferDuration = 5
         playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = true
+        NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
         player = AVPlayer(playerItem: playerItem)
         playerViewController.player = player
         audioInitial()
@@ -305,15 +307,25 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         videoPlayerView.layer.addSublayer(playerLayer)
     }
     
-    private func toggleControlVideo(isPlay: Bool) {
-        if isPlay {
+    @objc func videoDidFinish() {
+        toggleControlVideo(controll: .reload)
+    }
+    
+    func toggleControlVideo(controll: VideoControl) {
+        if controll == .play {
             player.play()
             playView.isHidden = true
             fullScreenBtn.isHidden = false
-        }else {
+            reloadView.isHidden = true
+        }else if controll == .pause {
             player.pause()
             fullScreenBtn.isHidden = true
             playView.isHidden = false
+            reloadView.isHidden = true
+        }else {
+            playView.isHidden = true
+            fullScreenBtn.isHidden = true
+            reloadView.isHidden = false
         }
     }
     
@@ -371,10 +383,15 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     
     @IBAction func playVideo(_ sender: UIButton) {
         if player.timeControlStatus == .paused {
-            toggleControlVideo(isPlay: true)
+            toggleControlVideo(controll: .play)
         }else {
-            toggleControlVideo(isPlay: false)
+            toggleControlVideo(controll: .pause)
         }
+    }
+    
+    @IBAction func reloadVideo(_ sender: UIButton) {
+        player.seek(to: .zero)
+        toggleControlVideo(controll: .play)
     }
     
     @IBAction func allHistoryTraining(_ sender: UIButton) {

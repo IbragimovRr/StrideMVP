@@ -20,6 +20,7 @@ protocol AddVideoViewDelegate {
 
 class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
+    @IBOutlet weak var reloadView: UIView!
     @IBOutlet weak var changeVideo: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var loading: LottieAnimationView!
@@ -65,8 +66,10 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        toggleControlVideo(isPlay: false)
+        toggleControlVideo(controll: .pause)
     }
+    
+    // MARK: - Protocol
     
     func showData() {
         let module = presenter.module
@@ -122,6 +125,8 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         loading.isHidden = true
     }
     
+    // MARK: - Player
+    
     func settingsPlayer(videoURL: URL) {
         let asset = AVURLAsset(url: videoURL)
         let playerItem = AVPlayerItem(asset: asset)
@@ -130,8 +135,16 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         player = AVPlayer(playerItem: playerItem)
         playerViewController.player = player
         player.automaticallyWaitsToMinimizeStalling = false
+        NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
         audioInitial()
         setupView()
+    }
+    
+    func setupView() {
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = videoPlayerView.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        videoPlayerView.layer.addSublayer(playerLayer)
     }
     
     func audioInitial() {
@@ -143,22 +156,40 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         }
     }
     
-    func setupView() {
-        playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = videoPlayerView.bounds
-        playerLayer.videoGravity = .resizeAspectFill
-        videoPlayerView.layer.addSublayer(playerLayer)
+    
+    @objc func videoDidFinish() {
+        toggleControlVideo(controll: .reload)
     }
     
-    func toggleControlVideo(isPlay: Bool) {
-        if isPlay {
+    private func getTimeInVideo() -> Int {
+        if let currentItem = player.currentItem {
+            let duration = currentItem.duration
+            let durationInSeconds = CMTimeGetSeconds(duration)
+            if durationInSeconds.isFinite {
+                let durationInMinutes = durationInSeconds / 60
+                return Int(durationInMinutes)
+            } else {
+                return 0
+            }
+        }
+        return 0
+    }
+    
+    func toggleControlVideo(controll: VideoControl) {
+        if controll == .play {
             player.play()
             playView.isHidden = true
             fullScreenBtn.isHidden = false
-        }else {
+            reloadView.isHidden = true
+        }else if controll == .pause {
             player.pause()
             fullScreenBtn.isHidden = true
             playView.isHidden = false
+            reloadView.isHidden = true
+        }else {
+            playView.isHidden = true
+            fullScreenBtn.isHidden = true
+            reloadView.isHidden = false
         }
     }
     
@@ -184,20 +215,6 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         descriptionViewLeftConstraint.constant = 30
         applyBtn.isHidden = false
         countCharacters.isHidden = false
-    }
-    
-    private func getTimeInVideo() -> Int {
-        if let currentItem = player.currentItem {
-            let duration = currentItem.duration
-            let durationInSeconds = CMTimeGetSeconds(duration)
-            if durationInSeconds.isFinite {
-                let durationInMinutes = durationInSeconds / 60
-                return Int(durationInMinutes)
-            } else {
-                return 0
-            }
-        }
-        return 0
     }
     
     
@@ -228,10 +245,15 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
     @IBAction func playVideo(_ sender: UIButton) {
         if player.timeControlStatus == .paused {
-            toggleControlVideo(isPlay: true)
+            toggleControlVideo(controll: .play)
         }else {
-            toggleControlVideo(isPlay: false)
+            toggleControlVideo(controll: .pause)
         }
+    }
+    
+    @IBAction func reloadVideo(_ sender: UIButton) {
+        player.seek(to: .zero)
+        toggleControlVideo(controll: .play)
     }
     
     @IBAction func uploadVideo(_ sender: UIButton) {

@@ -10,6 +10,7 @@ import AVKit
 
 class VideoModuleViewController: UIViewController {
     
+    @IBOutlet weak var reloadView: UIView!
     @IBOutlet weak var fullScreenBtn: UIButton!
     @IBOutlet weak var playView: UIView!
     @IBOutlet weak var playImageControl: UIImageView!
@@ -36,7 +37,7 @@ class VideoModuleViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        toggleControlVideo(isPlay: false)
+        toggleControlVideo(controll: .pause)
     }
 
     
@@ -57,6 +58,7 @@ class VideoModuleViewController: UIViewController {
         playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = true
         player = AVPlayer(playerItem: playerItem)
         playerViewController.player = player
+        NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
         audioInitial()
         setupView()
     }
@@ -77,27 +79,41 @@ class VideoModuleViewController: UIViewController {
         videoPlayerView.layer.addSublayer(playerLayer)
     }
     
-    func toggleControlVideo(isPlay: Bool) {
-        if isPlay {
+    @objc func videoDidFinish() {
+        toggleControlVideo(controll: .reload)
+    }
+    
+    func toggleControlVideo(controll: VideoControl) {
+        if controll == .play {
             player.play()
             playView.isHidden = true
             fullScreenBtn.isHidden = false
-        }else {
+            reloadView.isHidden = true
+        }else if controll == .pause {
             player.pause()
             fullScreenBtn.isHidden = true
             playView.isHidden = false
+            reloadView.isHidden = true
+        }else {
+            playView.isHidden = true
+            fullScreenBtn.isHidden = true
+            reloadView.isHidden = false
         }
     }
     
     
     @IBAction func playVideo(_ sender: UIButton) {
         if player.timeControlStatus == .paused {
-            toggleControlVideo(isPlay: true)
+            toggleControlVideo(controll: .play)
         }else {
-            toggleControlVideo(isPlay: false)
+            toggleControlVideo(controll: .pause)
         }
     }
     
+    @IBAction func reloadVideo(_ sender: UIButton) {
+        player.seek(to: .zero)
+        toggleControlVideo(controll: .play)
+    }
     
     @IBAction func fullScreen(_ sender: UIButton) {
         present(playerViewController, animated: true) {

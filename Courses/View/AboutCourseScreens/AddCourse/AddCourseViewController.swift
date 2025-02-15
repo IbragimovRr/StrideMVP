@@ -414,7 +414,7 @@ extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, W
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         presenter.viewDidLoad()
-        editor.font(fonts[selectedFontIndex])
+        editor.standartFont()
     }
     
     func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName: String, fontColor: String) {
@@ -428,6 +428,7 @@ extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, W
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print(message.body)
         if message.name == "format" { // Выдает при изменении положения курсора
             editor.initialFormat(message: message)
         }
