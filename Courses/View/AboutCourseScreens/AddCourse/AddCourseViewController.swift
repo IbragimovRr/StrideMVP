@@ -14,7 +14,6 @@ import WebKit
 protocol AddCoursePresenterViewDelegate {
     func isLoading(_ bool: Bool)
     func setData(html: String)
-    func setData(attributedString: NSAttributedString)
     func setImage(url: String)
     func saveCourse()
     func setError(_ error: String)
@@ -22,7 +21,6 @@ protocol AddCoursePresenterViewDelegate {
 
 class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate {
     
-    @IBOutlet weak var oldTextView: UITextView!
     @IBOutlet weak var heightFontView: UIView!
     @IBOutlet weak var fontCollectionView: UICollectionView!
     @IBOutlet weak var editorBackView: UIView!
@@ -68,7 +66,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
             "Sans",
             "Inter"
         ]
-    var selectedFontIndex = 2
+    var selectedFontIndex = 3
     private var isChangedText = false
     private var isSave = true
     
@@ -153,10 +151,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     
     func setImage(url: String) {
         editor.insertImage(url: url, alt: "image")
-    }
-    
-    func setData(attributedString: NSAttributedString) {
-        oldTextView.attributedText = attributedString
     }
     
     func setData(html: String) {
@@ -420,6 +414,7 @@ extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, W
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         presenter.viewDidLoad()
+        editor.font(fonts[selectedFontIndex])
     }
     
     func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName: String, fontColor: String) {

@@ -30,18 +30,21 @@ class AddCoursePresenter: AddCoursePresenterDelegate {
     private func getData() {
         guard let urlHtml = module.text else { return }
         Task {
-            let html = try await FilePath().downloadHtmlFileWithURL(url: urlHtml)
-            DispatchQueue.main.async {
-                if let html = html {
-                    self.view.setData(html: html)
+            do {
+                let html = try await FilePath().downloadHtmlFileWithURL(url: urlHtml)
+                DispatchQueue.main.async {
+                    if let html = html {
+                        self.view.setData(html: html)
+                    }
                 }
-            }
-        }
-        
-        Task {
-            let attributedString = try await FilePath().downloadFileWithURL(url: urlHtml)
-            DispatchQueue.main.async {
-                self.view.setData(attributedString: attributedString)
+            }catch ErrorNetwork.runtimeError(let error) {
+                DispatchQueue.main.async {
+                    self.view.setError(error)
+                }
+            }catch {
+                DispatchQueue.main.async {
+                    self.view.setError("Неизвестная ошибка. Попробуйте позже")
+                }
             }
         }
     }
@@ -49,10 +52,12 @@ class AddCoursePresenter: AddCoursePresenterDelegate {
 
     
     func saveImageInCloud(filePath: URL)  {
+        view.isLoading(true)
         Task {
             let url = try await CloudServices().uploadFileToS3(fileURL: filePath)
             DispatchQueue.main.async {
                 self.view.setImage(url: url)
+                self.view.isLoading(false)
             }
         }
     }

@@ -70,7 +70,7 @@ class AddTrainingModulePresenter: AddTrainingModulePresenterDelegate {
                 }
             }catch {
                 DispatchQueue.main.async {
-                    self.view.showError(error: "Неизвестная ошибка попробуйте позже")
+                    self.view.showError(error: "Неизвестная ошибка. Попробуйте позже")
                     self.view.showLoading(isLoading: false)
                 }
             }
