@@ -74,7 +74,11 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     func showData() {
         let module = presenter.module
         authorText.text = module.author
-        timeCount.text = "\(module.timeVideo) минут"
+        if module.timeVideo != 0 {
+            timeCount.text = "\(module.timeVideo) \(module.timeVideo.declinedWord(one: "минута", few: "минуты", many: "минут"))"
+        }else {
+            timeCount.text = "< 1 минуты"
+        }
         nameModule.text = module.module.name
         descriptionText.text = module.videoDescription
         updateCharCountLabel(count: descriptionText.text.count)

@@ -74,7 +74,8 @@ extension AdminCoursesViewController: UICollectionViewDelegate, UICollectionView
         cell.nameCourse.text = courses[indexPath.row].nameCourse
         cell.price.text = "Цена: \(courses[indexPath.row].price)Р"
         cell.rating.text = "\(courses[indexPath.row].rating)"
-        cell.daysCount.text = "\(courses[indexPath.row].daysCount) этапов"
+        let days = courses[indexPath.row].daysCount
+        cell.daysCount.text = "\(days) \(days.declinedWord())"
         return cell
     }
     

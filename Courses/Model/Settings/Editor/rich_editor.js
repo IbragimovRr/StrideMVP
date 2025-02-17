@@ -108,6 +108,13 @@ RE.rangeSelectionExists = function() {
     return false;
 };
 
+
+document.addEventListener("drop", function(event) {
+    event.preventDefault();
+}, false);
+
+
+
 RE.rangeOrCaretSelectionExists = function() {
     //!! coerces a null to bool
     var sel = document.getSelection();

@@ -5655,6 +5655,7 @@
                         <outlet property="similarCoursesCollectionView" destination="C2c-fT-JmQ" id="V8K-1R-f0h"/>
                         <outlet property="stackBtn" destination="sNW-YM-TPt" id="tkI-Gc-XMJ"/>
                         <outlet property="stackInfo" destination="Hmn-gP-Se7" id="IjC-Ne-hYp"/>
+                        <outlet property="stage" destination="YiK-C2-aLI" id="m3l-av-Weo"/>
                         <outlet property="topScrollConstant" destination="2SR-yW-97s" id="qJ0-JR-aoX"/>
                         <outlet property="userAvatar" destination="qKi-wv-gIz" id="9Yj-N8-32n"/>
                         <segue destination="bdF-Md-SrY" kind="show" identifier="goCourse" id="M8w-WU-QND"/>
@@ -14609,10 +14610,10 @@
     <inferredMetricsTieBreakers>
         <segue reference="oYQ-p4-idr"/>
         <segue reference="vKu-9D-Hl7"/>
-        <segue reference="2uE-MH-jsq"/>
+        <segue reference="35z-4l-np9"/>
         <segue reference="nsh-RS-Plh"/>
         <segue reference="IVu-BL-rNu"/>
-        <segue reference="VEv-hw-ZY6"/>
+        <segue reference="M8w-WU-QND"/>
         <segue reference="F7H-ew-eXR"/>
         <segue reference="HHf-kQ-icL"/>
         <segue reference="eaT-yL-Yiu"/>

@@ -243,3 +243,18 @@ extension UITextField {
         }
     }
 }
+
+extension Int {
+    func declinedWord(one: String = "этап", few: String = "этапа", many: String = "этапов") -> String {
+        let remainder10 = self % 10
+        let remainder100 = self % 100
+        
+        if remainder10 == 1 && remainder100 != 11 {
+            return "\(one)"
+        } else if (2...4).contains(remainder10) && !(12...14).contains(remainder100) {
+            return "\(few)"
+        } else {
+            return "\(many)"
+        }
+    }
+}

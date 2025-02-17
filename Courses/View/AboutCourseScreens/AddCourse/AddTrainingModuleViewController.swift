@@ -219,8 +219,8 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         playerItem.preferredForwardBufferDuration = 5
         playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = true
         player = AVPlayer(playerItem: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
         playerViewController.player = player
+        NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
         audioInitial()
         setupView()
     }
@@ -514,7 +514,8 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     }
     
     @IBAction func fullScreen(_ sender: UIButton) {
-        present(playerViewController, animated: true) {
+        present(playerViewController, animated: true) { [self] in
+            NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
             self.player.play()
         }
     }

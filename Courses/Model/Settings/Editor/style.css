@@ -66,6 +66,10 @@ body, h1, p, ul, ol {
     margin: 0;
 }
 
+h1 {
+    font-size: 32px;
+}
+
 div {
     display: block;
     position: static;

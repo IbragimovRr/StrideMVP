@@ -277,6 +277,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     }
 
     private func getIndexByFontName(name: String) {
+        guard isUserScrolling == false else { return }
         for x in 0...fonts.count - 1 {
             if fonts[x] == name {
                 selectedFontIndex = x
@@ -428,7 +429,6 @@ extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, W
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print(message.body)
         if message.name == "format" { // Выдает при изменении положения курсора
             editor.initialFormat(message: message)
         }

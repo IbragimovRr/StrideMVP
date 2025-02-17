@@ -43,7 +43,11 @@ class VideoModuleViewController: UIViewController {
     
     func showData() {
         authorName.text = module.author
-        time.text = "\(module.timeVideo) минут"
+        if module.timeVideo != 0 {
+            time.text = "\(module.timeVideo) \(module.timeVideo.declinedWord(one: "минута", few: "минуты", many: "минут"))"
+        }else {
+            time.text = "< 1 минуты"
+        }
         nameModule.text = module.module.name
         descriptionVideo.text = module.videoDescription
         if let videoURL = module.videoURL {

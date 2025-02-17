@@ -25,6 +25,7 @@ protocol InfoCoursesViewDelegate {
 
 class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
 
+    @IBOutlet weak var stage: UILabel!
     @IBOutlet weak var promoMainText: UILabel!
     @IBOutlet weak var oldPrice: UILabel!
     @IBOutlet weak var promoMainBtn: UIButton!
@@ -206,6 +207,8 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
         dateCreate.text = presenter.course.dataCreated
         rating.text = "\(presenter.course.rating)"
         countDays.text = "\(presenter.course.daysCount)"
+        let days = presenter.course.daysCount
+        stage.text = days.declinedWord(one: "Этап", few: "Этапа", many: "Этапов")
         name.text = presenter.course.nameCourse
         coachName.text = presenter.course.author.userName
         im.sd_setImage(with: presenter.course.imageURL)
@@ -459,7 +462,8 @@ extension InfoCoursesViewController: UICollectionViewDelegate, UICollectionViewD
             cell.nameCourse.text = presenter.similarCourse[indexPath.row].nameCourse
             cell.price.text = "\(presenter.similarCourse[indexPath.row].price)₽"
             cell.rating.text = "\(presenter.similarCourse[indexPath.row].rating)"
-            cell.daysCount.text = "\(presenter.similarCourse[indexPath.row].daysCount) этапов"
+            let days = presenter.similarCourse[indexPath.row].daysCount
+            cell.daysCount.text = "\(days) \(days.declinedWord())"
             return cell
         }
     }
