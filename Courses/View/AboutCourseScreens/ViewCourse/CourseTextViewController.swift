@@ -103,6 +103,15 @@ extension CourseTextViewController: WKNavigationDelegate {
         getData()
         editor.disableEditing()
     }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url, navigationAction.navigationType == .linkActivated {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
+    }
 }
 extension CourseTextViewController: WKScriptMessageHandler {
     

@@ -1820,8 +1820,8 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тренера" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7If-O1-3WH">
-                                                <rect key="frame" x="19.999999999999996" y="779" width="62.666666666666657" height="19.666666666666629"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тренеры" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7If-O1-3WH">
+                                                <rect key="frame" x="20" y="779" width="66.333333333333329" height="19.666666666666629"/>
                                                 <fontDescription key="fontDescription" name="Commissioner-SemiBold" family="Commissioner" pointSize="16"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -12151,10 +12151,29 @@
                                         </connections>
                                     </button>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Owa-Kn-cIC" customClass="LottieAnimationView" customModule="Lottie">
-                                        <rect key="frame" x="176.66666666666666" y="447" width="40" height="40"/>
+                                        <rect key="frame" x="141.66666666666666" y="412" width="110" height="110"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zl4-tF-glU">
+                                                <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="0%">
+                                                        <attributes>
+                                                            <color key="NSColor" name="GrayMain"/>
+                                                            <font key="NSFont" size="10" name="Commissioner-Thin_Medium"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="UKa-Ov-zbM"/>
+                                            <constraint firstItem="Zl4-tF-glU" firstAttribute="leading" secondItem="Owa-Kn-cIC" secondAttribute="leading" id="EzX-Qs-03P"/>
+                                            <constraint firstAttribute="bottom" secondItem="Zl4-tF-glU" secondAttribute="bottom" id="HcQ-sb-ovx"/>
+                                            <constraint firstAttribute="width" constant="110" id="UKa-Ov-zbM"/>
+                                            <constraint firstAttribute="trailing" secondItem="Zl4-tF-glU" secondAttribute="trailing" id="YOb-b5-mjL"/>
+                                            <constraint firstItem="Zl4-tF-glU" firstAttribute="top" secondItem="Owa-Kn-cIC" secondAttribute="top" id="oQV-z7-lGR"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="loading"/>
@@ -12167,10 +12186,10 @@
                                     <constraint firstItem="k02-fO-2PN" firstAttribute="top" secondItem="9R6-Y2-GrW" secondAttribute="bottom" id="Ofo-9F-e4p"/>
                                     <constraint firstAttribute="bottom" secondItem="k02-fO-2PN" secondAttribute="bottom" constant="30" id="Sqq-ua-yMF"/>
                                     <constraint firstItem="k02-fO-2PN" firstAttribute="leading" secondItem="Yyq-4f-fAl" secondAttribute="leading" constant="30" id="SzG-Dd-G86"/>
-                                    <constraint firstItem="Owa-Kn-cIC" firstAttribute="top" secondItem="k02-fO-2PN" secondAttribute="top" constant="5" id="T2R-Ge-FJN"/>
+                                    <constraint firstItem="Owa-Kn-cIC" firstAttribute="top" secondItem="k02-fO-2PN" secondAttribute="top" constant="-30" id="T2R-Ge-FJN"/>
                                     <constraint firstAttribute="trailing" secondItem="k02-fO-2PN" secondAttribute="trailing" constant="30" id="WXO-N5-I5R"/>
                                     <constraint firstItem="Owa-Kn-cIC" firstAttribute="centerX" secondItem="Yyq-4f-fAl" secondAttribute="centerX" id="XLG-NK-E15"/>
-                                    <constraint firstItem="Owa-Kn-cIC" firstAttribute="bottom" secondItem="k02-fO-2PN" secondAttribute="bottom" constant="-5" id="cuK-me-gYN"/>
+                                    <constraint firstItem="Owa-Kn-cIC" firstAttribute="bottom" secondItem="Yyq-4f-fAl" secondAttribute="bottom" id="cuK-me-gYN"/>
                                     <constraint firstItem="9R6-Y2-GrW" firstAttribute="top" secondItem="Yyq-4f-fAl" secondAttribute="top" id="rwc-d3-wxw"/>
                                     <constraint firstAttribute="trailing" secondItem="9R6-Y2-GrW" secondAttribute="trailing" id="vXR-xV-rQ0"/>
                                 </constraints>
@@ -12215,6 +12234,7 @@
                         <outlet property="descriptionViewTopConstraint" destination="4D9-OW-838" id="0Fu-71-Iss"/>
                         <outlet property="fullScreenBtn" destination="1rs-7h-IG6" id="rW6-SE-16F"/>
                         <outlet property="loading" destination="Owa-Kn-cIC" id="xmd-9c-g8U"/>
+                        <outlet property="loadingProcent" destination="Zl4-tF-glU" id="Af2-6T-Oxm"/>
                         <outlet property="nameModule" destination="Jpf-kC-9jk" id="Cc2-xZ-YIr"/>
                         <outlet property="playImage" destination="SuX-vI-OPE" id="2BG-S7-qcm"/>
                         <outlet property="playView" destination="hSO-MU-xVe" id="gRI-gG-s3X"/>
@@ -13062,10 +13082,29 @@
                                         </connections>
                                     </button>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jo9-p3-zF7" customClass="LottieAnimationView" customModule="Lottie">
-                                        <rect key="frame" x="171.66666666666666" y="442" width="50" height="50"/>
+                                        <rect key="frame" x="141.66666666666666" y="412" width="110" height="110"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pte-nR-jh3">
+                                                <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="0%">
+                                                        <attributes>
+                                                            <color key="NSColor" name="GrayMain"/>
+                                                            <font key="NSFont" size="10" name="Commissioner-Thin_Medium"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="gH1-xW-MeQ"/>
+                                            <constraint firstItem="pte-nR-jh3" firstAttribute="top" secondItem="jo9-p3-zF7" secondAttribute="top" id="BqF-eT-hCf"/>
+                                            <constraint firstItem="pte-nR-jh3" firstAttribute="leading" secondItem="jo9-p3-zF7" secondAttribute="leading" id="GYK-Ca-MdA"/>
+                                            <constraint firstAttribute="bottom" secondItem="pte-nR-jh3" secondAttribute="bottom" id="V2h-b8-DSi"/>
+                                            <constraint firstAttribute="trailing" secondItem="pte-nR-jh3" secondAttribute="trailing" id="dFj-3R-2xH"/>
+                                            <constraint firstAttribute="width" constant="110" id="gH1-xW-MeQ"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="loading"/>
@@ -13081,9 +13120,9 @@
                                     <constraint firstItem="e5V-bS-wVR" firstAttribute="top" secondItem="l4p-Qi-WVG" secondAttribute="bottom" id="Y5y-us-SQP"/>
                                     <constraint firstItem="l4p-Qi-WVG" firstAttribute="leading" secondItem="E4a-kM-Qls" secondAttribute="leading" id="fUn-Pl-24m"/>
                                     <constraint firstItem="jo9-p3-zF7" firstAttribute="centerX" secondItem="E4a-kM-Qls" secondAttribute="centerX" id="g9E-nW-IUa"/>
-                                    <constraint firstItem="jo9-p3-zF7" firstAttribute="top" secondItem="e5V-bS-wVR" secondAttribute="top" id="lws-0B-BL1"/>
+                                    <constraint firstItem="jo9-p3-zF7" firstAttribute="top" secondItem="e5V-bS-wVR" secondAttribute="top" constant="-30" id="lws-0B-BL1"/>
                                     <constraint firstItem="l4p-Qi-WVG" firstAttribute="top" secondItem="E4a-kM-Qls" secondAttribute="top" id="r6P-qk-S5u"/>
-                                    <constraint firstItem="jo9-p3-zF7" firstAttribute="bottom" secondItem="e5V-bS-wVR" secondAttribute="bottom" id="whW-Hn-s15"/>
+                                    <constraint firstItem="jo9-p3-zF7" firstAttribute="bottom" secondItem="E4a-kM-Qls" secondAttribute="bottom" id="whW-Hn-s15"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="25"/>
@@ -13138,6 +13177,7 @@
                         <outlet property="loading" destination="jo9-p3-zF7" id="v7b-mU-n6n"/>
                         <outlet property="nameModule" destination="AiX-F4-NoF" id="2BQ-2F-rhV"/>
                         <outlet property="playView" destination="mGm-QG-hge" id="ERe-FK-Uie"/>
+                        <outlet property="progress" destination="pte-nR-jh3" id="VDw-nE-ams"/>
                         <outlet property="reloadView" destination="IVF-Cd-9Mr" id="lmz-LL-s8F"/>
                         <outlet property="repeatsBox" destination="Q13-aO-EIk" id="L4Q-YO-y4E"/>
                         <outlet property="repeatsImage" destination="3T8-fI-Dy0" id="Zks-Un-10D"/>
@@ -14610,15 +14650,15 @@
     <inferredMetricsTieBreakers>
         <segue reference="oYQ-p4-idr"/>
         <segue reference="vKu-9D-Hl7"/>
-        <segue reference="35z-4l-np9"/>
+        <segue reference="2uE-MH-jsq"/>
         <segue reference="nsh-RS-Plh"/>
         <segue reference="IVu-BL-rNu"/>
         <segue reference="M8w-WU-QND"/>
-        <segue reference="F7H-ew-eXR"/>
+        <segue reference="RsJ-Z8-4Bo"/>
         <segue reference="HHf-kQ-icL"/>
         <segue reference="eaT-yL-Yiu"/>
         <segue reference="3aH-yg-pXb"/>
-        <segue reference="pPa-ol-Wiu"/>
+        <segue reference="DFO-Ta-Hbe"/>
         <segue reference="7iD-6h-6hO"/>
     </inferredMetricsTieBreakers>
     <resources>

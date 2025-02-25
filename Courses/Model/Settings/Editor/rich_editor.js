@@ -39,11 +39,8 @@ function getFormattingData() {
     }
     formattingData.blockquote = isBlockquoteActive();
     
-    // Получаем название шрифта
     const fontName = document.queryCommandValue("fontName");
     formattingData.fontName = fontName;
-
-    // Получаем цвет текста
     const fontColor = document.queryCommandValue("foreColor");
     formattingData.fontColor = fontColor;
 
@@ -82,7 +79,6 @@ function handleFormatChange() {
     window.webkit.messageHandlers.format.postMessage({ formatting: formattingData });
 }
 
-
 document.addEventListener("selectionchange", function() {
     RE.backuprange();
     handleFormatChange();
@@ -96,6 +92,38 @@ document.addEventListener("DOMContentLoaded", function() {
             window.webkit.messageHandlers.imageClicked.postMessage(imageUrl);
         }
     });
+});
+
+document.getElementById('editor').addEventListener('paste', function(e) {
+    e.preventDefault();
+    
+    let text = (e.clipboardData || window.clipboardData).getData('text/plain');
+    
+    let currentFont = document.queryCommandValue('fontName');
+    let fontColor = document.queryCommandValue('foreColor');
+    let fontSize = document.queryCommandValue('fontSize');
+    let isBold = document.queryCommandState('bold');
+    let isItalic = document.queryCommandState('italic');
+    let isUnderline = document.queryCommandState('underline');
+    
+    let span = document.createElement('span');
+    span.style.fontFamily = currentFont;
+    span.style.color = fontColor;
+    span.style.fontSize = fontSize;
+    span.style.fontWeight = isBold ? 'bold' : 'normal';
+    span.style.fontStyle = isItalic ? 'italic' : 'normal';
+    span.style.textDecoration = isUnderline ? 'underline' : 'none';
+    span.textContent = text;
+    
+    
+    let selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        let range = selection.getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(span);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
 });
 
 //looks specifically for a Range selection and not a Caret selection
@@ -244,9 +272,6 @@ RE.setFontSize = function(size) {
     document.execCommand("styleWithCSS", null, false);
 };
 
-RE.setFont = function(fontName) {
-    document.execCommand("fontName", false, fontName);
-}
 
 RE.setBackgroundColor = function(color) {
     RE.editor.style.backgroundColor = color;
@@ -304,6 +329,7 @@ RE.setFont = function(font) {
     RE.restorerange();
     document.execCommand("styleWithCSS", null, true);
     document.execCommand('fontName', false, font);
+    document.execCommand("insertText", false, '\u200B')
     document.execCommand("styleWithCSS", null, false);
 };
 

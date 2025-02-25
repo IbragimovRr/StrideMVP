@@ -109,11 +109,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         bottomConsoleView.constant = 0
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-        presenter.deleteAlamofireFiles()
-    }
     
     func setupRichEditorView() {
         let webConfiguration = WKWebViewConfiguration()
@@ -429,6 +424,7 @@ extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, W
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print(message.body)
         if message.name == "format" { // Выдает при изменении положения курсора
             editor.initialFormat(message: message)
         }

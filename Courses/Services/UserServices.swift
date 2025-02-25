@@ -44,11 +44,7 @@ class UserServices {
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = AF.upload(multipartFormData: { multipartFormData in
             if let avatarURL = user.avatarURL {
-                ImageResize.compressImageFromFileURL(fileURL: avatarURL, maxSizeInMB: 0.1) { compressedURL in
-                    if let url = compressedURL {
-                        multipartFormData.append(url, withName: "image")
-                    }
-                }
+                multipartFormData.append(avatarURL, withName: "image")
             }
             multipartFormData.append(Data(user.name.utf8), withName: "first_name")
             multipartFormData.append(Data(user.surname.utf8), withName: "last_name")

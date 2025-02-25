@@ -202,7 +202,7 @@ extension AddInfoAboutModuleViewController: UIImagePickerControllerDelegate & UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage, let url = info[.imageURL] as? URL {
-            ImageResize().deleteTempImage(atURL: url)
+            module.module.imageURL = url
             picker.dismiss(animated: true)
             let crop = CropImage(vc: self)
             crop.showModuleImageCourse(with: image)
@@ -220,7 +220,6 @@ extension AddInfoAboutModuleViewController: UIImagePickerControllerDelegate & UI
     
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         imageBtn.setImage(image, for: .normal)
-        module.module.imageURL = ImageResize().imageToURL(image: image, fileName: "\(UUID().uuidString)")
         cropViewController.dismiss(animated: true)
     }
     

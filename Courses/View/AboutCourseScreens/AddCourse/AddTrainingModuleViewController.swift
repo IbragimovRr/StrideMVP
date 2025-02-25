@@ -17,10 +17,12 @@ protocol AddTrainingModuleViewDelegate {
     func showError(error: String)
     func saveData()
     func showLoading(isLoading: Bool)
+    func showProgress(progress: String)
 }
 
 class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDelegate {
 
+    @IBOutlet weak var progress: UILabel!
     @IBOutlet weak var reloadView: UIView!
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var loading: LottieAnimationView!
@@ -85,6 +87,7 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         descriptionText.delegate = self
         presenter.view = self
         view.addSubview(errorView)
+        loadingSettings()
         presenter.getModule()
     }
     
@@ -129,7 +132,6 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     
     func showData() {
         let module = presenter.module
-        print(module)
         nameModule.text = module.module.name
         descriptionText.text = module.description
         updateCharCountLabel(count: descriptionText.text.count)
@@ -164,6 +166,11 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         im.sd_setImage(with: presenter.module.mediaURL)
     }
     
+    func showProgress(progress: String) {
+        self.progress.text = "\(progress)%"
+    }
+    
+    
     func saveData() {
         navigationController?.popViewController(animated: true)
     }
@@ -188,6 +195,11 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     }
     
     // MARK: - Private function
+    
+    private func loadingSettings() {
+        loading.loopMode = .loop
+        loading.contentMode = .scaleToFill
+    }
     
     private func hiddenTrainingItems() {
         if countType.text == "2/2" {
@@ -429,6 +441,12 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         guard trainingItem.firstItemType != nil && trainingItem.secondItemType != nil else {
             return .failure(ErrorNetwork.runtimeError("Выберите формат тренировки"))
         }
+        guard trainingItem.firstItemType != nil && trainingItem.secondItemType != nil else {
+            return .failure(ErrorNetwork.runtimeError("Выберите формат тренировки"))
+        }
+        let type = MediaTypeManager().determineFileType(from: mediaURL)
+        guard type != .none else { return
+            .failure(ErrorNetwork.runtimeError("Медиа формат не поддерживается")) }
         presenter.module.mediaURL = mediaURL
         presenter.module.description = descriptionText.text
         return .success(())

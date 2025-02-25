@@ -137,7 +137,6 @@
 		44C9F9322D4E4E6200C10A68 /* rich_editor.js in Resources */ = {isa = PBXBuildFile; fileRef = 44C9F9232D4E4E6200C10A68 /* rich_editor.js */; };
 		44C9F9332D4E4E6200C10A68 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 44C9F9242D4E4E6200C10A68 /* style.css */; };
 		44C9F9342D4E4E6200C10A68 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9F9262D4E4E6200C10A68 /* Model.swift */; };
-		44C9F9352D4E4E6200C10A68 /* ImageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9F9272D4E4E6200C10A68 /* ImageResize.swift */; };
 		44C9F9362D4E4E6200C10A68 /* Privacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9F9282D4E4E6200C10A68 /* Privacy.swift */; };
 		44C9F9372D4E4E6200C10A68 /* ValidateTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9F9292D4E4E6200C10A68 /* ValidateTF.swift */; };
 		44C9F9382D4E4E6200C10A68 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9F92A2D4E4E6200C10A68 /* Extension.swift */; };
@@ -336,7 +335,6 @@
 		44C9F9232D4E4E6200C10A68 /* rich_editor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rich_editor.js; sourceTree = "<group>"; };
 		44C9F9242D4E4E6200C10A68 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		44C9F9262D4E4E6200C10A68 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		44C9F9272D4E4E6200C10A68 /* ImageResize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResize.swift; sourceTree = "<group>"; };
 		44C9F9282D4E4E6200C10A68 /* Privacy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Privacy.swift; sourceTree = "<group>"; };
 		44C9F9292D4E4E6200C10A68 /* ValidateTF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateTF.swift; sourceTree = "<group>"; };
 		44C9F92A2D4E4E6200C10A68 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -513,7 +511,6 @@
 				44C9F92B2D4E4E6200C10A68 /* FilePath.swift */,
 				44C9F92F2D4E4E6200C10A68 /* UD.swift */,
 				44C9F9422D4E548F00C10A68 /* MediaType.swift */,
-				44C9F9272D4E4E6200C10A68 /* ImageResize.swift */,
 				44C9F92E2D4E4E6200C10A68 /* NavigationControllerDelegate.swift */,
 				44C9F92D2D4E4E6200C10A68 /* DeepLinksManager.swift */,
 				44C9F9262D4E4E6200C10A68 /* Model.swift */,
@@ -1066,7 +1063,6 @@
 				447D8C812C85DEEB00EF2217 /* PaymentServices.swift in Sources */,
 				449C124E2D00DDA30091F0F5 /* MyCoursesPresenter.swift in Sources */,
 				448E73EA2CFCD0DB00C3000D /* PromoTableViewCell.swift in Sources */,
-				44C9F9352D4E4E6200C10A68 /* ImageResize.swift in Sources */,
 				44BC590B2CD0FB7E00AD7FFA /* Admin.swift in Sources */,
 				44897A492D343D8C00ED8021 /* VideoModule.swift in Sources */,
 				447652E42D4EE54C00AA5C48 /* LocalCloudServices.swift in Sources */,
@@ -1360,7 +1356,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 4.0.9;
+				MARKETING_VERSION = 4.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1399,7 +1395,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 4.0.9;
+				MARKETING_VERSION = 4.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

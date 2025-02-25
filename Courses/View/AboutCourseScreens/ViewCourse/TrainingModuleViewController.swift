@@ -112,7 +112,6 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     // Работа с клавиатурой
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
@@ -126,9 +125,6 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         firstTF.scrollBottomText(scrollView: scrollView, notification: notification)
     }
 
-    @objc func keyboardWillDisappear() {
-        scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: 0), animated: true)
-    }
     
     private func changeHeightCollection() {
         trainingCollectionView.layoutIfNeeded()

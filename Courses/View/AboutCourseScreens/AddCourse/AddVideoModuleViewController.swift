@@ -16,10 +16,12 @@ protocol AddVideoViewDelegate {
     func saveData()
     func showLoading(isLoading: Bool)
     func showError(error: String)
+    func showProgress(progress: String)
 }
 
 class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
+    @IBOutlet weak var loadingProcent: UILabel!
     @IBOutlet weak var reloadView: UIView!
     @IBOutlet weak var changeVideo: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
@@ -118,6 +120,11 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         }
     }
     
+    func showProgress(progress: String) {
+        loadingProcent.text = "\(progress)%"
+    }
+    
+    
     func showError(error: String) {
         errorView.configure(title: "Ошибка", description: error)
         errorView.isHidden = false
@@ -125,7 +132,7 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
     private func loadingSettings() {
         loading.loopMode = .loop
-        loading.contentMode = .scaleToFill
+        loading.contentMode = .scaleAspectFill
         loading.isHidden = true
     }
     

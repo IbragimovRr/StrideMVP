@@ -36,7 +36,6 @@ class ChangeInformationViewController: UIViewController, ChangeInformationViewDe
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
 
-    private var avatarURL: URL?
     private var activateTF: UITextField?
 
     override func viewDidLoad() {
@@ -145,7 +144,6 @@ class ChangeInformationViewController: UIViewController, ChangeInformationViewDe
         presenter.user.phone = phoneNumber.text ?? presenter.user.phone
         presenter.user.email = mail.text ?? presenter.user.email
         presenter.user.coach.description = descriptionTF.text ?? presenter.user.coach.description
-        presenter.user.avatarURL = avatarURL
     }
 
     private func loadingSettings() {
@@ -190,7 +188,7 @@ extension ChangeInformationViewController: UIImagePickerControllerDelegate & UIN
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage, let url = info[.imageURL] as? URL {
-            ImageResize().deleteTempImage(atURL: url)
+            presenter.user.avatarURL = url
             picker.dismiss(animated: true)
             let crop = CropImage(vc: self)
             crop.showAvatarCrop(with: image)
@@ -208,7 +206,6 @@ extension ChangeInformationViewController: UIImagePickerControllerDelegate & UIN
     
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         avatar.image = image
-        avatarURL = ImageResize().imageToURL(image: image, fileName: "avatar")
         cropViewController.dismiss(animated: true)
     }
 

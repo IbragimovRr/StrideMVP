@@ -56,9 +56,9 @@ class AddTrainingModulePresenter: AddTrainingModulePresenterDelegate {
         view.showLoading(isLoading: true)
         Task {
             do {
-                print(44)
-                try await CourseServices().changeTrainingModule(module: module)
-                print(55)
+                try await CourseServices().changeTrainingModule(module: module) { response in
+                    self.view.showProgress(progress: "\(response)")
+                }
                 DispatchQueue.main.async {
                     self.view.showLoading(isLoading: false)
                     self.view.saveData()

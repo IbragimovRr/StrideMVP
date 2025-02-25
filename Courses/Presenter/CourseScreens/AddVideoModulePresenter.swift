@@ -36,7 +36,9 @@ class AddVideoModulePresenter: AddVideoModuleDelegate {
         view?.showLoading(isLoading: true)
         Task {
             do {
-                try await CourseServices().addVideoModulesData(module: module)
+                try await CourseServices().addVideoModulesData(module: module) { progress in
+                    self.view?.showProgress(progress: "\(progress)")
+                }
                 DispatchQueue.main.async {
                     self.view?.saveData()
                     self.view?.showLoading(isLoading: false)
