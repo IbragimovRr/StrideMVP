@@ -88,12 +88,14 @@ extension AddPlanCoursesViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
+        var cell = ModuleCourseCollectionViewCell()
         guard presenter.days.isEmpty == false else { return cell }
 
         if let image = presenter.days[indexPath.section].modules[indexPath.row].module.imageURL {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageModule", for: indexPath) as! ModuleCourseCollectionViewCell
             cell.im.sd_setImage(with: image)
+        }else {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
         }
         
         cell.cropBottomConstantinPlan(count: presenter.days[indexPath.section].modules.count - 1, index: indexPath.row)

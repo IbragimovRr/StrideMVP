@@ -597,7 +597,7 @@ extension AddTrainingModuleViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRepeats", for: indexPath) as! RepeatsCollectionViewCell
+        var cell = RepeatsCollectionViewCell()
         
         if indexPath.row == presenter.module.trainingItems.count {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRepeats", for: indexPath) as! RepeatsCollectionViewCell

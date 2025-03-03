@@ -233,12 +233,13 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Day
         if collectionView == daysCollectionView {
-            var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "day", for: indexPath) as! DaysCourseCollectionViewCell
+            var cell = DaysCourseCollectionViewCell()
             // Add +
             if indexPath.row == presenter.course.courseDays.count {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addDayCell", for: indexPath) as! DaysCourseCollectionViewCell
                 return cell
             }else {
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "day", for: indexPath) as! DaysCourseCollectionViewCell
                 cell.lbl.text = "\(indexPath.row + 1)"
                 cell.delete.isHidden = false
                 cell.delete.tag = presenter.course.courseDays[indexPath.row].dayID
@@ -253,7 +254,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
             return cell
         }else {
             // Modules
-            var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
+            var cell = ModuleCourseCollectionViewCell()
 
             guard presenter.course.courseDays.isEmpty == false else { return cell }
 
@@ -262,7 +263,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moduleAdd", for: indexPath) as! ModuleCourseCollectionViewCell
                 return cell
             }
-
+            
             if let image = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].module.imageURL {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
                 cell.im.sd_setImage(with: image)

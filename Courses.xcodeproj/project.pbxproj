@@ -83,8 +83,6 @@
 		447652E42D4EE54C00AA5C48 /* LocalCloudServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447652E32D4EE54C00AA5C48 /* LocalCloudServices.swift */; };
 		447652EB2D4FDBB400AA5C48 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447652EA2D4FDBB400AA5C48 /* RealmModel.swift */; };
 		447652F62D50238A00AA5C48 /* DateHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447652F52D50238A00AA5C48 /* DateHeaderCollectionReusableView.swift */; };
-		447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */; };
-		447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */; };
 		447D8C812C85DEEB00EF2217 /* PaymentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D8C802C85DEEB00EF2217 /* PaymentServices.swift */; };
 		447D8C8E2C89D09600EF2217 /* emptyBox.json in Resources */ = {isa = PBXBuildFile; fileRef = 447D8C8D2C89D09600EF2217 /* emptyBox.json */; };
 		447FE4932CDD2300007C5B31 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447FE4922CDD2300007C5B31 /* MainTabBarController.swift */; };
@@ -176,6 +174,8 @@
 		44F118D22D109025000FCDC3 /* AppMetricaCore in Frameworks */ = {isa = PBXBuildFile; productRef = 44F118D12D109025000FCDC3 /* AppMetricaCore */; };
 		44F118D42D109025000FCDC3 /* AppMetricaCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 44F118D32D109025000FCDC3 /* AppMetricaCrashes */; };
 		44F118D62D109025000FCDC3 /* AppMetricaLibraryAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 44F118D52D109025000FCDC3 /* AppMetricaLibraryAdapter */; };
+		44F15D7A2D7479270048D9A8 /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 44F15D792D7479270048D9A8 /* TinkoffASDKCore */; };
+		44F15D7C2D7479270048D9A8 /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 44F15D7B2D7479270048D9A8 /* TinkoffASDKUI */; };
 		44F395482C9B8BA200861759 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 44F395472C9B8BA200861759 /* CropViewController */; };
 		44F3954A2C9B8BA200861759 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 44F395492C9B8BA200861759 /* TOCropViewController */; };
 		44F3954C2C9B8BB900861759 /* CropImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3954B2C9B8BB900861759 /* CropImage.swift */; };
@@ -187,7 +187,7 @@
 		751510412C34586D009978E6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751510402C34586D009978E6 /* SettingsViewController.swift */; };
 		753A4F7C2C340DB7007A8194 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753A4F7B2C340DB7007A8194 /* MyCoursesViewController.swift */; };
 		753A4F7E2C341E98007A8194 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 753A4F7D2C341E98007A8194 /* Inter-Medium.ttf */; };
-		7555DEB52C986FC100B80A13 /* WithdradSBPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555DEB42C986FC100B80A13 /* WithdradSBPViewController.swift */; };
+		7555DEB52C986FC100B80A13 /* WithdrawSBPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555DEB42C986FC100B80A13 /* WithdrawSBPViewController.swift */; };
 		7555DEB72C98822000B80A13 /* BanksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555DEB62C98822000B80A13 /* BanksTableViewCell.swift */; };
 		7595784B2C5B9A7E00A9F811 /* AddInfoAboutModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7595784A2C5B9A7D00A9F811 /* AddInfoAboutModuleViewController.swift */; };
 		75D68C612C80A361001407F0 /* AddReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D68C602C80A361001407F0 /* AddReviewViewController.swift */; };
@@ -376,7 +376,7 @@
 		751510402C34586D009978E6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		753A4F7B2C340DB7007A8194 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
 		753A4F7D2C341E98007A8194 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
-		7555DEB42C986FC100B80A13 /* WithdradSBPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdradSBPViewController.swift; sourceTree = "<group>"; };
+		7555DEB42C986FC100B80A13 /* WithdrawSBPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawSBPViewController.swift; sourceTree = "<group>"; };
 		7555DEB62C98822000B80A13 /* BanksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BanksTableViewCell.swift; sourceTree = "<group>"; };
 		7595784A2C5B9A7D00A9F811 /* AddInfoAboutModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoAboutModuleViewController.swift; sourceTree = "<group>"; };
 		75D68C602C80A361001407F0 /* AddReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewController.swift; sourceTree = "<group>"; };
@@ -393,15 +393,15 @@
 				44F52AC92D5D506D00F07505 /* Lightbox in Frameworks */,
 				44DFB11E2C3BE46B005C8F44 /* Lottie in Frameworks */,
 				44F118D62D109025000FCDC3 /* AppMetricaLibraryAdapter in Frameworks */,
+				44F15D7C2D7479270048D9A8 /* TinkoffASDKUI in Frameworks */,
 				44064C972C2861CA00AB5227 /* SwiftyJSON in Frameworks */,
-				447D8C7D2C85DED400EF2217 /* TinkoffASDKCore in Frameworks */,
 				44D68AF82C5051E100F8F476 /* GoogleSignInSwift in Frameworks */,
 				44F395482C9B8BA200861759 /* CropViewController in Frameworks */,
 				44064C9C2C2861D700AB5227 /* SDWebImageMapKit in Frameworks */,
 				44064C922C2861B900AB5227 /* Alamofire in Frameworks */,
 				44064C9A2C2861D700AB5227 /* SDWebImage in Frameworks */,
 				44F3954A2C9B8BA200861759 /* TOCropViewController in Frameworks */,
-				447D8C7F2C85DED400EF2217 /* TinkoffASDKUI in Frameworks */,
+				44F15D7A2D7479270048D9A8 /* TinkoffASDKCore in Frameworks */,
 				44321F9A2D40496D00247DA9 /* AWSCore in Frameworks */,
 				44000EAC2D50F130004E54A8 /* RealmSwift in Frameworks */,
 				44A406832C762FE1005509D0 /* SkeletonView in Frameworks */,
@@ -447,6 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				440DAB322C1748D400C576FB /* Courses */,
+				44AC38512D71E6D7002DFCE8 /* Frameworks */,
 				440DAB312C1748D400C576FB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -539,7 +540,7 @@
 				440C9C402CF49D72007D0735 /* PromoViewController.swift */,
 				441E4AEE2CD2AD6100800EE4 /* СonfidentialityViewController.swift */,
 				75F6FDB32C9323B500A57EA9 /* WithdrawViewController.swift */,
-				7555DEB42C986FC100B80A13 /* WithdradSBPViewController.swift */,
+				7555DEB42C986FC100B80A13 /* WithdrawSBPViewController.swift */,
 				75D68C602C80A361001407F0 /* AddReviewViewController.swift */,
 				75106D782C38AFDB0036042B /* InfoAboutMeViewController.swift */,
 				7508513A2C38763A00F5C0DC /* ChangeInformationViewController.swift */,
@@ -797,6 +798,13 @@
 			path = TabBarScreensPresenter;
 			sourceTree = "<group>";
 		};
+		44AC38512D71E6D7002DFCE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		44BC59032CCFF33200AD7FFA /* AdminPanelScreens */ = {
 			isa = PBXGroup;
 			children = (
@@ -937,8 +945,6 @@
 				44D68AF52C5051E100F8F476 /* GoogleSignIn */,
 				44D68AF72C5051E100F8F476 /* GoogleSignInSwift */,
 				44A406822C762FE1005509D0 /* SkeletonView */,
-				447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */,
-				447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */,
 				44F395472C9B8BA200861759 /* CropViewController */,
 				44F395492C9B8BA200861759 /* TOCropViewController */,
 				44F118D12D109025000FCDC3 /* AppMetricaCore */,
@@ -948,6 +954,8 @@
 				44321F9B2D40496D00247DA9 /* AWSS3 */,
 				44000EAB2D50F130004E54A8 /* RealmSwift */,
 				44F52AC82D5D506D00F07505 /* Lightbox */,
+				44F15D792D7479270048D9A8 /* TinkoffASDKCore */,
+				44F15D7B2D7479270048D9A8 /* TinkoffASDKUI */,
 			);
 			productName = Courses;
 			productReference = 440DAB302C1748D400C576FB /* Courses.app */;
@@ -984,12 +992,12 @@
 				44DFB11C2C3BE46A005C8F44 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				44D68AF42C5051E100F8F476 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				44A406812C762FE1005509D0 /* XCRemoteSwiftPackageReference "SkeletonView" */,
-				447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */,
 				44F395462C9B8BA200861759 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */,
 				44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */,
 				44000EAA2D50F130004E54A8 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				44F52AC72D5D506D00F07505 /* XCRemoteSwiftPackageReference "Lightbox" */,
+				44F15D782D7479270048D9A8 /* XCRemoteSwiftPackageReference "asdk-ios" */,
 			);
 			productRefGroup = 440DAB312C1748D400C576FB /* Products */;
 			projectDirPath = "";
@@ -1072,7 +1080,7 @@
 				44682CA32D034CDD00087C62 /* CreatePromoPresenter.swift in Sources */,
 				448E73FA2CFF087A00C3000D /* UserModel.swift in Sources */,
 				44D84B242D1DC798001A35CA /* TypeModuleViewController.swift in Sources */,
-				7555DEB52C986FC100B80A13 /* WithdradSBPViewController.swift in Sources */,
+				7555DEB52C986FC100B80A13 /* WithdrawSBPViewController.swift in Sources */,
 				7555DEB72C98822000B80A13 /* BanksTableViewCell.swift in Sources */,
 				440DAB342C1748D400C576FB /* AppDelegate.swift in Sources */,
 				44E4061C2CFF78F4004F633E /* CourseModel.swift in Sources */,
@@ -1350,7 +1358,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1389,7 +1397,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1472,14 +1480,6 @@
 				minimumVersion = 2.40.0;
 			};
 		};
-		447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/tinkoff-mobile-tech/tinkoff-asdk-ios?tab=readme-ov-file#%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.1.1;
-			};
-		};
 		44A406812C762FE1005509D0 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
@@ -1510,6 +1510,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.9.0;
+			};
+		};
+		44F15D782D7479270048D9A8 /* XCRemoteSwiftPackageReference "asdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://opensource.tbank.ru/mobile-tech/asdk-ios.git";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 		44F395462C9B8BA200861759 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
@@ -1566,16 +1574,6 @@
 			package = 44321F982D40496D00247DA9 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
 			productName = AWSS3;
 		};
-		447D8C7C2C85DED400EF2217 /* TinkoffASDKCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */;
-			productName = TinkoffASDKCore;
-		};
-		447D8C7E2C85DED400EF2217 /* TinkoffASDKUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 447D8C7B2C85DED300EF2217 /* XCRemoteSwiftPackageReference "tinkoff-asdk-ios" */;
-			productName = TinkoffASDKUI;
-		};
 		44A406822C762FE1005509D0 /* SkeletonView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 44A406812C762FE1005509D0 /* XCRemoteSwiftPackageReference "SkeletonView" */;
@@ -1610,6 +1608,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 44F118D02D109025000FCDC3 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */;
 			productName = AppMetricaLibraryAdapter;
+		};
+		44F15D792D7479270048D9A8 /* TinkoffASDKCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44F15D782D7479270048D9A8 /* XCRemoteSwiftPackageReference "asdk-ios" */;
+			productName = TinkoffASDKCore;
+		};
+		44F15D7B2D7479270048D9A8 /* TinkoffASDKUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44F15D782D7479270048D9A8 /* XCRemoteSwiftPackageReference "asdk-ios" */;
+			productName = TinkoffASDKUI;
 		};
 		44F395472C9B8BA200861759 /* CropViewController */ = {
 			isa = XCSwiftPackageProductDependency;

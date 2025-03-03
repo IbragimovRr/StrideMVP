@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NAm-LK-wo0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NAm-LK-wo0">
     <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -5831,10 +5831,10 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="336" height="120"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20F-6M-EZF">
-                                                    <rect key="frame" x="10" y="10" width="185" height="82.666666666666671"/>
+                                                    <rect key="frame" x="10" y="10" width="164.66666666666666" height="82.666666666666671"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="2AQ-ld-vOi">
-                                                            <rect key="frame" x="15" y="10" width="145" height="40.666666666666664"/>
+                                                            <rect key="frame" x="15.000000000000007" y="10" width="124.66666666666669" height="40.666666666666664"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 минут" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BzJ-q3-vhL">
                                                                     <rect key="frame" x="0.0" y="0.0" width="30" height="10"/>
@@ -5843,10 +5843,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название модуля" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrO-bU-bcK">
-                                                                    <rect key="frame" x="0.0" y="22" width="145" height="18.666666666666671"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="145" id="LWA-d8-se1"/>
-                                                                    </constraints>
+                                                                    <rect key="frame" x="0.0" y="22" width="124.66666666666667" height="18.666666666666671"/>
                                                                     <fontDescription key="fontDescription" name="Commissioner-Thin_Bold" family="Commissioner" pointSize="15"/>
                                                                     <color key="textColor" name="GrayMain"/>
                                                                     <nil key="highlightedColor"/>
@@ -5854,10 +5851,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpV-nq-yPm">
-                                                            <rect key="frame" x="15" y="62.666666666666671" width="145" height="10"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="145" id="kBF-3h-QwT"/>
-                                                            </constraints>
+                                                            <rect key="frame" x="15.000000000000007" y="62.666666666666671" width="124.66666666666669" height="10"/>
                                                             <fontDescription key="fontDescription" name="Commissioner-Thin_Medium" family="Commissioner" pointSize="8"/>
                                                             <color key="textColor" name="GrayMain"/>
                                                             <nil key="highlightedColor"/>
@@ -5904,6 +5898,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="Q8I-Fv-IDe" secondAttribute="bottom" id="MJg-h3-BBE"/>
                                                 <constraint firstItem="Q8I-Fv-IDe" firstAttribute="leading" secondItem="IdQ-En-MJb" secondAttribute="leading" id="Q7K-1o-l7w"/>
                                                 <constraint firstItem="20F-6M-EZF" firstAttribute="top" secondItem="IdQ-En-MJb" secondAttribute="top" constant="10" id="YGv-Qd-YXd"/>
+                                                <constraint firstItem="YKt-N4-qCV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="20F-6M-EZF" secondAttribute="trailing" constant="15" id="YHk-fH-oNE"/>
                                                 <constraint firstAttribute="trailing" secondItem="YKt-N4-qCV" secondAttribute="trailing" constant="15" id="bMK-Ni-Duk"/>
                                                 <constraint firstItem="20F-6M-EZF" firstAttribute="leading" secondItem="IdQ-En-MJb" secondAttribute="leading" constant="10" id="bzq-vA-GY2"/>
                                                 <constraint firstAttribute="trailing" secondItem="Q8I-Fv-IDe" secondAttribute="trailing" id="mhn-Oo-coU"/>
@@ -7371,10 +7366,10 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="336" height="120"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdb-Lx-zil">
-                                                    <rect key="frame" x="10" y="10" width="175" height="82.666666666666671"/>
+                                                    <rect key="frame" x="10" y="10" width="149.66666666666666" height="82.666666666666671"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="xZi-Rl-uyF">
-                                                            <rect key="frame" x="15" y="10" width="150" height="40.666666666666664"/>
+                                                            <rect key="frame" x="15.000000000000007" y="10" width="124.66666666666669" height="40.666666666666664"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 минут" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kws-4d-aeI">
                                                                     <rect key="frame" x="0.0" y="0.0" width="30" height="10"/>
@@ -7383,10 +7378,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название модуля" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDz-oS-S1H">
-                                                                    <rect key="frame" x="0.0" y="22" width="150" height="18.666666666666671"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="150" id="uVn-bZ-TF0"/>
-                                                                    </constraints>
+                                                                    <rect key="frame" x="0.0" y="22" width="124.66666666666667" height="18.666666666666671"/>
                                                                     <fontDescription key="fontDescription" name="Commissioner-Thin_Bold" family="Commissioner" pointSize="15"/>
                                                                     <color key="textColor" name="GrayMain"/>
                                                                     <nil key="highlightedColor"/>
@@ -7394,7 +7386,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMp-R5-918">
-                                                            <rect key="frame" x="15" y="62.666666666666671" width="150" height="10"/>
+                                                            <rect key="frame" x="15.000000000000007" y="62.666666666666671" width="124.66666666666669" height="10"/>
                                                             <fontDescription key="fontDescription" name="Commissioner-Thin_Medium" family="Commissioner" pointSize="8"/>
                                                             <color key="textColor" name="GrayMain"/>
                                                             <nil key="highlightedColor"/>
@@ -7439,6 +7431,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="4bs-bs-g9h" secondAttribute="trailing" id="D7s-V3-vqy"/>
+                                                <constraint firstItem="jDU-yc-H1O" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fdb-Lx-zil" secondAttribute="trailing" constant="15" id="Ei7-X1-o5x"/>
                                                 <constraint firstItem="jDU-yc-H1O" firstAttribute="top" secondItem="FGg-uy-8FI" secondAttribute="top" constant="15" id="Kba-cT-qtw"/>
                                                 <constraint firstItem="4bs-bs-g9h" firstAttribute="top" secondItem="FGg-uy-8FI" secondAttribute="top" id="ODV-Jz-A4L"/>
                                                 <constraint firstAttribute="trailing" secondItem="jDU-yc-H1O" secondAttribute="trailing" constant="15" id="Vmd-mI-7Gn"/>
@@ -8256,10 +8249,10 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="321" height="120"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQh-na-2Lf">
-                                                            <rect key="frame" x="10" y="10" width="175" height="82.666666666666671"/>
+                                                            <rect key="frame" x="10" y="10" width="149.66666666666666" height="82.666666666666671"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VRM-ym-aWL">
-                                                                    <rect key="frame" x="15" y="10" width="150" height="40.666666666666664"/>
+                                                                    <rect key="frame" x="15.000000000000007" y="10" width="124.66666666666669" height="40.666666666666664"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 минут" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPn-zE-NC2">
                                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="10"/>
@@ -8268,10 +8261,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название модуля" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C01-Um-Zcv">
-                                                                            <rect key="frame" x="0.0" y="22" width="150" height="18.666666666666671"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="150" id="eVu-ai-PdQ"/>
-                                                                            </constraints>
+                                                                            <rect key="frame" x="0.0" y="22" width="124.66666666666667" height="18.666666666666671"/>
                                                                             <fontDescription key="fontDescription" name="Commissioner-Thin_Bold" family="Commissioner" pointSize="15"/>
                                                                             <color key="textColor" name="GrayMain"/>
                                                                             <nil key="highlightedColor"/>
@@ -8279,7 +8269,7 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyi-Au-OSJ">
-                                                                    <rect key="frame" x="15" y="62.666666666666671" width="150" height="10"/>
+                                                                    <rect key="frame" x="15.000000000000007" y="62.666666666666671" width="124.66666666666669" height="10"/>
                                                                     <fontDescription key="fontDescription" name="Commissioner-Thin_Medium" family="Commissioner" pointSize="8"/>
                                                                     <color key="textColor" name="GrayMain"/>
                                                                     <nil key="highlightedColor"/>
@@ -8350,6 +8340,7 @@
                                                         <constraint firstItem="P5f-b8-yyd" firstAttribute="leading" secondItem="JlG-ny-itK" secondAttribute="leading" id="kVp-nb-79V"/>
                                                         <constraint firstAttribute="bottom" secondItem="IzO-5f-0f7" secondAttribute="bottom" id="nDr-vU-J8b"/>
                                                         <constraint firstAttribute="trailing" secondItem="IzO-5f-0f7" secondAttribute="trailing" id="v0e-Vv-Qg5"/>
+                                                        <constraint firstItem="XQh-na-2Lf" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="qa3-v7-czs" secondAttribute="leading" constant="-20" id="vnn-a0-V0M"/>
                                                         <constraint firstItem="IzO-5f-0f7" firstAttribute="leading" secondItem="JlG-ny-itK" secondAttribute="leading" id="yiR-8H-tJM"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -13467,10 +13458,10 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="321" height="120"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Up-A2-0te">
-                                                            <rect key="frame" x="10" y="10" width="175" height="82.666666666666671"/>
+                                                            <rect key="frame" x="10" y="10" width="149.66666666666666" height="82.666666666666671"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6CT-SO-bWh">
-                                                                    <rect key="frame" x="15" y="10" width="150" height="40.666666666666664"/>
+                                                                    <rect key="frame" x="15.000000000000007" y="10" width="124.66666666666669" height="40.666666666666664"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 минут" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kv5-iv-iGJ">
                                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="10"/>
@@ -13479,10 +13470,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название модуля" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y48-tc-VKQ">
-                                                                            <rect key="frame" x="0.0" y="22" width="150" height="18.666666666666671"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="150" id="TFK-Lb-fKG"/>
-                                                                            </constraints>
+                                                                            <rect key="frame" x="0.0" y="22" width="124.66666666666667" height="18.666666666666671"/>
                                                                             <fontDescription key="fontDescription" name="Commissioner-Thin_Bold" family="Commissioner" pointSize="15"/>
                                                                             <color key="textColor" name="GrayMain"/>
                                                                             <nil key="highlightedColor"/>
@@ -13490,7 +13478,7 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3r-oG-tY8">
-                                                                    <rect key="frame" x="15" y="62.666666666666671" width="150" height="10"/>
+                                                                    <rect key="frame" x="15.000000000000007" y="62.666666666666671" width="124.66666666666669" height="10"/>
                                                                     <fontDescription key="fontDescription" name="Commissioner-Thin_Medium" family="Commissioner" pointSize="8"/>
                                                                     <color key="textColor" name="GrayMain"/>
                                                                     <nil key="highlightedColor"/>
@@ -13560,6 +13548,7 @@
                                                         <constraint firstItem="i6i-Na-vVX" firstAttribute="leading" secondItem="tQE-G9-5uf" secondAttribute="leading" id="nBK-xm-eWO"/>
                                                         <constraint firstAttribute="bottom" secondItem="i6i-Na-vVX" secondAttribute="bottom" id="nR4-s0-1lh"/>
                                                         <constraint firstAttribute="bottom" secondItem="HCG-74-kSc" secondAttribute="bottom" id="qwg-rV-Fpt"/>
+                                                        <constraint firstItem="kW5-fi-AR5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9Up-A2-0te" secondAttribute="trailing" constant="15" id="sxG-iS-MlB"/>
                                                         <constraint firstItem="9Up-A2-0te" firstAttribute="top" secondItem="tQE-G9-5uf" secondAttribute="top" constant="10" id="vHG-nU-SO1"/>
                                                         <constraint firstItem="kW5-fi-AR5" firstAttribute="top" secondItem="tQE-G9-5uf" secondAttribute="top" constant="15" id="znr-70-kCH"/>
                                                     </constraints>
@@ -14654,7 +14643,7 @@
         <segue reference="nsh-RS-Plh"/>
         <segue reference="IVu-BL-rNu"/>
         <segue reference="M8w-WU-QND"/>
-        <segue reference="RsJ-Z8-4Bo"/>
+        <segue reference="F7H-ew-eXR"/>
         <segue reference="HHf-kQ-icL"/>
         <segue reference="eaT-yL-Yiu"/>
         <segue reference="3aH-yg-pXb"/>

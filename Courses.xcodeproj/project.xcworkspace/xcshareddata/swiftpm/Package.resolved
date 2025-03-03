@@ -1,5 +1,5 @@
 {
-  "originHash" : "b8b5c7e692c2c983d87883d38ad9bb03432882d1c4ecaf6c10ffa0afa740fdae",
+  "originHash" : "f26d5c2477daf4d39017da870c33e365fe593cdb2b6c282534294ba5df8d7b47",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "a23678a2e783b126c247b53b3e3b44f09a3d39c1",
         "version" : "5.9.0"
+      }
+    },
+    {
+      "identity" : "asdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://opensource.tbank.ru/mobile-tech/asdk-ios.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "70b26936a906fa5daeb985a2527630e58b9c386c"
       }
     },
     {
@@ -114,8 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "10d06f6a33bafae8c164fbfd1f03391f6d4692b3",
-        "version" : "5.20.0"
+        "revision" : "cac9a55a3ae92478a2c95042dcc8d9695d2129ca",
+        "version" : "5.21.0"
       }
     },
     {
@@ -134,15 +143,6 @@
       "state" : {
         "revision" : "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
         "version" : "5.0.2"
-      }
-    },
-    {
-      "identity" : "tinkoff-asdk-ios?tab=readme-ov-file#%d0%bf%d0%be%d0%b4%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%bd%d0%b8%d0%b5",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/tinkoff-mobile-tech/tinkoff-asdk-ios?tab=readme-ov-file#%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5",
-      "state" : {
-        "revision" : "ef3a532779ecef3eca97461cd56bba67fa602919",
-        "version" : "3.1.1"
       }
     },
     {

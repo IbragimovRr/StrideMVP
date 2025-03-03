@@ -88,7 +88,7 @@ class WithdrawSBPViewController: UIViewController, WithdrawViewDelegate {
             numberBorder.color = .errorRed
             result = false
             return result }
-        guard numberTextField.text!.count == 17 else {
+        guard numberTextField.text!.count == 18 else {
             numberBorder.color = .errorRed
             showError(error: "Неправильный номер")
             result = false

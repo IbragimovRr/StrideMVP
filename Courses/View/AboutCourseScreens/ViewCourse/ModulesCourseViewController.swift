@@ -191,13 +191,15 @@ extension ModulesCourseViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         }else {
             // Modules
-            var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module2", for: indexPath) as! ModuleCourseCollectionViewCell
+            var cell = ModuleCourseCollectionViewCell()
 
             guard course.courseDays.isEmpty == false else { return cell }
 
             if let image = course.courseDays[selectDay].modules[indexPath.row].module.imageURL {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
                 cell.im.sd_setImage(with: image)
+            }else {
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module2", for: indexPath) as! ModuleCourseCollectionViewCell
             }
             
             cell.typeModule(course.courseDays[selectDay].modules[indexPath.row].type)

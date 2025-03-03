@@ -29,17 +29,6 @@ class PaymentServices {
 
 
     // MARK: - Оплата
-    func cardList(_ viewController: UIViewController, email: String) {
-        self.email = email
-        do {
-            let sdk = try AcquiringUISDK(coreSDKConfiguration: coreSDKConfiguration, uiSDKConfiguration: uiSDKConfiguration)
-            sdk.presentCardList(on: viewController, customerKey: email)
-
-        } catch {
-            assertionFailure("\(error)")
-        }
-    }
-
     func configure(_ viewController: UIViewController, email: String, price: Int, completion: @escaping (PaymentResult) -> ()) {
         self.email = email
         do {
@@ -80,7 +69,6 @@ class PaymentServices {
 
     
     // MARK: - Вывод
-    
     
     func fetchFunds(payment: PaymentMethod) async throws {
         let url = Constants.url + "api/v1/payments/"
