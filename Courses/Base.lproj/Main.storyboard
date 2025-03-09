@@ -5831,7 +5831,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="336" height="120"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20F-6M-EZF">
-                                                    <rect key="frame" x="10" y="10" width="164.66666666666666" height="82.666666666666671"/>
+                                                    <rect key="frame" x="10" y="10" width="154.66666666666666" height="82.666666666666671"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="2AQ-ld-vOi">
                                                             <rect key="frame" x="15.000000000000007" y="10" width="124.66666666666669" height="40.666666666666664"/>
@@ -5851,7 +5851,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpV-nq-yPm">
-                                                            <rect key="frame" x="15.000000000000007" y="62.666666666666671" width="124.66666666666669" height="10"/>
+                                                            <rect key="frame" x="15.000000000000007" y="62.666666666666671" width="114.66666666666669" height="10"/>
                                                             <fontDescription key="fontDescription" name="Commissioner-Thin_Medium" family="Commissioner" pointSize="8"/>
                                                             <color key="textColor" name="GrayMain"/>
                                                             <nil key="highlightedColor"/>
@@ -5863,7 +5863,7 @@
                                                         <constraint firstItem="rpV-nq-yPm" firstAttribute="leading" secondItem="20F-6M-EZF" secondAttribute="leading" constant="15" id="0W9-Ic-mlb"/>
                                                         <constraint firstItem="2AQ-ld-vOi" firstAttribute="leading" secondItem="20F-6M-EZF" secondAttribute="leading" constant="15" id="9NN-8R-AtK"/>
                                                         <constraint firstAttribute="bottom" secondItem="rpV-nq-yPm" secondAttribute="bottom" constant="10" id="JYd-nt-YCA"/>
-                                                        <constraint firstAttribute="trailing" secondItem="2AQ-ld-vOi" secondAttribute="trailing" constant="25" id="aBN-2Z-Bhl"/>
+                                                        <constraint firstAttribute="trailing" secondItem="2AQ-ld-vOi" secondAttribute="trailing" constant="15" id="aBN-2Z-Bhl"/>
                                                         <constraint firstItem="2AQ-ld-vOi" firstAttribute="top" secondItem="20F-6M-EZF" secondAttribute="top" constant="10" id="hV1-LZ-MYN"/>
                                                         <constraint firstAttribute="trailing" secondItem="rpV-nq-yPm" secondAttribute="trailing" constant="25" id="wcc-ZV-wtm"/>
                                                     </constraints>
@@ -7366,7 +7366,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="336" height="120"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdb-Lx-zil">
-                                                    <rect key="frame" x="10" y="10" width="149.66666666666666" height="82.666666666666671"/>
+                                                    <rect key="frame" x="10" y="10" width="154.66666666666666" height="82.666666666666671"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="xZi-Rl-uyF">
                                                             <rect key="frame" x="15.000000000000007" y="10" width="124.66666666666669" height="40.666666666666664"/>
@@ -7386,7 +7386,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMp-R5-918">
-                                                            <rect key="frame" x="15.000000000000007" y="62.666666666666671" width="124.66666666666669" height="10"/>
+                                                            <rect key="frame" x="15" y="62.666666666666671" width="129.66666666666666" height="10"/>
                                                             <fontDescription key="fontDescription" name="Commissioner-Thin_Medium" family="Commissioner" pointSize="8"/>
                                                             <color key="textColor" name="GrayMain"/>
                                                             <nil key="highlightedColor"/>
@@ -7398,7 +7398,7 @@
                                                         <constraint firstItem="SMp-R5-918" firstAttribute="top" secondItem="xZi-Rl-uyF" secondAttribute="bottom" constant="12" id="Mv4-oa-lZW"/>
                                                         <constraint firstAttribute="bottom" secondItem="SMp-R5-918" secondAttribute="bottom" constant="10" id="Qf5-Hc-r5J"/>
                                                         <constraint firstAttribute="trailing" secondItem="SMp-R5-918" secondAttribute="trailing" constant="10" id="dbb-Lc-afi"/>
-                                                        <constraint firstAttribute="trailing" secondItem="xZi-Rl-uyF" secondAttribute="trailing" constant="10" id="lkN-SV-1Lr"/>
+                                                        <constraint firstAttribute="trailing" secondItem="xZi-Rl-uyF" secondAttribute="trailing" constant="15" id="lkN-SV-1Lr"/>
                                                         <constraint firstItem="xZi-Rl-uyF" firstAttribute="leading" secondItem="fdb-Lx-zil" secondAttribute="leading" constant="15" id="luq-JH-XQl"/>
                                                         <constraint firstItem="SMp-R5-918" firstAttribute="leading" secondItem="fdb-Lx-zil" secondAttribute="leading" constant="15" id="m6J-HC-ot9"/>
                                                     </constraints>
@@ -8249,7 +8249,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="321" height="120"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQh-na-2Lf">
-                                                            <rect key="frame" x="10" y="10" width="149.66666666666666" height="82.666666666666671"/>
+                                                            <rect key="frame" x="10" y="10" width="154.66666666666666" height="82.666666666666671"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VRM-ym-aWL">
                                                                     <rect key="frame" x="15.000000000000007" y="10" width="124.66666666666669" height="40.666666666666664"/>
@@ -8269,7 +8269,7 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyi-Au-OSJ">
-                                                                    <rect key="frame" x="15.000000000000007" y="62.666666666666671" width="124.66666666666669" height="10"/>
+                                                                    <rect key="frame" x="15" y="62.666666666666671" width="129.66666666666666" height="10"/>
                                                                     <fontDescription key="fontDescription" name="Commissioner-Thin_Medium" family="Commissioner" pointSize="8"/>
                                                                     <color key="textColor" name="GrayMain"/>
                                                                     <nil key="highlightedColor"/>
@@ -8280,7 +8280,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="Gyi-Au-OSJ" secondAttribute="trailing" constant="10" id="2lI-td-w7V"/>
                                                                 <constraint firstItem="VRM-ym-aWL" firstAttribute="leading" secondItem="XQh-na-2Lf" secondAttribute="leading" constant="15" id="9G4-Zs-S2R"/>
                                                                 <constraint firstItem="VRM-ym-aWL" firstAttribute="top" secondItem="XQh-na-2Lf" secondAttribute="top" constant="10" id="YOK-Mv-bYS"/>
-                                                                <constraint firstAttribute="trailing" secondItem="VRM-ym-aWL" secondAttribute="trailing" constant="10" id="Zlr-tB-4ki"/>
+                                                                <constraint firstAttribute="trailing" secondItem="VRM-ym-aWL" secondAttribute="trailing" constant="15" id="Zlr-tB-4ki"/>
                                                                 <constraint firstItem="Gyi-Au-OSJ" firstAttribute="top" secondItem="VRM-ym-aWL" secondAttribute="bottom" constant="12" id="bd1-X6-uLN"/>
                                                                 <constraint firstItem="Gyi-Au-OSJ" firstAttribute="leading" secondItem="XQh-na-2Lf" secondAttribute="leading" constant="15" id="n6b-Uh-hR9"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Gyi-Au-OSJ" secondAttribute="bottom" constant="10" id="xOq-Iv-X9N"/>
@@ -9012,7 +9012,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JjH-MO-h89">
                                         <rect key="frame" x="18.333333333333336" y="0.0" width="10.333333333333336" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="GrayMain"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -9155,7 +9155,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Комиссия 20%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMr-jq-CQ0">
                                 <rect key="frame" x="0.0" y="807" width="393" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                <color key="textColor" red="0.7725490196" green="0.77647058820000003" blue="0.78039215689999997" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" name="GrayMain"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yaw-dM-xsC">
@@ -9297,7 +9297,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEF-9q-pc7">
                                         <rect key="frame" x="18.333333333333336" y="0.0" width="10.333333333333336" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="GrayMain"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -9366,7 +9366,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Комиссия 20%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfF-Qx-E0D">
                                 <rect key="frame" x="0.0" y="807" width="393" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                <color key="textColor" red="0.7725490196" green="0.77647058820000003" blue="0.78039215689999997" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" name="GrayMain"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Fi-iz-Zmt">
@@ -11981,7 +11981,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="442"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSj-af-z4c">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="417"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="567"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название модуля" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpf-kC-9jk">
                                                         <rect key="frame" x="28" y="28" width="337" height="25"/>
@@ -12106,7 +12106,7 @@
                                                     <constraint firstItem="V0e-Gc-0AW" firstAttribute="top" secondItem="Jpf-kC-9jk" secondAttribute="bottom" constant="10" id="RwU-iX-FGM"/>
                                                     <constraint firstItem="Q6W-Ia-zAQ" firstAttribute="top" secondItem="sKe-5c-YAc" secondAttribute="bottom" constant="10" id="Rwp-Jb-gF6"/>
                                                     <constraint firstItem="Jpf-kC-9jk" firstAttribute="top" secondItem="hSj-af-z4c" secondAttribute="top" constant="28" id="TuU-BD-5WX"/>
-                                                    <constraint firstAttribute="bottom" secondItem="TyE-KU-mqa" secondAttribute="bottom" constant="50" id="XjJ-d8-fai"/>
+                                                    <constraint firstAttribute="bottom" secondItem="TyE-KU-mqa" secondAttribute="bottom" constant="200" id="XjJ-d8-fai"/>
                                                     <constraint firstItem="Jpf-kC-9jk" firstAttribute="leading" secondItem="hSj-af-z4c" secondAttribute="leading" constant="28" id="hX9-En-dtc"/>
                                                     <constraint firstItem="TyE-KU-mqa" firstAttribute="top" secondItem="sKe-5c-YAc" secondAttribute="bottom" constant="30" id="m2C-tn-sQn"/>
                                                     <constraint firstItem="JkS-UX-pQG" firstAttribute="top" secondItem="V0e-Gc-0AW" secondAttribute="bottom" constant="15" id="xoh-dY-rmr"/>
@@ -13458,7 +13458,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="321" height="120"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Up-A2-0te">
-                                                            <rect key="frame" x="10" y="10" width="149.66666666666666" height="82.666666666666671"/>
+                                                            <rect key="frame" x="10" y="10" width="154.66666666666666" height="82.666666666666671"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6CT-SO-bWh">
                                                                     <rect key="frame" x="15.000000000000007" y="10" width="124.66666666666669" height="40.666666666666664"/>
@@ -13478,7 +13478,7 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3r-oG-tY8">
-                                                                    <rect key="frame" x="15.000000000000007" y="62.666666666666671" width="124.66666666666669" height="10"/>
+                                                                    <rect key="frame" x="15" y="62.666666666666671" width="129.66666666666666" height="10"/>
                                                                     <fontDescription key="fontDescription" name="Commissioner-Thin_Medium" family="Commissioner" pointSize="8"/>
                                                                     <color key="textColor" name="GrayMain"/>
                                                                     <nil key="highlightedColor"/>
@@ -13487,7 +13487,7 @@
                                                             <color key="backgroundColor" name="LightBlackMain"/>
                                                             <constraints>
                                                                 <constraint firstItem="K3r-oG-tY8" firstAttribute="top" secondItem="6CT-SO-bWh" secondAttribute="bottom" constant="12" id="1TV-c0-xjQ"/>
-                                                                <constraint firstAttribute="trailing" secondItem="6CT-SO-bWh" secondAttribute="trailing" constant="10" id="9Mi-IK-fyN"/>
+                                                                <constraint firstAttribute="trailing" secondItem="6CT-SO-bWh" secondAttribute="trailing" constant="15" id="9Mi-IK-fyN"/>
                                                                 <constraint firstItem="K3r-oG-tY8" firstAttribute="leading" secondItem="9Up-A2-0te" secondAttribute="leading" constant="15" id="HId-4R-75k"/>
                                                                 <constraint firstItem="6CT-SO-bWh" firstAttribute="top" secondItem="9Up-A2-0te" secondAttribute="top" constant="10" id="IdC-Jx-LZE"/>
                                                                 <constraint firstAttribute="bottom" secondItem="K3r-oG-tY8" secondAttribute="bottom" constant="10" id="RyY-cn-x1z"/>
@@ -14642,8 +14642,8 @@
         <segue reference="2uE-MH-jsq"/>
         <segue reference="nsh-RS-Plh"/>
         <segue reference="IVu-BL-rNu"/>
-        <segue reference="M8w-WU-QND"/>
-        <segue reference="F7H-ew-eXR"/>
+        <segue reference="afS-Cq-cau"/>
+        <segue reference="ID3-qF-T3b"/>
         <segue reference="HHf-kQ-icL"/>
         <segue reference="eaT-yL-Yiu"/>
         <segue reference="3aH-yg-pXb"/>
