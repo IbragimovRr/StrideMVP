@@ -13,6 +13,7 @@ class AdminCoursesViewController: UIViewController {
     
     private var courses = [CourseModel]()
     private var selectCourse = CourseModel()
+    private var loadingMoreData = true
     var isVerificationCourses = true
     
     override func viewDidLoad() {
@@ -34,6 +35,16 @@ class AdminCoursesViewController: UIViewController {
         Task {
             let result = try await CourseServices().getAllCourses()
             courses = result
+            collectionView.reloadData()
+        }
+    }
+    
+    func getNextPage(url: String) {
+        Task {
+            loadingMoreData = false
+            let result = try await CourseServices().getAllCourses(page: url)
+            courses += result
+            loadingMoreData = true
             collectionView.reloadData()
         }
     }
@@ -63,13 +74,27 @@ extension AdminCoursesViewController: UICollectionViewDelegate, UICollectionView
         cell.nameCourse.text = courses[indexPath.row].nameCourse
         cell.price.text = "Цена: \(courses[indexPath.row].price)Р"
         cell.rating.text = "\(courses[indexPath.row].rating)"
-        cell.daysCount.text = "\(courses[indexPath.row].daysCount) этапов"
+        let days = courses[indexPath.row].daysCount
+        cell.daysCount.text = "\(days) \(days.declinedWord())"
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectCourse = courses[indexPath.row]
         performSegue(withIdentifier: "admin", sender: self)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentHeight = collectionView.contentSize.height
+        let scrollViewHeight = scrollView.frame.size.height
+        let scrollOffset = scrollView.contentOffset.y
+        
+        guard courses.isEmpty == false else { return }
+        let nextURL = courses[courses.count - 1].nextPage
+        
+        if scrollOffset >= contentHeight - scrollViewHeight && loadingMoreData && nextURL != "" {
+            getNextPage(url: nextURL)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

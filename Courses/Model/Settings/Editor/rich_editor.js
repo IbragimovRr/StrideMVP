@@ -39,9 +39,11 @@ function getFormattingData() {
     }
     formattingData.blockquote = isBlockquoteActive();
     
-    const fontName = getFontName();
+    const fontName = document.queryCommandValue("fontName");
     formattingData.fontName = fontName;
-    
+    const fontColor = document.queryCommandValue("foreColor");
+    formattingData.fontColor = fontColor;
+
     return formattingData;
 }
 
@@ -58,38 +60,71 @@ function isBlockquoteActive() {
   return container.tagName === "BLOCKQUOTE";
 }
 
-
-function getFontName() {
-    const selection = window.getSelection();
-    let fontName = null;
-    
-    if (selection.rangeCount > 0) {
-        const range = selection.getRangeAt(0);
-        const node = range.commonAncestorContainer;
-        
-        let parentNode = node.nodeType === Node.TEXT_NODE ? node.parentNode : node;
-        
-        if(parentNode){
-            const style = window.getComputedStyle(parentNode);
-            fontName = style.fontFamily;
-        }
-        
-    }
-    return fontName;
-}
-
+let lastSelectionRange = null;
 
 function handleFormatChange() {
+    const selection = window.getSelection();
+    
+    if (!selection.rangeCount) return;
+    
+    const newRange = selection.getRangeAt(0);
+    
+    if (lastSelectionRange && newRange.compareBoundaryPoints(Range.START_TO_START, lastSelectionRange) === 0) {
+        return;
+    }
+    
+    lastSelectionRange = newRange.cloneRange();
+    
     const formattingData = getFormattingData();
     window.webkit.messageHandlers.format.postMessage({ formatting: formattingData });
 }
-
 
 document.addEventListener("selectionchange", function() {
     RE.backuprange();
     handleFormatChange();
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    document.body.addEventListener("click", function(event) {
+        let target = event.target;
+        if (target.tagName === "IMG") {
+            let imageUrl = target.src;
+            window.webkit.messageHandlers.imageClicked.postMessage(imageUrl);
+        }
+    });
+});
+
+document.getElementById('editor').addEventListener('paste', function(e) {
+    e.preventDefault();
+    
+    let text = (e.clipboardData || window.clipboardData).getData('text/plain');
+    
+    let currentFont = document.queryCommandValue('fontName');
+    let fontColor = document.queryCommandValue('foreColor');
+    let fontSize = document.queryCommandValue('fontSize');
+    let isBold = document.queryCommandState('bold');
+    let isItalic = document.queryCommandState('italic');
+    let isUnderline = document.queryCommandState('underline');
+    
+    let span = document.createElement('span');
+    span.style.fontFamily = currentFont;
+    span.style.color = fontColor;
+    span.style.fontSize = fontSize;
+    span.style.fontWeight = isBold ? 'bold' : 'normal';
+    span.style.fontStyle = isItalic ? 'italic' : 'normal';
+    span.style.textDecoration = isUnderline ? 'underline' : 'none';
+    span.textContent = text;
+    
+    
+    let selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        let range = selection.getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(span);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+});
 
 //looks specifically for a Range selection and not a Caret selection
 RE.rangeSelectionExists = function() {
@@ -100,6 +135,13 @@ RE.rangeSelectionExists = function() {
     }
     return false;
 };
+
+
+document.addEventListener("drop", function(event) {
+    event.preventDefault();
+}, false);
+
+
 
 RE.rangeOrCaretSelectionExists = function() {
     //!! coerces a null to bool
@@ -230,9 +272,6 @@ RE.setFontSize = function(size) {
     document.execCommand("styleWithCSS", null, false);
 };
 
-RE.setFont = function(fontName) {
-    document.execCommand("fontName", false, fontName);
-}
 
 RE.setBackgroundColor = function(color) {
     RE.editor.style.backgroundColor = color;
@@ -290,6 +329,7 @@ RE.setFont = function(font) {
     RE.restorerange();
     document.execCommand("styleWithCSS", null, true);
     document.execCommand('fontName', false, font);
+    document.execCommand("insertText", false, '\u200B')
     document.execCommand("styleWithCSS", null, false);
 };
 
@@ -309,9 +349,20 @@ RE.setTextBackgroundColor = function(color) {
 
 RE.setHeading = function(heading, fontName) {
     document.execCommand('formatBlock', false, '<h' + heading + '>');
-    document.execCommand('fontName', false, fontName);
+    setTimeout(() => {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+
+            const headingElement = selection.anchorNode.parentElement;
+            if (headingElement.tagName.toLowerCase() === 'h' + heading) {
+                headingElement.style.fontFamily = fontName;
+            }
+        }, 10);
 };
 
+RE.resetHeading = function() {
+    document.execCommand('formatBlock', false, '<p>'); // Возвращает текст в параграф
+};
 
 RE.setIndent = function() {
     document.execCommand('indent', false, null);

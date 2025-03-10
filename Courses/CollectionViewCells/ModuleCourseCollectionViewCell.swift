@@ -8,6 +8,7 @@
 import UIKit
 
 class ModuleCourseCollectionViewCell: UICollectionViewCell {
+    
     @IBOutlet weak var typeModuleImage: UIImageView!
     @IBOutlet weak var typeModuleView: UIView!
     @IBOutlet weak var settingsBtn2: UIButton!

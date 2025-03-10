@@ -224,9 +224,16 @@ enum Alignment {
 
 enum CourseCatalog {
     case myCreate
+    case myBought
     case recomend
     case popular
     case celebrity
+}
+
+enum VideoControl {
+    case play
+    case pause
+    case reload
 }
 
 enum SelectBtn {

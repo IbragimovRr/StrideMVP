@@ -14,7 +14,6 @@ import WebKit
 protocol AddCoursePresenterViewDelegate {
     func isLoading(_ bool: Bool)
     func setData(html: String)
-    func setData(attributedString: NSAttributedString)
     func setImage(url: String)
     func saveCourse()
     func setError(_ error: String)
@@ -22,7 +21,6 @@ protocol AddCoursePresenterViewDelegate {
 
 class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate {
     
-    @IBOutlet weak var oldTextView: UITextView!
     @IBOutlet weak var heightFontView: UIView!
     @IBOutlet weak var fontCollectionView: UICollectionView!
     @IBOutlet weak var editorBackView: UIView!
@@ -48,22 +46,27 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     var presenter = AddCoursePresenter()
     
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
+    let colorPicker = UIColorPickerViewController()
     private var startPosition = CGPoint()
+    private var isUserScrolling = false
     var fonts = [
             "Dots",
             "Attractive",
             "Courier New",
             "Montserrat",
+            "Copperplate",
+            "Rockwell",
+            "Palatino",
+            "DINCondensed",
+            "Cochin",
+            "MarkerFelt",
+            "Baskerville",
             "Commissioner",
             "Raleway",
             "Sans",
             "Inter"
         ]
-    var selectedFontIndex = 2 {
-        didSet {
-            editor.font(fonts[selectedFontIndex])
-        }
-    }
+    var selectedFontIndex = 3
     private var isChangedText = false
     private var isSave = true
     
@@ -90,7 +93,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        scrollToCenterCell()
+        scrollToFontCenterCell()
     }
     
     @objc func keyboardWillAppear(notification:Notification) {
@@ -106,11 +109,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         bottomConsoleView.constant = 0
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-        presenter.deleteAlamofireFiles()
-    }
     
     func setupRichEditorView() {
         let webConfiguration = WKWebViewConfiguration()
@@ -148,10 +146,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     
     func setImage(url: String) {
         editor.insertImage(url: url, alt: "image")
-    }
-    
-    func setData(attributedString: NSAttributedString) {
-        oldTextView.attributedText = attributedString
     }
     
     func setData(html: String) {
@@ -242,7 +236,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         if fontCollectionView.isHidden {
             fontCollectionView.isHidden = false
             isFontName.backgroundColor = .extraLightBlackMain
-//            editor.focus()
         }else {
             fontCollectionView.isHidden = true
             isFontName.backgroundColor = .clear
@@ -253,42 +246,40 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         if heightFontView.isHidden {
             heightFontView.isHidden = false
             isFontHeight.backgroundColor = .extraLightBlackMain
-            editor.focus()
         }else {
             heightFontView.isHidden = true
             isFontHeight.backgroundColor = .clear
         }
     }
     
-    func scrollToCenterCell() {
+    private func toggleBtn(sender: UIButton) {
+        if sender.backgroundColor == .clear {
+            sender.backgroundColor = UIColor.extraLightBlackMain
+        }else {
+            sender.backgroundColor = .clear
+        }
+    }
+    
+    func scrollToFontCenterCell() {
         let indexPath = IndexPath(row: selectedFontIndex, section: 0)
         
         fontCollectionView.layoutIfNeeded()
         if let attributes = fontCollectionView.layoutAttributesForItem(at: indexPath) {
             let center = CGPoint(x: attributes.center.x - fontCollectionView.bounds.width / 2, y: 0)
-            fontCollectionView.setContentOffset(center, animated: false)
+            fontCollectionView.setContentOffset(center, animated: true)
             fontCollectionView.reloadData()
         }
     }
 
-    
-    private func warningSave() {
-        let alert = UIAlertController(title: "Вы не сохранили изменения", message: "Вы точно хотите выйти?", preferredStyle: .alert)
-        
-        let deleteAction = UIAlertAction(title: "Выйти", style: .default) { _ in
-            self.navigationController?.popViewController(animated: true)
+    private func getIndexByFontName(name: String) {
+        guard isUserScrolling == false else { return }
+        for x in 0...fonts.count - 1 {
+            if fonts[x] == name {
+                selectedFontIndex = x
+            }
         }
-        
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _ in
-            self.dismiss(animated: true)
-        }
-        
-        alert.addAction(deleteAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true)
+        scrollToFontCenterCell()
     }
-
 
     
     // MARK: - UIButton
@@ -329,16 +320,19 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
             toggleFontHieght()
         case 2:
             editor.bold()
+            toggleBtn(sender: sender)
         case 3:
             editor.italic()
+            toggleBtn(sender: sender)
         case 4:
-            let picker = UIColorPickerViewController()
-            picker.delegate = self
-            self.present(picker, animated: true, completion: nil)
+            colorPicker.delegate = self
+            self.present(colorPicker, animated: true, completion: nil)
         case 5:
             editor.strikeThrough()
+            toggleBtn(sender: sender)
         case 6:
             editor.underline()
+            toggleBtn(sender: sender)
         case 7:
             errorView.configureUnavailable(title: "Недоступно", description: "Добавление цитат недоступно. Попробуйте снова позднее.")
             errorView.isHidden = false
@@ -401,14 +395,14 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     
     @IBAction func back(_ sender: UIButton) {
         if isSave == false {
-            warningSave()
+            errorView.warningSave(self)
         }else {
             self.navigationController?.popViewController(animated: true)
         }
     }
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
-        view.endEditing(true)
+//        view.endEditing(true)
     }
     
 }
@@ -416,22 +410,22 @@ extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, W
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         presenter.viewDidLoad()
+        editor.standartFont()
     }
     
-    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName: String) {
+    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName: String, fontColor: String) {
         changedAlignment(aligment)
-        if isBold { self.isBold.backgroundColor = .extraLightBlackMain}
-        else { self.isBold.backgroundColor = .clear }
-        if isItalic { self.isItalic.backgroundColor = .extraLightBlackMain}
-        else { self.isItalic.backgroundColor = .clear }
-        if isUnderline { self.isUnderline.backgroundColor = .extraLightBlackMain}
-        else { self.isUnderline.backgroundColor = .clear }
-        if isStrikethrough { self.isStrikeThrough.backgroundColor = .extraLightBlackMain}
-        else { self.isStrikeThrough.backgroundColor = .clear }
+        self.isBold.backgroundColor = isBold ? UIColor.extraLightBlackMain : UIColor.clear
+        self.isItalic.backgroundColor = isItalic ? UIColor.extraLightBlackMain : UIColor.clear
+        self.isUnderline.backgroundColor = isUnderline ? UIColor.extraLightBlackMain : UIColor.clear
+        self.isStrikeThrough.backgroundColor = isStrikethrough ? UIColor.extraLightBlackMain : UIColor.clear
+        getIndexByFontName(name: fontName)
+        colorPicker.selectedColor =  fontColor.toUIColor() ?? .white
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == "format" {
+        print(message.body)
+        if message.name == "format" { // Выдает при изменении положения курсора
             editor.initialFormat(message: message)
         }
     }
@@ -474,7 +468,18 @@ extension AddCourseViewController: UICollectionViewDataSource, UICollectionViewD
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedFontIndex = indexPath.row
+        editor.font(fonts[selectedFontIndex])
+        scrollToFontCenterCell()
+    }
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isUserScrolling = true
+    }
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard isUserScrolling else { return } // Только пользовательская прокрутка
         let layout = fontCollectionView.collectionViewLayout as! CarouselLayout
         let centerX = scrollView.contentOffset.x + scrollView.bounds.width / 2
         
@@ -493,13 +498,25 @@ extension AddCourseViewController: UICollectionViewDataSource, UICollectionViewD
         
         if closestIndex != selectedFontIndex {
             selectedFontIndex = closestIndex
-            
+            editor.font(fonts[selectedFontIndex])
+
             let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.impactOccurred()
             
             fontCollectionView.reloadData()
         }
     }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        isUserScrolling = false
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            isUserScrolling = false
+        }
+    }
+
 
 }
 // MARK: - Color

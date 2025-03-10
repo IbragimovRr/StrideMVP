@@ -7,6 +7,7 @@
 
 import UIKit
 import AVKit
+import Lottie
 
 protocol AddTrainingModuleViewDelegate {
     func showData()
@@ -15,10 +16,16 @@ protocol AddTrainingModuleViewDelegate {
     func showUploadMedia()
     func showError(error: String)
     func saveData()
+    func showLoading(isLoading: Bool)
+    func showProgress(progress: String)
 }
 
 class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDelegate {
 
+    @IBOutlet weak var progress: UILabel!
+    @IBOutlet weak var reloadView: UIView!
+    @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var loading: LottieAnimationView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var heigthCollection: NSLayoutConstraint!
     @IBOutlet weak var distanceView: Border!
@@ -59,10 +66,11 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
+    private var playerLayer = AVPlayerLayer()
     let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     let presenter = AddTrainingModulePresenter()
-    
-    var selectTF = UITextField()
+    var isLoaded = false
+    var selectTF: UITextField?
     var mediaURL: URL?
     var trainingItem: TrainingItem {
         get {
@@ -79,12 +87,18 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         descriptionText.delegate = self
         presenter.view = self
         view.addSubview(errorView)
+        loadingSettings()
         presenter.getModule()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        playerLayer.frame = videoPlayerView.bounds
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        toggleControlVideo(isPlay: false)
+        toggleControlVideo(controll: .pause)
     }
     
     // Работа с клавиатурой
@@ -100,12 +114,14 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     }
 
     @objc func keyboardWillAppear(notification: Notification) {
+        guard let selectTF = selectTF else { return }
         //Скролл до низа nextField c клавиатурой
         selectTF.scrollBottomText(scrollView: scrollView, notification: notification)
+        self.selectTF = nil
     }
 
     @objc func keyboardWillDisappear() {
-        scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: 0), animated: true)
+        selectTF = nil
     }
     
     private func changeHeightCollection() {
@@ -150,6 +166,11 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         im.sd_setImage(with: presenter.module.mediaURL)
     }
     
+    func showProgress(progress: String) {
+        self.progress.text = "\(progress)%"
+    }
+    
+    
     func saveData() {
         navigationController?.popViewController(animated: true)
     }
@@ -159,7 +180,26 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         errorView.isHidden = false
     }
     
+    func showLoading(isLoading: Bool) {
+        if isLoading {
+            loading.play()
+            loading.isHidden = false
+            saveBtn.isHidden = true
+            isLoaded = true
+        }else {
+            loading.stop()
+            loading.isHidden = true
+            saveBtn.isHidden = false
+            isLoaded = false
+        }
+    }
+    
     // MARK: - Private function
+    
+    private func loadingSettings() {
+        loading.loopMode = .loop
+        loading.contentMode = .scaleToFill
+    }
     
     private func hiddenTrainingItems() {
         if countType.text == "2/2" {
@@ -192,6 +232,7 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = true
         player = AVPlayer(playerItem: playerItem)
         playerViewController.player = player
+        NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
         audioInitial()
         setupView()
     }
@@ -206,21 +247,31 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     }
     
     func setupView() {
-        let layer = AVPlayerLayer(player: player)
-        layer.frame = videoPlayerView.bounds
-        layer.videoGravity = .resizeAspectFill
-        videoPlayerView.layer.addSublayer(layer)
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = videoPlayerView.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        videoPlayerView.layer.addSublayer(playerLayer)
     }
     
-    private func toggleControlVideo(isPlay: Bool) {
-        if isPlay {
+    @objc func videoDidFinish() {
+        toggleControlVideo(controll: .reload)
+    }
+    
+    func toggleControlVideo(controll: VideoControl) {
+        if controll == .play {
             player.play()
             playView.isHidden = true
             fullScreenBtn.isHidden = false
-        }else {
+            reloadView.isHidden = true
+        }else if controll == .pause {
             player.pause()
             fullScreenBtn.isHidden = true
             playView.isHidden = false
+            reloadView.isHidden = true
+        }else {
+            playView.isHidden = true
+            fullScreenBtn.isHidden = true
+            reloadView.isHidden = false
         }
     }
     
@@ -390,6 +441,12 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
         guard trainingItem.firstItemType != nil && trainingItem.secondItemType != nil else {
             return .failure(ErrorNetwork.runtimeError("Выберите формат тренировки"))
         }
+        guard trainingItem.firstItemType != nil && trainingItem.secondItemType != nil else {
+            return .failure(ErrorNetwork.runtimeError("Выберите формат тренировки"))
+        }
+        let type = MediaTypeManager().determineFileType(from: mediaURL)
+        guard type != .none else { return
+            .failure(ErrorNetwork.runtimeError("Медиа формат не поддерживается")) }
         presenter.module.mediaURL = mediaURL
         presenter.module.description = descriptionText.text
         return .success(())
@@ -445,16 +502,25 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     
     @IBAction func playVideo(_ sender: UIButton) {
         if player.timeControlStatus == .paused {
-            toggleControlVideo(isPlay: true)
+            toggleControlVideo(controll: .play)
         }else {
-            toggleControlVideo(isPlay: false)
+            toggleControlVideo(controll: .pause)
         }
+    }
+    
+    @IBAction func reloadVideo(_ sender: UIButton) {
+        player.seek(to: .zero)
+        toggleControlVideo(controll: .play)
     }
     
     // MARK: - Other Action
     
     @IBAction func back(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        if isLoaded {
+            errorView.warningSave(self, title: "Загрузка еще не завершена")
+        }else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
@@ -466,7 +532,8 @@ class AddTrainingModuleViewController: UIViewController, AddTrainingModuleViewDe
     }
     
     @IBAction func fullScreen(_ sender: UIButton) {
-        present(playerViewController, animated: true) {
+        present(playerViewController, animated: true) { [self] in
+            NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
             self.player.play()
         }
     }
@@ -505,7 +572,7 @@ extension AddTrainingModuleViewController: UITextViewDelegate, UITextFieldDelega
         
         let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
         
-        if newText.count <= 400 {
+        if newText.count <= 1000 {
             updateCharCountLabel(count: newText.count)
             return true
         }
@@ -514,7 +581,7 @@ extension AddTrainingModuleViewController: UITextViewDelegate, UITextFieldDelega
     }
     
     func updateCharCountLabel(count: Int){
-        countDescription.text = "\(count)/\(400)"
+        countDescription.text = "\(count)/\(1000)"
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -530,7 +597,7 @@ extension AddTrainingModuleViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRepeats", for: indexPath) as! RepeatsCollectionViewCell
+        var cell = RepeatsCollectionViewCell()
         
         if indexPath.row == presenter.module.trainingItems.count {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRepeats", for: indexPath) as! RepeatsCollectionViewCell

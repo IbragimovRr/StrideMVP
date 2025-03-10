@@ -189,8 +189,6 @@ class AddInfoAboutCourseVC: UIViewController {
         loading.isHidden = true
         saveBtn.isHidden = false
     }
-    
-    
 
     func addInfoInVar() {
         infoCourses.nameCourse = name.text!
@@ -298,7 +296,7 @@ extension AddInfoAboutCourseVC: UIImagePickerControllerDelegate & UINavigationCo
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage, let url = info[.imageURL] as? URL {
-            ImageResize().deleteTempImage(atURL: url)
+            imageURL = url
             picker.dismiss(animated: true)
             let crop = CropImage(vc: self)
             crop.showMainImageCourse(with: image)
@@ -316,7 +314,6 @@ extension AddInfoAboutCourseVC: UIImagePickerControllerDelegate & UINavigationCo
     
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         imagePred.image = image
-        imageURL = ImageResize().imageToURL(image: image, fileName: "courseInfo")
         cropViewController.dismiss(animated: true)
     }
     

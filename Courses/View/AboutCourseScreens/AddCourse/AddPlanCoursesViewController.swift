@@ -9,6 +9,7 @@ import UIKit
 
 class AddPlanCoursesViewController: UIViewController, PlanCoursesViewDelegate {
 
+    @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var planInfoView: UIView!
     @IBOutlet weak var modulesCollectionView: UICollectionView!
     
@@ -36,6 +37,10 @@ class AddPlanCoursesViewController: UIViewController, PlanCoursesViewDelegate {
     
     func savePlan() {
         performSegue(withIdentifier: "preview", sender: self)
+    }
+    
+    func isEnabledBtn(_ bool: Bool) {
+        nextBtn.isEnabled = bool
     }
     
     @IBAction func preview(_ sender: UIButton) {
@@ -83,12 +88,14 @@ extension AddPlanCoursesViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
+        var cell = ModuleCourseCollectionViewCell()
         guard presenter.days.isEmpty == false else { return cell }
 
         if let image = presenter.days[indexPath.section].modules[indexPath.row].module.imageURL {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageModule", for: indexPath) as! ModuleCourseCollectionViewCell
             cell.im.sd_setImage(with: image)
+        }else {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module", for: indexPath) as! ModuleCourseCollectionViewCell
         }
         
         cell.cropBottomConstantinPlan(count: presenter.days[indexPath.section].modules.count - 1, index: indexPath.row)

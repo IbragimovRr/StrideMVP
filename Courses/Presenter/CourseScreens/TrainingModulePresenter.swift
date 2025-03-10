@@ -22,6 +22,7 @@ class TrainingModulePresenter: TrainingModulePresenterDelegate {
     func getData() {
         view?.showData()
         view.selectRepeats = 0
+        print(module.mediaURL)
         if let mediaURL = module.mediaURL {
             checkType(media: mediaURL)
         }

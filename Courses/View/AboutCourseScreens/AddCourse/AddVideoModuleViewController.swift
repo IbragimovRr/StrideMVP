@@ -16,10 +16,13 @@ protocol AddVideoViewDelegate {
     func saveData()
     func showLoading(isLoading: Bool)
     func showError(error: String)
+    func showProgress(progress: String)
 }
 
 class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
+    @IBOutlet weak var loadingProcent: UILabel!
+    @IBOutlet weak var reloadView: UIView!
     @IBOutlet weak var changeVideo: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var loading: LottieAnimationView!
@@ -44,6 +47,8 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     var presenter = AddVideoModulePresenter()
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
+    private var playerLayer = AVPlayerLayer()
+    private var isLoaded = false
     let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     
     override func viewDidLoad() {
@@ -56,15 +61,26 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         presenter.checkUpload()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        playerLayer.frame = videoPlayerView.bounds
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        toggleControlVideo(isPlay: false)
+        toggleControlVideo(controll: .pause)
     }
+    
+    // MARK: - Protocol
     
     func showData() {
         let module = presenter.module
         authorText.text = module.author
-        timeCount.text = "\(module.timeVideo) минут"
+        if module.timeVideo != 0 {
+            timeCount.text = "\(module.timeVideo) \(module.timeVideo.declinedWord(one: "минута", few: "минуты", many: "минут"))"
+        }else {
+            timeCount.text = "< 1 минуты"
+        }
         nameModule.text = module.module.name
         descriptionText.text = module.videoDescription
         updateCharCountLabel(count: descriptionText.text.count)
@@ -95,12 +111,19 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
             loading.play()
             loading.isHidden = false
             saveBtn.isHidden = true
+            isLoaded = true
         }else {
             loading.stop()
             loading.isHidden = true
             saveBtn.isHidden = false
+            isLoaded = false
         }
     }
+    
+    func showProgress(progress: String) {
+        loadingProcent.text = "\(progress)%"
+    }
+    
     
     func showError(error: String) {
         errorView.configure(title: "Ошибка", description: error)
@@ -109,9 +132,11 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
     private func loadingSettings() {
         loading.loopMode = .loop
-        loading.contentMode = .scaleToFill
+        loading.contentMode = .scaleAspectFill
         loading.isHidden = true
     }
+    
+    // MARK: - Player
     
     func settingsPlayer(videoURL: URL) {
         let asset = AVURLAsset(url: videoURL)
@@ -121,8 +146,16 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         player = AVPlayer(playerItem: playerItem)
         playerViewController.player = player
         player.automaticallyWaitsToMinimizeStalling = false
+        NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
         audioInitial()
         setupView()
+    }
+    
+    func setupView() {
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = videoPlayerView.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        videoPlayerView.layer.addSublayer(playerLayer)
     }
     
     func audioInitial() {
@@ -134,22 +167,40 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         }
     }
     
-    func setupView() {
-        let layer = AVPlayerLayer(player: player)
-        layer.frame = videoPlayerView.bounds
-        layer.videoGravity = .resizeAspectFill
-        videoPlayerView.layer.addSublayer(layer)
+    
+    @objc func videoDidFinish() {
+        toggleControlVideo(controll: .reload)
     }
     
-    func toggleControlVideo(isPlay: Bool) {
-        if isPlay {
+    private func getTimeInVideo() -> Int {
+        if let currentItem = player.currentItem {
+            let duration = currentItem.duration
+            let durationInSeconds = CMTimeGetSeconds(duration)
+            if durationInSeconds.isFinite {
+                let durationInMinutes = durationInSeconds / 60
+                return Int(durationInMinutes)
+            } else {
+                return 0
+            }
+        }
+        return 0
+    }
+    
+    func toggleControlVideo(controll: VideoControl) {
+        if controll == .play {
             player.play()
             playView.isHidden = true
             fullScreenBtn.isHidden = false
-        }else {
+            reloadView.isHidden = true
+        }else if controll == .pause {
             player.pause()
             fullScreenBtn.isHidden = true
             playView.isHidden = false
+            reloadView.isHidden = true
+        }else {
+            playView.isHidden = true
+            fullScreenBtn.isHidden = true
+            reloadView.isHidden = false
         }
     }
     
@@ -175,20 +226,6 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
         descriptionViewLeftConstraint.constant = 30
         applyBtn.isHidden = false
         countCharacters.isHidden = false
-    }
-    
-    private func getTimeInVideo() -> Int {
-        if let currentItem = player.currentItem {
-            let duration = currentItem.duration
-            let durationInSeconds = CMTimeGetSeconds(duration)
-            if durationInSeconds.isFinite {
-                let durationInMinutes = durationInSeconds / 60
-                return Int(durationInMinutes)
-            } else {
-                return 0
-            }
-        }
-        return 0
     }
     
     
@@ -219,10 +256,15 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     
     @IBAction func playVideo(_ sender: UIButton) {
         if player.timeControlStatus == .paused {
-            toggleControlVideo(isPlay: true)
+            toggleControlVideo(controll: .play)
         }else {
-            toggleControlVideo(isPlay: false)
+            toggleControlVideo(controll: .pause)
         }
+    }
+    
+    @IBAction func reloadVideo(_ sender: UIButton) {
+        player.seek(to: .zero)
+        toggleControlVideo(controll: .play)
     }
     
     @IBAction func uploadVideo(_ sender: UIButton) {
@@ -248,7 +290,11 @@ class AddVideoModuleViewController: UIViewController, AddVideoViewDelegate {
     }
     
     @IBAction func back(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        if isLoaded {
+            errorView.warningSave(self, title: "Загрузка еще не завершена")
+        }else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func swipe(_ sender: UIPanGestureRecognizer) {
@@ -286,7 +332,7 @@ extension AddVideoModuleViewController: UITextViewDelegate {
         
         let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
         
-        if newText.count <= 400 {
+        if newText.count <= 1000 {
             updateCharCountLabel(count: newText.count)
             return true
         }
@@ -295,7 +341,7 @@ extension AddVideoModuleViewController: UITextViewDelegate {
     }
     
     func updateCharCountLabel(count: Int){
-        countCharacters.text = "\(count)/\(400)"
+        countCharacters.text = "\(count)/\(1000)"
     }
     
 }

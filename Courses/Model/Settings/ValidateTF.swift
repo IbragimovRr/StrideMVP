@@ -33,8 +33,8 @@ class ValidateTF {
     func phone(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return false }
         let newString = (text as NSString).replacingCharacters(in: range, with: string)
-        if newString.format(with: "+X (XXX) XXX-XXXX").count >= 2 {
-            textField.text = newString.format(with: "+X (XXX) XXX-XXXX")
+        if newString.format(with: "+X (XXX) XXX-XX-XX").count >= 2 {
+            textField.text = newString.format(with: "+X (XXX) XXX-XX-XX")
             return false
         } else {
             return false

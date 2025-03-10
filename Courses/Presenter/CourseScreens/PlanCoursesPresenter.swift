@@ -27,15 +27,23 @@ class PlanCoursesPresenter: PlanCoursesPresenterDelegate {
     }
     
     func savePlan() {
+        view.isEnabledBtn(false)
         Task {
             do {
                 try await CourseServices().addIsVisibleInModule(days: days)
                 DispatchQueue.main.async {
                     self.view.savePlan()
+                    self.view.isEnabledBtn(true)
                 }
             }catch ErrorNetwork.runtimeError(let error) {
                 DispatchQueue.main.async {
                     self.view.setError(error: error)
+                    self.view.isEnabledBtn(true)
+                }
+            }catch {
+                DispatchQueue.main.async {
+                    self.view.setError(error: "Попробуйте позже")
+                    self.view.isEnabledBtn(true)
                 }
             }
         }

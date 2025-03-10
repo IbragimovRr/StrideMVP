@@ -109,8 +109,6 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
             performSegue(withIdentifier: "conf", sender: self)
         case "Добавить курс":
             performSegue(withIdentifier: "goToAddCourse", sender: self)
-//            case "Подтвердить аккаунт":
-//                UIApplication.shared.open(Constants.formsURL)
         case "Стать тренером":
             UIApplication.shared.open(Constants.formsURL)
         case "Кошелёк":
@@ -161,7 +159,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         if segue.identifier == "myCourse" {
             let vc = segue.destination as! CoursesViewController
-            vc.typeCourse = .myCreate
+            if user.role == .coach {
+                vc.typeCourse = .myCreate
+            }else if user.role == .user {
+                vc.typeCourse = .myBought
+            }
         }else if segue.identifier == "goToAddCourse" {
             let vc = segue.destination as! AddInfoAboutCourseVC
             vc.create = true

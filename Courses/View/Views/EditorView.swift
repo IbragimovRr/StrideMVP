@@ -2,7 +2,7 @@ import UIKit
 import WebKit
 
 protocol EditorViewDelegate {
-    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName:String)
+    func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName:String, fontColor: String)
 }
 
 class EditorView: WKWebView {
@@ -96,12 +96,20 @@ class EditorView: WKWebView {
         runJS("RE.setFont('\(name)')")
     }
     
+    func standartFont() {
+        runJS("document.getElementById('editor').style.fontFamily = 'Montserrat';")
+    }
+    
     func fontSize(_ size: Int) {
         runJS("RE.setFontSize('\(size)px')")
     }
     
     func heading(_ size: Int, _ fontName: String) {
-        runJS("RE.setHeading('\(size)', '\(fontName)')")
+        if size == 0 {
+            runJS("RE.resetHeading()")
+        }else {
+            runJS("RE.setHeading('\(size)', '\(fontName)')")
+        }
     }
     
     
@@ -130,13 +138,6 @@ class EditorView: WKWebView {
         }
         
     }
-    
-    func getFormat() {
-        runJS("RE.isCommandActive('bold');") { result in
-            print(result)
-        }
-    }
-    
     
     func getLineHeight(completion: @escaping (String?) -> Void) {
         evaluateJavaScript("RE.getLineHeight()") { (result, error) in
@@ -208,7 +209,8 @@ class EditorView: WKWebView {
                 let isJustifyCenter = formattingData["justifyCenter"] as? Bool ?? false
                 let isJustifyRight = formattingData["justifyRight"] as? Bool ?? false
                 let isJustifyFull = formattingData["justifyFull"] as? Bool ?? false
-                let fontName = formattingData["fontName"] as? String ?? "Times New Roman"
+                var fontName = formattingData["fontName"] as? String ?? "Times New Roman"
+                let fontColor = formattingData["fontColor"] as? String ?? ""
                 
                 var alignment: NSTextAlignment = .natural
                 if isJustifyLeft {
@@ -221,8 +223,9 @@ class EditorView: WKWebView {
                     alignment = .justified
                 }
 
+                fontName = fontName.replacingOccurrences(of: "\"", with: "")
 
-                delegate?.format(isBold: isBold, isItalic: isItalic, isUnderline: isUnderline, isStrikethrough: isStrikethrough, isBlockquote: isBlockquote, aligment: alignment, fontName: fontName)
+                delegate?.format(isBold: isBold, isItalic: isItalic, isUnderline: isUnderline, isStrikethrough: isStrikethrough, isBlockquote: isBlockquote, aligment: alignment, fontName: fontName, fontColor: fontColor)
             }
         }
     }

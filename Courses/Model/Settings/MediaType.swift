@@ -17,7 +17,7 @@ class MediaTypeManager {
     func determineFileType(from url: URL) -> MediaType {
         let pathExtension = url.pathExtension.lowercased()
 
-        let imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "tiff"]
+        let imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp"]
         let videoExtensions = ["mp4", "mov", "avi", "mkv", "flv", "wmv"]
 
         if imageExtensions.contains(pathExtension) {

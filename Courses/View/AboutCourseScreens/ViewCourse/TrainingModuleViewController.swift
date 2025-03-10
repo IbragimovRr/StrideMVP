@@ -24,6 +24,7 @@ protocol TrainingModuleViewDelegate {
 
 class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate {
     
+    @IBOutlet weak var reloadView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var controlTimerBtn: UIButton!
     @IBOutlet weak var timerCount: UILabel!
@@ -53,6 +54,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     
     private let playerViewController = AVPlayerViewController()
     private var player = AVPlayer()
+    private var playerLayer = AVPlayerLayer()
     private var timer = TimerTraining()
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
     var repeats = [TrainingItem]()
@@ -97,15 +99,19 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         presenter.getTraining()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        playerLayer.frame = videoPlayerView.bounds
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        toggleControlVideo(isPlay: false)
+        toggleControlVideo(controll: .pause)
     }
     
     // Работа с клавиатурой
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
@@ -119,9 +125,6 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         firstTF.scrollBottomText(scrollView: scrollView, notification: notification)
     }
 
-    @objc func keyboardWillDisappear() {
-        scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: 0), animated: true)
-    }
     
     private func changeHeightCollection() {
         trainingCollectionView.layoutIfNeeded()
@@ -279,6 +282,7 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
         playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = true
         player = AVPlayer(playerItem: playerItem)
         playerViewController.player = player
+        NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
         audioInitial()
         setupView()
     }
@@ -293,21 +297,31 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     }
     
     func setupView() {
-        let layer = AVPlayerLayer(player: player)
-        layer.frame = videoPlayerView.bounds
-        layer.videoGravity = .resizeAspectFill
-        videoPlayerView.layer.addSublayer(layer)
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = videoPlayerView.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        videoPlayerView.layer.addSublayer(playerLayer)
     }
     
-    private func toggleControlVideo(isPlay: Bool) {
-        if isPlay {
+    @objc func videoDidFinish() {
+        toggleControlVideo(controll: .reload)
+    }
+    
+    func toggleControlVideo(controll: VideoControl) {
+        if controll == .play {
             player.play()
             playView.isHidden = true
             fullScreenBtn.isHidden = false
-        }else {
+            reloadView.isHidden = true
+        }else if controll == .pause {
             player.pause()
             fullScreenBtn.isHidden = true
             playView.isHidden = false
+            reloadView.isHidden = true
+        }else {
+            playView.isHidden = true
+            fullScreenBtn.isHidden = true
+            reloadView.isHidden = false
         }
     }
     
@@ -365,10 +379,15 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     
     @IBAction func playVideo(_ sender: UIButton) {
         if player.timeControlStatus == .paused {
-            toggleControlVideo(isPlay: true)
+            toggleControlVideo(controll: .play)
         }else {
-            toggleControlVideo(isPlay: false)
+            toggleControlVideo(controll: .pause)
         }
+    }
+    
+    @IBAction func reloadVideo(_ sender: UIButton) {
+        player.seek(to: .zero)
+        toggleControlVideo(controll: .play)
     }
     
     @IBAction func allHistoryTraining(_ sender: UIButton) {
@@ -411,7 +430,8 @@ class TrainingModuleViewController: UIViewController, TrainingModuleViewDelegate
     }
     
     @IBAction func fullScreen(_ sender: UIButton) {
-        present(playerViewController, animated: true) {
+        present(playerViewController, animated: true) { [self] in
+            NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
             self.player.play()
         }
     }

@@ -90,6 +90,15 @@ class CoursesViewController: UIViewController {
             catalogCollectionView.reloadData()
         }
     }
+    
+    private func getMyBoughtCourses() {
+        Task {
+            course = try await CourseServices().getBoughtCourses()
+            filteredCourse = course
+            emptyCheck()
+            catalogCollectionView.reloadData()
+        }
+    }
 
     private func getCoursesBecauseTitle() {
         switch typeCourse {
@@ -105,6 +114,9 @@ class CoursesViewController: UIViewController {
         case .celebrity:
             titleLbl.text = "Курсы от знаменитостей"
             getCelebrityCourses()
+        case .myBought:
+            titleLbl.text = "Мои курсы"
+            getMyBoughtCourses()
         }
     }
     
@@ -130,7 +142,8 @@ extension CoursesViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.nameCourse.text = filteredCourse[indexPath.row].nameCourse
         cell.price.text = "\(filteredCourse[indexPath.row].price)₽"
         cell.rating.text = "\(filteredCourse[indexPath.row].rating)"
-        cell.daysCount.text = "\(filteredCourse[indexPath.row].daysCount) этапов"
+        let days = filteredCourse[indexPath.row].daysCount
+        cell.daysCount.text = "\(days) \(days.declinedWord())"
         return cell
     }
 
@@ -153,8 +166,7 @@ extension CoursesViewController: UICollectionViewDelegate, UICollectionViewDataS
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "changeCourse" {
-            let vc = segue.destination as! AddInfoAboutCourseVC
-            vc.create = false
+            let vc = segue.destination as! ModulesCourseViewController
             vc.idCourse = selectIDCourse
         }else if segue.identifier == "infoCourses" {
             let vc = segue.destination as! InfoCoursesViewController

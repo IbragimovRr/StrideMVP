@@ -42,6 +42,7 @@ class MyCoursesViewController: UIViewController, MyCoursesViewDelegate {
         super.viewWillAppear(animated)
         design()
         presenter.viewWillApear()
+        search.text = ""
     }
 
     func design() {

@@ -30,7 +30,7 @@ extension CourseServices {
         return id
     }
     
-    func addVideoModulesData(module: VideoModule) async throws {
+    func addVideoModulesData(module: VideoModule, progressHandler: @escaping (Int) -> Void) async throws {
         let url = Constants.url + "api/v1/video-module/update/\(module.module.id)/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response =  AF.upload(multipartFormData: { multipartFormData in
@@ -44,10 +44,16 @@ extension CourseServices {
                 multipartFormData.append(Data(author.utf8), withName: "author")
             }
             multipartFormData.append(Data("\(module.timeVideo)".utf8), withName: "time")
-        }, to: url, method: .patch, headers: headers).serializingData()
-        let value = try await response.value
-        let code = await response.response.response?.statusCode
+        }, to: url, method: .patch, headers: headers)
+        
+        response.uploadProgress { progress in
+            let percentComplete = Int(progress.fractionCompleted * 100)
+            progressHandler(percentComplete)
+        }
+        let value = try await response.serializingData().value
+        let code = await response.serializingData().response.response?.statusCode
         let json = JSON(value)
+        
         if code != 200 {
             if let dictionary = json.dictionary {
                 let error = dictionary.first!.value[0].stringValue

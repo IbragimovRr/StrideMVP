@@ -30,21 +30,27 @@ extension CourseServices {
         return id
     }
     
-    func changeTrainingModule(module: TrainingModule) async throws  {
+    func changeTrainingModule(module: TrainingModule, progressHandler: @escaping (Int) -> Void) async throws  {
         try await changeTrainingItems(module: module)
-        try await changeOtherOptions(module: module)
+        try await changeOtherOptions(module: module, progressHandler: progressHandler)
     }
     
-    private func changeOtherOptions(module: TrainingModule) async throws {
+    private func changeOtherOptions(module: TrainingModule, progressHandler: @escaping (Int) -> Void) async throws {
         let url = Constants.url + "api/v1/training-module/update/\(module.module.id)/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         
-        let response = AF.upload(multipartFormData: { multipartFormData in
+        let update = AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(Data(module.description.utf8), withName: "training_description")
             if let mediaURL = module.mediaURL, "\(mediaURL)".starts(with: "file") {
                 multipartFormData.append(mediaURL, withName: "data")
             }
-        }, to: url, method: .patch, headers: headers).serializingData()
+        }, to: url, method: .patch, headers: headers)
+        
+        update.uploadProgress { progress in
+            let percentComplete = Int(progress.fractionCompleted * 100)
+            progressHandler(percentComplete)
+        }
+        let response = update.serializingData()
         let value = try await response.value
         let code = await response.response.response?.statusCode
         let json = JSON(value)
