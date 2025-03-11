@@ -49,7 +49,7 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         avatar.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
         characteristic.isSkeletonable = true
         characteristic.linesCornerRadius = 5
-        characteristic.skeletonTextNumberOfLines = 0
+        characteristic.skeletonTextNumberOfLines = 3
         characteristic.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
         rating.isSkeletonable = true
         rating.linesCornerRadius = 5
@@ -61,11 +61,12 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         coursesCount.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
         name.isSkeletonable = true
         name.linesCornerRadius = 5
-        name.skeletonTextNumberOfLines = 3
+        name.skeletonTextNumberOfLines = 0
         name.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
 
         ratingBottom.isHidden = true
         coursesCountBottom.isHidden = true
+        name.isHidden = true
     }
 
     private func sceletonAnimatedStop() {
@@ -77,6 +78,7 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         name.hideSkeleton(transition: .none)
         ratingBottom.isHidden = false
         coursesCountBottom.isHidden = false
+        name.isHidden = false
     }
     
     func showUser() {
