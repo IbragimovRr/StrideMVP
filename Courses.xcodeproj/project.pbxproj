@@ -96,6 +96,8 @@
 		448E73FA2CFF087A00C3000D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73F92CFF087A00C3000D /* UserModel.swift */; };
 		448E73FE2CFF09E200C3000D /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448E73FD2CFF09E200C3000D /* Segment.swift */; };
 		448FBC692D31C24E00476EE2 /* AddCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */; };
+		448FF64C2D8186D500C7DBB7 /* TipVerificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448FF64B2D8186D500C7DBB7 /* TipVerificate.swift */; };
+		448FF64F2D818A5200C7DBB7 /* TipVerificate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448FF64E2D818A5200C7DBB7 /* TipVerificate.xib */; };
 		449215AE2D5B73470080184D /* Baskerville.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 449215AC2D5B73470080184D /* Baskerville.ttf */; };
 		449215AF2D5B73470080184D /* Baskerville-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 449215AD2D5B73470080184D /* Baskerville-Bold.ttf */; };
 		449215B12D5B736F0080184D /* MarkerFelt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 449215B02D5B736F0080184D /* MarkerFelt.ttf */; };
@@ -297,6 +299,8 @@
 		448E73F92CFF087A00C3000D /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		448E73FD2CFF09E200C3000D /* Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
 		448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoursePresenter.swift; sourceTree = "<group>"; };
+		448FF64B2D8186D500C7DBB7 /* TipVerificate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipVerificate.swift; sourceTree = "<group>"; };
+		448FF64E2D818A5200C7DBB7 /* TipVerificate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipVerificate.xib; sourceTree = "<group>"; };
 		449215AC2D5B73470080184D /* Baskerville.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Baskerville.ttf; sourceTree = "<group>"; };
 		449215AD2D5B73470080184D /* Baskerville-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baskerville-Bold.ttf"; sourceTree = "<group>"; };
 		449215B02D5B736F0080184D /* MarkerFelt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MarkerFelt.ttf; sourceTree = "<group>"; };
@@ -499,6 +503,7 @@
 				446BF1A02D2C948000D8E534 /* EditorView.swift */,
 				44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */,
 				44DA9F9D2D52443E00735179 /* TimerTraining.swift */,
+				448FF64D2D818A3D00C7DBB7 /* Tip */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -724,6 +729,15 @@
 				751510402C34586D009978E6 /* SettingsViewController.swift */,
 			);
 			path = TabBarScreens;
+			sourceTree = "<group>";
+		};
+		448FF64D2D818A3D00C7DBB7 /* Tip */ = {
+			isa = PBXGroup;
+			children = (
+				448FF64B2D8186D500C7DBB7 /* TipVerificate.swift */,
+				448FF64E2D818A5200C7DBB7 /* TipVerificate.xib */,
+			);
+			path = Tip;
 			sourceTree = "<group>";
 		};
 		449215A52D5B71540080184D /* Baskerville */ = {
@@ -1036,6 +1050,7 @@
 				449215C12D5B74670080184D /* Copperplate-Bold.otf in Resources */,
 				446B1E442D591D1800A3A851 /* Attractive-Italic.ttf in Resources */,
 				446B1E3D2D591B9700A3A851 /* Montserrat-Medium.ttf in Resources */,
+				448FF64F2D818A5200C7DBB7 /* TipVerificate.xib in Resources */,
 				449215BA2D5B74260080184D /* Palatino.ttf in Resources */,
 				446B1E432D591D1800A3A851 /* Attractive.ttf in Resources */,
 				44DFB11B2C3B2637005C8F44 /* loading.json in Resources */,
@@ -1160,6 +1175,7 @@
 				445757EC2D46F18500501511 /* TrainingModulePresenter.swift in Sources */,
 				44932A992C81303A00E0F86F /* PrivacyViewController.swift in Sources */,
 				44D68B012C51B3EF00F8F476 /* AddCourseViewController.swift in Sources */,
+				448FF64C2D8186D500C7DBB7 /* TipVerificate.swift in Sources */,
 				44BD6CE42C440974001645A0 /* AddModuleCoursesViewController.swift in Sources */,
 				7508513B2C38763A00F5C0DC /* ChangeInformationViewController.swift in Sources */,
 				448E73FE2CFF09E200C3000D /* Segment.swift in Sources */,

@@ -8,6 +8,7 @@
 import UIKit
 import SDWebImage
 import SkeletonView
+import TipKit
 
 protocol ProfileViewDelegate: AnyObject {
     func showUser()
@@ -17,6 +18,8 @@ protocol ProfileViewDelegate: AnyObject {
 
 class ProfileViewController: UIViewController, ProfileViewDelegate {
 
+    @IBOutlet weak var verifyImage: UIImageView!
+    @IBOutlet weak var verifyBtn: UIButton!
     @IBOutlet weak var characteristic: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var rating: UILabel!
@@ -27,12 +30,14 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
     @IBOutlet weak var coursesCollectionView: UICollectionView!
 
     var presenter = ProfilePresenter()
+    var verifyInfo: TipVerificate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.view = self
         coursesCollectionView.delegate = self
         coursesCollectionView.dataSource = self
+        tipCreate()
     }
 
 
@@ -40,8 +45,27 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         super.viewWillAppear(animated)
         presenter.viewWillApear()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tipSettings()
+    }
 
+    private func tipCreate() {
+        verifyInfo = TipVerificate(frame: CGRect(x: 0, y: 0, width: 220, height: 120))
+        verifyInfo.isHidden = true
+        view.addSubview(verifyInfo)
+    }
+    
+    private func tipSettings() {
+        let buttonFrameInRootView = verifyBtn.convert(verifyBtn.bounds, to: self.view)
 
+        let x = buttonFrameInRootView.maxX - 207
+        let y = buttonFrameInRootView.maxY + 5
+        
+        verifyInfo.frame =  CGRect(x: x, y: y, width: 220, height: 120)
+    }
+    
     private func sceletonAnimatedStart() {
         coursesCollectionView.isSkeletonable = true
         coursesCollectionView.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
@@ -64,9 +88,11 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         name.skeletonTextNumberOfLines = 0
         name.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
 
+        verifyImage.isHidden = true
         ratingBottom.isHidden = true
         coursesCountBottom.isHidden = true
         name.isHidden = true
+        
     }
 
     private func sceletonAnimatedStop() {
@@ -79,6 +105,7 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         ratingBottom.isHidden = false
         coursesCountBottom.isHidden = false
         name.isHidden = false
+        verifyImage.isHidden = false
     }
     
     func showUser() {
@@ -101,7 +128,26 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         }
     }
 
+    func showTip(bool: Bool) {
+        if bool {
+            verifyInfo.isHidden = false
+        }else {
+            verifyInfo.isHidden = true
+        }
+    }
 
+    
+    // MARK: - IBAction
+    
+    
+    @IBAction func verifyInfo(_ sender: UIButton) {
+        showTip(bool: true)
+    }
+    
+    @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        showTip(bool: false)
+    }
+    
 }
 
 extension ProfileViewController: SkeletonCollectionViewDelegate, SkeletonCollectionViewDataSource, UICollectionViewDelegateFlowLayout {

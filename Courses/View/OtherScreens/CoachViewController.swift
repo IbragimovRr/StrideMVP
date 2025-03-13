@@ -10,6 +10,8 @@ import SkeletonView
 
 class CoachViewController: UIViewController, ProfileViewDelegate {
     
+    @IBOutlet weak var verifyBtn: UIButton!
+    @IBOutlet weak var verifyImage: UIImageView!
     @IBOutlet weak var characteristic: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var rating: UILabel!
@@ -20,6 +22,7 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
     @IBOutlet weak var coursesCollectionView: UICollectionView!
 
     var presenter = ProfilePresenter()
+    var verifyInfo: TipVerificate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,7 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
         presenter.isMyProfile = false
         coursesCollectionView.delegate = self
         coursesCollectionView.dataSource = self
+        tipCreate()
     }
 
 
@@ -35,6 +39,25 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
         presenter.viewWillApear()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tipSettings()
+    }
+
+    private func tipCreate() {
+        verifyInfo = TipVerificate(frame: CGRect(x: 0, y: 0, width: 220, height: 120))
+        verifyInfo.isHidden = true
+        view.addSubview(verifyInfo)
+    }
+    
+    private func tipSettings() {
+        let buttonFrameInRootView = verifyBtn.convert(verifyBtn.bounds, to: self.view)
+
+        let x = buttonFrameInRootView.maxX - 207
+        let y = buttonFrameInRootView.maxY + 5
+        
+        verifyInfo.frame =  CGRect(x: x, y: y, width: 220, height: 120)
+    }
 
     private func sceletonAnimatedStart() {
         coursesCollectionView.isSkeletonable = true
@@ -61,6 +84,7 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
         ratingBottom.isHidden = true
         coursesCountBottom.isHidden = true
         name.isHidden = true
+        verifyImage.isHidden = true
     }
 
     private func sceletonAnimatedStop() {
@@ -73,6 +97,7 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
         ratingBottom.isHidden = false
         coursesCountBottom.isHidden = false
         name.isHidden = false
+        verifyImage.isHidden = false
     }
     
     func showUser() {
@@ -94,7 +119,23 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
             sceletonAnimatedStop()
         }
     }
-
+    
+    func showTip(bool: Bool) {
+        if bool {
+            verifyInfo.isHidden = false
+        }else {
+            verifyInfo.isHidden = true
+        }
+    }
+    
+    @IBAction func verifyOpen(_ sender: UIButton) {
+        showTip(bool: true)
+    }
+    
+    @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        showTip(bool: false)
+    }
+    
     @IBAction func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
