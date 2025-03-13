@@ -134,7 +134,7 @@ class ChangeInformationViewController: UIViewController, ChangeInformationViewDe
         name.text = presenter.user.name
         surname.text = presenter.user.surname
         mail.text = presenter.user.email
-        phoneNumber.text = presenter.user.phone.format(with: "+X (XXX) XXX-XXXX")
+        phoneNumber.text = presenter.user.phone.format(with: "+X (XXX) XXX-XX-XX")
         descriptionTF.text = presenter.user.coach.description
     }
 

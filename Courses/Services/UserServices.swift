@@ -43,7 +43,7 @@ class UserServices {
         let url = Constants.url + "api/v1/users/\(user.id)/"
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = AF.upload(multipartFormData: { multipartFormData in
-            if let avatarURL = user.avatarURL {
+            if let avatarURL = user.avatarURL, "\(avatarURL)".starts(with: "file") {
                 multipartFormData.append(avatarURL, withName: "image")
             }
             multipartFormData.append(Data(user.name.utf8), withName: "first_name")

@@ -159,10 +159,8 @@ class CourseServices {
         let headers: HTTPHeaders = ["Authorization": "Bearer \(UserServices.info.token)"]
         let response = AF.upload(multipartFormData: { multipartFormData in
             // Image
-            if "\(info.imageURL!)".starts(with: "file") {
-                if let url = info.imageURL {
-                    multipartFormData.append(url, withName: "image")
-                }
+            if let url = info.imageURL, "\(url)".starts(with: "file") {
+                multipartFormData.append(url, withName: "image")
             }
             // Черновик
             if method == .post {
