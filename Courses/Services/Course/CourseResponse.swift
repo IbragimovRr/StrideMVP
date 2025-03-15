@@ -129,9 +129,8 @@ class CourseResponse {
     
     // MARK: - All Courses JSON
     func allCourses(value: Data) -> [CourseModel] {
-        let json = JSON(value)
+        let json = JSON(value)        
         var courses = [CourseModel]()
-
         let results = json["results"].arrayValue
         guard results.isEmpty == false else {return []}
 
@@ -147,13 +146,15 @@ class CourseResponse {
             let authorSurname = json["results"][x]["author"]["last_name"].stringValue
             let authorID = json["results"][x]["author"]["id"].intValue
             let authorAvatar = json["results"][x]["author"]["image"].stringValue
-            let author = UserModel(name:authorName, surname: authorSurname, id: authorID, avatarURL: URL(string: authorAvatar))
+            let authorIsVerified = json["results"][x]["author"]["is_verified"].boolValue
+            let coach = CoachModel(isVerified: authorIsVerified)
+            let author = UserModel(name:authorName, surname: authorSurname, id: authorID, avatarURL: URL(string: authorAvatar), coach: coach)
             let countBuyer = json["results"][x]["bought_count"].intValue
             let rating = json["results"][x]["rating"].floatValue
             let isBought = json["results"][x]["bought"].boolValue
             let next = json["next"].stringValue
             let progressInDays = json["results"][x]["completed_days_count"].intValue
-            courses.append(CourseModel(daysCount: daysCount, nameCourse: title, price: price, imageURL: URL(string: image), rating: rating, id: id, description: description, dataCreated: dataCreated, progressInDays: progressInDays, countBuyer: countBuyer, isBought: isBought, nextPage: next, author: UserModel(name:authorName, surname: authorSurname, id: authorID)))
+            courses.append(CourseModel(daysCount: daysCount, nameCourse: title, price: price, imageURL: URL(string: image), rating: rating, id: id, description: description, dataCreated: dataCreated, progressInDays: progressInDays, countBuyer: countBuyer, isBought: isBought, nextPage: next, author: author))
         }
         return courses
     }
@@ -178,7 +179,9 @@ class CourseResponse {
             let authorSurname = json[x]["author"]["last_name"].stringValue
             let authorID = json[x]["author"]["id"].intValue
             let authorAvatar = json[x]["author"]["image"].stringValue
-            let author = UserModel(name:authorName, surname: authorSurname, id: authorID, avatarURL: URL(string: authorAvatar))
+            let authorIsVerified = json[x]["author"]["is_verified"].boolValue
+            let coach = CoachModel(isVerified: authorIsVerified)
+            let author = UserModel(name:authorName, surname: authorSurname, id: authorID, avatarURL: URL(string: authorAvatar), coach: coach)
             let countBuyer = json[x]["bought_count"].intValue
             let rating = json[x]["rating"].floatValue
             let isBought = json[x]["bought"].boolValue
@@ -204,7 +207,9 @@ class CourseResponse {
         let authorSurname = json["author"]["last_name"].stringValue
         let authorID = json["author"]["id"].intValue
         let authorAvatar = json["author"]["image"].stringValue
-        let author = UserModel(name:authorName, surname: authorSurname, id: authorID, avatarURL: URL(string: authorAvatar))
+        let authorIsVerified = json["author"]["is_verified"].boolValue
+        let coach = CoachModel(isVerified: authorIsVerified)
+        let author = UserModel(name:authorName, surname: authorSurname, id: authorID, avatarURL: URL(string: authorAvatar), coach: coach)
         let rating = json["rating"].floatValue
         let myRating = json["my_rating"]["rating"].intValue
         let categoryID = json["category"]["id"].intValue

@@ -18,8 +18,8 @@ protocol ProfileViewDelegate: AnyObject {
 
 class ProfileViewController: UIViewController, ProfileViewDelegate {
 
-    @IBOutlet weak var verifyImage: UIImageView!
-    @IBOutlet weak var verifyBtn: UIButton!
+    
+    @IBOutlet weak var verifyView: UIView!
     @IBOutlet weak var characteristic: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var rating: UILabel!
@@ -58,7 +58,7 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
     }
     
     private func tipSettings() {
-        let buttonFrameInRootView = verifyBtn.convert(verifyBtn.bounds, to: self.view)
+        let buttonFrameInRootView = verifyView.convert(verifyView.bounds, to: self.view)
 
         let x = buttonFrameInRootView.maxX - 207
         let y = buttonFrameInRootView.maxY + 5
@@ -88,7 +88,7 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         name.skeletonTextNumberOfLines = 0
         name.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
 
-        verifyImage.isHidden = true
+        verifyView.isHidden = true
         ratingBottom.isHidden = true
         coursesCountBottom.isHidden = true
         name.isHidden = true
@@ -105,13 +105,14 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         ratingBottom.isHidden = false
         coursesCountBottom.isHidden = false
         name.isHidden = false
-        verifyImage.isHidden = false
+        verifyView.isHidden = false
     }
     
     func showUser() {
         characteristic.text = presenter.user.coach.description
         name.text = "\(presenter.user.surname) \(presenter.user.name)"
         avatar.sd_setImage(with: presenter.user.avatarURL)
+        verifyView.isHidden = !presenter.user.coach.isVerified
     }
     
     func showMyCourses() {

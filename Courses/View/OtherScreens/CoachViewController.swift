@@ -10,8 +10,8 @@ import SkeletonView
 
 class CoachViewController: UIViewController, ProfileViewDelegate {
     
-    @IBOutlet weak var verifyBtn: UIButton!
-    @IBOutlet weak var verifyImage: UIImageView!
+    
+    @IBOutlet weak var verifyView: UIView!
     @IBOutlet weak var characteristic: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var rating: UILabel!
@@ -51,7 +51,7 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
     }
     
     private func tipSettings() {
-        let buttonFrameInRootView = verifyBtn.convert(verifyBtn.bounds, to: self.view)
+        let buttonFrameInRootView = verifyView.convert(verifyView.bounds, to: self.view)
 
         let x = buttonFrameInRootView.maxX - 207
         let y = buttonFrameInRootView.maxY + 5
@@ -84,7 +84,7 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
         ratingBottom.isHidden = true
         coursesCountBottom.isHidden = true
         name.isHidden = true
-        verifyImage.isHidden = true
+        verifyView.isHidden = true
     }
 
     private func sceletonAnimatedStop() {
@@ -97,13 +97,15 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
         ratingBottom.isHidden = false
         coursesCountBottom.isHidden = false
         name.isHidden = false
-        verifyImage.isHidden = false
+        verifyView.isHidden = false
     }
     
     func showUser() {
         characteristic.text = presenter.user.coach.description
         name.text = "\(presenter.user.surname) \(presenter.user.name)"
         avatar.sd_setImage(with: presenter.user.avatarURL)
+        verifyView.isHidden = !presenter.user.coach.isVerified
+        verifyView.isHidden = !presenter.user.coach.isVerified
     }
     
     func showMyCourses() {
