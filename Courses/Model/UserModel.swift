@@ -25,7 +25,7 @@ struct UserModel {
     var id = 0
     var token = ""
     
-    init(role: Role = .user, name: String = "", surname: String = "", email: String = "", phone: String = "", id: Int = 0, avatarURL: URL? = nil) {
+    init(role: Role = .user, name: String = "", surname: String = "", email: String = "", phone: String = "", id: Int = 0, avatarURL: URL? = nil, coach: CoachModel = CoachModel()) {
         self.role = role
         self.name = name
         self.surname = surname
@@ -34,6 +34,7 @@ struct UserModel {
         self.phone = phone
         self.userName = "\(self.name) \(self.surname)"
         self.avatarURL = avatarURL
+        self.coach = coach
     }
     
     init(role: Role, name: String, surname: String, email: String, phone: String, height: Double? = nil, weight: Double? = nil, birthday: String? = nil, description: String? = nil, avatarURL: URL? = nil, level: Level? = nil, goal: Goal? = nil, myCourses: [CourseModel] = [CourseModel](), id: Int = 0) {
@@ -59,6 +60,7 @@ struct CoachModel {
     var rating: Float = 0.0
     var myCourses = [CourseModel]()
     var money: Int = 0
+    var isVerified: Bool = false
 }
 
 struct InfoMeModel: Encodable {

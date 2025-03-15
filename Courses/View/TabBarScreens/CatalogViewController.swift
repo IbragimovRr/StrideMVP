@@ -177,6 +177,7 @@ extension CatalogViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.nameCourse.text = presenter.courses[indexPath.row].nameCourse
             cell.price.text = "\(presenter.courses[indexPath.row].price)₽"
             cell.rating.text = "\(presenter.courses[indexPath.row].rating)"
+            cell.isVerified.isHidden = !presenter.courses[indexPath.row].author.coach.isVerified
             let days = presenter.courses[indexPath.row].daysCount
             cell.daysCount.text = "\(days) \(days.declinedWord())"
             return cell

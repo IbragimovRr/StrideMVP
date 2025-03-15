@@ -20,4 +20,5 @@ class CoursesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var progressInDays: UILabel!
     @IBOutlet weak var daysCount: UILabel!
     @IBOutlet weak var progressVIew: UIProgressView!
+    @IBOutlet weak var isVerified: UIImageView!
 }

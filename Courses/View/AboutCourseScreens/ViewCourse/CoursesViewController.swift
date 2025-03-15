@@ -142,6 +142,7 @@ extension CoursesViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.nameCourse.text = filteredCourse[indexPath.row].nameCourse
         cell.price.text = "\(filteredCourse[indexPath.row].price)₽"
         cell.rating.text = "\(filteredCourse[indexPath.row].rating)"
+        cell.isVerified.isHidden = !filteredCourse[indexPath.row].author.coach.isVerified
         let days = filteredCourse[indexPath.row].daysCount
         cell.daysCount.text = "\(days) \(days.declinedWord())"
         return cell

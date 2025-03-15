@@ -10,6 +10,8 @@ import SkeletonView
 
 class CoachViewController: UIViewController, ProfileViewDelegate {
     
+    
+    @IBOutlet weak var verifyView: UIView!
     @IBOutlet weak var characteristic: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var rating: UILabel!
@@ -20,6 +22,7 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
     @IBOutlet weak var coursesCollectionView: UICollectionView!
 
     var presenter = ProfilePresenter()
+    var verifyInfo: TipVerificate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,7 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
         presenter.isMyProfile = false
         coursesCollectionView.delegate = self
         coursesCollectionView.dataSource = self
+        tipCreate()
     }
 
 
@@ -35,6 +39,25 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
         presenter.viewWillApear()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tipSettings()
+    }
+
+    private func tipCreate() {
+        verifyInfo = TipVerificate(frame: CGRect(x: 0, y: 0, width: 220, height: 120))
+        verifyInfo.isHidden = true
+        view.addSubview(verifyInfo)
+    }
+    
+    private func tipSettings() {
+        let buttonFrameInRootView = verifyView.convert(verifyView.bounds, to: self.view)
+
+        let x = buttonFrameInRootView.maxX - 207
+        let y = buttonFrameInRootView.maxY + 5
+        
+        verifyInfo.frame =  CGRect(x: x, y: y, width: 220, height: 120)
+    }
 
     private func sceletonAnimatedStart() {
         coursesCollectionView.isSkeletonable = true
@@ -43,7 +66,7 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
         avatar.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
         characteristic.isSkeletonable = true
         characteristic.linesCornerRadius = 5
-        characteristic.skeletonTextNumberOfLines = 0
+        characteristic.skeletonTextNumberOfLines = 3
         characteristic.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
         rating.isSkeletonable = true
         rating.linesCornerRadius = 5
@@ -55,11 +78,13 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
         coursesCount.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
         name.isSkeletonable = true
         name.linesCornerRadius = 5
-        name.skeletonTextNumberOfLines = 3
+        name.skeletonTextNumberOfLines = 0
         name.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.lightBlackMain))
 
         ratingBottom.isHidden = true
         coursesCountBottom.isHidden = true
+        name.isHidden = true
+        verifyView.isHidden = true
     }
 
     private func sceletonAnimatedStop() {
@@ -71,12 +96,16 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
         name.hideSkeleton(transition: .none)
         ratingBottom.isHidden = false
         coursesCountBottom.isHidden = false
+        name.isHidden = false
+        verifyView.isHidden = false
     }
     
     func showUser() {
         characteristic.text = presenter.user.coach.description
         name.text = "\(presenter.user.surname) \(presenter.user.name)"
         avatar.sd_setImage(with: presenter.user.avatarURL)
+        verifyView.isHidden = !presenter.user.coach.isVerified
+        verifyView.isHidden = !presenter.user.coach.isVerified
     }
     
     func showMyCourses() {
@@ -92,7 +121,23 @@ class CoachViewController: UIViewController, ProfileViewDelegate {
             sceletonAnimatedStop()
         }
     }
-
+    
+    func showTip(bool: Bool) {
+        if bool {
+            verifyInfo.isHidden = false
+        }else {
+            verifyInfo.isHidden = true
+        }
+    }
+    
+    @IBAction func verifyOpen(_ sender: UIButton) {
+        showTip(bool: true)
+    }
+    
+    @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        showTip(bool: false)
+    }
+    
     @IBAction func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }

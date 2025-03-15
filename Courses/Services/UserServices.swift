@@ -114,6 +114,7 @@ class UserServices {
         user.level = Level(rawValue: json["level"].stringValue)
         user.coach.description = json["desc"].stringValue
         user.coach.money = json["balance"].intValue
+        user.coach.isVerified = json["is_verified"].boolValue
         user.avatarURL = URL(string: "\(json["image"].stringValue)")
         let isCoach = json["is_coach"].boolValue
         let admin = json["is_staff"].boolValue
@@ -141,6 +142,7 @@ class UserServices {
         user.phone = json["phone_number"].stringValue
         user.id = json["id"].intValue
         user.coach.description = json["desc"].stringValue
+        user.coach.isVerified = json["is_verified"].boolValue
         user.avatarURL = URL(string: json["image"].stringValue)
         return user
     }

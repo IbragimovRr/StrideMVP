@@ -1,0 +1,239 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.FrontendMVP-arm64-apple-macosx15.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/sources",
+      "importPath" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ruslan/Documents/Programming/FrontendMVP/Sources/main.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "FrontendMVP",
+      "moduleOutputPath" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/Modules/FrontendMVP.swiftmodule",
+      "objects" : [
+        "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/main.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "FrontendMVP_main",
+        "-color-diagnostics",
+        "-swift-version",
+        "6",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "frontendmvp"
+      ],
+      "outputFileMapPath" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/main.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/Modules/FrontendMVP.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/ruslan/Documents/Programming/FrontendMVP/Sources/main.swift"
+      ],
+      "tempsPath" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "FrontendMVP" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "FrontendMVP",
+      "-package-name",
+      "frontendmvp",
+      "-incremental",
+      "-c",
+      "/Users/ruslan/Documents/Programming/FrontendMVP/Sources/main.swift",
+      "-I",
+      "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx10.13",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "FrontendMVP_main",
+      "-color-diagnostics",
+      "-swift-version",
+      "6",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "frontendmvp",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "FrontendMVP" : [
+
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "writeCommands" : {
+    "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP-entitlement.plist"
+    },
+    "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ruslan/Documents/Programming/FrontendMVP/Sources/main.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/sources"
+    },
+    "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/main.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.product/Objects.LinkFileList"
+    },
+    "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

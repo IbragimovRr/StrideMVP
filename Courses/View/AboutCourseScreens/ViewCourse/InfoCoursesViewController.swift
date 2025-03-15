@@ -25,6 +25,8 @@ protocol InfoCoursesViewDelegate {
 
 class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var verifyView: UIView!
     @IBOutlet weak var stage: UILabel!
     @IBOutlet weak var promoMainText: UILabel!
     @IBOutlet weak var oldPrice: UILabel!
@@ -60,6 +62,7 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
     @IBOutlet weak var btnView: UIButton!
 
     private let errorView = ErrorView(frame: CGRect(x: 25, y: 54, width: UIScreen.main.bounds.width - 50, height: 70))
+    private var verifyInfo: TipVerificate!
     
     var presenter = InfoCoursePresenter()
     
@@ -99,15 +102,18 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
         reviewsCollectionView.dataSource = self
         similarCoursesCollectionView.delegate = self
         similarCoursesCollectionView.dataSource = self
+        scrollView.delegate = self
         promoTextField.delegate = self
         view.addSubview(errorView)
         errorView.isHidden = true
         presenter.viewDidLoad()
+        tipCreate()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         changeCollectionViewHeight()
+        tipSettings()
     }
     
     func showError(error: String) {
@@ -160,6 +166,22 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
         }else {
             sceletonAnimatedStop()
         }
+    }
+    
+    private func tipCreate() {
+        verifyInfo = TipVerificate(frame: CGRect(x: 0, y: 0, width: 220, height: 120))
+        verifyInfo.isHidden = true
+        verifyInfo.color = UIColor.extraLightBlackMain
+        view.addSubview(verifyInfo)
+    }
+    
+    private func tipSettings() {
+        let buttonFrameInRootView = verifyView.convert(verifyView.bounds, to: self.view)
+
+        let x = buttonFrameInRootView.maxX - 207
+        let y = buttonFrameInRootView.maxY + 5
+        
+        verifyInfo.frame =  CGRect(x: x, y: y, width: 220, height: 120)
     }
     
     func buyCoursesSuccessed() {
@@ -215,6 +237,7 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
         countBuyer.text = "\(presenter.course.countBuyer)"
         categoryLbl.text = presenter.course.category.nameCategory
         userAvatar.sd_setImage(with: presenter.course.author.avatarURL)
+        verifyView.isHidden = !presenter.course.author.coach.isVerified 
         interfaceCheck()
         interfaceDesign()
     }
@@ -388,7 +411,9 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
         }
     }
     
-    
+    @IBAction func showVerify(_ sender: UIButton) {
+        verifyInfo.isHidden = false
+    }
     
 
     @IBAction func share(_ sender: UIButton) {
@@ -433,6 +458,7 @@ class InfoCoursesViewController: UIViewController, InfoCoursesViewDelegate {
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
         promoTextField.resignFirstResponder()
+        verifyInfo.isHidden = true
     }
     
 }
@@ -462,6 +488,7 @@ extension InfoCoursesViewController: UICollectionViewDelegate, UICollectionViewD
             cell.nameCourse.text = presenter.similarCourse[indexPath.row].nameCourse
             cell.price.text = "\(presenter.similarCourse[indexPath.row].price)₽"
             cell.rating.text = "\(presenter.similarCourse[indexPath.row].rating)"
+            cell.isVerified.isHidden = !presenter.similarCourse[indexPath.row].author.coach.isVerified
             let days = presenter.similarCourse[indexPath.row].daysCount
             cell.daysCount.text = "\(days) \(days.declinedWord())"
             return cell
@@ -517,6 +544,13 @@ extension InfoCoursesViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         textField.text = textField.text?.uppercased()
+    }
+    
+}
+extension InfoCoursesViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        verifyInfo.isHidden = true
     }
     
 }

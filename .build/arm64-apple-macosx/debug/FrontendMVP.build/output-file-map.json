@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/master.swiftdeps"
+  },
+  "/Users/ruslan/Documents/Programming/FrontendMVP/Sources/main.swift": {
+    "dependencies": "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/main.d",
+    "object": "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/main.swift.o",
+    "swiftmodule": "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/ruslan/Documents/Programming/FrontendMVP/.build/arm64-apple-macosx/debug/FrontendMVP.build/main.swiftdeps"
+  }
+}
