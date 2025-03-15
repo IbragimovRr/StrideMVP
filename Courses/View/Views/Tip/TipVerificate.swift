@@ -60,4 +60,12 @@ class TipVerificate: UIView {
         super.layoutSubviews()
         arrowView.frame = CGRect(x: 187, y: 0, width: 16, height: 8)
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateArrowColor()
+        }
+    }
 }
