@@ -4850,7 +4850,7 @@
                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0E-7J-kdL">
                                                                         <rect key="frame" x="4" y="4" width="37" height="37"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qKi-wv-gIz">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qKi-wv-gIz">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
                                                                             </imageView>
                                                                         </subviews>
