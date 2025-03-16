@@ -102,6 +102,7 @@ extension CourseTextViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         getData()
         editor.disableEditing()
+        editor.setupImageClickHandler()
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -116,6 +117,7 @@ extension CourseTextViewController: WKNavigationDelegate {
 extension CourseTextViewController: WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print(message.body)
         if message.name == "imageClicked", let imageUrl = message.body as? String {
             imageShow(imageURL: imageUrl)
         }

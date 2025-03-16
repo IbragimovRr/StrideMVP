@@ -101,7 +101,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             bottomConsoleView.constant = keyboardHeight - 30
-            editor.scrollTop()
         }
     }
     
@@ -410,7 +409,7 @@ extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, W
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         presenter.viewDidLoad()
-        editor.standartFont()
+        editor.setupSelection()
     }
     
     func format(isBold: Bool, isItalic: Bool, isUnderline: Bool, isStrikethrough: Bool, isBlockquote: Bool, aligment: NSTextAlignment, fontName: String, fontColor: String) {
@@ -438,7 +437,6 @@ extension AddCourseViewController: UIImagePickerControllerDelegate & UINavigatio
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage, let url = info[.imageURL] as? URL {
             presenter.saveImageInCloud(filePath: url)
-            editor.unFocus()
             picker.dismiss(animated: true)
         }
     }

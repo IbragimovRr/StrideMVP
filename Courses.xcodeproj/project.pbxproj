@@ -480,8 +480,8 @@
 				44049A2D2C6CE0C30014BD9C /* credentials.plist */,
 				440DAB3E2C1748D600C576FB /* LaunchScreen.storyboard */,
 				7515103D2C345816009978E6 /* TableViewCells */,
-				44E906352C2ADE5900FFA6DD /* CollectionViewCells */,
 				44064C712C26ED4F00AB5227 /* Fonts */,
+				44E906352C2ADE5900FFA6DD /* CollectionViewCells */,
 				44DFB1172C3B1FC1005C8F44 /* Animation */,
 			);
 			path = Courses;
@@ -603,8 +603,8 @@
 			children = (
 				446B1E372D591B9700A3A851 /* Montserrat-Bold.ttf */,
 				446B1E382D591B9700A3A851 /* Montserrat-BoldItalic.ttf */,
-				446B1E392D591B9700A3A851 /* Montserrat-Medium.ttf */,
 				446B1E3A2D591B9700A3A851 /* Montserrat-MediumItalic.ttf */,
+				446B1E392D591B9700A3A851 /* Montserrat-Medium.ttf */,
 			);
 			path = Montserrat;
 			sourceTree = "<group>";
@@ -1380,7 +1380,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1419,7 +1419,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.courses.Stride;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

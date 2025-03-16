@@ -49,88 +49,78 @@ class EditorView: WKWebView {
     }
     
     public func getHtml(handler: @escaping (String) -> Void) {
-        runJS("RE.getHtml()") { r in
+        runJS("quill.root.innerHTML;") { r in
             handler(r)
         }
     }
     
     private func setHTML(_ value: String) {
-        runJS("RE.setHtml('\(value.escaped)')")
+        runJS("quill.clipboard.dangerouslyPasteHTML('\(value.escaped)');")
+    }
+    
+    func setupSelection() {
+        runJS("QuillFunctions.setupSelectionChangeHandler()")
     }
     
     func disableEditing() {
-        runJS("RE.disableEditing()")
+        runJS("quill.disable();")
     }
     
     func strikeThrough() {
-        evaluateJavaScript("RE.setStrikeThrough()")
+        runJS("QuillFunctions.toggleStrike()")
     }
     
     func underline() {
-        evaluateJavaScript("RE.setUnderline()")
+        runJS("QuillFunctions.toggleUnderline()")
     }
     
     func bold() {
-        runJS("RE.setBold()")
+        runJS("QuillFunctions.toggleBold()")
     }
     
     func italic() {
-        runJS("RE.setItalic()")
+        runJS("QuillFunctions.toggleItalic()")
     }
     
     func textColor(_ color: UIColor) {
-        runJS("RE.prepareInsert()")
-        runJS("RE.setTextColor('\(color.hex)')")
-    }
-    
-    func horizontalRule() {
-        runJS("RE.horizontalRule()")
-    }
-    
-    func textBackgroundColor(_ color: UIColor) {
-        runJS("RE.prepareInsert()")
-        runJS("RE.setTextBackgroundColor('\(color.hex)')")
+        runJS("QuillFunctions.setTextColor('\(color.hex)')")
     }
     
     func font(_ name: String) {
-        runJS("RE.setFont('\(name)')")
-    }
-    
-    func standartFont() {
-        runJS("document.getElementById('editor').style.fontFamily = 'Montserrat';")
+        runJS("QuillFunctions.setFont('\(name)')")
     }
     
     func fontSize(_ size: Int) {
-        runJS("RE.setFontSize('\(size)px')")
+        runJS("QuillFunctions.setFontSize('\(size)')")
     }
     
     func heading(_ size: Int, _ fontName: String) {
         if size == 0 {
-            runJS("RE.resetHeading()")
+            runJS("QuillFunctions.removeHeading()")
         }else {
-            runJS("RE.setHeading('\(size)', '\(fontName)')")
+            runJS("QuillFunctions.setHeading('\(size)')")
         }
     }
     
     
     public func undo() {
-        runJS("RE.undo()")
+        runJS("quill.history.undo();")
     }
     
     public func redo() {
-        runJS("RE.redo()")
+        runJS("quill.history.redo();")
     }
     
     func justify(_ alignment: NSTextAlignment) {
         switch alignment {
         case .left:
-            evaluateJavaScript("RE.setJustifyLeft()")
+            evaluateJavaScript("QuillFunctions.setAlignment('left')")
         case .center:
-            evaluateJavaScript("RE.setJustifyCenter()")
+            evaluateJavaScript("QuillFunctions.setAlignment('center')")
         case .right:
-            evaluateJavaScript("RE.setJustifyRight()")
+            evaluateJavaScript("QuillFunctions.setAlignment('right')")
         case .justified:
-            evaluateJavaScript("RE.setJustifyFull()")
+            evaluateJavaScript("QuillFunctions.setAlignment('justify')")
         case .natural:
             break
         @unknown default:
@@ -139,105 +129,50 @@ class EditorView: WKWebView {
         
     }
     
-    func getLineHeight(completion: @escaping (String?) -> Void) {
-        evaluateJavaScript("RE.getLineHeight()") { (result, error) in
-            if let error = error {
-                print("Error getting line height: \(error.localizedDescription)")
-                completion(nil)
-                return
-            }
-            completion(result as? String)
-        }
-    }
-    
-    func lineHeight(height: String) {
-        evaluateJavaScript("RE.setLineHeight('\(height)')")
-    }
-    
-
-    func scrollTop() {
-        runJS("RE.scrollTop();")
-    }
-    
     func insertImage(url: String, alt: String) {
         let escapedURL = url.escaped
-        let escapedAlt = alt.escaped
-        
-        evaluateJavaScript("RE.insertImage('\(escapedURL)', '\(escapedAlt)')")
+        runJS("QuillFunctions.insertImage('\(escapedURL)')")
     }
     
     func blockquote() {
-        evaluateJavaScript("RE.setBlockquote();")
+        runJS("QuillFunctions.setBlockquote();")
     }
     
-    func insertTable(width: Int = 2, height: Int = 2) {
-        runJS("RE.prepareInsert()")
-        runJS("RE.insertTable(\(width), \(height))")
+    func setupImageClickHandler() {
+        runJS("QuillFunctions.setupImageClickHandler();")
     }
-    
-    func insertHTML(html: String) {
-        runJS("RE.insertHTML('\(html)')")
-    }
-    
-    func insertLink(url: String, title: String) {
-        evaluateJavaScript("RE.insertLink('\(url)', '\(title)')")
-    }
-    
-    func prepareInsert() {
-        evaluateJavaScript("RE.prepareInsert()")
-    }
-    
-    func focus() {
-        evaluateJavaScript("RE.focus()")
-    }
-    
-    func unFocus() {
-        evaluateJavaScript("RE.blurFocus()")
-    }
-    
     
     func initialFormat(message: WKScriptMessage) {
         if let messageBody = message.body as? [String: Any] {
+            let isBold = messageBody["bold"] as? Bool ?? false
+            let isItalic = messageBody["italic"] as? Bool ?? false
+            let isUnderline = messageBody["underline"] as? Bool ?? false
+            let isStrikethrough = messageBody["strike"] as? Bool ?? false
+            let isBlockquote = messageBody["blockquote"] as? Bool ?? false
+            let fontName = messageBody["font"] as? String ?? "Montserrat"
+            let fontColor = messageBody["color"] as? String ?? ""
+            let fontSize = messageBody["size"] as? String ?? "12pt"
 
-            if let formattingData = messageBody["formatting"] as? [String: Any] {
-                let isBold = formattingData["bold"] as? Bool ?? false
-                let isItalic = formattingData["italic"] as? Bool ?? false
-                let isUnderline = formattingData["underline"] as? Bool ?? false
-                let isStrikethrough = formattingData["strikethrough"] as? Bool ?? false
-                let isBlockquote = formattingData["blockquote"] as? Bool ?? false
-                let isJustifyLeft = formattingData["justifyLeft"] as? Bool ?? false
-                let isJustifyCenter = formattingData["justifyCenter"] as? Bool ?? false
-                let isJustifyRight = formattingData["justifyRight"] as? Bool ?? false
-                let isJustifyFull = formattingData["justifyFull"] as? Bool ?? false
-                var fontName = formattingData["fontName"] as? String ?? "Times New Roman"
-                let fontColor = formattingData["fontColor"] as? String ?? ""
-                
-                var alignment: NSTextAlignment = .natural
-                if isJustifyLeft {
+            // Определение выравнивания
+            var alignment: NSTextAlignment = .natural
+            if let align = messageBody["align"] as? String {
+                switch align {
+                case "left":
                     alignment = .left
-                } else if isJustifyCenter {
+                case "center":
                     alignment = .center
-                } else if isJustifyRight {
+                case "right":
                     alignment = .right
-                } else if isJustifyFull {
+                case "justify":
                     alignment = .justified
+                default:
+                    alignment = .natural
                 }
-
-                fontName = fontName.replacingOccurrences(of: "\"", with: "")
-
-                delegate?.format(isBold: isBold, isItalic: isItalic, isUnderline: isUnderline, isStrikethrough: isStrikethrough, isBlockquote: isBlockquote, aligment: alignment, fontName: fontName, fontColor: fontColor)
             }
-        }
-    }
-    
-    func getEditorContent(completion: @escaping (String?) -> Void) {
-        evaluateJavaScript("RE.getHtml()") { (result, error) in
-            if let error = error {
-                print("Error getting content: \(error.localizedDescription)")
-                completion(nil)
-                return
-            }
-            completion(result as? String)
+
+            let cleanedFontName = fontName.replacingOccurrences(of: "\"", with: "")
+
+            delegate?.format(isBold: isBold,isItalic: isItalic,isUnderline: isUnderline,isStrikethrough: isStrikethrough,isBlockquote: isBlockquote,aligment: alignment,fontName: cleanedFontName,fontColor: fontColor)
         }
     }
     

@@ -322,7 +322,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhS-eT-1zy">
-                                <rect key="frame" x="10" y="123" width="373" height="630"/>
+                                <rect key="frame" x="0.0" y="123" width="393" height="630"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pqz-eq-q0B">
@@ -733,7 +733,7 @@
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="centerX" secondItem="xnu-Sq-5BV" secondAttribute="centerX" id="3O1-t2-0as"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="bottom" secondItem="pqz-eq-q0B" secondAttribute="bottom" id="G3E-kt-DQe"/>
                             <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="xYI-FY-3sc" secondAttribute="trailing" id="GOJ-2R-o6z"/>
-                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="RhS-eT-1zy" secondAttribute="trailing" constant="10" id="Kla-ZE-oxI"/>
+                            <constraint firstItem="XmU-3q-Hr8" firstAttribute="trailing" secondItem="RhS-eT-1zy" secondAttribute="trailing" id="Kla-ZE-oxI"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="top" secondItem="j3E-yc-avL" secondAttribute="bottom" constant="10" id="O0T-Nv-iGn"/>
                             <constraint firstItem="jHI-pb-aUK" firstAttribute="leading" secondItem="xnu-Sq-5BV" secondAttribute="leading" id="PCp-UW-C6E"/>
                             <constraint firstItem="pqz-eq-q0B" firstAttribute="trailing" secondItem="Tcz-ME-6lc" secondAttribute="trailing" id="XSS-W7-GxF"/>
@@ -743,7 +743,7 @@
                             <constraint firstItem="j3E-yc-avL" firstAttribute="leading" secondItem="pqz-eq-q0B" secondAttribute="leading" constant="35" id="eyy-oa-9PG"/>
                             <constraint firstItem="Tcz-ME-6lc" firstAttribute="leading" secondItem="pqz-eq-q0B" secondAttribute="leading" id="hEl-vY-tTh"/>
                             <constraint firstItem="xYI-FY-3sc" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" id="rT6-4M-HFy"/>
-                            <constraint firstItem="RhS-eT-1zy" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" constant="10" id="s38-fL-OgB"/>
+                            <constraint firstItem="RhS-eT-1zy" firstAttribute="leading" secondItem="XmU-3q-Hr8" secondAttribute="leading" id="s38-fL-OgB"/>
                             <constraint firstItem="RhS-eT-1zy" firstAttribute="top" secondItem="jHI-pb-aUK" secondAttribute="bottom" constant="10" id="ueu-rL-FNJ"/>
                         </constraints>
                         <connections>
