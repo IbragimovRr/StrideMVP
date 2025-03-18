@@ -111,16 +111,42 @@ class EditorView: WKWebView {
         runJS("quill.history.redo();")
     }
     
+    public func canUndo(handler: @escaping (Bool) -> Void) {
+        runJS("QuillFunctions.canUndo();") { result in
+            let canUndo = result == "true"
+            handler(canUndo)
+        }
+    }
+    
+    public func canRedo(handler: @escaping (Bool) -> Void) {
+        runJS("QuillFunctions.canRedo();") { result in
+            let canRedo = result == "true"
+            handler(canRedo)
+        }
+    }
+    
+    
+    func hasChanges(handler: @escaping (Bool) -> Void) {
+        runJS("QuillFunctions.hasChanges();") { result in
+            let changes = result == "true"
+            handler(changes)
+        }
+    }
+    
+    func resetChanges() {
+        runJS("QuillFunctions.resetChanges();")
+    }
+    
     func justify(_ alignment: NSTextAlignment) {
         switch alignment {
         case .left:
-            evaluateJavaScript("QuillFunctions.setAlignment('left')")
+            runJS("QuillFunctions.setAlignment('')")
         case .center:
-            evaluateJavaScript("QuillFunctions.setAlignment('center')")
+            runJS("QuillFunctions.setAlignment('center')")
         case .right:
-            evaluateJavaScript("QuillFunctions.setAlignment('right')")
+            runJS("QuillFunctions.setAlignment('right')")
         case .justified:
-            evaluateJavaScript("QuillFunctions.setAlignment('justify')")
+            runJS("QuillFunctions.setAlignment('justify')")
         case .natural:
             break
         @unknown default:

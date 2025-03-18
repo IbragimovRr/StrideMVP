@@ -25,8 +25,31 @@ var quill = new Quill('#editor', {
     modules: {}
 });
 
+let hasChanges = false;
+
+quill.on('text-change', function() {
+    window.webkit.messageHandlers.format.postMessage("textChange");
+    hasChanges = true;
+});
 
 window.QuillFunctions = {
+    
+    hasChanges: function() {
+        return hasChanges;
+    },
+    
+    resetChanges: function() {
+        hasChanges = false;
+    },
+    
+    canUndo: function() {
+        return quill.history.stack.undo.length > 0;
+    },
+    
+    // Проверка возможности Redo
+    canRedo: function() {
+        return quill.history.stack.redo.length > 0;
+    },
     
     // Получить содержимое редактора
     getEditorContent: function() {
@@ -137,7 +160,7 @@ window.QuillFunctions = {
                     strike: format.strike || false,
                     blockquote: format.blockquote || false,
                     align: format.align || 'left',
-                    font: format.font || 'sans-serif',
+                    font: format.font || 'Montserrat',
                     color: format.color || '#000000',
                     size: format.size || '12pt'
                 };

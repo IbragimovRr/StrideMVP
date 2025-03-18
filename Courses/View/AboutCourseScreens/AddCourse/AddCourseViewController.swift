@@ -52,7 +52,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     var fonts = [
             "Dots",
             "Attractive",
-            "Courier New",
             "Montserrat",
             "Copperplate",
             "Rockwell",
@@ -68,8 +67,7 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
         ]
     var selectedFontIndex = 3
     private var isChangedText = false
-    private var isSave = true
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.overrideUserInterfaceStyle = .dark
@@ -149,10 +147,11 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     
     func setData(html: String) {
         self.editor.html = html
+        editor.resetChanges()
     }
     
     func saveCourse() {
-        isSave = true
+        editor.resetChanges()
     }
     
     func setError(_ error: String) {
@@ -211,16 +210,20 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     }
     
     private func checkUndoRedo() {
-        if editor.undoManager?.canUndo == true {
-            undo.setImage(UIImage.undoFill, for: .normal)
-        }else {
-            undo.setImage(UIImage.undo, for: .normal)
+        editor.canUndo { res in
+            if res == true {
+                self.undo.setImage(UIImage.undoFill, for: .normal)
+            }else {
+                self.undo.setImage(UIImage.undo, for: .normal)
+            }
         }
         
-        if editor.undoManager?.canRedo == true {
-            redo.setImage(UIImage.rendoFill, for: .normal)
-        }else {
-            redo.setImage(UIImage.rendo, for: .normal)
+        editor.canRedo { res in
+            if res == true {
+                self.redo.setImage(UIImage.rendoFill, for: .normal)
+            }else {
+                self.redo.setImage(UIImage.rendo, for: .normal)
+            }
         }
     }
     
@@ -393,10 +396,12 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     }
     
     @IBAction func back(_ sender: UIButton) {
-        if isSave == false {
-            errorView.warningSave(self)
-        }else {
-            self.navigationController?.popViewController(animated: true)
+        editor.hasChanges { isSave in
+            if isSave == true {
+                self.errorView.warningSave(self)
+            }else {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
@@ -419,6 +424,7 @@ extension AddCourseViewController: WKScriptMessageHandler, EditorViewDelegate, W
         self.isUnderline.backgroundColor = isUnderline ? UIColor.extraLightBlackMain : UIColor.clear
         self.isStrikeThrough.backgroundColor = isStrikethrough ? UIColor.extraLightBlackMain : UIColor.clear
         getIndexByFontName(name: fontName)
+        checkUndoRedo()
         colorPicker.selectedColor =  fontColor.toUIColor() ?? .white
     }
     
