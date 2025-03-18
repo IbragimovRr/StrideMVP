@@ -52,7 +52,6 @@ class AddCourseViewController: UIViewController, AddCoursePresenterViewDelegate 
     var fonts = [
             "Dots",
             "Attractive",
-            "Courier New",
             "Montserrat",
             "Copperplate",
             "Rockwell",
