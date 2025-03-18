@@ -19,7 +19,6 @@ protocol AddModuleCoursesViewDelegate {
 
 class AddModuleCoursesViewController: UIViewController, AddModuleCoursesViewDelegate {
     
-
     @IBOutlet weak var successBtn: UIButton!
     @IBOutlet weak var loading: LottieAnimationView!
     @IBOutlet weak var nameCourses: UILabel!
@@ -241,7 +240,7 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
             }else {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "day", for: indexPath) as! DaysCourseCollectionViewCell
                 cell.lbl.text = "\(indexPath.row + 1)"
-                cell.delete.isHidden = false
+                cell.delete.isHidden = presenter.course.courseDays[indexPath.row].isVerified
                 cell.delete.tag = presenter.course.courseDays[indexPath.row].dayID
                 cell.delete.addTarget(self, action: #selector(deleteDayBtn), for: .touchUpInside)
                 if presenter.selectDay == indexPath.row {
@@ -269,10 +268,12 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
                 cell.im.sd_setImage(with: image)
                 cell.settingsBtn.tag = indexPath.row
                 cell.settingsBtn.addTarget(self, action: #selector(settings), for: .touchUpInside)
+                cell.settingsBtn.isHidden = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].module.isVerified
             }else {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "module2", for: indexPath) as! ModuleCourseCollectionViewCell
                 cell.settingsBtn2.tag = indexPath.row
                 cell.settingsBtn2.addTarget(self, action: #selector(settings), for: .touchUpInside)
+                cell.settingsBtn2.isHidden = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].module.isVerified
             }
             cell.name.text = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].module.name
             if presenter.course.courseDays[presenter.selectDay].modules[indexPath.row].module.minutes == 0 {
@@ -303,13 +304,14 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
                 performSegue(withIdentifier: "addModule", sender: self)
             }else {
                 presenter.selectModule = presenter.course.courseDays[presenter.selectDay].modules[indexPath.row]
+                let verify = presenter.selectModule?.module.isVerified ?? false
                 switch presenter.selectModule?.type {
                 case .custom:
-                    performSegue(withIdentifier: "goToAddCourse2", sender: self)
+                    performSegue(withIdentifier: "customVerify\(verify)", sender: self)
                 case .video:
-                    performSegue(withIdentifier: "goToAddVideoModule", sender: self)
+                    performSegue(withIdentifier: "videoVerify\(verify)", sender: self)
                 case .training:
-                    performSegue(withIdentifier: "goToAddTrainingModule", sender: self)
+                    performSegue(withIdentifier: "trainingVerify\(verify)", sender: self)
                 case .none:
                     break
                 }
@@ -320,16 +322,25 @@ extension AddModuleCoursesViewController: UICollectionViewDelegate, UICollection
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if segue.identifier == "goToAddCourse2" {
+        if segue.identifier == "customVerifyfalse" { /// Еще не проверенные модули
             let vc = segue.destination as! AddCourseViewController
             vc.presenter.module = presenter.selectModule as! CustomModule
-        }else if segue.identifier == "goToAddVideoModule" {
+        }else if segue.identifier == "videoVerifyfalse" {
             let vc = segue.destination as! AddVideoModuleViewController
             vc.presenter.module = presenter.selectModule as! VideoModule
-        }else if segue.identifier == "goToAddTrainingModule" {
+        }else if segue.identifier == "trainingVerifyfalse" {
             let vc = segue.destination as! AddTrainingModuleViewController
             vc.presenter.module = presenter.selectModule as! TrainingModule
-        }else if segue.identifier == "goToModuleSettings" {
+        }else if segue.identifier == "customVerifytrue" { /// Уже проверенные модули
+            let vc = segue.destination as! CourseTextViewController
+            vc.module = presenter.selectModule as! CustomModule
+        }else if segue.identifier == "videoVerifytrue" {
+            let vc = segue.destination as! VideoModuleViewController
+            vc.module = presenter.selectModule as! VideoModule
+        }else if segue.identifier == "trainingVerifytrue" {
+            let vc = segue.destination as! TrainingModuleViewController
+            vc.presenter.module = presenter.selectModule as! TrainingModule
+        }else if segue.identifier == "goToModuleSettings" { /// Остальные
             let vc = segue.destination as! AddInfoAboutModuleViewController
             vc.module = presenter.selectModule!
             vc.delegate = self

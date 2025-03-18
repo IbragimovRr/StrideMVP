@@ -30,10 +30,11 @@ class CourseResponse {
             let trainingModulesArray = json["days"][x]["training_modules"].arrayValue.count
             let videoModulesArray = json["days"][x]["video_modules"].arrayValue.count
             let completed = json["days"][x]["day_completed"].boolValue
+            let isVerified = json["days"][x]["is_verified"].boolValue
             modules += initialCustomModule(x: x, modulesCount: modulesArray, json: json)
             modules += initialVideoModule(x: x, modulesCount: videoModulesArray, json: json)
             modules += initialTrainingModule(x: x, modulesCount: trainingModulesArray, json: json)
-            course.courseDays.append(DayModel(dayID: idDay, type: .noneSee, modules: modules, completed: completed))
+            course.courseDays.append(DayModel(dayID: idDay, type: .noneSee, modules: modules, completed: completed, isVerified: isVerified))
             modules.removeAll()
         }
         return course
@@ -53,7 +54,8 @@ class CourseResponse {
             let index = json["days"][x]["modules"][y]["order"].intValue
             let completed = json["days"][x]["modules"][y]["module_complete"].boolValue
             let isVisible = json["days"][x]["modules"][y]["is_visible"].boolValue
-            modules.append(CustomModule(module: Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index, isVisible: isVisible), text: URL(string: text)))
+            let isVerified = json["days"][x]["modules"][y]["is_verified"].boolValue
+            modules.append(CustomModule(module: Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index, isVisible: isVisible, isVerified: isVerified), text: URL(string: text)))
         }
         return modules
     }
@@ -71,6 +73,7 @@ class CourseResponse {
             let index = json["days"][x]["training_modules"][y]["order"].intValue
             let completed = json["days"][x]["training_modules"][y]["module_complete"].boolValue
             let isVisible = json["days"][x]["training_modules"][y]["is_visible"].boolValue
+            let isVerified = json["days"][x]["training_modules"][y]["is_verified"].boolValue
             
             let mediaURL = json["days"][x]["training_modules"][y]["data"].stringValue
             let description = json["days"][x]["training_modules"][y]["training_description"].stringValue
@@ -78,7 +81,7 @@ class CourseResponse {
             
             let trainingItmes = initialTrainingItem(x: x, y: y, count: trainingItemsCount, json: json)
             
-            let defaultModels = Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index, isVisible: isVisible)
+            let defaultModels = Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index, isVisible: isVisible, isVerified: isVerified)
             
             modules.append(TrainingModule(module: defaultModels, mediaURL: URL(string: mediaURL), description: description, trainingItems: trainingItmes))
         }
@@ -112,6 +115,8 @@ class CourseResponse {
             let index = json["days"][x]["video_modules"][y]["order"].intValue
             let completed = json["days"][x]["video_modules"][y]["module_complete"].boolValue
             let isVisible = json["days"][x]["video_modules"][y]["is_visible"].boolValue
+            let isVerified = json["days"][x]["video_modules"][y]["is_verified"].boolValue
+            
             let author = json["days"][x]["video_modules"][y]["author"].stringValue
             let time = json["days"][x]["video_modules"][y]["time"].intValue
             
@@ -119,7 +124,7 @@ class CourseResponse {
             let videoDesc = json["days"][x]["video_modules"][y]["video_desc"].stringValue
             
             
-            let defaultModule = Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index, isVisible: isVisible)
+            let defaultModule = Modules( name: title, minutes: min, imageURL: URL(string: image), description: desc, id: id, isCompleted: completed, position: index, isVisible: isVisible, isVerified: isVerified)
             
             modules.append(VideoModule(module: defaultModule, videoURL: URL(string: video), views: 0, timeVideo: time, author: author, videoDescription: videoDesc))
         }
