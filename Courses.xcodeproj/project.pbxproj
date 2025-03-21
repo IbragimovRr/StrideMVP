@@ -243,8 +243,8 @@
 		440E1F732CA16AD1002C6FC8 /* CourseErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseErrors.swift; sourceTree = "<group>"; };
 		440E1F752CA16C86002C6FC8 /* CourseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseResponse.swift; sourceTree = "<group>"; };
 		441E4AEE2CD2AD6100800EE4 /* СonfidentialityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СonfidentialityViewController.swift"; sourceTree = "<group>"; };
-		441E4AF02CD2BD2E00800EE4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
-		441E4AF12CD2BD2E00800EE4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		441E4AF02CD2BD2E00800EE4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.storyboard; sourceTree = "<group>"; };
+		441E4AF12CD2BD2E00800EE4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		442023B32D282751007C3E68 /* AddTrainingModulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrainingModulePresenter.swift; sourceTree = "<group>"; };
 		44228F582D2804E000D751ED /* RepeatsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatsCollectionViewCell.swift; sourceTree = "<group>"; };
 		44228F5A2D2813C500D751ED /* AddTrainingModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrainingModuleViewController.swift; sourceTree = "<group>"; };
@@ -422,15 +422,15 @@
 		44064C712C26ED4F00AB5227 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				44064C742C26ED8E00AB5227 /* Commissioner-Medium.ttf */,
-				449CF0DE2C337100000D4528 /* Commissioner-Bold.ttf */,
-				44064C762C26ED9500AB5227 /* Commissioner-SemiBold.ttf */,
-				753A4F7D2C341E98007A8194 /* Inter-Medium.ttf */,
-				44064C852C26F8A500AB5227 /* Commissioner-VariableFont_wght.ttf */,
-				44064C782C26ED9D00AB5227 /* Commissioner-Regular.ttf */,
-				44064C7A2C26EEB800AB5227 /* SF-Pro-Rounded-Semibold.otf */,
-				44064C7C2C26EEC100AB5227 /* SF-Pro-Rounded-Regular.otf */,
 				446B1E332D591B3100A3A851 /* Editor */,
+				449CF0DE2C337100000D4528 /* Commissioner-Bold.ttf */,
+				44064C742C26ED8E00AB5227 /* Commissioner-Medium.ttf */,
+				44064C782C26ED9D00AB5227 /* Commissioner-Regular.ttf */,
+				44064C762C26ED9500AB5227 /* Commissioner-SemiBold.ttf */,
+				44064C852C26F8A500AB5227 /* Commissioner-VariableFont_wght.ttf */,
+				753A4F7D2C341E98007A8194 /* Inter-Medium.ttf */,
+				44064C7C2C26EEC100AB5227 /* SF-Pro-Rounded-Regular.otf */,
+				44064C7A2C26EEB800AB5227 /* SF-Pro-Rounded-Semibold.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -438,11 +438,11 @@
 		44064C872C27040B00AB5227 /* StartScreens */ = {
 			isa = PBXGroup;
 			children = (
-				44064C882C27042100AB5227 /* StartViewController.swift */,
-				44064C8A2C28516C00AB5227 /* VhodViewController.swift */,
-				44064C8C2C285DA600AB5227 /* RegistrViewController.swift */,
 				44932A9A2C81F87B00E0F86F /* LoadingStartViewController.swift */,
+				44064C8C2C285DA600AB5227 /* RegistrViewController.swift */,
+				44064C882C27042100AB5227 /* StartViewController.swift */,
 				4450B3C82CB6066900F1F54B /* UpdateViewController.swift */,
+				44064C8A2C28516C00AB5227 /* VhodViewController.swift */,
 			);
 			path = StartScreens;
 			sourceTree = "<group>";
@@ -467,22 +467,22 @@
 		440DAB322C1748D400C576FB /* Courses */ = {
 			isa = PBXGroup;
 			children = (
-				448765092CE01C2E008A1E44 /* Courses.entitlements */,
-				448E73EF2CFF063E00C3000D /* Services */,
-				448E73EC2CFF05E000C3000D /* Model */,
-				448E73ED2CFF05E900C3000D /* View */,
-				448E73EE2CFF060600C3000D /* Presenter */,
-				440DAB3C2C1748D600C576FB /* Assets.xcassets */,
-				44962E942C821B3600CB6A1C /* Main.storyboard */,
-				440DAB332C1748D400C576FB /* AppDelegate.swift */,
-				440DAB352C1748D400C576FB /* SceneDelegate.swift */,
-				440DAB412C1748D600C576FB /* Info.plist */,
-				44049A2D2C6CE0C30014BD9C /* credentials.plist */,
-				440DAB3E2C1748D600C576FB /* LaunchScreen.storyboard */,
-				7515103D2C345816009978E6 /* TableViewCells */,
-				44064C712C26ED4F00AB5227 /* Fonts */,
-				44E906352C2ADE5900FFA6DD /* CollectionViewCells */,
 				44DFB1172C3B1FC1005C8F44 /* Animation */,
+				44E906352C2ADE5900FFA6DD /* CollectionViewCells */,
+				44064C712C26ED4F00AB5227 /* Fonts */,
+				448E73EC2CFF05E000C3000D /* Model */,
+				448E73EE2CFF060600C3000D /* Presenter */,
+				448E73EF2CFF063E00C3000D /* Services */,
+				7515103D2C345816009978E6 /* TableViewCells */,
+				448E73ED2CFF05E900C3000D /* View */,
+				440DAB332C1748D400C576FB /* AppDelegate.swift */,
+				440DAB3C2C1748D600C576FB /* Assets.xcassets */,
+				448765092CE01C2E008A1E44 /* Courses.entitlements */,
+				440DAB412C1748D600C576FB /* Info.plist */,
+				440DAB3E2C1748D600C576FB /* LaunchScreen.storyboard */,
+				44962E942C821B3600CB6A1C /* Main.storyboard */,
+				440DAB352C1748D400C576FB /* SceneDelegate.swift */,
+				44049A2D2C6CE0C30014BD9C /* credentials.plist */,
 			);
 			path = Courses;
 			sourceTree = "<group>";
@@ -490,20 +490,20 @@
 		440DAB482C17491D00C576FB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				75DBBEF32C8221A10063A489 /* Stars.swift */,
-				44064C802C26F0E800AB5227 /* Border.swift */,
-				44064C8E2C285F7C00AB5227 /* TextFieldFormat.swift */,
-				4442F3D72C31BFDB00203A36 /* PageLayout.swift */,
-				4488EA142C769D9D0086765F /* ErrorView.swift */,
-				44F3954B2C9B8BB900861759 /* CropImage.swift */,
-				44BC59012CCEE6F600AD7FFA /* RefreshControll.swift */,
-				447FE4922CDD2300007C5B31 /* MainTabBarController.swift */,
-				448E73FD2CFF09E200C3000D /* Segment.swift */,
-				440C9C3E2CED6C47007D0735 /* ProtectScreen.swift */,
-				446BF1A02D2C948000D8E534 /* EditorView.swift */,
-				44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */,
-				44DA9F9D2D52443E00735179 /* TimerTraining.swift */,
 				448FF64D2D818A3D00C7DBB7 /* Tip */,
+				44064C802C26F0E800AB5227 /* Border.swift */,
+				44DF69DA2D388A5200BD1A22 /* CarouselLayout.swift */,
+				44F3954B2C9B8BB900861759 /* CropImage.swift */,
+				446BF1A02D2C948000D8E534 /* EditorView.swift */,
+				4488EA142C769D9D0086765F /* ErrorView.swift */,
+				447FE4922CDD2300007C5B31 /* MainTabBarController.swift */,
+				4442F3D72C31BFDB00203A36 /* PageLayout.swift */,
+				440C9C3E2CED6C47007D0735 /* ProtectScreen.swift */,
+				44BC59012CCEE6F600AD7FFA /* RefreshControll.swift */,
+				448E73FD2CFF09E200C3000D /* Segment.swift */,
+				75DBBEF32C8221A10063A489 /* Stars.swift */,
+				44064C8E2C285F7C00AB5227 /* TextFieldFormat.swift */,
+				44DA9F9D2D52443E00735179 /* TimerTraining.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -512,15 +512,15 @@
 			isa = PBXGroup;
 			children = (
 				44C9F9252D4E4E6200C10A68 /* Editor */,
+				44C9F92D2D4E4E6200C10A68 /* DeepLinksManager.swift */,
 				44C9F92C2D4E4E6200C10A68 /* Error.swift */,
 				44C9F92A2D4E4E6200C10A68 /* Extension.swift */,
 				44C9F92B2D4E4E6200C10A68 /* FilePath.swift */,
-				44C9F92F2D4E4E6200C10A68 /* UD.swift */,
 				44C9F9422D4E548F00C10A68 /* MediaType.swift */,
-				44C9F92E2D4E4E6200C10A68 /* NavigationControllerDelegate.swift */,
-				44C9F92D2D4E4E6200C10A68 /* DeepLinksManager.swift */,
 				44C9F9262D4E4E6200C10A68 /* Model.swift */,
+				44C9F92E2D4E4E6200C10A68 /* NavigationControllerDelegate.swift */,
 				44C9F9282D4E4E6200C10A68 /* Privacy.swift */,
+				44C9F92F2D4E4E6200C10A68 /* UD.swift */,
 				44C9F9292D4E4E6200C10A68 /* ValidateTF.swift */,
 			);
 			path = Settings;
@@ -529,8 +529,8 @@
 		44682C992D01187F00087C62 /* StartScreensPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				44682C9A2D01189B00087C62 /* VhodPresenter.swift */,
 				44682C9C2D01F2A100087C62 /* RegistrPresenter.swift */,
+				44682C9A2D01189B00087C62 /* VhodPresenter.swift */,
 			);
 			path = StartScreensPresenter;
 			sourceTree = "<group>";
@@ -538,17 +538,17 @@
 		44682C9E2D02193300087C62 /* OtherScreens */ = {
 			isa = PBXGroup;
 			children = (
+				75D68C602C80A361001407F0 /* AddReviewViewController.swift */,
+				7508513A2C38763A00F5C0DC /* ChangeInformationViewController.swift */,
+				440CB67C2C5FA86F003FCAF0 /* CoachViewController.swift */,
 				44547E582CF4C1B50051C782 /* CreatePromoViewController.swift */,
+				75106D782C38AFDB0036042B /* InfoAboutMeViewController.swift */,
 				44BD149B2C808106006D0722 /* PickerModelViewController.swift */,
 				44932A982C81303A00E0F86F /* PrivacyViewController.swift */,
-				440CB67C2C5FA86F003FCAF0 /* CoachViewController.swift */,
 				440C9C402CF49D72007D0735 /* PromoViewController.swift */,
-				441E4AEE2CD2AD6100800EE4 /* СonfidentialityViewController.swift */,
-				75F6FDB32C9323B500A57EA9 /* WithdrawViewController.swift */,
 				7555DEB42C986FC100B80A13 /* WithdrawSBPViewController.swift */,
-				75D68C602C80A361001407F0 /* AddReviewViewController.swift */,
-				75106D782C38AFDB0036042B /* InfoAboutMeViewController.swift */,
-				7508513A2C38763A00F5C0DC /* ChangeInformationViewController.swift */,
+				75F6FDB32C9323B500A57EA9 /* WithdrawViewController.swift */,
+				441E4AEE2CD2AD6100800EE4 /* СonfidentialityViewController.swift */,
 			);
 			path = OtherScreens;
 			sourceTree = "<group>";
@@ -556,10 +556,10 @@
 		44682CA12D034CC500087C62 /* OtherScreens */ = {
 			isa = PBXGroup;
 			children = (
-				44682CA22D034CDD00087C62 /* CreatePromoPresenter.swift */,
-				44682CA42D03577500087C62 /* WithdrawPresenter.swift */,
 				44682CA62D0362B800087C62 /* ChangeInformationPresenter.swift */,
 				44682CAB2D076A8B00087C62 /* ConfidetialityPresenter.swift */,
+				44682CA22D034CDD00087C62 /* CreatePromoPresenter.swift */,
+				44682CA42D03577500087C62 /* WithdrawPresenter.swift */,
 			);
 			path = OtherScreens;
 			sourceTree = "<group>";
@@ -567,13 +567,13 @@
 		44682CA82D03BF3800087C62 /* CourseScreens */ = {
 			isa = PBXGroup;
 			children = (
-				44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */,
+				448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */,
 				4481D43B2D1C945E00DBE377 /* AddModuleCoursesPresenter.swift */,
-				4465B2FC2D1EFF5B005EA9D0 /* AddVideoModulePresenter.swift */,
 				442023B32D282751007C3E68 /* AddTrainingModulePresenter.swift */,
+				4465B2FC2D1EFF5B005EA9D0 /* AddVideoModulePresenter.swift */,
+				44682CA92D03BF5700087C62 /* InfoCoursePresenter.swift */,
 				440254D42D42EC5D00752940 /* PlanCoursesPresenter.swift */,
 				445757EB2D46F18500501511 /* TrainingModulePresenter.swift */,
-				448FBC682D31C24E00476EE2 /* AddCoursePresenter.swift */,
 			);
 			path = CourseScreens;
 			sourceTree = "<group>";
@@ -581,19 +581,19 @@
 		446B1E332D591B3100A3A851 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
-				449215AB2D5B71A80080184D /* Copperplate */,
-				449215AA2D5B71A00080184D /* Rockwell */,
-				449215A92D5B71990080184D /* Palatino */,
-				449215A82D5B71900080184D /* DINCondensed */,
-				449215A72D5B71750080184D /* Cochin */,
-				449215A62D5B716B0080184D /* MarkerFelt */,
-				449215A52D5B71540080184D /* Baskerville */,
-				446B1E502D59204E00A3A851 /* Raleway */,
-				446B1E4F2D59204800A3A851 /* Inter */,
-				446B1E482D591F5900A3A851 /* Sans */,
-				446B1E472D591F4300A3A851 /* Dots */,
 				446B1E402D591CFF00A3A851 /* Attractive */,
+				449215A52D5B71540080184D /* Baskerville */,
+				449215A72D5B71750080184D /* Cochin */,
+				449215AB2D5B71A80080184D /* Copperplate */,
+				449215A82D5B71900080184D /* DINCondensed */,
+				446B1E472D591F4300A3A851 /* Dots */,
+				446B1E4F2D59204800A3A851 /* Inter */,
+				449215A62D5B716B0080184D /* MarkerFelt */,
 				446B1E3F2D591CF400A3A851 /* Montserrat */,
+				449215A92D5B71990080184D /* Palatino */,
+				446B1E502D59204E00A3A851 /* Raleway */,
+				449215AA2D5B71A00080184D /* Rockwell */,
+				446B1E482D591F5900A3A851 /* Sans */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -603,8 +603,8 @@
 			children = (
 				446B1E372D591B9700A3A851 /* Montserrat-Bold.ttf */,
 				446B1E382D591B9700A3A851 /* Montserrat-BoldItalic.ttf */,
-				446B1E3A2D591B9700A3A851 /* Montserrat-MediumItalic.ttf */,
 				446B1E392D591B9700A3A851 /* Montserrat-Medium.ttf */,
+				446B1E3A2D591B9700A3A851 /* Montserrat-MediumItalic.ttf */,
 			);
 			path = Montserrat;
 			sourceTree = "<group>";
@@ -656,8 +656,8 @@
 		447652F42D50236D00AA5C48 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				440254D62D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift */,
 				447652F52D50238A00AA5C48 /* DateHeaderCollectionReusableView.swift */,
+				440254D62D42EF3F00752940 /* PlanHeaderCollectionReusableView.swift */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -666,14 +666,14 @@
 			isa = PBXGroup;
 			children = (
 				440E1F6C2CA1671F002C6FC8 /* Settings */,
-				448E73F92CFF087A00C3000D /* UserModel.swift */,
-				44682C9F2D02874A00087C62 /* PromocodeModel.swift */,
-				44E4061B2CFF78F4004F633E /* CourseModel.swift */,
-				44E2AB1B2D35C4AF00547228 /* ModuleModel.swift */,
-				44E2AB1D2D35C51E00547228 /* DayModel.swift */,
 				44E4061F2CFF7B9C004F633E /* CategoryModel.swift */,
-				44682CAD2D076BC500087C62 /* ThemeModel.swift */,
+				44E4061B2CFF78F4004F633E /* CourseModel.swift */,
+				44E2AB1D2D35C51E00547228 /* DayModel.swift */,
+				44E2AB1B2D35C4AF00547228 /* ModuleModel.swift */,
+				44682C9F2D02874A00087C62 /* PromocodeModel.swift */,
 				447652EA2D4FDBB400AA5C48 /* RealmModel.swift */,
+				44682CAD2D076BC500087C62 /* ThemeModel.swift */,
+				448E73F92CFF087A00C3000D /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -681,12 +681,12 @@
 		448E73ED2CFF05E900C3000D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				440DAB482C17491D00C576FB /* Views */,
-				44BC59032CCFF33200AD7FFA /* AdminPanelScreens */,
 				44D68B002C51B3EF00F8F476 /* AboutCourseScreens */,
+				44BC59032CCFF33200AD7FFA /* AdminPanelScreens */,
 				44682C9E2D02193300087C62 /* OtherScreens */,
-				448E73F02CFF065900C3000D /* TabBarScreens */,
 				44064C872C27040B00AB5227 /* StartScreens */,
+				448E73F02CFF065900C3000D /* TabBarScreens */,
+				440DAB482C17491D00C576FB /* Views */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -705,16 +705,16 @@
 		448E73EF2CFF063E00C3000D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				44E4061A2CFF75D2004F633E /* Course */,
+				44BC590A2CD0FB7E00AD7FFA /* Admin.swift */,
+				44E406212CFF7BFA004F633E /* CategoryServices.swift */,
+				44C9F93E2D4E4EAF00C10A68 /* CloudServices.swift */,
+				446475742C72088300ACD3D7 /* CommentsServices.swift */,
+				447652E32D4EE54C00AA5C48 /* LocalCloudServices.swift */,
 				447D8C802C85DEEB00EF2217 /* PaymentServices.swift */,
 				44547E562CF4BE380051C782 /* Promocodes.swift */,
-				44BC590A2CD0FB7E00AD7FFA /* Admin.swift */,
-				44C9F93E2D4E4EAF00C10A68 /* CloudServices.swift */,
-				447652E32D4EE54C00AA5C48 /* LocalCloudServices.swift */,
 				44064C9D2C28628000AB5227 /* SignServices.swift */,
 				44D68AF22C4ACC0C00F8F476 /* UserServices.swift */,
-				44E406212CFF7BFA004F633E /* CategoryServices.swift */,
-				446475742C72088300ACD3D7 /* CommentsServices.swift */,
-				44E4061A2CFF75D2004F633E /* Course */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -722,9 +722,9 @@
 		448E73F02CFF065900C3000D /* TabBarScreens */ = {
 			isa = PBXGroup;
 			children = (
-				753A4F7B2C340DB7007A8194 /* MyCoursesViewController.swift */,
 				449CF0D82C337099000D4528 /* CatalogViewController.swift */,
 				44C9F9402D4E4EDA00C10A68 /* HomeViewController.swift */,
+				753A4F7B2C340DB7007A8194 /* MyCoursesViewController.swift */,
 				7515103B2C343146009978E6 /* ProfileViewController.swift */,
 				751510402C34586D009978E6 /* SettingsViewController.swift */,
 			);
@@ -743,8 +743,8 @@
 		449215A52D5B71540080184D /* Baskerville */ = {
 			isa = PBXGroup;
 			children = (
-				449215AC2D5B73470080184D /* Baskerville.ttf */,
 				449215AD2D5B73470080184D /* Baskerville-Bold.ttf */,
+				449215AC2D5B73470080184D /* Baskerville.ttf */,
 			);
 			path = Baskerville;
 			sourceTree = "<group>";
@@ -803,8 +803,8 @@
 		449C124C2D00DD7E0091F0F5 /* TabBarScreensPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				448E73F32CFF071F00C3000D /* HomePresenter.swift */,
 				44E4061D2CFF79F7004F633E /* CatalogPresenter.swift */,
+				448E73F32CFF071F00C3000D /* HomePresenter.swift */,
 				449C124D2D00DDA30091F0F5 /* MyCoursesPresenter.swift */,
 				449C124F2D00E0AF0091F0F5 /* ProfilePresenter.swift */,
 				449C12512D010DEC0091F0F5 /* SettingsPresenter.swift */,
@@ -822,10 +822,10 @@
 		44BC59032CCFF33200AD7FFA /* AdminPanelScreens */ = {
 			isa = PBXGroup;
 			children = (
-				44BC59042CCFF34A00AD7FFA /* AdminMainViewController.swift */,
 				44BC59062CCFF36200AD7FFA /* AdminCoursesViewController.swift */,
-				44BC59082CCFF37500AD7FFA /* AdminOtherViewController.swift */,
+				44BC59042CCFF34A00AD7FFA /* AdminMainViewController.swift */,
 				4475CE702CD1240100B44299 /* AdminMoneyInfoViewController.swift */,
+				44BC59082CCFF37500AD7FFA /* AdminOtherViewController.swift */,
 			);
 			path = AdminPanelScreens;
 			sourceTree = "<group>";
@@ -853,14 +853,14 @@
 		44D84B252D1EF3A6001A35CA /* AddCourse */ = {
 			isa = PBXGroup;
 			children = (
-				443B076B2D444E1F00C08DE2 /* AddPlanCoursesViewController.swift */,
+				44D68AFB2C51B3EF00F8F476 /* AddCourseViewController.swift */,
+				44D68AFC2C51B3EF00F8F476 /* AddInfoAboutCourseVC.swift */,
 				7595784A2C5B9A7D00A9F811 /* AddInfoAboutModuleViewController.swift */,
 				44BD6CE32C440974001645A0 /* AddModuleCoursesViewController.swift */,
-				44D68AFC2C51B3EF00F8F476 /* AddInfoAboutCourseVC.swift */,
-				44D68AFB2C51B3EF00F8F476 /* AddCourseViewController.swift */,
-				44D84B232D1DC798001A35CA /* TypeModuleViewController.swift */,
-				44D84B272D1EF40C001A35CA /* AddVideoModuleViewController.swift */,
+				443B076B2D444E1F00C08DE2 /* AddPlanCoursesViewController.swift */,
 				44228F5A2D2813C500D751ED /* AddTrainingModuleViewController.swift */,
+				44D84B272D1EF40C001A35CA /* AddVideoModuleViewController.swift */,
+				44D84B232D1DC798001A35CA /* TypeModuleViewController.swift */,
 			);
 			path = AddCourse;
 			sourceTree = "<group>";
@@ -868,13 +868,13 @@
 		44D84B262D1EF3DE001A35CA /* ViewCourse */ = {
 			isa = PBXGroup;
 			children = (
-				44D68AFD2C51B3EF00F8F476 /* CoursesViewController.swift */,
-				44BD6CDB2C428A2C001645A0 /* ModulesCourseViewController.swift */,
 				44D68AFE2C51B3EF00F8F476 /* CourseTextViewController.swift */,
+				44D68AFD2C51B3EF00F8F476 /* CoursesViewController.swift */,
 				44D68AFF2C51B3EF00F8F476 /* InfoCoursesViewController.swift */,
-				44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */,
+				44BD6CDB2C428A2C001645A0 /* ModulesCourseViewController.swift */,
 				440254D22D42EB1600752940 /* PlanCoursesViewController.swift */,
 				445757ED2D46F1AC00501511 /* TrainingModuleViewController.swift */,
+				44435CF32D184FFD00B879C3 /* VideoModuleViewController.swift */,
 			);
 			path = ViewCourse;
 			sourceTree = "<group>";
@@ -891,10 +891,10 @@
 		44E4061A2CFF75D2004F633E /* Course */ = {
 			isa = PBXGroup;
 			children = (
-				44E402F42D4BF061006873BF /* CourseServices.swift */,
-				440E1F712CA169E9002C6FC8 /* CourseRequest.swift */,
 				440E1F732CA16AD1002C6FC8 /* CourseErrors.swift */,
+				440E1F712CA169E9002C6FC8 /* CourseRequest.swift */,
 				440E1F752CA16C86002C6FC8 /* CourseResponse.swift */,
+				44E402F42D4BF061006873BF /* CourseServices.swift */,
 				44897A462D343CF000ED8021 /* TrainingModule.swift */,
 				44897A482D343D8C00ED8021 /* VideoModule.swift */,
 			);
@@ -906,19 +906,19 @@
 			children = (
 				447652F42D50236D00AA5C48 /* Header */,
 				44E906362C2ADE8700FFA6DD /* BannerCollectionViewCell.swift */,
-				449CF0DA2C3370CA000D4528 /* CoursesCollectionViewCell.swift */,
 				449CF0DC2C3370E0000D4528 /* CategoriesCollectionViewCell.swift */,
-				44DFB1152C3B199A005C8F44 /* RecomendationCollectionViewCell.swift */,
-				44BD6CD92C407864001645A0 /* ReviewsCollectionViewCell.swift */,
-				44BD6CDD2C432C45001645A0 /* DaysCourseCollectionViewCell.swift */,
-				44BD6CDF2C432C82001645A0 /* ModuleCourseCollectionViewCell.swift */,
 				44BD149D2C80A141006D0722 /* CelebrityCollectionViewCell.swift */,
-				75F6FDB12C9321F600A57EA9 /* WithdrawCollectionViewCell.swift */,
-				448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */,
 				44E00B912CE39F2400E62089 /* CoachCollectionViewCell.swift */,
-				440C9C422CF49DD0007D0735 /* PromoCollectionViewCell.swift */,
-				44228F582D2804E000D751ED /* RepeatsCollectionViewCell.swift */,
+				449CF0DA2C3370CA000D4528 /* CoursesCollectionViewCell.swift */,
+				44BD6CDD2C432C45001645A0 /* DaysCourseCollectionViewCell.swift */,
 				44DF69D82D38882B00BD1A22 /* FontCollectionViewCell.swift */,
+				44BD6CDF2C432C82001645A0 /* ModuleCourseCollectionViewCell.swift */,
+				440C9C422CF49DD0007D0735 /* PromoCollectionViewCell.swift */,
+				44DFB1152C3B199A005C8F44 /* RecomendationCollectionViewCell.swift */,
+				44228F582D2804E000D751ED /* RepeatsCollectionViewCell.swift */,
+				44BD6CD92C407864001645A0 /* ReviewsCollectionViewCell.swift */,
+				448765072CE00D15008A1E44 /* SettingsCollectionViewCell.swift */,
+				75F6FDB12C9321F600A57EA9 /* WithdrawCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -926,9 +926,9 @@
 		7515103D2C345816009978E6 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				7515103E2C34583B009978E6 /* SettingsTableViewCell.swift */,
 				7555DEB62C98822000B80A13 /* BanksTableViewCell.swift */,
 				448E73E92CFCD0DB00C3000D /* PromoTableViewCell.swift */,
+				7515103E2C34583B009978E6 /* SettingsTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1219,6 +1219,7 @@
 				441E4AF12CD2BD2E00800EE4 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		44962E942C821B3600CB6A1C /* Main.storyboard */ = {
@@ -1228,6 +1229,7 @@
 				441E4AF02CD2BD2E00800EE4 /* ru */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
