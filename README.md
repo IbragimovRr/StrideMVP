@@ -66,6 +66,7 @@ fitness App
 
 💬 По вопросам сотрудничества: **ibragimovr04@mail.ru**  
 🔗 GitHub: [@IbragimovRr](https://github.com/IbragimovRr)
+📱 AppStore: https://apps.apple.com/ru/app/stride/id6737005692
 
 ---
 
